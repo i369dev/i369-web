@@ -3,6 +3,8 @@ import { PageId } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
 import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers } from 'lucide-react';
+import { TiltCard } from '../components/TiltCard';
+import { MagneticButton } from '../components/MagneticButton';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -56,7 +58,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       <section className="bg-white py-20 px-6 sm:px-12 lg:px-16 border-b border-black">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Col: Label & Visual Marker */}
+            {/* Left Col: Label & Visual Marker with 3D Tilt */}
             <div className="lg:col-span-4 space-y-6">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 accent-pink"></div>
@@ -67,7 +69,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               <h2 className="gothic-display text-4xl sm:text-5xl uppercase text-black tracking-tight leading-none">
                 Our Story.
               </h2>
-              <div className="p-6 bg-white border border-black space-y-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <TiltCard
+                maxTilt={8}
+                scale={1.03}
+                className="p-6 space-y-3 rounded-none"
+              >
                 <p className="font-mono-code text-[11px] text-zinc-500 uppercase tracking-wider font-bold">
                   Founder & Managing Director
                 </p>
@@ -77,13 +83,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 <p className="text-xs text-zinc-600 font-normal leading-relaxed">
                   Pioneering regional technology infrastructure, creative direction, and sustainable venture building in Sri Lanka's central highlands.
                 </p>
-              </div>
+              </TiltCard>
             </div>
 
-            {/* Right Col: High Contrast Body Text */}
+            {/* Right Col: High Contrast Body Text with subtle frosted treatment */}
             <div className="lg:col-span-8 space-y-6 text-base sm:text-lg text-zinc-800 font-normal leading-relaxed">
               <p>
-                <strong className="text-black font-bold">Imaginative369</strong> was founded on a simple observation: <span className="text-black underline decoration-[#008080] underline-offset-4">Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.</span>
+                <strong className="text-black font-bold">Imaginative369</strong> was founded on a simple observation: <span className="text-black underline decoration-[#008080] underline-offset-4 font-semibold">Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.</span>
               </p>
               <p className="text-zinc-600">
                 Founded by Mithila Bhashitha Navarathna Bandara, the company grew from a creative studio into a hybrid agency, software house, and venture studio — built to bridge the gap between raw regional infrastructure and modern digital expectations.
@@ -125,20 +131,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               Our Philosophy: "Strategy to Screen."
             </h2>
 
-            <p className="text-xl sm:text-2xl text-zinc-800 font-medium leading-relaxed border-l-2 border-black pl-6">
-              Every project starts with a plan and ends with something real — a launched app, a finished film, a campaign that converts. <span className="font-bold text-black">We don't hand off decks; we deliver outcomes.</span>
-            </p>
+            <div className="glass-panel-light p-6 border-l-4 border-l-black">
+              <p className="text-xl sm:text-2xl text-zinc-800 font-medium leading-relaxed">
+                Every project starts with a plan and ends with something real — a launched app, a finished film, a campaign that converts. <span className="font-bold text-black">We don't hand off decks; we deliver outcomes.</span>
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          HOW WE'RE BUILT: The Dual-Engine Model
+          HOW WE'RE BUILT: The Dual-Engine Model with 3D Tilt Cards
          ========================================================================= */}
       <section className="bg-[#111] text-white py-24 px-6 sm:px-12 lg:px-16 border-b border-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-white/20 text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
               Organizational Architecture
             </div>
             <h2 className="gothic-display text-4xl sm:text-6xl uppercase text-white tracking-tight leading-none">
@@ -151,12 +159,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* ENGINE 1 */}
-            <div className="p-8 sm:p-10 bg-black border border-zinc-800 border-t-4 border-t-[#008080] space-y-6">
+            <TiltCard
+              isDark={true}
+              maxTilt={6}
+              scale={1.02}
+              className="p-8 sm:p-10 border-t-4 border-t-[#008080] space-y-6 rounded-none"
+            >
               <div className="flex items-baseline justify-between">
                 <span className="font-mono-code text-xs uppercase tracking-widest text-[#00DFD8] font-bold">
                   Engine 01
                 </span>
-                <span className="font-mono-code text-xs text-zinc-500">
+                <span className="font-mono-code text-xs text-zinc-400 font-bold">
                   Client Mandates
                 </span>
               </div>
@@ -165,7 +178,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 <h3 className="gothic-display text-3xl sm:text-4xl uppercase text-white tracking-tight">
                   Agency Services
                 </h3>
-                <p className="font-mono-code text-xs text-zinc-400 mt-1">
+                <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
                   (What you hire us for)
                 </p>
               </div>
@@ -174,25 +187,30 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 Performance marketing, software engineering, destination branding, and cinematic production delivered through retainers and project-based contracts.
               </p>
 
-              <div className="pt-4 border-t border-zinc-900 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-400">
+              <div className="pt-4 border-t border-white/10 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#00DFD8]" />
                   <span>Custom Retainers & SLA Guarantees</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-400">
+                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#00DFD8]" />
                   <span>Regional Tourism & Corporate Enterprise</span>
                 </div>
               </div>
-            </div>
+            </TiltCard>
 
             {/* ENGINE 2 */}
-            <div className="p-8 sm:p-10 bg-black border border-zinc-800 border-t-4 border-t-[#FF69B4] space-y-6">
+            <TiltCard
+              isDark={true}
+              maxTilt={6}
+              scale={1.02}
+              className="p-8 sm:p-10 border-t-4 border-t-[#FF69B4] space-y-6 rounded-none"
+            >
               <div className="flex items-baseline justify-between">
                 <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF69B4] font-bold">
                   Engine 02
                 </span>
-                <span className="font-mono-code text-xs text-zinc-500">
+                <span className="font-mono-code text-xs text-zinc-400 font-bold">
                   Proprietary IP
                 </span>
               </div>
@@ -201,7 +219,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 <h3 className="gothic-display text-3xl sm:text-4xl uppercase text-white tracking-tight">
                   Venture Studio
                 </h3>
-                <p className="font-mono-code text-xs text-zinc-400 mt-1">
+                <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
                   (What we build ourselves)
                 </p>
               </div>
@@ -210,20 +228,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 The revenue from our agency work funds our own proprietary products — software, apps, and media ventures — so we're constantly testing the same technology and creative techniques we bring to our clients.
               </p>
 
-              <div className="pt-4 border-t border-zinc-900 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-400">
+              <div className="pt-4 border-t border-white/10 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#FF69B4]" />
                   <span>Active Ventures: LankaQuests, IntotheWILDlk, Inhale Exhale</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-400">
+                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#FF69B4]" />
                   <span>Real-world stress tested architectures</span>
                 </div>
               </div>
-            </div>
+            </TiltCard>
           </div>
 
-          <div className="mt-8 p-6 bg-black border border-white/20 text-center">
+          <div className="mt-8 p-6 glass-panel-dark text-center border border-white/20">
             <p className="text-base sm:text-lg text-zinc-300 font-medium">
               <span className="text-[#FFA500] font-bold">The result:</span> an agency that doesn't just advise on digital transformation — <span className="text-white font-bold underline decoration-[#FF69B4] underline-offset-4">it lives it</span>.
             </p>
@@ -232,12 +250,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       </section>
 
       {/* =========================================================================
-          VISION & MISSION: Monochromatic Split
+          VISION & MISSION: Monochromatic Split with 3D Tilt Cards
          ========================================================================= */}
       <section className="bg-white text-zinc-950 py-24 px-6 sm:px-12 lg:px-16 border-b border-black thin-grid">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* VISION */}
-          <div className="space-y-4 p-8 bg-white border border-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <TiltCard
+            maxTilt={6}
+            scale={1.02}
+            className="space-y-4 p-8 rounded-none cursor-default"
+          >
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 accent-teal"></div>
               <span className="font-mono-code text-xs uppercase tracking-widest text-[#008080] font-bold">
@@ -250,10 +272,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <p className="text-zinc-600 text-base leading-relaxed font-normal">
               To become a globally recognized technology and creative studio delivering world-class digital solutions that transform industries, empower local communities, and elevate destination tourism through innovation and sustainable digital technology.
             </p>
-          </div>
+          </TiltCard>
 
           {/* MISSION */}
-          <div className="space-y-4 p-8 bg-white border border-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <TiltCard
+            maxTilt={6}
+            scale={1.02}
+            className="space-y-4 p-8 rounded-none cursor-default"
+          >
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 accent-orange"></div>
               <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFA500] font-bold">
@@ -266,7 +292,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <p className="text-zinc-600 text-base leading-relaxed font-normal">
               To engineer reliable, scalable, user-centric software alongside high-impact visual media that improves business performance, creates memorable experiences, and builds long-term value for our clients, partners, and communities.
             </p>
-          </div>
+          </TiltCard>
         </div>
       </section>
 
@@ -292,37 +318,45 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 Headquartered in <strong className="text-white font-medium">Badulla, Uva Province, Sri Lanka</strong> — the heart of the Hill Country, and the reason we can move faster and shoot better than agencies twice our size.
               </p>
 
-              <div className="p-4 bg-black border border-white/20 font-mono-code text-xs text-zinc-400 space-y-1.5">
-                <p><span className="text-zinc-500">STUDIO ADDRESS:</span> 03 River Side Road, Badulla</p>
-                <p><span className="text-zinc-500">PROVINCIAL ZONE:</span> Uva Highlands</p>
-                <p><span className="text-zinc-500">RESPONSE LATENCY:</span> 15 Minutes to Nine Arches, Ella Gap & Pekoe Trail Stages</p>
+              <div className="p-4 glass-panel-dark font-mono-code text-xs text-zinc-400 space-y-1.5 border border-white/20">
+                <p><span className="text-zinc-400 font-bold">STUDIO ADDRESS:</span> 03 River Side Road, Badulla</p>
+                <p><span className="text-zinc-400 font-bold">PROVINCIAL ZONE:</span> Uva Highlands</p>
+                <p><span className="text-zinc-400 font-bold">RESPONSE LATENCY:</span> 15 Minutes to Nine Arches, Ella Gap & Pekoe Trail Stages</p>
               </div>
 
               <div className="pt-2">
-                <button
+                <MagneticButton
+                  variant="glass"
                   onClick={onOpenInquiry}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black hover:bg-[#FFA500] font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer"
+                  className="px-8 py-4 text-black bg-white hover:bg-[#FFA500]"
                 >
                   <span>Engage Badulla Studio</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </MagneticButton>
               </div>
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative border border-white/20 overflow-hidden bg-black group">
-                <img
-                  src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80"
-                  alt="Sri Lanka Hill Country Badulla"
-                  className="w-full h-96 object-cover grayscale brightness-90 contrast-125 group-hover:scale-105 transition-transform duration-500"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between font-mono-code text-xs">
-                  <span className="text-[#00DFD8]">06°59′N 81°03′E · Central Highlands</span>
-                  <span className="text-zinc-400">Badulla Headquarters</span>
+              <TiltCard
+                isDark={true}
+                maxTilt={6}
+                scale={1.02}
+                className="overflow-hidden rounded-none cursor-default"
+              >
+                <div className="h-96 w-full overflow-hidden relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80"
+                    alt="Sri Lanka Hill Country Badulla"
+                    className="w-full h-full object-cover grayscale brightness-90 contrast-125 card-media-zoom"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between font-mono-code text-xs z-20">
+                    <span className="text-[#00DFD8] font-bold">06°59′N 81°03′E · Central Highlands</span>
+                    <span className="text-zinc-400 font-bold">Badulla Headquarters</span>
+                  </div>
                 </div>
-              </div>
+              </TiltCard>
             </div>
           </div>
         </div>
@@ -330,3 +364,4 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
     </div>
   );
 };
+

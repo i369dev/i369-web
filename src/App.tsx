@@ -15,6 +15,7 @@ import { VenturesPage } from './pages/VenturesPage';
 import { ContactPage } from './pages/ContactPage';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { CaseStudyModal } from './components/CaseStudyModal';
+import { CustomCursor } from './components/CustomCursor';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
@@ -53,6 +54,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col font-body selection:bg-[#00DFD8] selection:text-black">
+      {/* Global Interactive Mouse Cursor & Ambient Glow */}
+      <CustomCursor />
+
       {/* Persistent Navigation Header with Gothic Logo */}
       <Navbar
         currentPage={currentPage}

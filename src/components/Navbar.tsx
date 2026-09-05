@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GothicLogo } from './GothicLogo';
 import { PageId } from '../types';
 import { Menu, X, ArrowUpRight, Globe } from 'lucide-react';
+import { MagneticButton } from './MagneticButton';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -46,8 +47,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         id="main-navbar"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md border-b border-black py-3.5 shadow-sm'
-            : 'bg-white border-b border-black py-4'
+            ? 'glass-nav-frosted py-3 shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
+            : 'bg-white/90 backdrop-blur-md border-b border-black/15 py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between">
@@ -58,11 +59,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-3 group text-left focus:outline-none cursor-pointer"
             aria-label="Imaginative 369 Home"
           >
-            <div className="w-8 h-8 bg-black flex items-center justify-center text-white font-mono-code font-bold text-xs shrink-0 tracking-tight group-hover:bg-[#FFA500] group-hover:text-black transition-colors">
+            <div className="w-8 h-8 bg-black flex items-center justify-center text-white font-mono-code font-bold text-xs shrink-0 tracking-tight group-hover:bg-[#FFA500] group-hover:text-black transition-colors shadow-sm">
               i369
             </div>
             <div className="flex flex-col">
-              <span className="font-bold tracking-tighter text-lg sm:text-xl uppercase text-black group-hover:opacity-75 transition-opacity">
+              <span className="font-bold tracking-tighter text-lg sm:text-xl uppercase text-black group-hover:text-[#FFA500] transition-colors">
                 Imaginative 369
               </span>
               <span className="font-mono-code text-[9px] uppercase tracking-[0.25em] text-gray-500">
@@ -83,10 +84,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={`relative py-1 text-xs uppercase font-mono-code tracking-widest transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'text-black font-bold border-b-2 border-black'
-                      : 'text-zinc-600 hover:text-black hover:opacity-70'
+                      : 'text-zinc-600 hover:text-black hover:opacity-75'
                   }`}
                 >
                   {link.label}
+                  {isActive && (
+                    <span
+                      className="absolute -bottom-[2px] left-0 right-0 h-[2px]"
+                      style={{ backgroundColor: link.accent }}
+                    />
+                  )}
                 </button>
               );
             })}
@@ -94,21 +101,22 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Action: Studio Indicator & CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 border border-black/20 bg-gray-50 text-[10px] font-mono-code uppercase tracking-wider text-zinc-700">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 border border-black/10 bg-black/[0.03] backdrop-blur-sm text-[10px] font-mono-code uppercase tracking-wider text-zinc-700">
               <span className="w-1.5 h-1.5 bg-[#008080]" />
               <span className="w-1.5 h-1.5 bg-[#FF69B4]" />
               <span className="w-1.5 h-1.5 bg-[#FFA500]" />
               <span className="ml-1 font-bold">Uva 680m</span>
             </div>
 
-            <button
+            <MagneticButton
               id="nav-start-project-btn"
+              variant="primary"
               onClick={onOpenInquiry}
-              className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#FFA500] hover:text-black transition-colors rounded-none cursor-pointer"
+              className="px-5 py-2.5"
             >
               <span>Contact</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
+            </MagneticButton>
           </div>
 
           {/* Mobile Menu Trigger */}
@@ -136,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div
           id="mobile-menu-overlay"
-          className="fixed inset-0 z-40 bg-white flex flex-col justify-between pt-24 pb-8 px-6 md:hidden animate-in fade-in duration-200 border-t border-black"
+          className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col justify-between pt-24 pb-8 px-6 md:hidden animate-in fade-in duration-200 border-t border-black/20"
         >
           <div className="flex flex-col space-y-4">
             <div className="pb-3 border-b border-black flex items-center justify-between">
@@ -204,3 +212,4 @@ export const Navbar: React.FC<NavbarProps> = ({
     </>
   );
 };
+

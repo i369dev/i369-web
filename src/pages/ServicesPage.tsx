@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PageId } from '../types';
 import { SERVICE_PILLARS } from '../data/agencyData';
 import { ArrowRight, ArrowUpRight, Check, Sparkles, Code2, Film, TrendingUp, Mountain } from 'lucide-react';
+import { MagneticButton } from '../components/MagneticButton';
+import { TiltCard } from '../components/TiltCard';
 
 interface ServicesPageProps {
   onNavigate: (page: PageId) => void;
@@ -65,14 +67,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
             const isDarkBackground = idx % 2 === 1; // 30% black alternate strip rhythm
 
             return (
-              <div
+              <TiltCard
                 key={pillar.id}
                 id={`service-${pillar.id}`}
-                className={`border border-black transition-all duration-300 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-                  isDarkBackground
-                    ? 'bg-[#111] text-white'
-                    : 'bg-white text-black'
-                }`}
+                isDark={isDarkBackground}
+                maxTilt={4}
+                scale={1.01}
+                className="transition-all duration-300 rounded-none cursor-default"
               >
                 <div className="p-8 sm:p-12 lg:p-14">
                   {/* Top Identifier */}
@@ -117,7 +118,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
 
                       {/* Featured Client or Build Badge */}
                       {(pillar.featuredClient || pillar.featuredProject) && (
-                        <div className={`p-4 border ${isDarkBackground ? 'bg-black border-white/20' : 'bg-zinc-50 border-black'}`}>
+                        <div className={`p-4 border ${isDarkBackground ? 'glass-panel-dark' : 'glass-panel-light'}`}>
                           <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-400 block mb-1">
                             {pillar.featuredClient ? 'Featured Client Engagement' : 'Featured Build & Innovation'}
                           </span>
@@ -127,17 +128,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
                         </div>
                       )}
 
-                      <button
+                      <MagneticButton
+                        variant={isDarkBackground ? 'glass' : 'primary'}
                         onClick={() => onOpenInquiry(pillar.title)}
-                        className={`inline-flex items-center gap-2 px-6 py-3 font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer ${
-                          isDarkBackground
-                            ? 'bg-white text-black hover:bg-[#FFA500]'
-                            : 'bg-black text-white hover:bg-[#FFA500] hover:text-black'
-                        }`}
+                        className="px-6 py-3"
                       >
                         <span>Commission This Discipline</span>
                         <ArrowUpRight className="w-4 h-4" />
-                      </button>
+                      </MagneticButton>
                     </div>
 
                     {/* Right: Deliverables List */}
@@ -150,10 +148,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
                         {pillar.points.map((point, pIdx) => (
                           <div
                             key={pIdx}
-                            className={`p-4 border flex items-start gap-4 ${
+                            className={`p-4 border flex items-start gap-4 transition-transform hover:translate-x-1 duration-200 ${
                               isDarkBackground
-                                ? 'bg-black border-white/10 text-zinc-200'
-                                : 'bg-white border-black text-zinc-800'
+                                ? 'bg-white/5 border-white/10 text-zinc-200'
+                                : 'bg-white/90 border-black/15 text-zinc-800'
                             }`}
                           >
                             <span className={`w-2 h-2 mt-1.5 shrink-0 ${styles.bg}`} />
@@ -166,7 +164,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
                     </div>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             );
           })}
         </div>
@@ -177,7 +175,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
          ========================================================================= */}
       <section className="bg-[#111] text-white py-24 px-6 sm:px-12 lg:px-16 border-t border-black">
         <div className="max-w-5xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-white/20 text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
             Direct Studio Line
           </div>
 
@@ -192,22 +190,25 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
+            <MagneticButton
+              variant="glass"
               onClick={() => onOpenInquiry()}
-              className="px-10 py-5 bg-white text-black hover:bg-[#FFA500] font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer"
+              className="px-10 py-5 text-black bg-white hover:bg-[#FFA500]"
             >
               Start Your Project
-            </button>
+            </MagneticButton>
 
-            <button
+            <MagneticButton
+              variant="outline"
               onClick={() => onNavigate('work')}
-              className="px-8 py-5 bg-black hover:bg-[#FFA500] hover:text-black text-white border border-white/20 font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer"
+              className="px-8 py-5 text-white border border-white/20 hover:bg-white/10"
             >
               Examine Our Case Studies
-            </button>
+            </MagneticButton>
           </div>
         </div>
       </section>
     </div>
   );
 };
+

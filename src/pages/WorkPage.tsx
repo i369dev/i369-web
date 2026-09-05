@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PageId, CaseStudy } from '../types';
 import { CASE_STUDIES, TRUSTED_CLIENTS } from '../data/agencyData';
 import { ArrowUpRight, Filter, CheckCircle2, Star } from 'lucide-react';
+import { TiltCard } from '../components/TiltCard';
+import { MagneticButton } from '../components/MagneticButton';
 
 interface WorkPageProps {
   onNavigate: (page: PageId) => void;
@@ -56,10 +58,10 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 <button
                   key={cat}
                   onClick={() => setActiveFilter(cat)}
-                  className={`px-4 py-2 text-xs font-mono-code uppercase font-bold tracking-widest transition-colors rounded-none border border-black cursor-pointer ${
+                  className={`px-4 py-2 text-xs font-mono-code uppercase font-bold tracking-widest transition-all duration-200 rounded-none border border-black cursor-pointer ${
                     activeFilter === cat
-                      ? 'bg-black text-white'
-                      : 'bg-white text-black hover:bg-[#FFA500]'
+                      ? 'bg-black text-white shadow-md'
+                      : 'bg-white/80 backdrop-blur-sm text-black hover:bg-[#FFA500]'
                   }`}
                 >
                   {cat}
@@ -71,34 +73,36 @@ export const WorkPage: React.FC<WorkPageProps> = ({
       </section>
 
       {/* =========================================================================
-          CASE STUDIES GRID
+          CASE STUDIES GRID with HugeInc 3D Tilt & Zoom Parallax
          ========================================================================= */}
       <section className="py-20 px-6 sm:px-12 lg:px-16 bg-[#FAFAFA] border-b border-black">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {filteredStudies.map((cs) => (
-              <div
+              <TiltCard
                 key={cs.id}
+                maxTilt={7}
+                scale={1.02}
                 onClick={() => onSelectCaseStudy(cs)}
-                className="group bg-white border border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer"
+                className="cursor-pointer rounded-none"
               >
-                {/* Image & Category Pill */}
+                {/* Image & Category Pill with Zoom effect */}
                 <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-black border-b border-black">
                   <img
                     src={cs.image}
                     alt={cs.title}
-                    className="w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover grayscale contrast-125 brightness-95 card-media-zoom"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-black text-white text-[10px] font-mono-code uppercase tracking-widest border border-white/30 rounded-none">
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-3 py-1 glass-pill text-white text-[10px] font-mono-code uppercase tracking-widest">
                       {cs.category}
                     </span>
                   </div>
 
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white font-mono-code text-xs">
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white font-mono-code text-xs z-20">
                     <span className="text-[#00DFD8] font-bold">{cs.client}</span>
                     <span className="text-zinc-300 font-bold">{cs.number}</span>
                   </div>
@@ -108,10 +112,10 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 <div className="p-8 space-y-4 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="gothic-display text-3xl sm:text-4xl uppercase text-black tracking-tight group-hover:text-zinc-700 transition-colors">
+                      <h3 className="gothic-display text-3xl sm:text-4xl uppercase text-black tracking-tight group-hover:text-[#FFA500] transition-colors">
                         {cs.title}
                       </h3>
-                      <ArrowUpRight className="w-5 h-5 text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
+                      <ArrowUpRight className="w-5 h-5 text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0 mt-1" />
                     </div>
 
                     <p className="mt-3 text-sm text-zinc-600 font-normal leading-relaxed">
@@ -120,7 +124,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                   </div>
 
                   {/* Highlights / Stats bar */}
-                  <div className="mt-6 pt-4 border-t border-black grid grid-cols-2 gap-4">
+                  <div className="mt-6 pt-4 border-t border-black/15 grid grid-cols-2 gap-4">
                     {cs.stats.slice(0, 2).map((stat, sIdx) => (
                       <div key={sIdx}>
                         <span className="font-mono-code text-[10px] text-zinc-500 uppercase tracking-wider block font-bold">
@@ -133,7 +137,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                     ))}
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -158,9 +162,12 @@ export const WorkPage: React.FC<WorkPageProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {TRUSTED_CLIENTS.map((client, idx) => (
-              <div
+              <TiltCard
                 key={idx}
-                className="p-6 bg-black border border-white/20 flex items-center justify-between hover:border-white/40 transition-colors rounded-none"
+                isDark={true}
+                maxTilt={8}
+                scale={1.03}
+                className="p-6 flex items-center justify-between rounded-none cursor-default"
               >
                 <div>
                   <h4 className="font-display font-bold text-lg text-white">
@@ -171,20 +178,22 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                   </p>
                 </div>
                 <div className="w-2 h-2 accent-teal"></div>
-              </div>
+              </TiltCard>
             ))}
           </div>
 
           <div className="mt-16 text-center">
-            <button
+            <MagneticButton
+              variant="glass"
               onClick={onOpenInquiry}
-              className="px-8 py-4 bg-white text-black hover:bg-[#FFA500] font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer"
+              className="px-8 py-4 text-black bg-white hover:bg-[#FFA500]"
             >
               Commission A New Case Study
-            </button>
+            </MagneticButton>
           </div>
         </div>
       </section>
     </div>
   );
 };
+

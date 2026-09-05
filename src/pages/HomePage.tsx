@@ -4,6 +4,8 @@ import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
 import { SERVICE_PILLARS, CASE_STUDIES, TRUSTED_CLIENTS, GROUND_ZERO_ADVANTAGES } from '../data/agencyData';
 import { ArrowRight, ArrowUpRight, Compass, ShieldCheck, Sparkles, Terminal, Video, MapPin, Zap } from 'lucide-react';
+import { TiltCard } from '../components/TiltCard';
+import { MagneticButton } from '../components/MagneticButton';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -19,7 +21,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
-          HERO SECTION: Artistic Flair 70% / 30% Architectural Grid Split
+          HERO SECTION: Artistic Flair 70% / 30% Architectural Grid Split with Glass Accents
          ========================================================================= */}
       <section id="hero-section" className="relative w-full border-b border-black flex flex-col">
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-5rem)]">
@@ -45,43 +47,48 @@ export const HomePage: React.FC<HomePageProps> = ({
                 369
               </h1>
 
-              {/* Stately Editorial Pull-Description */}
-              <p className="max-w-xl text-lg sm:text-xl leading-snug font-medium border-l-2 border-black pl-6 mb-10 text-[#141414]">
-                The creative media, digital marketing, and software engineering powerhouse of Sri Lanka’s Hill Country. Turning bold ideas into cinematic stories, high-performing software, and brands that win.
-              </p>
+              {/* Stately Editorial Pull-Description with subtle frosted highlight */}
+              <div className="max-w-xl p-6 glass-panel-light border-l-4 border-l-black mb-10">
+                <p className="text-lg sm:text-xl leading-snug font-medium text-[#141414]">
+                  The creative media, digital marketing, and software engineering powerhouse of Sri Lanka’s Hill Country. Turning bold ideas into cinematic stories, high-performing software, and brands that win.
+                </p>
+              </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons with Magnetic physics */}
               <div className="flex flex-wrap items-center gap-4">
-                <button
+                <MagneticButton
                   id="hero-primary-cta"
+                  variant="primary"
                   onClick={onOpenInquiry}
-                  className="bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#FFA500] hover:text-black transition-colors rounded-none cursor-pointer flex items-center gap-2"
+                  className="px-8 py-4"
                 >
                   <span>Start Your Project</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
-                <button
+                </MagneticButton>
+
+                <MagneticButton
                   id="hero-secondary-cta"
+                  variant="secondary"
                   onClick={() => onNavigate('work')}
-                  className="border border-black px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors text-black rounded-none cursor-pointer flex items-center gap-2"
+                  className="px-8 py-4"
                 >
                   <span>See Our Work</span>
                   <ArrowUpRight className="w-4 h-4" />
-                </button>
+                </MagneticButton>
               </div>
             </div>
 
             {/* Bottom Trusted Partners Ticker Strip on 70% section */}
-            <div className="border-t border-black flex flex-wrap items-center px-6 sm:px-12 py-6 gap-6 sm:gap-10 bg-white">
+            <div className="border-t border-black/15 flex flex-wrap items-center px-6 sm:px-12 py-6 gap-6 sm:gap-10 bg-white/70 backdrop-blur-md">
               <span className="text-[10px] font-bold uppercase tracking-widest opacity-40 w-28 shrink-0 font-mono-code">
                 Trusted Partners
               </span>
               <div className="flex flex-wrap items-center gap-6 sm:gap-8 grayscale opacity-75">
-                <span className="text-xs sm:text-sm font-black tracking-tight">AITKEN SPENCE</span>
-                <span className="text-xs sm:text-sm font-black tracking-tight">HILTON YALA</span>
-                <span className="text-xs sm:text-sm font-black tracking-tight">THE PEKOE TRAIL</span>
-                <span className="text-xs sm:text-sm font-black tracking-tight">COCO ORGANIC</span>
-                <span className="text-xs sm:text-sm font-black tracking-tight hidden md:inline">BALINESE SPAS</span>
+                <span className="text-xs sm:text-sm font-black tracking-tight hover:grayscale-0 transition-all cursor-default">AITKEN SPENCE</span>
+                <span className="text-xs sm:text-sm font-black tracking-tight hover:grayscale-0 transition-all cursor-default">HILTON YALA</span>
+                <span className="text-xs sm:text-sm font-black tracking-tight hover:grayscale-0 transition-all cursor-default">THE PEKOE TRAIL</span>
+                <span className="text-xs sm:text-sm font-black tracking-tight hover:grayscale-0 transition-all cursor-default">COCO ORGANIC</span>
+                <span className="text-xs sm:text-sm font-black tracking-tight hidden md:inline hover:grayscale-0 transition-all cursor-default">BALINESE SPAS</span>
               </div>
             </div>
           </div>
@@ -107,28 +114,28 @@ export const HomePage: React.FC<HomePageProps> = ({
               <ul className="space-y-4 text-xs tracking-widest uppercase font-mono-code">
                 <li
                   onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-[#008080] transition-colors group"
+                  className="flex items-center cursor-pointer hover:text-[#008080] transition-colors group p-2 rounded-sm hover:bg-white/5"
                 >
                   <span className="w-2 h-2 accent-teal mr-3 shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform">Tourism Marketing</span>
                 </li>
                 <li
                   onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-[#FF69B4] transition-colors group"
+                  className="flex items-center cursor-pointer hover:text-[#FF69B4] transition-colors group p-2 rounded-sm hover:bg-white/5"
                 >
                   <span className="w-2 h-2 accent-pink mr-3 shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform">Software Engineering</span>
                 </li>
                 <li
                   onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-[#FFA500] transition-colors group"
+                  className="flex items-center cursor-pointer hover:text-[#FFA500] transition-colors group p-2 rounded-sm hover:bg-white/5"
                 >
                   <span className="w-2 h-2 accent-orange mr-3 shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform">Cinematic Media</span>
                 </li>
                 <li
                   onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-gray-300 transition-colors group"
+                  className="flex items-center cursor-pointer hover:text-gray-300 transition-colors group p-2 rounded-sm hover:bg-white/5"
                 >
                   <span className="w-2 h-2 bg-white mr-3 shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform">Digital Ops</span>
@@ -137,7 +144,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             {/* Bottom Half: Headquarters & Build Next Callout */}
-            <div className="border-t border-white/20 p-8 sm:p-10 flex flex-col justify-between relative bg-black/40">
+            <div className="border-t border-white/20 p-8 sm:p-10 flex flex-col justify-between relative bg-black/50 backdrop-blur-md">
               <div className="mb-8">
                 <span className="text-[10px] uppercase tracking-widest opacity-60 block mb-2 font-mono-code">
                   Headquarters
@@ -175,8 +182,8 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* =========================================================================
           INTRO STRIP: Strategy to Screen
          ========================================================================= */}
-      <section id="intro-strip" className="bg-[#111] text-white border-b border-black py-16 sm:py-20 px-6 sm:px-12 lg:px-16">
-        <div className="max-w-7xl mx-auto">
+      <section id="intro-strip" className="bg-[#111] text-white border-b border-black py-16 sm:py-20 px-6 sm:px-12 lg:px-16 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-4">
               <div className="flex items-center gap-3 mb-3">
@@ -204,7 +211,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* =========================================================================
-          WHAT WE DO (Service Pillars Overview): 70% White / 30% Black Rhythm
+          WHAT WE DO (Service Pillars Overview): 3D Tilt Glass Cards
          ========================================================================= */}
       <section id="what-we-do" className="bg-white text-zinc-950 py-24 px-6 sm:px-12 lg:px-16 border-b border-black thin-grid">
         <div className="max-w-7xl mx-auto">
@@ -234,7 +241,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </button>
           </div>
 
-          {/* Pillars 4-Card Grid with crisp border-black styling */}
+          {/* Pillars 4-Card Grid with 3D Tilt and Glassmorphic aesthetics */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {SERVICE_PILLARS.map((pillar) => {
               const accentBar =
@@ -245,22 +252,24 @@ export const HomePage: React.FC<HomePageProps> = ({
                   : 'accent-orange';
 
               return (
-                <div
+                <TiltCard
                   key={pillar.id}
                   onClick={() => onNavigate('services')}
-                  className="group p-8 bg-white border border-black hover:border-black transition-all duration-200 cursor-pointer flex flex-col justify-between relative hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                  maxTilt={8}
+                  scale={1.03}
+                  className="p-8 flex flex-col justify-between cursor-pointer rounded-none"
                 >
-                  <div className={`absolute top-0 left-0 right-0 h-1 ${accentBar}`} />
+                  <div className={`absolute top-0 left-0 right-0 h-1.5 ${accentBar}`} />
 
                   <div>
                     <div className="flex items-center justify-between mb-6">
                       <span className="font-mono-code text-xs font-bold text-zinc-400">
                         {pillar.number}
                       </span>
-                      <span className="text-2xl">{pillar.icon}</span>
+                      <span className="text-2xl transition-transform duration-300 group-hover:scale-110">{pillar.icon}</span>
                     </div>
 
-                    <h3 className="gothic-display text-2xl uppercase text-black tracking-tight group-hover:opacity-75 transition-opacity">
+                    <h3 className="gothic-display text-2xl uppercase text-black tracking-tight group-hover:text-[#FFA500] transition-colors">
                       {pillar.title}
                     </h3>
 
@@ -269,14 +278,14 @@ export const HomePage: React.FC<HomePageProps> = ({
                     </p>
                   </div>
 
-                  <div className="mt-8 pt-4 border-t border-gray-200 flex items-center justify-between">
+                  <div className="mt-8 pt-4 border-t border-black/10 flex items-center justify-between">
                     <span className="font-mono-code text-[11px] uppercase tracking-wider text-zinc-500 font-semibold flex items-center gap-1.5">
                       <span className={`w-1.5 h-1.5 rounded-none ${accentBar}`} />
                       Inspect Pillar
                     </span>
                     <ArrowUpRight className="w-4 h-4 text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
-                </div>
+                </TiltCard>
               );
             })}
           </div>
@@ -284,9 +293,9 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* =========================================================================
-          WHY IMAGINATIVE369: Ground Zero Advantage (30% Black Structure)
+          WHY IMAGINATIVE369: Ground Zero Advantage (30% Black Structure with Glass Cards)
          ========================================================================= */}
-      <section id="ground-zero-advantage" className="bg-[#111] text-white py-24 px-6 sm:px-12 lg:px-16 border-b border-black">
+      <section id="ground-zero-advantage" className="bg-[#111] text-white py-24 px-6 sm:px-12 lg:px-16 border-b border-black relative">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="max-w-3xl mb-16">
@@ -306,7 +315,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </p>
           </div>
 
-          {/* 3 Structural Edge Cards */}
+          {/* 3 Structural Edge Cards with 3D Tilt */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {GROUND_ZERO_ADVANTAGES.map((adv) => {
               const borderTopColor =
@@ -324,9 +333,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                   : 'text-[#FFA500]';
 
               return (
-                <div
+                <TiltCard
                   key={adv.id}
-                  className={`p-8 bg-black border border-zinc-800 border-t-4 ${borderTopColor} space-y-6 hover:border-zinc-600 transition-colors`}
+                  isDark={true}
+                  maxTilt={7}
+                  scale={1.03}
+                  className={`p-8 border-t-4 ${borderTopColor} space-y-6 rounded-none`}
                 >
                   <div className="flex items-baseline justify-between">
                     <span className="font-mono-code text-xs text-zinc-500 font-bold">
@@ -346,34 +358,35 @@ export const HomePage: React.FC<HomePageProps> = ({
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-zinc-800">
-                    <span className="font-mono-code text-[11px] uppercase tracking-wider text-zinc-500">
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="font-mono-code text-[11px] uppercase tracking-wider text-zinc-400 font-bold">
                       {adv.metricLabel}
                     </span>
                   </div>
-                </div>
+                </TiltCard>
               );
             })}
           </div>
 
-          {/* Bottom Statement Box */}
-          <div className="mt-12 p-6 sm:p-8 bg-black border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-6">
+          {/* Bottom Statement Box with Glassmorphism */}
+          <div className="mt-12 p-6 sm:p-8 glass-panel-dark flex flex-col sm:flex-row items-center justify-between gap-6 border border-white/20">
             <p className="text-lg sm:text-xl text-zinc-200 font-medium">
               "We call it the <span className="text-white font-bold underline decoration-[#008080] underline-offset-4">Ground Zero Advantage</span>. Our clients call it results."
             </p>
 
-            <button
+            <MagneticButton
+              variant="glass"
               onClick={() => onNavigate('about')}
-              className="shrink-0 px-6 py-3 bg-white hover:bg-gray-200 text-black font-mono-code text-xs uppercase font-bold tracking-wider transition-colors cursor-pointer rounded-none"
+              className="shrink-0 px-6 py-3"
             >
               Read Our Full Story →
-            </button>
+            </MagneticButton>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          PROOF, NOT PROMISES: Portfolio & Trusted Partners Showcase
+          PROOF, NOT PROMISES: Portfolio & Trusted Partners Showcase (hugeinc.com style image reveal & 3D tilt)
          ========================================================================= */}
       <section id="proof-not-promises" className="bg-white text-zinc-950 py-24 px-6 sm:px-12 lg:px-16 border-b border-black thin-grid">
         <div className="max-w-7xl mx-auto">
@@ -394,77 +407,83 @@ export const HomePage: React.FC<HomePageProps> = ({
               </p>
             </div>
 
-            <button
+            <MagneticButton
+              variant="primary"
               onClick={() => onNavigate('work')}
-              className="mt-6 md:mt-0 inline-flex items-center gap-2 px-6 py-3.5 bg-black hover:bg-[#FFA500] hover:text-black text-white font-mono-code text-xs uppercase font-bold tracking-wider transition-colors cursor-pointer rounded-none"
+              className="mt-6 md:mt-0 px-6 py-3.5"
             >
               <span>View All Studies</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </MagneticButton>
           </div>
 
-          {/* Featured Case Studies Grid (Top 2 High-Impact Preview) */}
+          {/* Featured Case Studies Grid (HugeInc style 3D tilt, zoom reveal, and glassmorphic stats) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             {CASE_STUDIES.slice(0, 2).map((cs) => (
-              <div
+              <TiltCard
                 key={cs.id}
+                isDark={true}
+                maxTilt={6}
+                scale={1.02}
                 onClick={() => onSelectCaseStudy(cs)}
-                className="group relative bg-black text-white border border-black overflow-hidden cursor-pointer hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all"
+                className="cursor-pointer rounded-none"
               >
                 <div className="h-64 sm:h-80 w-full overflow-hidden relative">
                   <img
                     src={cs.image}
                     alt={cs.title}
-                    className="w-full h-full object-cover grayscale brightness-90 contrast-125 group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover grayscale brightness-90 contrast-125 card-media-zoom"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-black border border-white/20 text-[10px] font-mono-code uppercase tracking-widest text-[#00DFD8]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/40 to-transparent" />
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-3 py-1 glass-pill text-[10px] font-mono-code uppercase tracking-widest text-[#00DFD8]">
                       {cs.category} · {cs.client}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-8 space-y-4">
+                <div className="p-8 space-y-4 relative z-10">
                   <div className="flex items-baseline justify-between">
                     <h3 className="gothic-display text-3xl sm:text-4xl uppercase text-white tracking-tight group-hover:text-[#FFA500] transition-colors">
                       {cs.title}
                     </h3>
-                    <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                    <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                   </div>
 
-                  <p className="text-zinc-400 text-sm line-clamp-2 leading-relaxed">
+                  <p className="text-zinc-400 text-sm line-clamp-2 leading-relaxed font-light">
                     {cs.summary}
                   </p>
 
-                  <div className="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono-code text-zinc-400">
-                    <span>Impact: {cs.stats[0]?.label} → <strong className="text-white">{cs.stats[0]?.value}</strong></span>
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono-code text-zinc-400">
+                    <span>Impact: {cs.stats[0]?.label} → <strong className="text-white font-bold">{cs.stats[0]?.value}</strong></span>
                     <span className="text-[#FFA500] underline uppercase text-[11px] font-bold">Deep Dive →</span>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
 
-          {/* Trusted Clients Logo Wall */}
+          {/* Trusted Clients Logo Wall with glassmorphic cards */}
           <div className="pt-12 border-t border-black">
-            <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-zinc-500 text-center mb-8">
+            <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-zinc-500 text-center mb-8 font-bold">
               Trusted By Provincial & National Industry Pioneers
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
               {TRUSTED_CLIENTS.map((client, idx) => (
-                <div
+                <TiltCard
                   key={idx}
-                  className="p-4 bg-white border border-black text-center flex flex-col justify-center items-center h-24 hover:bg-gray-50 transition-colors"
+                  maxTilt={10}
+                  scale={1.04}
+                  className="p-4 text-center flex flex-col justify-center items-center h-24 rounded-none cursor-default"
                 >
                   <span className="font-display font-bold text-sm text-black">
                     {client.name}
                   </span>
-                  <span className="font-mono-code text-[9px] text-zinc-500 mt-1 uppercase">
+                  <span className="font-mono-code text-[9px] text-zinc-500 mt-1 uppercase font-bold">
                     {client.role}
                   </span>
-                </div>
+                </TiltCard>
               ))}
             </div>
           </div>
@@ -476,7 +495,7 @@ export const HomePage: React.FC<HomePageProps> = ({
          ========================================================================= */}
       <section id="closing-cta-band" className="bg-black text-white py-24 px-6 sm:px-12 lg:px-16 relative overflow-hidden">
         <div className="max-w-5xl mx-auto text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#111] border border-white/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20">
             <div className="w-2 h-2 accent-orange"></div>
             <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#FFA500] font-bold">
               Ground Zero Briefing
@@ -494,20 +513,22 @@ export const HomePage: React.FC<HomePageProps> = ({
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
+            <MagneticButton
               id="cta-band-get-in-touch-btn"
+              variant="glass"
               onClick={onOpenInquiry}
-              className="w-full sm:w-auto px-10 py-5 bg-white text-black hover:bg-[#FFA500] font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer"
+              className="w-full sm:w-auto px-10 py-5 text-black bg-white hover:bg-[#FFA500]"
             >
               Start Your Project
-            </button>
+            </MagneticButton>
 
-            <button
+            <MagneticButton
+              variant="outline"
               onClick={() => onNavigate('work')}
-              className="w-full sm:w-auto px-8 py-5 bg-transparent hover:bg-zinc-900 text-white border border-white font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer"
+              className="w-full sm:w-auto px-8 py-5 text-white border border-white hover:bg-white/10"
             >
               See Our Work
-            </button>
+            </MagneticButton>
           </div>
         </div>
 
@@ -519,3 +540,4 @@ export const HomePage: React.FC<HomePageProps> = ({
     </div>
   );
 };
+
