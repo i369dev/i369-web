@@ -29,52 +29,111 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Architectural Grid Section */}
           <div className="w-full flex flex-col relative thin-grid bg-white text-[#141414] justify-between flex-grow">
             <div className="p-8 sm:p-12 lg:p-16 flex-grow flex flex-col justify-center">
-              {/* Eyebrow */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="flex space-x-1.5">
-                  <div className="w-2 h-4 accent-teal"></div>
-                  <div className="w-2 h-4 accent-pink"></div>
-                  <div className="w-2 h-4 accent-orange"></div>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                {/* Left Column: Headline & Editorial Content */}
+                <div className="lg:col-span-7 flex flex-col justify-center">
+                  {/* Eyebrow */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="flex space-x-1.5">
+                      <div className="w-2 h-4 accent-teal"></div>
+                      <div className="w-2 h-4 accent-pink"></div>
+                      <div className="w-2 h-4 accent-orange"></div>
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-[0.4em] text-gray-500 font-mono-code">
+                      Strategy to Screen // Badulla
+                    </span>
+                  </div>
+
+                  {/* Main Artistic Flair Gothic Display Headline */}
+                  <h1 className="gothic-display text-5xl sm:text-7xl md:text-8xl lg:text-[100px] xl:text-[108px] text-black mb-8 leading-[0.85] tracking-tighter">
+                    IMAGINATIVE<br />
+                    369
+                  </h1>
+
+                  {/* Stately Editorial Pull-Description with subtle frosted highlight */}
+                  <div className="max-w-xl p-6 glass-panel-light border-l-4 border-l-black mb-10">
+                    <p className="text-lg sm:text-xl leading-snug font-medium text-[#141414]">
+                      The creative media, digital marketing, and software engineering powerhouse of Sri Lanka’s Hill Country. Turning bold ideas into cinematic stories, high-performing software, and brands that win.
+                    </p>
+                  </div>
+
+                  {/* Action Buttons with Magnetic physics */}
+                  <div className="flex flex-wrap items-center gap-4">
+                    <MagneticButton
+                      id="hero-primary-cta"
+                      variant="primary"
+                      onClick={onOpenInquiry}
+                      className="px-8 py-4"
+                    >
+                      <span>Start Your Project</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </MagneticButton>
+
+                    <MagneticButton
+                      id="hero-secondary-cta"
+                      variant="secondary"
+                      onClick={() => onNavigate('work')}
+                      className="px-8 py-4"
+                    >
+                      <span>See Our Work</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </MagneticButton>
+                  </div>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-[0.4em] text-gray-500 font-mono-code">
-                  Strategy to Screen // Badulla
-                </span>
-              </div>
 
-              {/* Main Artistic Flair Gothic Display Headline */}
-              <h1 className="gothic-display text-5xl sm:text-7xl md:text-8xl lg:text-[105px] text-black mb-8 leading-[0.85] tracking-tighter">
-                IMAGINATIVE<br />
-                369
-              </h1>
+                {/* Right Column: Cinematic Video Showcase Container */}
+                <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
+                  <div className="relative w-full max-w-lg lg:max-w-none rounded-2xl overflow-hidden border border-black/20 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.15)] group">
+                    {/* HTML5 Background Video */}
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
+                      className="w-full h-72 sm:h-96 lg:h-[460px] object-cover filter brightness-90 contrast-105 group-hover:scale-105 transition-transform duration-700 ease-out"
+                    >
+                      <source
+                        src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-fog-over-a-green-mountain-forest-41480-large.mp4"
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
 
-              {/* Stately Editorial Pull-Description with subtle frosted highlight */}
-              <div className="max-w-2xl p-6 glass-panel-light border-l-4 border-l-black mb-10">
-                <p className="text-lg sm:text-xl leading-snug font-medium text-[#141414]">
-                  The creative media, digital marketing, and software engineering powerhouse of Sri Lanka’s Hill Country. Turning bold ideas into cinematic stories, high-performing software, and brands that win.
-                </p>
-              </div>
+                    {/* Gradient Overlay for Cinematic Depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
-              {/* Action Buttons with Magnetic physics */}
-              <div className="flex flex-wrap items-center gap-4">
-                <MagneticButton
-                  id="hero-primary-cta"
-                  variant="primary"
-                  onClick={onOpenInquiry}
-                  className="px-8 py-4"
-                >
-                  <span>Start Your Project</span>
-                  <ArrowRight className="w-4 h-4" />
-                </MagneticButton>
+                    {/* Top Floating Glass Badge */}
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <div className="flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/20 text-white font-mono-code text-[10px] uppercase tracking-widest rounded-full">
+                        <span className="w-2 h-2 rounded-full bg-[#00DFD8] animate-pulse"></span>
+                        <span>Cinematic Reel // 4K</span>
+                      </div>
+                      <div className="flex space-x-1">
+                        <div className="w-1.5 h-3 accent-teal"></div>
+                        <div className="w-1.5 h-3 accent-pink"></div>
+                        <div className="w-1.5 h-3 accent-orange"></div>
+                      </div>
+                    </div>
 
-                <MagneticButton
-                  id="hero-secondary-cta"
-                  variant="secondary"
-                  onClick={() => onNavigate('work')}
-                  className="px-8 py-4"
-                >
-                  <span>See Our Work</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </MagneticButton>
+                    {/* Bottom Metadata Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between z-10 pointer-events-none text-white">
+                      <div>
+                        <p className="font-mono-code text-[11px] uppercase tracking-wider text-[#FFA500] font-bold">
+                          Central Highlands
+                        </p>
+                        <p className="font-display text-base font-semibold text-white/90">
+                          Badulla // 06°59′N 81°03′E
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] font-mono-code uppercase tracking-widest text-white/60 bg-white/10 backdrop-blur-sm px-2.5 py-1 rounded border border-white/15">
+                          680m Above Sea
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
