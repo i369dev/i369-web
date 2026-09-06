@@ -191,53 +191,78 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="relative border-t border-black/15 bg-white/40 backdrop-blur-md overflow-hidden flex items-center h-16 sm:h-20 select-none">
               {/* Full-width scrolling logo marquee layer (z-0: passes continuously underneath the fixed left glass pane) */}
               <div className="absolute inset-0 w-full h-full z-0 flex items-center overflow-hidden pointer-events-auto">
-                <div className="animate-marquee-infinite flex items-center gap-4 sm:gap-6 pl-4 sm:pl-8">
-                  {/* Repeated twice to ensure seamless infinite looping */}
-                  {[...PARTNER_MARQUEE_ITEMS, ...PARTNER_MARQUEE_ITEMS].map((partner, pIdx) => {
-                    const matchedCaseStudy = partner.caseStudyId
-                      ? CASE_STUDIES.find((cs) => cs.id === partner.caseStudyId)
-                      : null;
+                <div className="animate-marquee-infinite flex items-center">
+                  {/* Track 1 */}
+                  <div className="flex items-center gap-8 sm:gap-12 md:gap-16 pr-8 sm:pr-12 md:pr-16 shrink-0">
+                    {PARTNER_MARQUEE_ITEMS.map((partner, pIdx) => {
+                      const matchedCaseStudy = partner.caseStudyId
+                        ? CASE_STUDIES.find((cs) => cs.id === partner.caseStudyId)
+                        : null;
 
-                    return (
-                      <div
-                        key={`${partner.id}-${pIdx}`}
-                        onClick={() => {
-                          if (matchedCaseStudy) {
-                            onSelectCaseStudy(matchedCaseStudy);
-                          } else {
-                            onNavigate('work');
-                          }
-                        }}
-                        title={matchedCaseStudy ? `View ${partner.name} Case Study` : `View ${partner.name} Details`}
-                        className="group relative flex items-center justify-center h-10 sm:h-12 px-3 sm:px-4 py-1 sm:py-1.5 bg-white/90 hover:bg-white border border-black/15 hover:border-black/50 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-2 shrink-0 cursor-pointer rounded-none"
-                      >
-                        {/* True Vibrant Original Color Logo Image with Natural Aspect Ratio */}
-                        <img
-                          src={partner.image}
-                          alt={partner.name}
-                          className="h-7 sm:h-8 w-auto max-w-[90px] sm:max-w-[120px] object-contain transition-transform duration-300 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                        {/* Subtle Corner Accent Indicator */}
+                      return (
                         <div
-                          className={`absolute top-0 right-0 w-1.5 h-1.5 ${
-                            partner.accentColor === 'teal'
-                              ? 'accent-teal'
-                              : partner.accentColor === 'pink'
-                              ? 'accent-pink'
-                              : 'accent-orange'
-                          } opacity-80 group-hover:opacity-100 transition-opacity`}
-                        />
-                      </div>
-                    );
-                  })}
+                          key={`track1-${partner.id}-${pIdx}`}
+                          onClick={() => {
+                            if (matchedCaseStudy) {
+                              onSelectCaseStudy(matchedCaseStudy);
+                            } else {
+                              onNavigate('work');
+                            }
+                          }}
+                          title={matchedCaseStudy ? `View ${partner.name} Case Study` : `View ${partner.name} Details`}
+                          className="group relative flex items-center justify-center shrink-0 cursor-pointer transition-all duration-300 ease-out hover:-translate-y-2 py-1 select-none"
+                        >
+                          {/* Raw Logo Image floating directly on grid with natural aspect ratio */}
+                          <img
+                            src={partner.image}
+                            alt={partner.name}
+                            className="h-7 sm:h-9 w-auto max-w-[95px] sm:max-w-[130px] object-contain transition-transform duration-300 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Track 2 (Identical for mathematically seamless CSS translateX(-50%) loop) */}
+                  <div className="flex items-center gap-8 sm:gap-12 md:gap-16 pr-8 sm:pr-12 md:pr-16 shrink-0" aria-hidden="true">
+                    {PARTNER_MARQUEE_ITEMS.map((partner, pIdx) => {
+                      const matchedCaseStudy = partner.caseStudyId
+                        ? CASE_STUDIES.find((cs) => cs.id === partner.caseStudyId)
+                        : null;
+
+                      return (
+                        <div
+                          key={`track2-${partner.id}-${pIdx}`}
+                          onClick={() => {
+                            if (matchedCaseStudy) {
+                              onSelectCaseStudy(matchedCaseStudy);
+                            } else {
+                              onNavigate('work');
+                            }
+                          }}
+                          title={matchedCaseStudy ? `View ${partner.name} Case Study` : `View ${partner.name} Details`}
+                          className="group relative flex items-center justify-center shrink-0 cursor-pointer transition-all duration-300 ease-out hover:-translate-y-2 py-1 select-none"
+                        >
+                          {/* Raw Logo Image floating directly on grid with natural aspect ratio */}
+                          <img
+                            src={partner.image}
+                            alt={partner.name}
+                            className="h-7 sm:h-9 w-auto max-w-[95px] sm:max-w-[130px] object-contain transition-transform duration-300 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
               {/* Fixed Left Heading with True Frosted Glassmorphism Pane (z-20) */}
               <div className="relative z-20 shrink-0 h-full flex items-center pl-4 sm:pl-8 md:pl-12 lg:pl-16 pr-5 sm:pr-8 glass-marquee-fixed pointer-events-none">
-                <div className="flex items-center gap-2 sm:gap-3 pointer-events-auto">
-                  <div className="flex space-x-1 shrink-0">
+                <div className="flex items-center gap-2.5 sm:gap-3 pointer-events-auto">
+                  {/* Decorative 3-color lines: hidden on mobile, visible on desktop/tablet */}
+                  <div className="hidden sm:flex space-x-1 shrink-0">
                     <div className="w-1.5 h-3.5 accent-teal"></div>
                     <div className="w-1.5 h-3.5 accent-pink"></div>
                     <div className="w-1.5 h-3.5 accent-orange"></div>
