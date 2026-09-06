@@ -187,36 +187,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Bottom Trusted Partners Infinite Logo Marquee Strip with Depth Slide-Out */}
-            <div className="relative border-t border-black/15 bg-white/70 backdrop-blur-lg overflow-hidden flex items-center h-16 sm:h-20 select-none">
-              {/* Fixed Left Heading with Intensified Glassmorphism Overlay (z-20) */}
-              <div className="relative z-20 shrink-0 h-full flex items-center pl-4 sm:pl-8 md:pl-12 lg:pl-16 pr-5 sm:pr-8 glass-marquee-fixed">
-                <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex space-x-1">
-                    <div className="w-1.5 h-3.5 accent-teal"></div>
-                    <div className="w-1.5 h-3.5 accent-pink"></div>
-                    <div className="w-1.5 h-3.5 accent-orange"></div>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] sm:tracking-[0.25em] text-black font-mono-code whitespace-nowrap drop-shadow-sm">
-                      Trusted Partners
-                    </span>
-                    <span className="text-[8px] sm:text-[9px] font-mono-code text-zinc-600 uppercase tracking-widest hidden md:inline font-bold">
-                      Client & Venture Network
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Optical Depth Fade Overlay (emerging from behind the frosted glass) */}
-              <div className="absolute left-[130px] sm:left-[190px] md:left-[240px] lg:left-[270px] top-0 bottom-0 z-10 w-10 sm:w-20 bg-gradient-to-r from-white/95 via-white/50 to-transparent pointer-events-none" />
-
-              {/* Right Exit/Entry Fade Gradient */}
-              <div className="absolute right-0 top-0 bottom-0 z-10 w-12 sm:w-24 bg-gradient-to-l from-white/95 via-white/50 to-transparent pointer-events-none" />
-
-              {/* Infinite Scrolling Logo Marquee (z-0: slides underneath the fixed left glass block) */}
-              <div className="flex-1 overflow-hidden relative z-0 h-full flex items-center">
-                <div className="animate-marquee-infinite flex items-center gap-3.5 sm:gap-5 pl-4 sm:pl-6">
+            {/* Bottom Trusted Partners Infinite Logo Marquee Strip with Depth Slide-Under */}
+            <div className="relative border-t border-black/15 bg-white/40 backdrop-blur-md overflow-hidden flex items-center h-16 sm:h-20 select-none">
+              {/* Full-width scrolling logo marquee layer (z-0: passes continuously underneath the fixed left glass pane) */}
+              <div className="absolute inset-0 w-full h-full z-0 flex items-center overflow-hidden pointer-events-auto">
+                <div className="animate-marquee-infinite flex items-center gap-4 sm:gap-6 pl-4 sm:pl-8">
                   {/* Repeated twice to ensure seamless infinite looping */}
                   {[...PARTNER_MARQUEE_ITEMS, ...PARTNER_MARQUEE_ITEMS].map((partner, pIdx) => {
                     const matchedCaseStudy = partner.caseStudyId
@@ -234,30 +209,53 @@ export const HomePage: React.FC<HomePageProps> = ({
                           }
                         }}
                         title={matchedCaseStudy ? `View ${partner.name} Case Study` : `View ${partner.name} Details`}
-                        className="group relative h-10 sm:h-12 w-28 sm:w-36 bg-white/95 hover:bg-white border border-black/15 hover:border-black/50 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-0.5 transition-all duration-300 shrink-0 cursor-pointer overflow-hidden p-1.5 flex items-center justify-center rounded-none"
+                        className="group relative flex items-center justify-center h-10 sm:h-12 px-3 sm:px-4 py-1 sm:py-1.5 bg-white/90 hover:bg-white border border-black/15 hover:border-black/50 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out hover:-translate-y-2 shrink-0 cursor-pointer rounded-none"
                       >
-                        {/* True Vibrant Original Color Logo Image */}
+                        {/* True Vibrant Original Color Logo Image with Natural Aspect Ratio */}
                         <img
                           src={partner.image}
                           alt={partner.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="h-7 sm:h-8 w-auto max-w-[90px] sm:max-w-[120px] object-contain transition-transform duration-300 group-hover:scale-105"
                           loading="lazy"
                         />
                         {/* Subtle Corner Accent Indicator */}
                         <div
-                          className={`absolute top-0 right-0 w-2 h-2 ${
+                          className={`absolute top-0 right-0 w-1.5 h-1.5 ${
                             partner.accentColor === 'teal'
                               ? 'accent-teal'
                               : partner.accentColor === 'pink'
                               ? 'accent-pink'
                               : 'accent-orange'
-                          } opacity-90 group-hover:opacity-100 transition-opacity`}
+                          } opacity-80 group-hover:opacity-100 transition-opacity`}
                         />
                       </div>
                     );
                   })}
                 </div>
               </div>
+
+              {/* Fixed Left Heading with True Frosted Glassmorphism Pane (z-20) */}
+              <div className="relative z-20 shrink-0 h-full flex items-center pl-4 sm:pl-8 md:pl-12 lg:pl-16 pr-5 sm:pr-8 glass-marquee-fixed pointer-events-none">
+                <div className="flex items-center gap-2 sm:gap-3 pointer-events-auto">
+                  <div className="flex space-x-1 shrink-0">
+                    <div className="w-1.5 h-3.5 accent-teal"></div>
+                    <div className="w-1.5 h-3.5 accent-pink"></div>
+                    <div className="w-1.5 h-3.5 accent-orange"></div>
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <div className="font-mono-code font-black text-[10px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.24em] text-black leading-tight drop-shadow-sm flex flex-col sm:inline">
+                      <span>Trusted</span>
+                      <span className="sm:ml-1.5">Partners</span>
+                    </div>
+                    <span className="text-[8px] sm:text-[9px] font-mono-code text-zinc-600 uppercase tracking-widest hidden md:inline font-bold mt-0.5">
+                      Client & Venture Network
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Exit/Entry Subtle Fade Gradient (z-10) */}
+              <div className="absolute right-0 top-0 bottom-0 z-10 w-10 sm:w-16 bg-gradient-to-l from-white/80 to-transparent pointer-events-none" />
             </div>
           </div>
 
