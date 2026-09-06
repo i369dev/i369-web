@@ -44,28 +44,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Editorial
          ========================================================================= */}
-      <section className="bg-white border-b border-black py-16 sm:py-24 px-6 sm:px-12 lg:px-16 thin-grid relative">
+      <section className="bg-white border-b border-black py-12 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 thin-grid relative">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
             <div className="flex space-x-1.5">
               <div className="w-2 h-4 accent-teal"></div>
               <div className="w-2 h-4 accent-pink"></div>
               <div className="w-2 h-4 accent-orange"></div>
             </div>
-            <span className="font-mono-code text-xs uppercase tracking-[0.3em] text-gray-500 font-bold">
+            <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 font-bold">
               06 // Ground-Zero Transmission
             </span>
           </div>
 
-          <h1 className="gothic-display text-6xl sm:text-8xl md:text-9xl uppercase text-black tracking-tight leading-[0.88]">
+          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase text-black tracking-tight leading-[0.88] break-words">
             Let’s Build Something.
           </h1>
 
-          <div className="mt-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-t border-black pt-6">
-            <p className="font-display text-xl sm:text-2xl text-zinc-800 font-medium max-w-2xl border-l-2 border-black pl-6">
+          <div className="mt-6 sm:mt-8 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 border-t border-black pt-6">
+            <p className="font-display text-lg sm:text-xl md:text-2xl text-zinc-800 font-medium max-w-2xl border-l-2 border-black pl-4 sm:pl-6">
               Whether it's a destination campaign, a mobile app, or a full brand relaunch — tell us where you want to go.
             </p>
-            <p className="font-mono-code text-xs text-zinc-500 uppercase tracking-widest font-bold">
+            <p className="font-mono-code text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest font-bold">
               Strategy to Screen · Badulla, Sri Lanka
             </p>
           </div>
@@ -75,39 +75,39 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
       {/* =========================================================================
           FORM & STUDIO COORDINATES SPLIT (Hugeinc Style Grid)
          ========================================================================= */}
-      <section className="py-20 px-6 sm:px-12 lg:px-16 bg-[#FAFAFA] border-b border-black">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#FAFAFA] border-b border-black">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
             {/* Left: Studio Details & Ground Zero Info (Dark Glass 3D Tilt Card) */}
             <div className="lg:col-span-5">
               <TiltCard
                 isDark={true}
                 maxTilt={6}
                 scale={1.02}
-                className="p-8 sm:p-12 space-y-8 rounded-none cursor-default"
+                className="p-6 sm:p-8 md:p-12 space-y-6 sm:space-y-8 rounded-none cursor-default"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4">
                   <div className="w-8 h-8 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0">
                     i369
                   </div>
                   <div>
-                    <h3 className="gothic-display text-2xl uppercase text-white">
+                    <h3 className="gothic-display text-xl sm:text-2xl uppercase text-white">
                       Imaginative 369
                     </h3>
-                    <p className="font-mono-code text-xs text-zinc-400 uppercase tracking-widest mt-0.5 font-bold">
+                    <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-widest mt-0.5 font-bold">
                       Studio & Venture Directorate
                     </p>
                   </div>
                 </div>
 
-                <div className="space-y-6 text-sm">
-                  <div className="flex items-start gap-4">
+                <div className="space-y-4 sm:space-y-6 text-sm">
+                  <div className="flex items-start gap-3 sm:gap-4">
                     <MapPin className="w-4 h-4 text-[#FF69B4] shrink-0 mt-1" />
                     <div>
-                      <span className="font-mono-code text-xs text-zinc-400 uppercase tracking-wider block font-bold">
+                      <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
                         Studio Address
                       </span>
-                      <p className="text-zinc-200 font-normal mt-1 leading-relaxed">
+                      <p className="text-zinc-200 font-normal mt-1 text-xs sm:text-sm leading-relaxed">
                         03 River Side Road,<br />
                         Badulla, Uva Province,<br />
                         Sri Lanka
@@ -115,25 +115,25 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3 sm:gap-4">
                     <Mail className="w-4 h-4 text-[#00DFD8] shrink-0 mt-1" />
                     <div>
-                      <span className="font-mono-code text-xs text-zinc-400 uppercase tracking-wider block font-bold">
+                      <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
                         Direct Email
                       </span>
-                      <p className="text-zinc-200 font-mono-code mt-1 text-xs">
+                      <p className="text-zinc-200 font-mono-code mt-1 text-xs break-all">
                         i369.developer@gmail.com
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3 sm:gap-4">
                     <Clock className="w-4 h-4 text-[#FFA500] shrink-0 mt-1" />
                     <div>
-                      <span className="font-mono-code text-xs text-zinc-400 uppercase tracking-wider block font-bold">
+                      <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
                         Highland Operating Hours
                       </span>
-                      <p className="text-zinc-200 mt-1 text-xs leading-relaxed">
+                      <p className="text-zinc-200 mt-1 text-xs sm:text-sm leading-relaxed">
                         Monday — Saturday: 08:30 — 18:30 IST<br />
                         <span className="text-zinc-400">24/7 Priority Response for Retainers</span>
                       </p>
@@ -141,11 +141,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                <div className="p-4 bg-white/5 border border-white/20 space-y-2">
-                  <span className="font-mono-code text-[11px] uppercase text-[#00DFD8] tracking-widest block font-bold">
+                <div className="p-3.5 sm:p-4 bg-white/5 border border-white/20 space-y-1.5 sm:space-y-2">
+                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase text-[#00DFD8] tracking-widest block font-bold">
                     Ground Zero Telemetry
                   </span>
-                  <p className="font-mono-code text-xs text-zinc-300 leading-relaxed">
+                  <p className="font-mono-code text-[11px] sm:text-xs text-zinc-300 leading-relaxed">
                     Coordinates: 06°59′N 81°03′E<br />
                     Average Elevation: 680m Above Sea<br />
                     Central Highlands Corridor
@@ -155,16 +155,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Right: The Official Contact Form (Light Glass Panel) */}
-            <div className="lg:col-span-7 bg-white/90 backdrop-blur-xl p-8 sm:p-12 border border-black/20 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-none">
+            <div className="lg:col-span-7 bg-white/90 backdrop-blur-xl p-5 sm:p-8 md:p-12 border border-black/20 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-none">
               {isSubmitted ? (
-                <div className="py-16 text-center space-y-6">
-                  <div className="w-16 h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#008080] shadow-sm">
-                    <CheckCircle2 className="w-8 h-8" />
+                <div className="py-12 sm:py-16 text-center space-y-4 sm:space-y-6">
+                  <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#008080] shadow-sm">
+                    <CheckCircle2 className="w-7 sm:w-8 h-7 sm:h-8" />
                   </div>
-                  <h3 className="gothic-display text-4xl uppercase text-black">
+                  <h3 className="gothic-display text-3xl sm:text-4xl uppercase text-black">
                     Inquiry Received.
                   </h3>
-                  <p className="text-zinc-600 max-w-md mx-auto text-sm sm:text-base leading-relaxed">
+                  <p className="text-zinc-600 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
                     Thank you, <strong className="text-black font-bold">{formData.name}</strong>. Your project brief has been recorded by our Badulla studio team. We will review your requirements and respond within 24 hours.
                   </p>
                   <MagneticButton
@@ -179,15 +179,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         message: '',
                       });
                     }}
-                    className="px-6 py-3"
+                    className="w-full sm:w-auto px-6 py-3 justify-center"
                   >
                     Submit Another Brief
                   </MagneticButton>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div>
-                    <h3 className="gothic-display text-3xl uppercase text-black tracking-tight">
+                    <h3 className="gothic-display text-2xl sm:text-3xl uppercase text-black tracking-tight">
                       Project Specification Brief
                     </h3>
                     <p className="text-xs sm:text-sm text-zinc-600 mt-1">
@@ -196,9 +196,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   {/* Name & Company */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-2">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
                         Name *
                       </label>
                       <input
@@ -207,12 +207,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Your full name"
-                        className="w-full px-4 py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-2">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
                         Company
                       </label>
                       <input
@@ -220,15 +220,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                         placeholder="Organization or brand"
-                        className="w-full px-4 py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
                       />
                     </div>
                   </div>
 
                   {/* Email & Project Type */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-2">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
                         Email *
                       </label>
                       <input
@@ -237,18 +237,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="name@organization.com"
-                        className="w-full px-4 py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-2">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
                         Project Type
                       </label>
                       <select
                         value={formData.projectType}
                         onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                        className="w-full px-4 py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors cursor-pointer font-sans"
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors cursor-pointer font-sans"
                       >
                         {projectTypes.map((type) => (
                           <option key={type} value={type}>
@@ -261,29 +261,29 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-2">
+                    <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
                       Message *
                     </label>
                     <textarea
-                      rows={5}
+                      rows={4}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Outline your objectives, timeline, or current challenge..."
-                      className="w-full px-4 py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
                     />
                   </div>
 
                   {/* Submit Button */}
-                  <div className="pt-2 flex items-center justify-between">
-                    <span className="font-mono-code text-xs text-zinc-500 font-bold">
+                  <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <span className="font-mono-code text-[11px] sm:text-xs text-zinc-500 font-bold">
                       * Required fields
                     </span>
 
                     <MagneticButton
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-8 py-4"
+                      className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 justify-center"
                     >
                       {isSubmitting ? (
                         <span>Transmitting...</span>
