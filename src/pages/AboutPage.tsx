@@ -32,7 +32,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           </div>
 
           {/* Main Gothic Display H1 */}
-          <h1 className="gothic-display text-4xl sm:text-6xl md:text-7xl lg:text-8.5xl font-black uppercase tracking-tight text-black leading-[0.88] break-words">
+          <h1 className="gothic-display text-4xl sm:text-6xl md:text-7xl lg:text-8.5xl font-black tracking-tight text-black leading-[0.88] break-words">
             About Imaginative369.
           </h1>
 
@@ -66,7 +66,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   The Genesis
                 </span>
               </div>
-              <h2 className="gothic-display text-3xl sm:text-4xl md:text-5xl uppercase text-black tracking-tight leading-none">
+              <h2 className="gothic-display text-3xl sm:text-4xl md:text-5xl text-black tracking-tight leading-none">
                 Our Story.
               </h2>
               <TiltCard
@@ -127,7 +127,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               </span>
             </div>
 
-            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl uppercase text-black tracking-tight leading-none mb-4 sm:mb-6">
+            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-black tracking-tight leading-none mb-4 sm:mb-6">
               Our Philosophy: "Strategy to Screen."
             </h2>
 
@@ -149,7 +149,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
               Organizational Architecture
             </div>
-            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl uppercase text-white tracking-tight leading-none">
+            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
               The Dual-Engine Model.
             </h2>
             <p className="text-zinc-400 font-light text-sm sm:text-base md:text-lg">
@@ -175,7 +175,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               </div>
 
               <div>
-                <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl uppercase text-white tracking-tight">
+                <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
                   Agency Services
                 </h3>
                 <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
@@ -216,7 +216,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               </div>
 
               <div>
-                <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl uppercase text-white tracking-tight">
+                <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
                   Venture Studio
                 </h3>
                 <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
@@ -266,7 +266,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 Global Horizons
               </span>
             </div>
-            <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl uppercase text-black tracking-tight">
+            <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-black tracking-tight">
               Our Vision
             </h3>
             <p className="text-zinc-600 text-sm sm:text-base leading-relaxed font-normal">
@@ -286,7 +286,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 Daily Execution
               </span>
             </div>
-            <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl uppercase text-black tracking-tight">
+            <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-black tracking-tight">
               Our Mission
             </h3>
             <p className="text-zinc-600 text-sm sm:text-base leading-relaxed font-normal">
@@ -310,7 +310,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 </span>
               </div>
 
-              <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl uppercase text-white tracking-tight leading-none">
+              <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
                 Where We Work.
               </h2>
 

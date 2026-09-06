@@ -57,7 +57,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             </span>
           </div>
 
-          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase text-black tracking-tight leading-[0.88] break-words">
+          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
             Let’s Build Something.
           </h1>
 
@@ -91,7 +91,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     i369
                   </div>
                   <div>
-                    <h3 className="gothic-display text-xl sm:text-2xl uppercase text-white">
+                    <h3 className="gothic-display text-xl sm:text-2xl text-white">
                       Imaginative 369
                     </h3>
                     <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-widest mt-0.5 font-bold">
@@ -161,7 +161,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#008080] shadow-sm">
                     <CheckCircle2 className="w-7 sm:w-8 h-7 sm:h-8" />
                   </div>
-                  <h3 className="gothic-display text-3xl sm:text-4xl uppercase text-black">
+                  <h3 className="gothic-display text-3xl sm:text-4xl text-black">
                     Inquiry Received.
                   </h3>
                   <p className="text-zinc-600 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
@@ -187,7 +187,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div>
-                    <h3 className="gothic-display text-2xl sm:text-3xl uppercase text-black tracking-tight">
+                    <h3 className="gothic-display text-2xl sm:text-3xl text-black tracking-tight">
                       Project Specification Brief
                     </h3>
                     <p className="text-xs sm:text-sm text-zinc-600 mt-1">

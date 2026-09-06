@@ -61,7 +61,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   {/* Main Artistic Flair Gothic Display Headline */}
                   <h1 className="gothic-display text-4xl sm:text-6xl md:text-7xl lg:text-[90px] xl:text-[104px] text-black mb-6 sm:mb-8 leading-[0.88] tracking-tighter break-words">
-                    IMAGINATIVE<br />
+                    Imaginative<br />
                     369
                   </h1>
 
@@ -305,7 +305,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   Core Mandate
                 </span>
               </div>
-              <h2 className="gothic-display text-3xl sm:text-4xl md:text-5xl uppercase text-white tracking-tight leading-none">
+              <h2 className="gothic-display text-3xl sm:text-4xl md:text-5xl text-white tracking-tight leading-none">
                 Strategy to Screen.
               </h2>
             </div>
@@ -337,7 +337,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 The Ground Zero Advantage
               </span>
             </div>
-            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl uppercase text-white tracking-tight leading-tight">
+            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-tight">
               We didn’t set up in Colombo.
               <br />
               <span className="text-zinc-400">We set up on the ground.</span>
@@ -382,7 +382,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </div>
 
                   <div>
-                    <h3 className="gothic-display text-xl sm:text-2xl uppercase text-white tracking-tight">
+                    <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight">
                       {adv.title}
                     </h3>
                     <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
@@ -431,7 +431,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   Verified Outcomes
                 </span>
               </div>
-              <h2 className="gothic-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase text-black tracking-tight leading-none">
+              <h2 className="gothic-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-black tracking-tight leading-none">
                 Proof, Not Promises.
               </h2>
               <p className="mt-3 text-sm sm:text-base md:text-lg text-zinc-700 max-w-2xl font-normal leading-relaxed">
@@ -477,7 +477,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 <div className="p-6 sm:p-8 space-y-4 relative z-10">
                   <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl uppercase text-white tracking-tight group-hover:text-[#FFA500] transition-colors">
+                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight group-hover:text-[#FFA500] transition-colors">
                       {cs.title}
                     </h3>
                     <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0" />
@@ -534,7 +534,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </span>
           </div>
 
-          <h2 className="gothic-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.9] break-words">
+          <h2 className="gothic-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.9] break-words">
             Ready to move from
             <br />
             <span className="text-white">Strategy to Screen?</span>
@@ -565,7 +565,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
 
         {/* Ambient Watermark */}
-        <div className="absolute -bottom-16 sm:-bottom-24 left-1/2 -translate-x-1/2 text-zinc-900/40 gothic-display text-[8rem] sm:text-[12rem] md:text-[16rem] lg:text-[18rem] font-black uppercase select-none pointer-events-none whitespace-nowrap">
+        <div className="absolute -bottom-16 sm:-bottom-24 left-1/2 -translate-x-1/2 text-zinc-900/40 gothic-display text-[8rem] sm:text-[12rem] md:text-[16rem] lg:text-[18rem] font-black select-none pointer-events-none whitespace-nowrap">
           369
         </div>
       </section>

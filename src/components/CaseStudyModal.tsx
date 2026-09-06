@@ -60,7 +60,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
           <div className="absolute bottom-6 left-6 right-6">
-            <h2 className="gothic-display text-4xl sm:text-5xl uppercase text-white tracking-tight leading-none">
+            <h2 className="gothic-display text-4xl sm:text-5xl text-white tracking-tight leading-none">
               {caseStudy.title}
             </h2>
           </div>

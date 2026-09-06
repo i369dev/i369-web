@@ -99,11 +99,11 @@ export const GothicLogo: React.FC<GothicLogoProps> = ({
         <div className="flex flex-col text-left">
           <div className="flex items-center gap-2">
             <span
-              className={`font-gothic text-xl tracking-wider uppercase font-bold ${
+              className={`font-gothic text-xl tracking-wider font-bold ${
                 variant === 'black' ? 'text-black' : 'text-white'
               }`}
             >
-              IMAGINATIVE 369
+              Imaginative 369
             </span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00DFD8]" />
           </div>

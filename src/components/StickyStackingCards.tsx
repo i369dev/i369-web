@@ -148,7 +148,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                   Service Pillars // Full-Stack Capability
                 </span>
               </div>
-              <h2 className="gothic-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase text-white tracking-tight leading-none">
+              <h2 className="gothic-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-none">
                 What We Do.
               </h2>
             </div>
@@ -293,7 +293,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                       </div>
 
                       {/* Main Service Title */}
-                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase text-white tracking-tight leading-none group-hover/box:text-[#FFA500] transition-colors">
+                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white tracking-tight leading-none group-hover/box:text-[#FFA500] transition-colors">
                         {pillar.title}
                       </h3>
                     </div>

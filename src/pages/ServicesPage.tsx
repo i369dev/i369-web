@@ -42,7 +42,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
             </span>
           </div>
 
-          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase text-black tracking-tight leading-[0.88] break-words">
+          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
             Services.
           </h1>
 
@@ -83,7 +83,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
                         {pillar.number}
                       </span>
                       <span className="text-2xl sm:text-3xl">{pillar.icon}</span>
-                      <h2 className="gothic-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight">
+                      <h2 className="gothic-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight">
                         {pillar.title}
                       </h2>
                     </div>
@@ -179,7 +179,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
             Direct Studio Line
           </div>
 
-          <h2 className="gothic-display text-4xl sm:text-6xl md:text-7xl uppercase tracking-tight text-white leading-none break-words">
+          <h2 className="gothic-display text-4xl sm:text-6xl md:text-7xl tracking-tight text-white leading-none break-words">
             Ready to build something?
             <br />
             <span className="text-[#FFA500]">Let's talk.</span>

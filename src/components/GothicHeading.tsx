@@ -36,7 +36,7 @@ export const GothicHeading: React.FC<GothicHeadingProps> = ({
       : 'text-white';
 
   const headingClass = `
-    font-gothic font-black uppercase tracking-tight leading-[0.9] select-none
+    font-gothic font-black tracking-tight leading-[0.9] select-none
     ${stacked ? 'flex flex-col' : 'inline-block'}
     ${level === 1 ? 'text-5xl sm:text-7xl md:text-8xl lg:text-9xl' : 'text-3xl sm:text-4xl md:text-5xl'}
     ${textColor}

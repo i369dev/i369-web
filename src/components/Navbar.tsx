@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               i369
             </div>
             <div className="flex flex-col">
-              <span className="font-bold tracking-tighter text-lg sm:text-xl uppercase text-black group-hover:text-[#FFA500] transition-colors">
+              <span className="font-bold tracking-tighter text-lg sm:text-xl text-black group-hover:text-[#FFA500] transition-colors">
                 Imaginative 369
               </span>
               <span className="font-mono-code text-[9px] uppercase tracking-[0.25em] text-gray-500">
@@ -163,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {link.number}
                   </span>
                   <span
-                    className={`gothic-display text-3xl font-black uppercase ${
+                    className={`gothic-display text-3xl font-black ${
                       currentPage === link.id
                         ? 'text-black underline decoration-2 underline-offset-4'
                         : 'text-zinc-600 group-hover:text-black'

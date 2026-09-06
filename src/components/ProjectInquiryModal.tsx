@@ -85,7 +85,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div className="space-y-2">
-              <h3 className="gothic-display text-3xl uppercase text-black">
+              <h3 className="gothic-display text-3xl text-black">
                 Brief Transmitted
               </h3>
               <p className="text-zinc-600 text-sm max-w-md mx-auto">
@@ -120,7 +120,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                   Direct Strategy Portal
                 </span>
               </div>
-              <h2 className="gothic-display text-3xl sm:text-4xl uppercase tracking-tight text-black">
+              <h2 className="gothic-display text-3xl sm:text-4xl tracking-tight text-black">
                 Start Your Project
               </h2>
               <p className="text-zinc-600 text-xs sm:text-sm mt-1">

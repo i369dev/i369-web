@@ -43,7 +43,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
             </span>
           </div>
 
-          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase text-black tracking-tight leading-[0.88] break-words">
+          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
             Our Work.
           </h1>
 
@@ -112,7 +112,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 <div className="p-5 sm:p-7 md:p-8 space-y-4 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-start justify-between gap-3 sm:gap-4">
-                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl uppercase text-black tracking-tight group-hover:text-[#FFA500] transition-colors">
+                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-black tracking-tight group-hover:text-[#FFA500] transition-colors">
                         {cs.title}
                       </h3>
                       <ArrowUpRight className="w-5 h-5 text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0 mt-1" />
@@ -152,7 +152,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
             <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#00DFD8] font-bold">
               Industry Credentials
             </span>
-            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white leading-none">
+            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl tracking-tight text-white leading-none">
               Trusted By.
             </h2>
             <p className="text-zinc-400 text-xs sm:text-sm md:text-base font-normal">

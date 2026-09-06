@@ -33,8 +33,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 i369
               </div>
               <div>
-                <h3 className="gothic-display text-3xl sm:text-4xl uppercase tracking-tight text-white leading-none">
-                  IMAGINATIVE 369
+                <h3 className="gothic-display text-3xl sm:text-4xl tracking-tight text-white leading-none">
+                  Imaginative 369
                 </h3>
                 <p className="font-mono-code text-xs text-gray-400 uppercase tracking-widest mt-1 font-bold">
                   Digital Agency & Venture Studio

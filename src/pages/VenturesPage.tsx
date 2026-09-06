@@ -31,7 +31,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
             </span>
           </div>
 
-          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl uppercase text-black tracking-tight leading-[0.88] break-words">
+          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
             Built In-House.
           </h1>
 
@@ -93,7 +93,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                     </div>
 
                     <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-20">
-                      <h3 className="gothic-display text-2xl sm:text-4xl md:text-5xl uppercase text-white tracking-tight leading-none">
+                      <h3 className="gothic-display text-2xl sm:text-4xl md:text-5xl text-white tracking-tight leading-none">
                         {venture.name}
                       </h3>
                       <p className="font-mono-code text-[11px] sm:text-xs text-[#FFA500] uppercase tracking-widest mt-1.5 sm:mt-2 font-bold">
@@ -176,7 +176,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
             The Living Lab
           </div>
 
-          <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl uppercase text-white tracking-tight leading-none">
+          <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
             Why We Build Our Own.
           </h2>
 
