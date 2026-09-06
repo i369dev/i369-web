@@ -6,6 +6,7 @@ import { SERVICE_PILLARS, CASE_STUDIES, TRUSTED_CLIENTS, GROUND_ZERO_ADVANTAGES,
 import { ArrowRight, ArrowUpRight, Compass, ShieldCheck, Sparkles, Terminal, Video, MapPin, Zap, Volume2, VolumeX } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
+import { StickyStackingCards } from '../components/StickyStackingCards';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -319,86 +320,9 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* =========================================================================
-          WHAT WE DO (Service Pillars Overview): 3D Tilt Glass Cards
+          WHAT WE DO: Cinematic Sticky Scroll Stacking Cards with Camera Dial Easing
          ========================================================================= */}
-      <section id="what-we-do" className="bg-white text-zinc-950 py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-black gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-2 h-2 accent-teal"></div>
-                <span className="font-mono-code text-xs uppercase tracking-widest text-zinc-500 font-bold">
-                  Service Pillars Overview
-                </span>
-              </div>
-              <h2 className="gothic-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase text-black tracking-tight leading-none">
-                What We Do.
-              </h2>
-              <p className="font-mono-code text-sm sm:text-base md:text-lg text-zinc-600 mt-2 font-medium">
-                Four disciplines. One team. Zero friction.
-              </p>
-            </div>
-
-            <button
-              onClick={() => onNavigate('services')}
-              className="mt-2 md:mt-0 inline-flex items-center gap-2 text-xs font-mono-code font-bold uppercase tracking-widest text-black hover:text-[#FFA500] transition-colors group cursor-pointer border-b border-black pb-1 self-start md:self-auto"
-            >
-              <span>Explore All Services</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#FFA500]" />
-            </button>
-          </div>
-
-          {/* Pillars 4-Card Grid with 3D Tilt and Glassmorphic aesthetics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {SERVICE_PILLARS.map((pillar) => {
-              const accentBar =
-                pillar.accentColor === 'teal'
-                  ? 'accent-teal'
-                  : pillar.accentColor === 'pink'
-                  ? 'accent-pink'
-                  : 'accent-orange';
-
-              return (
-                <TiltCard
-                  key={pillar.id}
-                  onClick={() => onNavigate('services')}
-                  maxTilt={8}
-                  scale={1.03}
-                  className="p-6 sm:p-8 flex flex-col justify-between cursor-pointer rounded-none"
-                >
-                  <div className={`absolute top-0 left-0 right-0 h-1.5 ${accentBar}`} />
-
-                  <div>
-                    <div className="flex items-center justify-between mb-4 sm:mb-6">
-                      <span className="font-mono-code text-xs font-bold text-zinc-400">
-                        {pillar.number}
-                      </span>
-                      <span className="text-2xl transition-transform duration-300 group-hover:scale-110">{pillar.icon}</span>
-                    </div>
-
-                    <h3 className="gothic-display text-xl sm:text-2xl uppercase text-black tracking-tight group-hover:text-[#FFA500] transition-colors">
-                      {pillar.title}
-                    </h3>
-
-                    <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
-                      {pillar.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 sm:mt-8 pt-4 border-t border-black/10 flex items-center justify-between">
-                    <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-wider text-zinc-500 font-semibold flex items-center gap-1.5">
-                      <span className={`w-1.5 h-1.5 rounded-none ${accentBar}`} />
-                      Inspect Pillar
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
-                </TiltCard>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <StickyStackingCards onNavigate={onNavigate} />
 
       {/* =========================================================================
           WHY IMAGINATIVE369: Ground Zero Advantage (30% Black Structure with Glass Cards)
