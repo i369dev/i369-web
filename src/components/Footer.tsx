@@ -2,6 +2,7 @@ import React from 'react';
 import { GothicLogo } from './GothicLogo';
 import { PageId } from '../types';
 import { ArrowUp, Mail, MapPin, Compass, ArrowUpRight } from 'lucide-react';
+import { MagneticButton } from './MagneticButton';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -28,14 +29,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
           {/* Col 1: Brand & Logo */}
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-start gap-4">
-              <div className="w-9 h-9 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0 tracking-tight">
+              <div className="w-9 h-9 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0 tracking-tight shadow-sm">
                 i369
               </div>
               <div>
                 <h3 className="gothic-display text-3xl sm:text-4xl uppercase tracking-tight text-white leading-none">
                   IMAGINATIVE 369
                 </h3>
-                <p className="font-mono-code text-xs text-gray-400 uppercase tracking-widest mt-1">
+                <p className="font-mono-code text-xs text-gray-400 uppercase tracking-widest mt-1 font-bold">
                   Digital Agency & Venture Studio
                 </p>
               </div>
@@ -46,14 +47,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
             </p>
 
             <div className="flex flex-wrap items-center gap-2 pt-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-black border border-white/20 text-[10px] font-mono-code text-[#00DFD8]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#00DFD8]">
                 <Compass className="w-3 h-3" />
                 06°59′N 81°03′E
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-black border border-white/20 text-[10px] font-mono-code text-[#FF69B4]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#FF69B4]">
                 Dual-Engine Model
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-black border border-white/20 text-[10px] font-mono-code text-[#FFA500]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#FFA500]">
                 Badulla, Sri Lanka
               </span>
             </div>
@@ -134,7 +135,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
 
           {/* Col 3: Studio Coordinates & CTA */}
           <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
-            <div className="p-6 border border-white/20 bg-black">
+            <div className="p-6 border border-white/20 glass-panel-dark">
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#FF69B4] shrink-0 mt-0.5" />
                 <div>
@@ -145,20 +146,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                     03 River Side Road, Badulla,<br />
                     Uva Province, Sri Lanka
                   </p>
-                  <p className="text-[#00DFD8] text-xs font-mono-code mt-2">
+                  <p className="text-[#00DFD8] text-xs font-mono-code mt-2 font-bold">
                     i369.developer@gmail.com
                   </p>
                 </div>
               </div>
 
-              <button
+              <MagneticButton
                 id="footer-start-project-btn"
+                variant="glass"
                 onClick={onOpenInquiry}
-                className="w-full mt-5 py-3 px-4 bg-white text-black hover:bg-[#FFA500] text-xs font-mono-code font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors rounded-none cursor-pointer"
+                className="w-full mt-5 py-3 px-4 text-black bg-white hover:bg-[#FFA500]"
               >
                 <span>Initiate Brief</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
-              </button>
+              </MagneticButton>
             </div>
 
             <button
@@ -178,7 +180,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               Think. Create. Inspire.
             </span>
             <span className="mx-2 text-zinc-700">|</span>
-            <span className="text-zinc-400 uppercase tracking-widest">Strategy to Screen</span>
+            <span className="text-zinc-400 uppercase tracking-widest font-bold">Strategy to Screen</span>
           </div>
 
           <div className="flex items-center gap-4">

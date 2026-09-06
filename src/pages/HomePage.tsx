@@ -21,13 +21,13 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
-          HERO SECTION: Artistic Flair 70% / 30% Architectural Grid Split with Glass Accents
+          HERO SECTION: Architectural Grid with Glass Accents
          ========================================================================= */}
       <section id="hero-section" className="relative w-full border-b border-black flex flex-col">
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-5rem)]">
+        <div className="flex-1 w-full min-h-[calc(100vh-5rem)] flex flex-col">
           
-          {/* LEFT: 70% Architectural Grid Section */}
-          <div className="lg:col-span-8 w-full border-r border-black flex flex-col relative thin-grid bg-white text-[#141414] justify-between">
+          {/* Architectural Grid Section */}
+          <div className="w-full flex flex-col relative thin-grid bg-white text-[#141414] justify-between flex-grow">
             <div className="p-8 sm:p-12 lg:p-16 flex-grow flex flex-col justify-center">
               {/* Eyebrow */}
               <div className="flex items-center gap-3 mb-6">
@@ -48,7 +48,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </h1>
 
               {/* Stately Editorial Pull-Description with subtle frosted highlight */}
-              <div className="max-w-xl p-6 glass-panel-light border-l-4 border-l-black mb-10">
+              <div className="max-w-2xl p-6 glass-panel-light border-l-4 border-l-black mb-10">
                 <p className="text-lg sm:text-xl leading-snug font-medium text-[#141414]">
                   The creative media, digital marketing, and software engineering powerhouse of Sri Lanka’s Hill Country. Turning bold ideas into cinematic stories, high-performing software, and brands that win.
                 </p>
@@ -78,7 +78,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Bottom Trusted Partners Ticker Strip on 70% section */}
+            {/* Bottom Trusted Partners Ticker Strip */}
             <div className="border-t border-black/15 flex flex-wrap items-center px-6 sm:px-12 py-6 gap-6 sm:gap-10 bg-white/70 backdrop-blur-md">
               <span className="text-[10px] font-bold uppercase tracking-widest opacity-40 w-28 shrink-0 font-mono-code">
                 Trusted Partners
@@ -89,89 +89,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <span className="text-xs sm:text-sm font-black tracking-tight hover:grayscale-0 transition-all cursor-default">THE PEKOE TRAIL</span>
                 <span className="text-xs sm:text-sm font-black tracking-tight hover:grayscale-0 transition-all cursor-default">COCO ORGANIC</span>
                 <span className="text-xs sm:text-sm font-black tracking-tight hidden md:inline hover:grayscale-0 transition-all cursor-default">BALINESE SPAS</span>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: 30% Obsidian Column with Triple Accent Bars & Directory */}
-          <div className="lg:col-span-4 w-full bg-[#111] text-white flex flex-col justify-between border-t lg:border-t-0 border-black relative">
-            {/* Top Half: Services Directory & Triple Bar */}
-            <div className="p-8 sm:p-10 flex flex-col justify-end relative">
-              {/* Artistic Flair Triple Accent Bars */}
-              <div className="absolute top-0 right-0 p-6 flex space-x-2">
-                <div className="w-2 h-10 sm:h-12 accent-teal"></div>
-                <div className="w-2 h-10 sm:h-12 accent-pink"></div>
-                <div className="w-2 h-10 sm:h-12 accent-orange"></div>
-              </div>
-
-              <span className="text-[10px] font-mono-code uppercase tracking-[0.3em] text-gray-400 mb-2">
-                Discipline Matrix
-              </span>
-              <h2 className="gothic-display text-4xl sm:text-5xl mb-6 text-white leading-none">
-                SERVICES
-              </h2>
-
-              <ul className="space-y-4 text-xs tracking-widest uppercase font-mono-code">
-                <li
-                  onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-[#008080] transition-colors group p-2 rounded-sm hover:bg-white/5"
-                >
-                  <span className="w-2 h-2 accent-teal mr-3 shrink-0"></span>
-                  <span className="group-hover:translate-x-1 transition-transform">Tourism Marketing</span>
-                </li>
-                <li
-                  onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-[#FF69B4] transition-colors group p-2 rounded-sm hover:bg-white/5"
-                >
-                  <span className="w-2 h-2 accent-pink mr-3 shrink-0"></span>
-                  <span className="group-hover:translate-x-1 transition-transform">Software Engineering</span>
-                </li>
-                <li
-                  onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-[#FFA500] transition-colors group p-2 rounded-sm hover:bg-white/5"
-                >
-                  <span className="w-2 h-2 accent-orange mr-3 shrink-0"></span>
-                  <span className="group-hover:translate-x-1 transition-transform">Cinematic Media</span>
-                </li>
-                <li
-                  onClick={() => onNavigate('services')}
-                  className="flex items-center cursor-pointer hover:text-gray-300 transition-colors group p-2 rounded-sm hover:bg-white/5"
-                >
-                  <span className="w-2 h-2 bg-white mr-3 shrink-0"></span>
-                  <span className="group-hover:translate-x-1 transition-transform">Digital Ops</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Bottom Half: Headquarters & Build Next Callout */}
-            <div className="border-t border-white/20 p-8 sm:p-10 flex flex-col justify-between relative bg-black/50 backdrop-blur-md">
-              <div className="mb-8">
-                <span className="text-[10px] uppercase tracking-widest opacity-60 block mb-2 font-mono-code">
-                  Headquarters
-                </span>
-                <p className="text-sm font-bold leading-tight">
-                  Badulla, Uva Province<br />
-                  <span className="text-[#00DFD8] text-xs font-mono-code font-normal">
-                    The Ground Zero Advantage · 680m
-                  </span>
-                </p>
-              </div>
-
-              <div className="mt-auto flex justify-between items-end">
-                <div className="vertical-text text-[10px] uppercase tracking-widest opacity-40 font-bold font-mono-code">
-                  EST. 2024 // 06°59′N
-                </div>
-                <div className="text-right">
-                  <p className="text-[36px] sm:text-[40px] gothic-display leading-none mb-2 text-white">
-                    BUILD<br />NEXT
-                  </p>
-                  <button
-                    onClick={() => onNavigate('ventures')}
-                    className="text-[10px] uppercase font-bold tracking-widest border-b border-white pb-1 hover:text-[#FFA500] hover:border-[#FFA500] transition-colors cursor-pointer"
-                  >
-                    Explore Ventures →
-                  </button>
-                </div>
               </div>
             </div>
           </div>

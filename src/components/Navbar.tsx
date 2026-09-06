@@ -99,15 +99,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Action: Studio Indicator & CTA */}
+          {/* Right Action: Contact CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 border border-black/10 bg-black/[0.03] backdrop-blur-sm text-[10px] font-mono-code uppercase tracking-wider text-zinc-700">
-              <span className="w-1.5 h-1.5 bg-[#008080]" />
-              <span className="w-1.5 h-1.5 bg-[#FF69B4]" />
-              <span className="w-1.5 h-1.5 bg-[#FFA500]" />
-              <span className="ml-1 font-bold">Uva 680m</span>
-            </div>
-
             <MagneticButton
               id="nav-start-project-btn"
               variant="primary"

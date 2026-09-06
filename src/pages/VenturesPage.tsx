@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PageId, VentureItem } from '../types';
 import { VENTURES } from '../data/agencyData';
 import { ArrowUpRight, Play, Pause, Compass, Radio, MapPin, Sparkles, ExternalLink } from 'lucide-react';
+import { TiltCard } from '../components/TiltCard';
+import { MagneticButton } from '../components/MagneticButton';
 
 interface VenturesPageProps {
   onNavigate: (page: PageId) => void;
@@ -37,7 +39,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
             <p className="font-display text-xl sm:text-2xl text-zinc-800 font-medium max-w-xl border-l-2 border-black pl-6">
               We don’t just build for clients — we build our own.
             </p>
-            <p className="font-mono-code text-xs text-zinc-500 uppercase tracking-widest">
+            <p className="font-mono-code text-xs text-zinc-500 uppercase tracking-widest font-bold">
               Highland AdventureTech · Eco Hospitality · Audio Label
             </p>
           </div>
@@ -51,38 +53,38 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
         <div className="max-w-7xl mx-auto space-y-16">
           {VENTURES.map((venture, idx) => {
             const isAudioVenture = venture.id === 'inhale-exhale';
-            const isGpsVenture = venture.id === 'lankaquests';
             const isDarkCard = idx % 2 === 1;
 
             return (
-              <div
+              <TiltCard
                 key={venture.id}
                 id={`venture-${venture.id}`}
-                className={`border border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all duration-200 ${
-                  isDarkCard ? 'bg-[#111] text-white' : 'bg-white text-black'
-                }`}
+                isDark={isDarkCard}
+                maxTilt={4}
+                scale={1.01}
+                className="rounded-none cursor-default overflow-hidden"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12">
                   {/* Left Column: Image & Media Controls */}
-                  <div className="lg:col-span-6 relative h-80 lg:h-auto min-h-[350px] overflow-hidden bg-black border-b lg:border-b-0 lg:border-r border-black">
+                  <div className="lg:col-span-6 relative h-80 lg:h-auto min-h-[350px] overflow-hidden bg-black border-b lg:border-b-0 lg:border-r border-black/20">
                     <img
                       src={venture.image}
                       alt={venture.name}
-                      className="w-full h-full object-cover grayscale contrast-125 brightness-90"
+                      className="w-full h-full object-cover grayscale contrast-125 brightness-90 card-media-zoom"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
                     {/* Interactive Overlay Badges */}
-                    <div className="absolute top-6 left-6 right-6 flex items-center justify-between">
-                      <span className="px-3 py-1 bg-black text-white border border-white/20 font-mono-code text-[11px] uppercase tracking-wider rounded-none">
+                    <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
+                      <span className="px-3 py-1 glass-pill text-white font-mono-code text-[11px] uppercase tracking-wider rounded-none">
                         {venture.status}
                       </span>
 
                       {isAudioVenture && (
                         <button
                           onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                          className="flex items-center gap-2 px-3 py-1.5 bg-[#FF69B4] hover:bg-[#FF85C2] text-white font-mono-code text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-colors"
+                          className="flex items-center gap-2 px-3 py-1.5 bg-[#FF69B4] hover:bg-[#FF85C2] text-white font-mono-code text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-colors shadow-sm"
                         >
                           {isPlayingAudio ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                           <span>{isPlayingAudio ? 'Pause Live Stream' : 'Audition Soundscape'}</span>
@@ -90,7 +92,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                       )}
                     </div>
 
-                    <div className="absolute bottom-6 left-6 right-6">
+                    <div className="absolute bottom-6 left-6 right-6 z-20">
                       <h3 className="gothic-display text-4xl sm:text-5xl uppercase text-white tracking-tight leading-none">
                         {venture.name}
                       </h3>
@@ -117,8 +119,8 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                               key={fIdx}
                               className={`p-3 border text-xs font-mono-code flex items-start gap-2 ${
                                 isDarkCard
-                                  ? 'bg-black border-white/10 text-zinc-300'
-                                  : 'bg-[#F5F5F5] border-black text-black'
+                                  ? 'bg-white/5 border-white/10 text-zinc-300'
+                                  : 'bg-white/90 border-black/15 text-black'
                               }`}
                             >
                               <div className="w-1.5 h-1.5 accent-teal mt-1 shrink-0"></div>
@@ -131,7 +133,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
 
                     {/* Tech Stack & Status bar */}
                     <div className={`pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                      isDarkCard ? 'border-white/10' : 'border-black'
+                      isDarkCard ? 'border-white/10' : 'border-black/15'
                     }`}>
                       <div className="flex flex-wrap gap-2">
                         {venture.techStack.map((tech, tIdx) => (
@@ -139,8 +141,8 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                             key={tIdx}
                             className={`px-2.5 py-1 text-[10px] font-mono-code uppercase tracking-wider border rounded-none ${
                               isDarkCard
-                                ? 'bg-black border-white/20 text-zinc-400'
-                                : 'bg-white border-black text-black'
+                                ? 'bg-white/5 border-white/20 text-zinc-300'
+                                : 'bg-black/5 border-black/20 text-black font-bold'
                             }`}
                           >
                             {tech}
@@ -148,19 +150,18 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                         ))}
                       </div>
 
-                      <button
+                      <MagneticButton
+                        variant={isDarkCard ? 'glass' : 'primary'}
                         onClick={onOpenInquiry}
-                        className={`inline-flex items-center gap-1.5 text-xs font-mono-code font-bold uppercase tracking-widest transition-colors cursor-pointer ${
-                          isDarkCard ? 'text-[#FFA500] hover:text-white' : 'text-black hover:text-[#FFA500]'
-                        }`}
+                        className="px-4 py-2"
                       >
-                        <span>Collaborate on Venture</span>
-                        <ArrowUpRight className="w-4 h-4" />
-                      </button>
+                        <span>Collaborate</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </MagneticButton>
                     </div>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             );
           })}
         </div>
@@ -171,7 +172,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
          ========================================================================= */}
       <section className="bg-[#111] text-white py-24 px-6 sm:px-12 lg:px-16 border-t border-black">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-white/20 text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
             The Living Lab
           </div>
 
@@ -184,12 +185,13 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
           </p>
 
           <div className="pt-4">
-            <button
+            <MagneticButton
+              variant="glass"
               onClick={onOpenInquiry}
-              className="px-8 py-4 bg-white text-black hover:bg-[#FFA500] font-mono-code text-xs uppercase font-bold tracking-widest transition-colors rounded-none cursor-pointer"
+              className="px-8 py-4 text-black bg-white hover:bg-[#FFA500]"
             >
               Invest or Partner with Imaginative 369
-            </button>
+            </MagneticButton>
           </div>
         </div>
       </section>
