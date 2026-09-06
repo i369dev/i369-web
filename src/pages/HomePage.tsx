@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { PageId, CaseStudy } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
 import { SERVICE_PILLARS, CASE_STUDIES, TRUSTED_CLIENTS, GROUND_ZERO_ADVANTAGES } from '../data/agencyData';
-import { ArrowRight, ArrowUpRight, Compass, ShieldCheck, Sparkles, Terminal, Video, MapPin, Zap } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Compass, ShieldCheck, Sparkles, Terminal, Video, MapPin, Zap, Volume2, VolumeX } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 
@@ -18,6 +18,20 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenInquiry,
   onSelectCaseStudy,
 }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+
+  const toggleSound = () => {
+    if (videoRef.current) {
+      const nextMuted = !videoRef.current.muted;
+      videoRef.current.muted = nextMuted;
+      setIsMuted(nextMuted);
+      if (!nextMuted) {
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  };
+
   return (
     <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
@@ -81,55 +95,91 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </div>
                 </div>
 
-                {/* Right Column: Cinematic Video Showcase Container */}
+                {/* Right Column: Cinematic Video Showcase Container with Glassmorphism */}
                 <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
-                  <div className="relative w-full max-w-lg lg:max-w-none rounded-2xl overflow-hidden border border-black/20 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.15)] group">
-                    {/* HTML5 Background Video */}
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      poster="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
-                      className="w-full h-72 sm:h-96 lg:h-[460px] object-cover filter brightness-90 contrast-105 group-hover:scale-105 transition-transform duration-700 ease-out"
-                    >
-                      <source
-                        src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-fog-over-a-green-mountain-forest-41480-large.mp4"
-                        type="video/mp4"
-                      />
-                      Your browser does not support the video tag.
-                    </video>
+                  <div className="relative w-full max-w-lg lg:max-w-none group">
+                    {/* Ambient Glow / Diffused Aura for Seamless Edge Blending */}
+                    <div className="absolute -inset-2 sm:-inset-3 bg-gradient-to-tr from-[#00DFD8]/20 via-[#FF69B4]/10 to-[#FFA500]/25 rounded-[2.5rem] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
 
-                    {/* Gradient Overlay for Cinematic Depth */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                    {/* Outer Polished Glass Frame with Frosted Backdrop Blur */}
+                    <div className="relative p-2 sm:p-3 rounded-3xl bg-white/40 backdrop-blur-2xl border border-white/70 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)] ring-1 ring-black/5">
+                      
+                      {/* Inner Video Container */}
+                      <div className="relative w-full rounded-2xl overflow-hidden bg-black shadow-[inset_0_2px_15px_rgba(0,0,0,0.6)]">
+                        {/* HTML5 Cinematic Background Video */}
+                        <video
+                          ref={videoRef}
+                          autoPlay
+                          loop
+                          muted={isMuted}
+                          playsInline
+                          poster="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
+                          className="w-full h-72 sm:h-96 lg:h-[460px] object-cover filter contrast-[1.08] saturate-[1.12] brightness-[0.92] group-hover:scale-105 transition-transform duration-700 ease-out"
+                        >
+                          <source
+                            src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-fog-over-a-green-mountain-forest-41480-large.mp4"
+                            type="video/mp4"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
 
-                    {/* Top Floating Glass Badge */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/20 text-white font-mono-code text-[10px] uppercase tracking-widest rounded-full">
-                        <span className="w-2 h-2 rounded-full bg-[#00DFD8] animate-pulse"></span>
-                        <span>Cinematic Reel // 4K</span>
-                      </div>
-                      <div className="flex space-x-1">
-                        <div className="w-1.5 h-3 accent-teal"></div>
-                        <div className="w-1.5 h-3 accent-pink"></div>
-                        <div className="w-1.5 h-3 accent-orange"></div>
-                      </div>
-                    </div>
+                        {/* Cinematic Vignette & Edge Shadow Overlay for Soft Blending */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/15 pointer-events-none" />
+                        <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.6)] pointer-events-none" />
+                        <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-2xl pointer-events-none" />
 
-                    {/* Bottom Metadata Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between z-10 pointer-events-none text-white">
-                      <div>
-                        <p className="font-mono-code text-[11px] uppercase tracking-wider text-[#FFA500] font-bold">
-                          Central Highlands
-                        </p>
-                        <p className="font-display text-base font-semibold text-white/90">
-                          Badulla // 06°59′N 81°03′E
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-[10px] font-mono-code uppercase tracking-widest text-white/60 bg-white/10 backdrop-blur-sm px-2.5 py-1 rounded border border-white/15">
-                          680m Above Sea
-                        </span>
+                        {/* Top Floating Glass Badge with Live Reel Indicator */}
+                        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                          <div className="flex items-center gap-2 px-3 py-1.5 bg-black/55 backdrop-blur-xl border border-white/20 text-white font-mono-code text-[10px] uppercase tracking-widest rounded-full shadow-md">
+                            <span className="w-2 h-2 rounded-full bg-[#00DFD8] animate-pulse"></span>
+                            <span>Cinematic Reel // 4K</span>
+                          </div>
+                          
+                          <div className="flex space-x-1 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-white/10">
+                            <div className="w-1.5 h-3 accent-teal"></div>
+                            <div className="w-1.5 h-3 accent-pink"></div>
+                            <div className="w-1.5 h-3 accent-orange"></div>
+                          </div>
+                        </div>
+
+                        {/* Bottom Overlay: Telemetry & Interactive Glass Sound Toggle */}
+                        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between z-20 text-white">
+                          <div className="pointer-events-none">
+                            <p className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FFA500] font-bold">
+                              Central Highlands
+                            </p>
+                            <p className="font-display text-sm sm:text-base font-semibold text-white/95">
+                              Badulla // 06°59′N 81°03′E
+                            </p>
+                          </div>
+
+                          {/* Sound Toggle Button */}
+                          <div className="flex items-center gap-2">
+                            <button
+                              id="hero-video-audio-toggle"
+                              onClick={toggleSound}
+                              aria-label={isMuted ? 'Unmute video audio' : 'Mute video audio'}
+                              title={isMuted ? 'Unmute video sound' : 'Mute video sound'}
+                              className="group/sound flex items-center gap-2 px-3 py-2 bg-black/60 hover:bg-black/85 backdrop-blur-xl border border-white/30 hover:border-white/60 text-white rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
+                            >
+                              {isMuted ? (
+                                <>
+                                  <VolumeX className="w-4 h-4 text-zinc-300 group-hover/sound:text-white transition-colors" />
+                                  <span className="font-mono-code text-[10px] uppercase tracking-wider text-zinc-300 group-hover/sound:text-white hidden sm:inline-block">
+                                    Sound Off
+                                  </span>
+                                </>
+                              ) : (
+                                <>
+                                  <Volume2 className="w-4 h-4 text-[#00DFD8] animate-bounce transition-colors" />
+                                  <span className="font-mono-code text-[10px] uppercase tracking-wider text-[#00DFD8] font-bold hidden sm:inline-block">
+                                    Sound On
+                                  </span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
