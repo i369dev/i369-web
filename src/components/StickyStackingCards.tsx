@@ -49,58 +49,53 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
   const [activeStep, setActiveStep] = useState<number>(0);
 
   // Track scroll progress through the tall container
+  // Offset: start start (triggers exactly as section top reaches top of viewport)
+  // to end end (completes as bottom of container reaches bottom of viewport)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Snappy spring physics for smooth, responsive momentum
+  // Snappy yet ultra-fluid spring physics for smooth, responsive momentum bound to scroll
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 180,
-    damping: 26,
-    restDelta: 0.0005,
+    stiffness: 120,
+    damping: 24,
+    mass: 0.2,
+    restDelta: 0.0001,
   });
 
   // =========================================================================
-  // SCROLL-DRIVEN "TRAIN" MOTION WITH PRECISE PAUSING LOGIC:
-  // - Track layout: Card Width = 80vw, Gap = 4vw, Left Start Offset = 10vw
-  // - Step pitch P = 84vw. Total 4 cards distance = 3 * 84vw = 252vw.
+  // SCROLL-BOUND FLUID MARQUEE GLIDE LOGIC:
+  // - Layout: pl-[10vw] centers Card 01 (width 80vw) at trackX = 0vw.
+  // - Gap between cards = 4vw. Pitch = 84vw per card.
+  // - Total distance to reveal all 4 cards = 3 * 84vw = 252vw.
   //
-  // 1. [0.00 -> 0.15]: Card 01 enters from far-right (95vw) to exact center (0vw)
-  // 2. [0.15 -> 0.30]: Card 01 PAUSES & LOCKS PRECISELY IN CENTER (0vw)
-  // 3. [0.30 -> 0.70]: Continuous Train Flow (0vw -> -252vw)
-  //                    Cards 02 & 03 sweep across viewport WITHOUT stopping
-  // 4. [0.70 -> 0.85]: Card 04 PAUSES & LOCKS PRECISELY IN CENTER (-252vw)
-  // 5. [0.85 -> 1.00]: Unpin buffer; normal downward scrolling resumes
+  // 1. [0.00]: As the section pins to the top of viewport, Card 01 is IMMEDIATELY
+  //    and perfectly centered at 0vw without any lag, empty gap, or initial delay.
+  // 2. [0.00 -> 0.95]: Smooth, steady, linear scroll-bound glide from 0vw to -252vw.
+  //    Subsequent cards sweep in fluidly from right to left like a marquee.
+  // 3. [0.95 -> 1.00]: Buffer zone at the final card before smooth unpinning.
   // =========================================================================
   const trackX = useTransform(smoothProgress, (v: number) => {
-    if (v <= 0.15) {
-      // 0.00 to 0.15: 95vw -> 0vw (Enter from far-right)
-      const t = v / 0.15;
-      return `${95 * (1 - t)}vw`;
-    } else if (v <= 0.30) {
-      // 0.15 to 0.30: 0vw (Card 01 Center Pause)
-      return `0vw`;
-    } else if (v <= 0.70) {
-      // 0.30 to 0.70: 0vw -> -252vw (Smooth train sweep; Cards 02 & 03 flow through)
-      const t = (v - 0.30) / (0.70 - 0.30);
-      return `${-252 * t}vw`;
-    } else if (v <= 0.85) {
-      // 0.70 to 0.85: -252vw (Card 04 Center Pause)
-      return `-252vw`;
-    } else {
-      // 0.85 to 1.00: -252vw (Section complete, unpins for vertical scroll)
-      return `-252vw`;
+    if (v <= 0) {
+      return '0vw';
     }
+    if (v >= 0.95) {
+      return '-252vw';
+    }
+    // Linear continuous glide from 0vw to -252vw over progress 0.00 -> 0.95
+    const t = v / 0.95;
+    return `${-252 * t}vw`;
   });
 
-  // Active step tracking for camera dial HUD
+  // Active step tracking for camera dial HUD and progress bars
   useMotionValueEvent(smoothProgress, 'change', (latest) => {
-    if (latest < 0.30) {
+    // 4 stages across 0.0 to 0.95: ~0.24 intervals
+    if (latest < 0.24) {
       setActiveStep(0);
-    } else if (latest < 0.50) {
+    } else if (latest < 0.48) {
       setActiveStep(1);
-    } else if (latest < 0.70) {
+    } else if (latest < 0.72) {
       setActiveStep(2);
     } else {
       setActiveStep(3);
@@ -112,9 +107,9 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
     if (!containerRef.current) return;
     const containerTop = containerRef.current.offsetTop;
     const containerHeight = containerRef.current.offsetHeight;
-    // Specific scroll targets corresponding to Card 1, 2, 3, 4
-    const scrollTargets = [0.22, 0.43, 0.57, 0.78];
-    const targetScroll = containerTop + containerHeight * scrollTargets[index] - 60;
+    // Step targets evenly distributed from 0 to 0.95
+    const stepFractions = [0.02, 0.32, 0.63, 0.94];
+    const targetScroll = containerTop + containerHeight * stepFractions[index];
 
     window.scrollTo({
       top: targetScroll,
@@ -126,9 +121,9 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
     <div
       ref={containerRef}
       id="what-we-do"
-      className="relative w-full bg-[#0a0a0a] text-white min-h-[400vh] border-b border-black select-none overflow-clip"
+      className="relative w-full bg-[#0a0a0a] text-white min-h-[350vh] border-b border-black select-none overflow-clip"
     >
-      {/* Sticky Viewport Stage */}
+      {/* Sticky Viewport Stage: Locks immediately at top */}
       <div className="sticky top-16 sm:top-20 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-between overflow-hidden py-3 sm:py-5">
         
         {/* =========================================================================
