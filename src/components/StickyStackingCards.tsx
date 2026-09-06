@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent, useSpring } from 'motion/react';
 import { SERVICE_PILLARS } from '../data/agencyData';
 import { PageId } from '../types';
-import { ArrowRight, ArrowUpRight, Camera, Disc, Eye, Layers, Sparkles, Zap } from 'lucide-react';
+import { ArrowUpRight, Camera, Disc, Layers } from 'lucide-react';
 
 interface StickyStackingCardsProps {
   onNavigate: (page: PageId) => void;
@@ -16,8 +16,7 @@ const PILLAR_CINEMATIC_DATA = [
     iso: 'ISO 100',
     shutter: '1/1000s',
     focal: '24mm F1.4',
-    badge: 'Highland & Eco-Tourism Roadmaps',
-    metric: '300KM+ Trail Ops // 50K+ Passes',
+    badge: 'Tourism & Destination Marketing',
   },
   {
     ...SERVICE_PILLARS[1],
@@ -25,8 +24,7 @@ const PILLAR_CINEMATIC_DATA = [
     iso: 'ISO 400',
     shutter: '1/2500s',
     focal: '35mm F1.8',
-    badge: 'Flutter, React Native & Gemini AI',
-    metric: 'Offline GPS Engine // Real-time AI',
+    badge: 'Software Engineering & AdventureTech',
   },
   {
     ...SERVICE_PILLARS[2],
@@ -34,8 +32,7 @@ const PILLAR_CINEMATIC_DATA = [
     iso: 'ISO 800',
     shutter: '1/5000s',
     focal: '50mm F1.2 Cinema',
-    badge: '4K Cinema & Aerial Drone Ops',
-    metric: 'NatGeo Storytelling // 4K 120FPS',
+    badge: 'Cinematic Media & Visual Identity',
   },
   {
     ...SERVICE_PILLARS[3],
@@ -43,8 +40,7 @@ const PILLAR_CINEMATIC_DATA = [
     iso: 'ISO 200',
     shutter: '1/4000s',
     focal: '85mm F1.4 Master',
-    badge: '24/7 Operations & Performance Media',
-    metric: '40MW+ Lead Conversion Engine',
+    badge: 'Digital Operations & Performance',
   },
 ];
 
@@ -58,10 +54,10 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
     offset: ['start start', 'end end'],
   });
 
-  // Smooth out progress with spring physics for a high-end mechanical feel
+  // Snappy spring physics for mechanical camera dial feel
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 180,
-    damping: 24,
+    stiffness: 190,
+    damping: 26,
     restDelta: 0.001,
   });
 
@@ -82,33 +78,33 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
   // MECHANICAL CAMERA DIAL STEPPED TRANSFORMS
   // ==========================================
 
-  // Card 1 (Base): Starts full size, scales down and dims slightly as upper cards stack
-  const card1Scale = useTransform(smoothProgress, [0, 0.22, 0.32, 0.85], [1, 1, 0.94, 0.92]);
+  // Card 1 (Base): Starts full size, scales down subtly as upper cards stack
+  const card1Scale = useTransform(smoothProgress, [0, 0.22, 0.32, 0.85], [1, 1, 0.95, 0.93]);
   const card1Dim = useTransform(smoothProgress, [0.18, 0.32], [1, 0.45]);
 
   // Card 2: Snappy slide-in from right [0.18 -> 0.32], then holds pinned [0.32 -> 0.52]
   const card2X = useTransform(
     smoothProgress,
     [0, 0.16, 0.30, 1],
-    ['115%', '115%', '0%', '0%']
+    ['105%', '105%', '0%', '0%']
   );
-  const card2Scale = useTransform(smoothProgress, [0.16, 0.30, 0.52, 0.62], [1.02, 1, 1, 0.95]);
+  const card2Scale = useTransform(smoothProgress, [0.16, 0.30, 0.52, 0.62], [1.02, 1, 1, 0.96]);
   const card2Dim = useTransform(smoothProgress, [0.48, 0.62], [1, 0.5]);
 
   // Card 3: Snappy slide-in from right [0.48 -> 0.62], then holds pinned [0.62 -> 0.82]
   const card3X = useTransform(
     smoothProgress,
     [0, 0.46, 0.60, 1],
-    ['115%', '115%', '0%', '0%']
+    ['105%', '105%', '0%', '0%']
   );
-  const card3Scale = useTransform(smoothProgress, [0.46, 0.60, 0.82, 0.90], [1.02, 1, 1, 0.96]);
+  const card3Scale = useTransform(smoothProgress, [0.46, 0.60, 0.82, 0.90], [1.02, 1, 1, 0.97]);
   const card3Dim = useTransform(smoothProgress, [0.78, 0.90], [1, 0.6]);
 
   // Card 4: Snappy slide-in from right [0.76 -> 0.90], then holds pinned
   const card4X = useTransform(
     smoothProgress,
     [0, 0.76, 0.90, 1],
-    ['115%', '115%', '0%', '0%']
+    ['105%', '105%', '0%', '0%']
   );
   const card4Scale = useTransform(smoothProgress, [0.76, 0.90, 1], [1.02, 1, 1]);
 
@@ -152,13 +148,13 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
     <div
       ref={containerRef}
       id="what-we-do"
-      className="relative w-full bg-zinc-950 text-white min-h-[380vh] border-b border-black select-none"
+      className="relative w-full bg-[#0d0d0d] text-white min-h-[380vh] border-b border-black select-none"
     >
-      {/* Sticky Viewport Stage */}
-      <div className="sticky top-16 sm:top-20 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-between overflow-hidden px-4 sm:px-8 md:px-12 lg:px-16 py-4 sm:py-6 max-w-7xl mx-auto">
+      {/* Sticky Viewport Stage Centered in Screen */}
+      <div className="sticky top-16 sm:top-20 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-between overflow-hidden px-4 sm:px-6 md:px-8 lg:px-12 py-4 sm:py-6 max-w-7xl mx-auto">
         
-        {/* Top Header & Mechanical Camera Dial HUD */}
-        <div className="relative z-50 flex flex-col md:flex-row md:items-end justify-between pb-3 sm:pb-4 border-b border-white/15 gap-3 sm:gap-4 shrink-0 bg-zinc-950/80 backdrop-blur-md">
+        {/* Top Header & Camera Dial Navigation Strip */}
+        <div className="relative z-50 flex flex-col md:flex-row md:items-end justify-between pb-3 sm:pb-4 border-b border-white/15 gap-3 shrink-0 bg-[#0d0d0d]/85 backdrop-blur-md">
           <div>
             <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
               <div className="flex space-x-1">
@@ -176,7 +172,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
           </div>
 
           {/* Mechanical Camera Dial Control HUD */}
-          <div className="flex items-center gap-3 sm:gap-6 self-start md:self-auto bg-black/60 border border-white/20 px-3 sm:px-4 py-2 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+          <div className="flex items-center gap-2.5 sm:gap-5 self-start md:self-auto bg-black/70 border border-white/20 px-3 sm:px-4 py-1.5 sm:py-2 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.6)] rounded-lg">
             {/* Dial Step Rings */}
             <div className="flex items-center gap-1 sm:gap-1.5">
               {PILLAR_CINEMATIC_DATA.map((p, idx) => {
@@ -193,7 +189,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                     key={`dial-${p.id}`}
                     onClick={() => jumpToStep(idx)}
                     title={`Dial Step ${p.number}: ${p.title}`}
-                    className={`relative px-2 sm:px-2.5 py-1 font-mono-code text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                    className={`relative px-2 sm:px-2.5 py-1 font-mono-code text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer rounded-sm ${
                       isActive
                         ? `${accentClass} shadow-[0_0_12px_rgba(255,255,255,0.4)] scale-105`
                         : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
@@ -222,148 +218,114 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
               onClick={() => onNavigate('services')}
               className="inline-flex items-center gap-1.5 font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-[#FFA500] transition-colors group cursor-pointer border-l border-white/20 pl-3"
             >
-              <span>All Services</span>
+              <span>Explore All</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-[#FFA500] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
           </div>
         </div>
 
-        {/* Stacking Card Stage (Center) */}
-        <div className="relative flex-1 w-full my-3 sm:my-4 flex items-center justify-center overflow-hidden">
-          {PILLAR_CINEMATIC_DATA.map((pillar, idx) => {
-            const zIndex = (idx + 1) * 10;
-            const accentColor =
-              pillar.accentColor === 'teal'
-                ? '#008080'
-                : pillar.accentColor === 'pink'
-                ? '#FF1493'
-                : '#FFA500';
+        {/* Stacking Card Stage (Center) - Widescreen Dimensions with Smooth Rounded Corners */}
+        <div className="relative flex-1 w-full my-auto flex items-center justify-center overflow-hidden py-2 sm:py-4">
+          <div className="relative w-full max-w-5xl xl:max-w-6xl h-[280px] sm:h-[340px] md:h-[420px] lg:h-[460px] flex items-center justify-center">
+            {PILLAR_CINEMATIC_DATA.map((pillar, idx) => {
+              const zIndex = (idx + 1) * 10;
+              const accentColor =
+                pillar.accentColor === 'teal'
+                  ? '#008080'
+                  : pillar.accentColor === 'pink'
+                  ? '#FF1493'
+                  : '#FFA500';
 
-            const accentBorderClass =
-              pillar.accentColor === 'teal'
-                ? 'border-t-[#008080]'
-                : pillar.accentColor === 'pink'
-                ? 'border-t-[#FF1493]'
-                : 'border-t-[#FFA500]';
+              const accentBorderClass =
+                pillar.accentColor === 'teal'
+                  ? 'border-t-[#008080]'
+                  : pillar.accentColor === 'pink'
+                  ? 'border-t-[#FF1493]'
+                  : 'border-t-[#FFA500]';
 
-            const accentBadgeClass =
-              pillar.accentColor === 'teal'
-                ? 'bg-[#008080]/20 text-teal-300 border-[#008080]/50'
-                : pillar.accentColor === 'pink'
-                ? 'bg-[#FF1493]/20 text-pink-300 border-[#FF1493]/50'
-                : 'bg-[#FFA500]/20 text-orange-300 border-[#FFA500]/50';
+              const accentBadgeClass =
+                pillar.accentColor === 'teal'
+                  ? 'bg-[#008080]/30 text-teal-300 border-[#008080]/60'
+                  : pillar.accentColor === 'pink'
+                  ? 'bg-[#FF1493]/30 text-pink-300 border-[#FF1493]/60'
+                  : 'bg-[#FFA500]/30 text-orange-300 border-[#FFA500]/60';
 
-            return (
-              <motion.div
-                key={pillar.id}
-                style={{
-                  x: xTransforms[idx],
-                  scale: scaleTransforms[idx],
-                  opacity: dimTransforms[idx],
-                  zIndex: zIndex,
-                }}
-                className={`absolute inset-0 w-full h-full rounded-none border border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col justify-between bg-zinc-900 border-t-4 ${accentBorderClass}`}
-              >
-                {/* Cinematic Background Image with Rich Dark Gradient Overlay */}
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src={pillar.bgImage}
-                    alt={pillar.title}
-                    className="w-full h-full object-cover object-center filter brightness-[0.75] contrast-[1.15] scale-105"
-                    loading="lazy"
-                  />
-                  {/* Multi-layer Cinematic Film Gradients */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
-                  {/* Subtle Grid Grain Accent */}
-                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
-                </div>
-
-                {/* Card Top Strip / Shutter Tag */}
-                <div className="relative z-10 p-4 sm:p-6 md:p-8 flex items-center justify-between">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <span className="font-mono-code text-xs sm:text-sm font-black px-2 sm:px-2.5 py-0.5 bg-black/80 border border-white/30 text-white tracking-widest">
-                      PILLAR {pillar.number}
-                    </span>
-                    <span className="hidden sm:inline font-mono-code text-[11px] text-zinc-300 tracking-wider uppercase bg-black/60 border border-white/15 px-2.5 py-0.5 backdrop-blur-md">
-                      {pillar.badge}
-                    </span>
+              return (
+                <motion.div
+                  key={pillar.id}
+                  onClick={() => onNavigate('services')}
+                  style={{
+                    x: xTransforms[idx],
+                    scale: scaleTransforms[idx],
+                    opacity: dimTransforms[idx],
+                    zIndex: zIndex,
+                  }}
+                  className={`absolute inset-0 w-full h-full rounded-2xl sm:rounded-3xl border border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col justify-between bg-zinc-900 border-t-4 ${accentBorderClass} cursor-pointer group`}
+                >
+                  {/* Cinematic Background Image with Rich Dark Gradient Overlay */}
+                  <div className="absolute inset-0 z-0 rounded-2xl sm:rounded-3xl overflow-hidden">
+                    <img
+                      src={pillar.bgImage}
+                      alt={pillar.title}
+                      className="w-full h-full object-cover object-center filter brightness-[0.7] contrast-[1.15] scale-105 group-hover:scale-110 transition-transform duration-700 ease-out"
+                      loading="lazy"
+                    />
+                    {/* Multi-layer Cinematic Film Gradients */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
+                    {/* Subtle Grain Overlay */}
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
                   </div>
 
-                  <div className="flex items-center gap-2 bg-black/80 border border-white/20 px-3 py-1 backdrop-blur-md font-mono-code text-[10px] sm:text-xs text-zinc-300">
-                    <Disc className="w-3.5 h-3.5 text-[#FFA500] animate-spin" style={{ animationDuration: '6s' }} />
-                    <span className="font-bold text-white uppercase tracking-wider">{pillar.metric}</span>
-                  </div>
-                </div>
-
-                {/* Floating Glassmorphism Text Box (Bottom / Middle-Left Layout) */}
-                <div className="relative z-10 p-4 sm:p-6 md:p-8 flex flex-col md:flex-row items-end md:items-end justify-between gap-4 sm:gap-6">
-                  {/* Main Frosted Glass Panel */}
-                  <div className="w-full md:max-w-2xl bg-black/65 backdrop-blur-2xl border border-white/20 p-5 sm:p-7 md:p-8 shadow-[0_16px_40px_rgba(0,0,0,0.6)] relative overflow-hidden group">
-                    {/* Corner Specular Highlight */}
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-white/10 to-transparent pointer-events-none" />
-                    
-                    {/* Tagline / Subheading */}
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={`font-mono-code text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-2 py-0.5 border ${accentBadgeClass}`}>
-                        {pillar.tagline}
+                  {/* Top Minimalist Index Pill */}
+                  <div className="relative z-10 p-4 sm:p-6 md:p-8 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono-code text-[11px] sm:text-xs font-black px-2.5 py-1 bg-black/80 border border-white/30 text-white tracking-widest rounded-md">
+                        {pillar.number} // 04
                       </span>
                     </div>
 
-                    {/* Headline */}
-                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase text-white tracking-tight leading-none mb-3 sm:mb-4">
-                      {pillar.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-xs sm:text-sm md:text-base text-zinc-300 leading-relaxed font-light mb-4 sm:mb-6 max-w-xl">
-                      {pillar.description}
-                    </p>
-
-                    {/* Key Point Highlights */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 sm:pt-4 border-t border-white/15">
-                      {pillar.points.slice(0, 4).map((pt, ptIdx) => (
-                        <div key={`pt-${ptIdx}`} className="flex items-start gap-2 font-mono-code text-[10px] sm:text-[11px] text-zinc-300">
-                          <span className="w-1.5 h-1.5 shrink-0 mt-1.5" style={{ backgroundColor: accentColor }} />
-                          <span className="leading-tight">{pt}</span>
-                        </div>
-                      ))}
+                    <div className="flex items-center gap-2 bg-black/80 border border-white/20 px-3 py-1 backdrop-blur-md font-mono-code text-[10px] sm:text-xs text-zinc-300 rounded-md">
+                      <Disc className="w-3.5 h-3.5 text-[#FFA500] animate-spin" style={{ animationDuration: '6s' }} />
+                      <span className="font-bold text-white uppercase tracking-wider hidden sm:inline">{pillar.badge}</span>
+                      <span className="font-bold text-white uppercase tracking-wider sm:hidden">Pillar {pillar.number}</span>
                     </div>
                   </div>
 
-                  {/* Right Side Action Button floating card */}
-                  <div className="w-full md:w-auto shrink-0 flex flex-col sm:flex-row md:flex-col gap-2.5">
-                    <button
-                      onClick={() => onNavigate('services')}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-3.5 bg-white text-black hover:bg-[#FFA500] hover:text-black font-mono-code font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.5)] cursor-pointer group/btn"
-                    >
-                      <span>Explore Pillar</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
+                  {/* Minimized Content: Only Subtitle Tagline + Main Service Title inside Floating Glassmorphism Container */}
+                  <div className="relative z-10 p-4 sm:p-6 md:p-8 flex items-end">
+                    <div className="w-full max-w-2xl bg-black/60 backdrop-blur-2xl border border-white/25 p-4 sm:p-6 md:p-8 shadow-[0_16px_40px_rgba(0,0,0,0.65)] rounded-xl sm:rounded-2xl relative overflow-hidden group/box">
+                      {/* Corner Specular Glass Glare */}
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/15 to-transparent pointer-events-none" />
+                      
+                      {/* Small Subtitle / Tagline right above main title */}
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <span className={`font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest px-2.5 py-0.5 border rounded ${accentBadgeClass}`}>
+                          {pillar.tagline}
+                        </span>
+                      </div>
 
-                    <button
-                      onClick={() => onNavigate('work')}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-black/70 hover:bg-black text-zinc-300 hover:text-white border border-white/20 font-mono-code font-bold text-[10px] uppercase tracking-wider transition-all backdrop-blur-md cursor-pointer"
-                    >
-                      <Eye className="w-3.5 h-3.5 text-zinc-400" />
-                      <span>View Case Studies</span>
-                    </button>
+                      {/* Main Service Title */}
+                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase text-white tracking-tight leading-none group-hover/box:text-[#FFA500] transition-colors">
+                        {pillar.title}
+                      </h3>
+                    </div>
                   </div>
-                </div>
 
-                {/* Bottom Architectural Accent Line */}
-                <div className="relative z-10 w-full h-1" style={{ backgroundColor: accentColor }} />
-              </motion.div>
-            );
-          })}
+                  {/* Bottom Architectural Accent Line */}
+                  <div className="relative z-10 w-full h-1" style={{ backgroundColor: accentColor }} />
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Bottom Timeline & Scroll Prompt */}
-        <div className="relative z-50 flex items-center justify-between pt-2 sm:pt-3 border-t border-white/15 text-zinc-400 font-mono-code text-[9px] sm:text-[10px] uppercase tracking-widest shrink-0 bg-zinc-950/80 backdrop-blur-md">
+        {/* Bottom Status Bar & Progress */}
+        <div className="relative z-50 flex items-center justify-between pt-2 sm:pt-3 border-t border-white/15 text-zinc-400 font-mono-code text-[9px] sm:text-[10px] uppercase tracking-widest shrink-0 bg-[#0d0d0d]/85 backdrop-blur-md">
           <div className="flex items-center gap-2 sm:gap-4">
             <span className="text-white font-bold flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-[#FFA500]" />
-              Sticky Scroll Architecture
+              Sticky Scroll Stacking
             </span>
             <span className="hidden md:inline text-zinc-500">|</span>
             <span className="hidden md:inline text-zinc-400">
@@ -373,8 +335,8 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
 
           {/* Stepped Progress Bar */}
           <div className="flex items-center gap-2">
-            <span className="hidden sm:inline text-zinc-500">Camera Dial Easing</span>
-            <div className="w-24 sm:w-36 h-1.5 bg-white/15 overflow-hidden flex">
+            <span className="hidden sm:inline text-zinc-500">Dial Easing</span>
+            <div className="w-20 sm:w-32 h-1.5 bg-white/15 overflow-hidden flex rounded-full">
               <div
                 className="h-full bg-gradient-to-r from-[#008080] via-[#FF1493] to-[#FFA500] transition-all duration-300"
                 style={{ width: `${((activeStep + 1) / 4) * 100}%` }}
