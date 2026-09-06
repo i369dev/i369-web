@@ -251,6 +251,107 @@ export const TRUSTED_CLIENTS = [
   { name: 'Life Balance Wellness', role: 'Holistic Health Centers' }
 ];
 
+export interface PartnerMarqueeItem {
+  id: string;
+  name: string;
+  category: string;
+  image: string;
+  accentColor: 'teal' | 'pink' | 'orange';
+  caseStudyId?: string;
+}
+
+export const PARTNER_MARQUEE_ITEMS: PartnerMarqueeItem[] = [
+  {
+    id: 'pekoe-trail',
+    name: 'The Pekoe Trail',
+    category: 'Official Digital Partner',
+    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'teal',
+    caseStudyId: 'pekoe-trail'
+  },
+  {
+    id: 'solar-maps',
+    name: 'Solar Maps (Pvt) Ltd',
+    category: '40MW+ Renewable Lead Engine',
+    image: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'orange',
+    caseStudyId: 'solar-maps'
+  },
+  {
+    id: 'ayana-garden',
+    name: 'Ayana Garden Ella',
+    category: 'Boutique Luxury Hospitality',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'pink',
+    caseStudyId: 'ayana-garden-ella'
+  },
+  {
+    id: 'lankaquests',
+    name: 'LankaQuests',
+    category: 'AdventureTech Gaming Platform',
+    image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'teal'
+  },
+  {
+    id: 'hilton-yala',
+    name: 'Hilton Yala',
+    category: 'Luxury Wilderness Resort',
+    image: 'https://images.unsplash.com/photo-1588598198321-9735fd52455b?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'orange'
+  },
+  {
+    id: 'aitken-spence',
+    name: 'Aitken Spence',
+    category: 'Conglomerate & Hospitality',
+    image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'teal'
+  },
+  {
+    id: 'intothewildlk',
+    name: 'IntotheWILDlk',
+    category: 'Boutique Off-Grid Network',
+    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'pink'
+  },
+  {
+    id: 'the-quest',
+    name: 'The Quest',
+    category: 'Highland Adventure Expedition',
+    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'orange',
+    caseStudyId: 'the-quest-adventuretech'
+  },
+  {
+    id: 'coco-organic',
+    name: 'Coco Organic',
+    category: 'Sustainable Agro Brand',
+    image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'teal'
+  },
+  {
+    id: 'inhale-exhale',
+    name: 'Inhale Exhale',
+    category: 'Highland House Music Label',
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'pink'
+  },
+  {
+    id: 'balinese-spas',
+    name: 'Balinese Spas',
+    category: 'Holistic Wellness Retreats',
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'orange'
+  },
+  {
+    id: 'hill-country-tourism',
+    name: 'Hill Country Tourism',
+    category: 'Regional Tourism Directorate',
+    image: 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=300&q=80',
+    accentColor: 'teal',
+    caseStudyId: 'hill-country-tourism'
+  }
+];
+
 export const GROUND_ZERO_ADVANTAGES = [
   {
     id: 'overhead',
