@@ -55,63 +55,98 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       </section>
 
       {/* =========================================================================
-          OUR STORY: Founded by Mithila Bhashitha Navarathna Bandara
+          OUR STORY: Founded by Mithila Bhashitha Navarathna Bandara (Cinematic Backdrop)
          ========================================================================= */}
-      <section className="bg-white py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative bg-black text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden">
+        {/* Cinematic Background Image Layer */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105 transition-transform duration-1000"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80')`,
+          }}
+        />
+
+        {/* Multi-Layer Dark Gradient & Vignette Overlay for Pristine Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
             {/* Left Col: Label & Visual Marker with 3D Tilt */}
-            <div className="lg:col-span-4 space-y-4 sm:space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 space-y-4 sm:space-y-6"
+            >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 accent-pink"></div>
                 <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF00FF] font-bold">
                   The Genesis
                 </span>
               </div>
-              <h2 className="gothic-display text-3xl sm:text-4xl md:text-5xl text-black tracking-tight leading-none">
+              <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
                 Our Story.
               </h2>
               <TiltCard
                 maxTilt={8}
-                scale={1.03}
-                className="p-5 sm:p-6 space-y-3 rounded-none"
+                scale={1.02}
+                isDark={true}
+                glowColor="rgba(255, 0, 255, 0.2)"
+                className="p-6 sm:p-7 space-y-3.5 rounded-none bg-black/60 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/50 shadow-2xl transition-all"
               >
-                <p className="font-mono-code text-[10px] sm:text-[11px] text-zinc-500 uppercase tracking-wider font-bold">
-                  Founder & Managing Director
-                </p>
-                <p className="font-display text-base sm:text-lg text-black font-bold">
+                <div className="flex items-center justify-between">
+                  <p className="font-mono-code text-[10px] sm:text-[11px] text-[#00FFFF] uppercase tracking-wider font-bold">
+                    Founder & Managing Director
+                  </p>
+                  <span className="w-1.5 h-1.5 bg-[#FF00FF]"></span>
+                </div>
+                <p className="font-display text-lg sm:text-xl text-white font-bold leading-tight">
                   Mithila Bhashitha Navarathna Bandara
                 </p>
-                <p className="text-xs text-zinc-600 font-normal leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
                   Pioneering regional technology infrastructure, creative direction, and sustainable venture building in Sri Lanka's central highlands.
                 </p>
               </TiltCard>
-            </div>
+            </motion.div>
 
             {/* Right Col: High Contrast Body Text with subtle frosted treatment */}
-            <div className="lg:col-span-8 space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg text-zinc-800 font-normal leading-relaxed">
-              <p>
-                <strong className="text-black font-bold">Imaginative369</strong> was founded on a simple observation: <span className="text-black underline decoration-[#00FFFF] underline-offset-4 font-semibold">Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.</span>
-              </p>
-              <p className="text-zinc-600">
-                Founded by Mithila Bhashitha Navarathna Bandara, the company grew from a creative studio into a hybrid agency, software house, and venture studio — built to bridge the gap between raw regional infrastructure and modern digital expectations.
-              </p>
-              <p className="text-zinc-600">
-                Today, our leadership team spans strategy, engineering, and creative direction, delivering everything from cinematic destination campaigns to full-stack software platforms — without ever losing the on-the-ground perspective that got us here.
-              </p>
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 space-y-5 sm:space-y-6 text-sm sm:text-base md:text-lg text-zinc-300 font-normal leading-relaxed"
+            >
+              <div className="p-6 sm:p-8 bg-black/50 backdrop-blur-md border border-white/15 space-y-5 sm:space-y-6">
+                <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed">
+                  <strong className="text-[#FFFF00] font-bold">Imaginative369</strong> was founded on a simple observation:{' '}
+                  <span className="text-white underline decoration-[#00FFFF] underline-offset-8 font-semibold">
+                    Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.
+                  </span>
+                </p>
+                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                  Founded by Mithila Bhashitha Navarathna Bandara, the company grew from a creative studio into a hybrid agency, software house, and venture studio — built to bridge the gap between raw regional infrastructure and modern digital expectations.
+                </p>
+                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                  Today, our leadership team spans strategy, engineering, and creative direction, delivering everything from cinematic destination campaigns to full-stack software platforms — without ever losing the on-the-ground perspective that got us here.
+                </p>
 
-              {/* Graphic Accents */}
-              <div className="pt-2 sm:pt-4 flex items-center gap-3">
-                <div className="flex space-x-1.5 flex-1">
-                  <div className="h-1 flex-1 accent-teal"></div>
-                  <div className="h-1 flex-1 accent-pink"></div>
-                  <div className="h-1 flex-1 accent-orange"></div>
+                {/* Graphic Accents */}
+                <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/10">
+                  <div className="flex space-x-1.5 w-full sm:w-48">
+                    <div className="h-1 flex-1 accent-teal"></div>
+                    <div className="h-1 flex-1 accent-pink"></div>
+                    <div className="h-1 flex-1 accent-orange"></div>
+                  </div>
+                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-400 font-bold">
+                    Established in Uva Province
+                  </span>
                 </div>
-                <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-500 font-bold">
-                  Established in Uva
-                </span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
