@@ -34,12 +34,12 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-24 sm:pt-28 md:pt-24">
       {/* =========================================================================
           HERO SECTION: Architectural Grid with Glass Accents
          ========================================================================= */}
       <section id="hero-section" className="relative w-full border-b border-black flex flex-col overflow-hidden">
-        <div className="flex-1 w-full min-h-[calc(100vh-5rem)] flex flex-col">
+        <div className="flex-1 w-full min-h-[calc(100vh-6rem)] flex flex-col">
           
           {/* Architectural Grid Section */}
           <div className="w-full flex flex-col relative thin-grid bg-white text-[#141414] justify-between flex-grow">
@@ -55,7 +55,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <div className="w-2 h-4 accent-orange"></div>
                     </div>
                     <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] sm:tracking-[0.4em] text-gray-500 font-mono-code">
-                      Strategy to Screen // Badulla
+                      Strategy to Screen
                     </span>
                   </div>
 
