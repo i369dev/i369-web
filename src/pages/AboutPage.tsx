@@ -284,27 +284,27 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       </section>
 
       {/* =========================================================================
-          LEADERSHIP PROFILE MODAL POPUP (Glassmorphism & AnimatePresence)
+          LEADERSHIP PROFILE MODAL POPUP (Ultra-Modern Glassmorphism & Staggered Motion)
          ========================================================================= */}
       <AnimatePresence>
         {selectedMember && (
           <div
             id="team-member-modal-backdrop"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/80 backdrop-blur-xl animate-in fade-in duration-200"
             onClick={() => setSelectedMember(null)}
           >
             <motion.div
               id="team-member-modal-content"
-              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 20 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-3xl bg-[#111111]/95 backdrop-blur-2xl border border-white/20 text-white shadow-[0_25px_80px_rgba(0,0,0,0.85)] rounded-none overflow-hidden max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-3xl bg-black/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)] text-white rounded-none overflow-hidden max-h-[90vh] flex flex-col"
             >
               {/* Top CMYK Accent Bar */}
               <div
-                className="h-1.5 w-full"
+                className="h-1 w-full"
                 style={{
                   backgroundColor:
                     selectedMember.accentColor === 'teal'
@@ -316,7 +316,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               />
 
               {/* Modal Header Bar */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-md">
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/[0.02]"
+              >
                 <div className="flex items-center gap-2.5">
                   <div className="flex space-x-1">
                     <span className="w-1.5 h-3 accent-teal"></span>
@@ -330,37 +335,43 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
                 <button
                   onClick={() => setSelectedMember(null)}
-                  className="p-1.5 text-zinc-400 hover:text-black hover:bg-[#FFFF00] border border-white/20 hover:border-[#FFFF00] transition-colors cursor-pointer rounded-none"
+                  className="p-1.5 text-zinc-400 hover:text-black hover:bg-[#FFFF00] border border-white/15 hover:border-[#FFFF00] transition-colors cursor-pointer rounded-none"
                   aria-label="Close Profile"
                 >
                   <X className="w-4 h-4" />
                 </button>
-              </div>
+              </motion.div>
 
               {/* Modal Scrollable Body */}
-              <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(90vh-100px)]">
+              <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(90vh-90px)]">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
-                  {/* Left Col: Portrait */}
-                  <div className="md:col-span-5 space-y-4">
-                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-black border border-white/20">
+                  {/* Left Col: Portrait with Staggered Entrance */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.45, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                    className="md:col-span-5"
+                  >
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/60 border border-white/10 shadow-2xl">
                       <img
                         src={selectedMember.image}
                         alt={selectedMember.name}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top contrast-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2 py-1 bg-black/80 backdrop-blur-md text-[#00FFFF] border border-white/20 block text-center">
-                          03 River Side Rd, Badulla
-                        </span>
-                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
                     </div>
-                  </div>
+                  </motion.div>
 
-                  {/* Right Col: Details */}
-                  <div className="md:col-span-7 space-y-5">
-                    <div className="space-y-1.5">
+                  {/* Right Col: Details with Sequential Staggered Entrance */}
+                  <div className="md:col-span-7 space-y-6">
+                    {/* Header Details (Role, Name, Department) */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                      className="space-y-1.5"
+                    >
                       <span
                         className="font-mono-code text-xs uppercase tracking-wider font-bold block"
                         style={{
@@ -377,52 +388,50 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                       <h3 className="gothic-display text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
                         {selectedMember.name}
                       </h3>
-                      <p className="font-mono-code text-xs text-zinc-400 uppercase tracking-wide">
+                      <p className="font-mono-code text-xs text-zinc-400 uppercase tracking-wide pt-0.5">
                         {selectedMember.department}
                       </p>
-                    </div>
+                    </motion.div>
 
                     {/* Biography */}
-                    <div className="space-y-2 pt-2 border-t border-white/10">
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="space-y-2 pt-3 border-t border-white/10"
+                    >
                       <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-500 font-bold block">
-                        Biography & Focus
+                        Biography & Strategic Focus
                       </span>
-                      <p className="text-zinc-300 text-sm sm:text-base font-normal leading-relaxed">
+                      <p className="text-zinc-200 text-sm sm:text-base font-normal leading-relaxed">
                         {selectedMember.bio}
                       </p>
-                    </div>
+                    </motion.div>
 
-                    {/* Domain Badges */}
-                    <div className="space-y-2.5 pt-2 border-t border-white/10">
+                    {/* Domain Competency Badges */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                      className="space-y-3 pt-3 border-t border-white/10"
+                    >
                       <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-500 font-bold block">
                         Domain Competencies
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {selectedMember.tags.map((tag, tagIdx) => (
-                          <span
+                          <motion.span
                             key={tagIdx}
-                            className="font-mono-code text-xs text-zinc-200 bg-white/5 border border-white/15 px-3 py-1 rounded-none hover:border-[#FFFF00]/50 transition-colors"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3, delay: 0.32 + tagIdx * 0.06 }}
+                            className="font-mono-code text-xs text-zinc-200 bg-white/[0.04] border border-white/15 px-3 py-1 rounded-none hover:border-[#FFFF00]/60 hover:text-white transition-colors"
                           >
                             {tag}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
-                    </div>
-
-                    {/* Action */}
-                    <div className="pt-4 flex items-center justify-between">
-                      <MagneticButton
-                        variant="primary"
-                        onClick={() => {
-                          setSelectedMember(null);
-                          onOpenInquiry();
-                        }}
-                        className="w-full py-3 px-5 text-black bg-[#FFFF00] hover:bg-white text-xs font-mono-code font-bold uppercase tracking-wider flex items-center justify-center gap-2"
-                      >
-                        <span>Initiate Brief With Leadership</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </MagneticButton>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
