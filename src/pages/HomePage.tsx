@@ -188,8 +188,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Bottom Trusted Partners Infinite Logo Marquee Strip with Depth Slide-Under */}
-            <div className="relative border-t border-black/15 bg-white/40 backdrop-blur-md overflow-hidden flex items-center h-16 sm:h-20 select-none">
+            {/* Bottom Trusted Partners Infinite Logo Marquee Strip with Matching Header Glassmorphism */}
+            <div className="relative border-t border-black/12 border-b border-black/12 bg-white/88 backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden flex items-center h-16 sm:h-20 select-none">
               {/* Full-width scrolling logo marquee layer (z-0: passes continuously underneath the fixed left glass pane) */}
               <div className="absolute inset-0 w-full h-full z-0 flex items-center overflow-hidden pointer-events-auto">
                 <div className="animate-marquee-infinite flex items-center">
@@ -211,7 +211,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                             }
                           }}
                           title={matchedCaseStudy ? `View ${partner.name} Case Study` : `View ${partner.name} Details`}
-                          className="group relative flex items-center justify-center shrink-0 cursor-pointer transition-all duration-300 ease-out hover:-translate-y-2 py-1 select-none"
+                          className="group relative flex items-center justify-center shrink-0 cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1.5 py-1 select-none"
                         >
                           {/* Raw Logo Image floating directly on grid with natural aspect ratio */}
                           <img
@@ -225,7 +225,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     })}
                   </div>
 
-                  {/* Track 2 (Identical for mathematically seamless CSS translateX(-50%) loop) */}
+                  {/* Track 2 (Exact duplicate for seamless infinite 0% -> -50% loop) */}
                   <div className="flex items-center gap-8 sm:gap-12 md:gap-16 pr-8 sm:pr-12 md:pr-16 shrink-0" aria-hidden="true">
                     {PARTNER_MARQUEE_ITEMS.map((partner, pIdx) => {
                       const matchedCaseStudy = partner.caseStudyId
@@ -243,7 +243,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                             }
                           }}
                           title={matchedCaseStudy ? `View ${partner.name} Case Study` : `View ${partner.name} Details`}
-                          className="group relative flex items-center justify-center shrink-0 cursor-pointer transition-all duration-300 ease-out hover:-translate-y-2 py-1 select-none"
+                          className="group relative flex items-center justify-center shrink-0 cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1.5 py-1 select-none"
                         >
                           {/* Raw Logo Image floating directly on grid with natural aspect ratio */}
                           <img
@@ -281,7 +281,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
 
               {/* Right Exit/Entry Subtle Fade Gradient (z-10) */}
-              <div className="absolute right-0 top-0 bottom-0 z-10 w-10 sm:w-16 bg-gradient-to-l from-white/80 to-transparent pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 z-10 w-12 sm:w-20 bg-gradient-to-l from-white/90 via-white/40 to-transparent pointer-events-none" />
             </div>
           </div>
 
