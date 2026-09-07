@@ -1,4 +1,4 @@
-import { ServicePillar, CaseStudy, VentureItem } from '../types';
+import { ServicePillar, CaseStudy, VentureItem, TeamMember } from '../types';
 
 export const SERVICE_PILLARS: ServicePillar[] = [
   {
@@ -381,3 +381,47 @@ export const GROUND_ZERO_ADVANTAGES = [
     accentColor: 'orange' as const
   }
 ];
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  {
+    id: 'mithila-bandara',
+    name: 'Mithila Bhashitha Navarathna Bandara',
+    role: 'Founder & Managing Director',
+    department: 'Executive Leadership & Creative Direction',
+    bio: 'Pioneering regional technology infrastructure, creative direction, and sustainable venture building in Sri Lanka\'s central highlands. Leading the strategic fusion of AdventureTech and destination marketing.',
+    accentColor: 'teal',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
+    tags: ['Strategic Vision', 'Creative Direction', 'Venture Architecture']
+  },
+  {
+    id: 'kavishka-senarath',
+    name: 'Kavishka Senarath',
+    role: 'Head of Software Engineering',
+    department: 'AdventureTech & Platforms',
+    bio: 'Architecting offline-first mobile apps, GPS spatial engines, and AI-driven platforms powering LankaQuests, high-performance booking engines, and enterprise web solutions.',
+    accentColor: 'pink',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
+    tags: ['Flutter / Mobile', 'Spatial GPS', 'Cloud Architecture']
+  },
+  {
+    id: 'tharindu-madusanka',
+    name: 'Tharindu Madusanka',
+    role: 'Director of Cinematic Media & Aerials',
+    department: 'Media Production & Visual Identity',
+    bio: 'Crafting 4K destination cinema, National Geographic-grade highland expeditions, and high-impact visual identities that capture the raw, misty atmosphere of Sri Lanka.',
+    accentColor: 'orange',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80',
+    tags: ['4K Cinematography', 'Aerial Drone', 'Atmospheric Grading']
+  },
+  {
+    id: 'sachini-jayasundara',
+    name: 'Sachini Jayasundara',
+    role: 'Head of Tourism & Growth Strategy',
+    department: 'Digital Operations & Performance',
+    bio: 'Leading multi-channel digital operations, regional stakeholder partnerships, and data-backed conversion funnels for national trails and luxury eco-resorts.',
+    accentColor: 'teal',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+    tags: ['Destination Roadmaps', 'Meta & Google Ads', 'Stakeholder Growth']
+  }
+];
+

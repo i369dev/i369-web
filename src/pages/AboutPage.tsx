@@ -1,10 +1,12 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { PageId } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
-import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers } from 'lucide-react';
+import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers, Sparkles, Terminal, Video, TrendingUp } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
+import { TEAM_MEMBERS } from '../data/agencyData';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -111,6 +113,145 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          LEADERSHIP & COUNCIL: Clean Minimalist Editorial Showcase (Huge Inc Style)
+         ========================================================================= */}
+      <section id="leadership-section" className="bg-black text-white py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black relative overflow-hidden">
+        {/* Subtle Ambient CMYK Glow Mesh */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00FFFF]/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#FF00FF]/5 rounded-full blur-3xl pointer-events-none translate-y-1/2"></div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Header Block: Minimalist Editorial Typography */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 pb-12 sm:pb-16 border-b border-white/15"
+          >
+            <div className="space-y-3 sm:space-y-4 max-w-2xl">
+              <div className="flex items-center gap-2.5">
+                <div className="flex space-x-1.5">
+                  <span className="w-2 h-2 rounded-none bg-[#00FFFF]"></span>
+                  <span className="w-2 h-2 rounded-none bg-[#FF00FF]"></span>
+                  <span className="w-2 h-2 rounded-none bg-[#FFFF00]"></span>
+                </div>
+                <span className="font-mono-code text-xs sm:text-xs uppercase tracking-[0.25em] text-[#00FFFF] font-bold">
+                  Leadership & Principals
+                </span>
+              </div>
+              <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[0.95]">
+                The Minds Behind the Studio.
+              </h2>
+            </div>
+
+            <p className="text-zinc-400 text-sm sm:text-base font-normal max-w-md leading-relaxed">
+              We are practitioners first — engineers deploying to mountain ridgelines, directors shooting at dawn, and strategists transforming regional economies.
+            </p>
+          </motion.div>
+
+          {/* Team Showcase Grid: 4-Column Minimalist Clean Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-10 sm:pt-14">
+            {TEAM_MEMBERS.map((member, index) => {
+              const accentColor = member.accentColor === 'teal' ? '#00FFFF' : member.accentColor === 'pink' ? '#FF00FF' : '#FFFF00';
+              const borderHoverClass = member.accentColor === 'teal' 
+                ? 'group-hover:border-[#00FFFF]/50 group-hover:shadow-[0_0_30px_rgba(0,255,255,0.15)]' 
+                : member.accentColor === 'pink' 
+                ? 'group-hover:border-[#FF00FF]/50 group-hover:shadow-[0_0_30px_rgba(255,0,255,0.15)]' 
+                : 'group-hover:border-[#FFFF00]/50 group-hover:shadow-[0_0_30px_rgba(255,255,0,0.15)]';
+              
+              const textAccentClass = member.accentColor === 'teal' ? 'text-[#00FFFF]' : member.accentColor === 'pink' ? 'text-[#FF00FF]' : 'text-[#FFFF00]';
+
+              return (
+                <motion.div
+                  key={member.id}
+                  id={`team-member-${member.id}`}
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.65, delay: index * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  className={`group relative flex flex-col bg-[#111111] border border-white/15 transition-all duration-500 rounded-none ${borderHoverClass}`}
+                >
+                  {/* Top Subtle CMYK Accent Indicator */}
+                  <div 
+                    className="h-1 w-full transition-opacity duration-300 opacity-60 group-hover:opacity-100"
+                    style={{ backgroundColor: accentColor }}
+                  />
+
+                  {/* High-Contrast Editorial Portrait Container */}
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-950">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                    />
+
+                    {/* Gradient Overlay for seamless depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500" />
+
+                    {/* Department Tag Overlay */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
+                      <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2 py-1 bg-black/80 backdrop-blur-md text-zinc-300 border border-white/20">
+                        {member.department.split('&')[0]}
+                      </span>
+                      <span className={`font-mono-code text-xs font-bold ${textAccentClass}`}>
+                        0{index + 1}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Member Details Stack */}
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4 bg-[#111111]">
+                    <div className="space-y-2">
+                      <span className={`font-mono-code text-[11px] uppercase tracking-wider font-bold block ${textAccentClass}`}>
+                        {member.role}
+                      </span>
+                      <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug group-hover:text-[#FFFF00] transition-colors">
+                        {member.name}
+                      </h3>
+                      <p className="text-xs sm:text-[13px] text-zinc-400 font-normal leading-relaxed pt-1">
+                        {member.bio}
+                      </p>
+                    </div>
+
+                    {/* Domain Focus Badges */}
+                    <div className="pt-2 border-t border-white/10 flex flex-wrap gap-1.5">
+                      {member.tags.map((tag, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="font-mono-code text-[10px] text-zinc-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-none"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Minimalist Footnote / Studio Commitment */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-12 sm:mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-zinc-500"
+          >
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-[#00FFFF]"></span>
+              <span>DIRECT EXECUTIVE ENGAGEMENT ON ALL ENTERPRISE ACCOUNTS</span>
+            </div>
+            <div className="text-zinc-400">
+              UVA PROVINCE • 03 RIVER SIDE ROAD, BADULLA
+            </div>
+          </motion.div>
         </div>
       </section>
 

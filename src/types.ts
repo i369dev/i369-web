@@ -45,6 +45,17 @@ export interface VentureItem {
   image: string;
 }
 
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  department: string;
+  bio: string;
+  accentColor: 'teal' | 'pink' | 'orange';
+  image: string;
+  tags: string[];
+}
+
 export interface ProjectInquiry {
   name: string;
   company: string;
