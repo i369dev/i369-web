@@ -461,7 +461,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           {/* Featured Case Studies Grid (HugeInc style 3D tilt, zoom reveal, and glassmorphic stats) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {CASE_STUDIES.slice(0, 2).map((cs) => (
               <TiltCard
                 key={cs.id}
@@ -505,30 +505,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
               </TiltCard>
             ))}
-          </div>
-
-          {/* Trusted Clients Logo Wall with glassmorphic cards */}
-          <div className="pt-8 sm:pt-12 border-t border-black">
-            <p className="font-mono-code text-[11px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-zinc-500 text-center mb-6 sm:mb-8 font-bold">
-              Trusted By Provincial & National Industry Pioneers
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-              {TRUSTED_CLIENTS.map((client, idx) => (
-                <TiltCard
-                  key={idx}
-                  maxTilt={10}
-                  scale={1.04}
-                  className="p-3 sm:p-4 text-center flex flex-col justify-center items-center h-20 sm:h-24 rounded-none cursor-default"
-                >
-                  <span className="font-display font-bold text-xs sm:text-sm text-black">
-                    {client.name}
-                  </span>
-                  <span className="font-mono-code text-[8px] sm:text-[9px] text-zinc-500 mt-1 uppercase font-bold">
-                    {client.role}
-                  </span>
-                </TiltCard>
-              ))}
-            </div>
           </div>
         </div>
       </section>
