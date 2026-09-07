@@ -325,30 +325,41 @@ export const HomePage: React.FC<HomePageProps> = ({
       <StickyStackingCards onNavigate={onNavigate} />
 
       {/* =========================================================================
-          WHY IMAGINATIVE369: Ground Zero Advantage (30% Black Structure with Glass Cards)
+          WHY IMAGINATIVE369: Ground Zero Advantage (Cinematic Parallax Background with Frosted Glass Cards)
          ========================================================================= */}
-      <section id="ground-zero-advantage" className="bg-[#111] text-white py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black relative">
-        <div className="max-w-7xl mx-auto">
+      <section
+        id="ground-zero-advantage"
+        className="relative text-white py-14 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-fixed bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=2400&q=85')`,
+        }}
+      >
+        {/* Modern Multi-Layer Gradient Overlays for Cinematic Depth & Pristine Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90 backdrop-blur-[2px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#008080]/15 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
+
+        <div className="relative z-10 max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="max-w-3xl mb-10 sm:mb-14 md:mb-16">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 accent-orange"></div>
-              <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFA500] font-bold">
+              <div className="w-2 h-2 accent-orange shrink-0"></div>
+              <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-widest text-[#FFA500] font-bold">
                 The Ground Zero Advantage
               </span>
             </div>
-            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-tight">
+            <h2 className="gothic-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
               We didn’t set up in Colombo.
               <br />
-              <span className="text-zinc-400">We set up on the ground.</span>
+              <span className="text-zinc-300">We set up on the ground.</span>
             </h2>
-            <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed">
+            <p className="mt-3.5 sm:mt-5 text-sm sm:text-base md:text-lg text-zinc-200 font-light leading-relaxed max-w-2xl">
               Headquartered in Badulla instead of the capital, Imaginative369 operates with a structural edge no city agency can replicate:
             </p>
           </div>
 
-          {/* 3 Structural Edge Cards with 3D Tilt */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {/* 3 Structural Edge Cards with 3D Tilt & Intense Frosted Glass */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
             {GROUND_ZERO_ADVANTAGES.map((adv) => {
               const borderTopColor =
                 adv.accentColor === 'teal'
@@ -369,28 +380,28 @@ export const HomePage: React.FC<HomePageProps> = ({
                   key={adv.id}
                   isDark={true}
                   maxTilt={7}
-                  scale={1.03}
-                  className={`p-6 sm:p-8 border-t-4 ${borderTopColor} space-y-4 sm:space-y-6 rounded-none`}
+                  scale={1.02}
+                  className={`p-5 sm:p-7 md:p-8 bg-black/60 backdrop-blur-2xl border border-white/20 border-t-4 ${borderTopColor} space-y-4 sm:space-y-6 rounded-xl sm:rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.6)]`}
                 >
                   <div className="flex items-baseline justify-between">
-                    <span className="font-mono-code text-xs text-zinc-500 font-bold">
+                    <span className="font-mono-code text-xs text-zinc-400 font-bold">
                       EDGE {adv.number}
                     </span>
-                    <span className={`gothic-display text-3xl sm:text-4xl font-bold tracking-tight ${metricTextColor}`}>
+                    <span className={`gothic-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight ${metricTextColor}`}>
                       {adv.metric}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight">
+                    <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug">
                       {adv.title}
                     </h3>
-                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
+                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
                       {adv.description}
                     </p>
                   </div>
 
-                  <div className="pt-3 sm:pt-4 border-t border-white/10">
+                  <div className="pt-3 sm:pt-4 border-t border-white/15">
                     <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-wider text-zinc-400 font-bold">
                       {adv.metricLabel}
                     </span>
@@ -400,9 +411,9 @@ export const HomePage: React.FC<HomePageProps> = ({
             })}
           </div>
 
-          {/* Bottom Statement Box with Glassmorphism */}
-          <div className="mt-8 sm:mt-12 p-5 sm:p-8 glass-panel-dark flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 border border-white/20 text-center sm:text-left">
-            <p className="text-base sm:text-lg md:text-xl text-zinc-200 font-medium">
+          {/* Bottom Statement Box with Premium Frosted Glassmorphism */}
+          <div className="mt-8 sm:mt-12 p-5 sm:p-7 md:p-8 bg-black/70 backdrop-blur-2xl rounded-xl sm:rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 border border-white/25 text-center sm:text-left shadow-2xl">
+            <p className="text-sm sm:text-base md:text-lg text-zinc-200 font-medium leading-relaxed">
               "We call it the <span className="text-white font-bold underline decoration-[#008080] underline-offset-4">Ground Zero Advantage</span>. Our clients call it results."
             </p>
 
