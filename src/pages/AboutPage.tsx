@@ -1,9 +1,9 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { PageId } from '../types';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { PageId, TeamMember } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
-import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers, Sparkles, Terminal, Video, TrendingUp } from 'lucide-react';
+import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers, Sparkles, Terminal, Video, TrendingUp, X, MapPin } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 import { TEAM_MEMBERS } from '../data/agencyData';
@@ -14,6 +14,27 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry }) => {
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedMember(null);
+      }
+    };
+
+    if (selectedMember) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedMember]);
   return (
     <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
@@ -192,10 +213,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             {TEAM_MEMBERS.map((member, index) => {
               const accentColor = member.accentColor === 'teal' ? '#00FFFF' : member.accentColor === 'pink' ? '#FF00FF' : '#FFFF00';
               const borderHoverClass = member.accentColor === 'teal' 
-                ? 'group-hover:border-[#00FFFF]/50 group-hover:shadow-[0_0_30px_rgba(0,255,255,0.15)]' 
+                ? 'group-hover:border-[#00FFFF]/60 group-hover:shadow-[0_0_30px_rgba(0,255,255,0.2)]' 
                 : member.accentColor === 'pink' 
-                ? 'group-hover:border-[#FF00FF]/50 group-hover:shadow-[0_0_30px_rgba(255,0,255,0.15)]' 
-                : 'group-hover:border-[#FFFF00]/50 group-hover:shadow-[0_0_30px_rgba(255,255,0,0.15)]';
+                ? 'group-hover:border-[#FF00FF]/60 group-hover:shadow-[0_0_30px_rgba(255,0,255,0.2)]' 
+                : 'group-hover:border-[#FFFF00]/60 group-hover:shadow-[0_0_30px_rgba(255,255,0,0.2)]';
               
               const textAccentClass = member.accentColor === 'teal' ? 'text-[#00FFFF]' : member.accentColor === 'pink' ? 'text-[#FF00FF]' : 'text-[#FFFF00]';
 
@@ -207,7 +228,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.65, delay: index * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
-                  className={`group relative flex flex-col bg-[#111111] border border-white/15 transition-all duration-500 rounded-none ${borderHoverClass}`}
+                  onClick={() => setSelectedMember(member)}
+                  className={`group relative flex flex-col bg-[#111111] border border-white/15 transition-all duration-500 rounded-none cursor-pointer ${borderHoverClass}`}
                 >
                   {/* Top Subtle CMYK Accent Indicator */}
                   <div 
@@ -225,43 +247,33 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                     />
 
                     {/* Gradient Overlay for seamless depth */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-500" />
 
                     {/* Department Tag Overlay */}
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                      <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2 py-1 bg-black/80 backdrop-blur-md text-zinc-300 border border-white/20">
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
                         {member.department.split('&')[0]}
-                      </span>
-                      <span className={`font-mono-code text-xs font-bold ${textAccentClass}`}>
-                        0{index + 1}
                       </span>
                     </div>
                   </div>
 
-                  {/* Member Details Stack */}
-                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4 bg-[#111111]">
-                    <div className="space-y-2">
+                  {/* Member Details Stack: Simplified Card (Image, Department, Role, Name) */}
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-3 bg-[#111111]">
+                    <div className="space-y-1.5">
                       <span className={`font-mono-code text-[11px] uppercase tracking-wider font-bold block ${textAccentClass}`}>
                         {member.role}
                       </span>
                       <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug group-hover:text-[#FFFF00] transition-colors">
                         {member.name}
                       </h3>
-                      <p className="text-xs sm:text-[13px] text-zinc-400 font-normal leading-relaxed pt-1">
-                        {member.bio}
+                      <p className="font-mono-code text-[11px] text-zinc-400 uppercase tracking-wider pt-0.5">
+                        {member.department}
                       </p>
                     </div>
 
-                    {/* Domain Focus Badges */}
-                    <div className="pt-2 border-t border-white/10 flex flex-wrap gap-1.5">
-                      {member.tags.map((tag, tagIdx) => (
-                        <span
-                          key={tagIdx}
-                          className="font-mono-code text-[10px] text-zinc-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-none"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono-code text-zinc-400 group-hover:text-white transition-colors">
+                      <span className="text-[11px] uppercase tracking-wider">View Profile</span>
+                      <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </motion.div>
@@ -270,6 +282,154 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           </div>
         </div>
       </section>
+
+      {/* =========================================================================
+          LEADERSHIP PROFILE MODAL POPUP (Glassmorphism & AnimatePresence)
+         ========================================================================= */}
+      <AnimatePresence>
+        {selectedMember && (
+          <div
+            id="team-member-modal-backdrop"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
+            onClick={() => setSelectedMember(null)}
+          >
+            <motion.div
+              id="team-member-modal-content"
+              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 20 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-3xl bg-[#111111]/95 backdrop-blur-2xl border border-white/20 text-white shadow-[0_25px_80px_rgba(0,0,0,0.85)] rounded-none overflow-hidden max-h-[90vh] flex flex-col"
+            >
+              {/* Top CMYK Accent Bar */}
+              <div
+                className="h-1.5 w-full"
+                style={{
+                  backgroundColor:
+                    selectedMember.accentColor === 'teal'
+                      ? '#00FFFF'
+                      : selectedMember.accentColor === 'pink'
+                      ? '#FF00FF'
+                      : '#FFFF00',
+                }}
+              />
+
+              {/* Modal Header Bar */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-md">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex space-x-1">
+                    <span className="w-1.5 h-3 accent-teal"></span>
+                    <span className="w-1.5 h-3 accent-pink"></span>
+                    <span className="w-1.5 h-3 accent-orange"></span>
+                  </div>
+                  <span className="font-mono-code text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
+                    Principal Profile // {selectedMember.department.split('&')[0]}
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => setSelectedMember(null)}
+                  className="p-1.5 text-zinc-400 hover:text-black hover:bg-[#FFFF00] border border-white/20 hover:border-[#FFFF00] transition-colors cursor-pointer rounded-none"
+                  aria-label="Close Profile"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Modal Scrollable Body */}
+              <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(90vh-100px)]">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
+                  {/* Left Col: Portrait */}
+                  <div className="md:col-span-5 space-y-4">
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-black border border-white/20">
+                      <img
+                        src={selectedMember.image}
+                        alt={selectedMember.name}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover object-top contrast-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2 py-1 bg-black/80 backdrop-blur-md text-[#00FFFF] border border-white/20 block text-center">
+                          03 River Side Rd, Badulla
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Col: Details */}
+                  <div className="md:col-span-7 space-y-5">
+                    <div className="space-y-1.5">
+                      <span
+                        className="font-mono-code text-xs uppercase tracking-wider font-bold block"
+                        style={{
+                          color:
+                            selectedMember.accentColor === 'teal'
+                              ? '#00FFFF'
+                              : selectedMember.accentColor === 'pink'
+                              ? '#FF00FF'
+                              : '#FFFF00',
+                        }}
+                      >
+                        {selectedMember.role}
+                      </span>
+                      <h3 className="gothic-display text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
+                        {selectedMember.name}
+                      </h3>
+                      <p className="font-mono-code text-xs text-zinc-400 uppercase tracking-wide">
+                        {selectedMember.department}
+                      </p>
+                    </div>
+
+                    {/* Biography */}
+                    <div className="space-y-2 pt-2 border-t border-white/10">
+                      <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-500 font-bold block">
+                        Biography & Focus
+                      </span>
+                      <p className="text-zinc-300 text-sm sm:text-base font-normal leading-relaxed">
+                        {selectedMember.bio}
+                      </p>
+                    </div>
+
+                    {/* Domain Badges */}
+                    <div className="space-y-2.5 pt-2 border-t border-white/10">
+                      <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-500 font-bold block">
+                        Domain Competencies
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedMember.tags.map((tag, tagIdx) => (
+                          <span
+                            key={tagIdx}
+                            className="font-mono-code text-xs text-zinc-200 bg-white/5 border border-white/15 px-3 py-1 rounded-none hover:border-[#FFFF00]/50 transition-colors"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action */}
+                    <div className="pt-4 flex items-center justify-between">
+                      <MagneticButton
+                        variant="primary"
+                        onClick={() => {
+                          setSelectedMember(null);
+                          onOpenInquiry();
+                        }}
+                        className="w-full py-3 px-5 text-black bg-[#FFFF00] hover:bg-white text-xs font-mono-code font-bold uppercase tracking-wider flex items-center justify-center gap-2"
+                      >
+                        <span>Initiate Brief With Leadership</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </MagneticButton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* =========================================================================
           OUR PHILOSOPHY: Strategy to Screen
