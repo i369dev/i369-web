@@ -55,23 +55,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       </section>
 
       {/* =========================================================================
-          OUR STORY: Founded by Mithila Bhashitha Navarathna Bandara (Cinematic Backdrop)
+          OUR STORY: Founded by Mithila Bhashitha Navarathna Bandara (Cinematic Full Backdrop)
          ========================================================================= */}
-      <section className="relative bg-black text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden">
-        {/* Cinematic Background Image Layer */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105 transition-transform duration-1000"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80')`,
-          }}
-        />
+      <section
+        id="our-story"
+        className="relative text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-fixed bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=85')`,
+        }}
+      >
+        {/* Modern Multi-Layer Gradient Overlays for Cinematic Depth & Pristine Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85 backdrop-blur-[2px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#FF00FF]/15 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
 
-        {/* Multi-Layer Dark Gradient & Vignette Overlay for Pristine Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
             {/* Left Col: Label & Visual Marker with 3D Tilt */}
             <motion.div 
@@ -94,8 +92,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 maxTilt={8}
                 scale={1.02}
                 isDark={true}
-                glowColor="rgba(255, 0, 255, 0.2)"
-                className="p-6 sm:p-7 space-y-3.5 rounded-none bg-black/60 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/50 shadow-2xl transition-all"
+                glowColor="rgba(255, 0, 255, 0.25)"
+                className="p-6 sm:p-7 space-y-3.5 rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all"
               >
                 <div className="flex items-center justify-between">
                   <p className="font-mono-code text-[10px] sm:text-[11px] text-[#00FFFF] uppercase tracking-wider font-bold">
@@ -118,30 +116,30 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 space-y-5 sm:space-y-6 text-sm sm:text-base md:text-lg text-zinc-300 font-normal leading-relaxed"
+              className="lg:col-span-7 space-y-5 sm:space-y-6 text-sm sm:text-base md:text-lg text-zinc-200 font-normal leading-relaxed"
             >
-              <div className="p-6 sm:p-8 bg-black/50 backdrop-blur-md border border-white/15 space-y-5 sm:space-y-6">
+              <div className="p-6 sm:p-8 bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] space-y-5 sm:space-y-6">
                 <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed">
                   <strong className="text-[#FFFF00] font-bold">Imaginative369</strong> was founded on a simple observation:{' '}
                   <span className="text-white underline decoration-[#00FFFF] underline-offset-8 font-semibold">
                     Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.
                   </span>
                 </p>
-                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
                   Founded by Mithila Bhashitha Navarathna Bandara, the company grew from a creative studio into a hybrid agency, software house, and venture studio — built to bridge the gap between raw regional infrastructure and modern digital expectations.
                 </p>
-                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
                   Today, our leadership team spans strategy, engineering, and creative direction, delivering everything from cinematic destination campaigns to full-stack software platforms — without ever losing the on-the-ground perspective that got us here.
                 </p>
 
                 {/* Graphic Accents */}
-                <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/10">
+                <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/15">
                   <div className="flex space-x-1.5 w-full sm:w-48">
                     <div className="h-1 flex-1 accent-teal"></div>
                     <div className="h-1 flex-1 accent-pink"></div>
                     <div className="h-1 flex-1 accent-orange"></div>
                   </div>
-                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-400 font-bold">
+                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-300 font-bold">
                     Established in Uva Province
                   </span>
                 </div>
@@ -270,23 +268,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               );
             })}
           </div>
-
-          {/* Minimalist Footnote / Studio Commitment */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-12 sm:mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-zinc-500"
-          >
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-[#00FFFF]"></span>
-              <span>DIRECT EXECUTIVE ENGAGEMENT ON ALL ENTERPRISE ACCOUNTS</span>
-            </div>
-            <div className="text-zinc-400">
-              UVA PROVINCE • 03 RIVER SIDE ROAD, BADULLA
-            </div>
-          </motion.div>
         </div>
       </section>
 
