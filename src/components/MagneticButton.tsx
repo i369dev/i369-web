@@ -44,7 +44,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   const getVariantStyles = () => {
     switch (variant) {
       case 'primary':
-        return 'bg-black text-white border border-black/80 hover:bg-[#FFA500] hover:text-black hover:border-[#FFA500] shadow-[0_4px_16px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_24px_rgba(255,165,0,0.3)]';
+        return 'bg-black text-white border border-black/80 hover:bg-[#FFFF00] hover:text-black hover:border-[#FFFF00] shadow-[0_4px_16px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_24px_rgba(255,255,0,0.35)]';
       case 'secondary':
         return 'bg-white/80 backdrop-blur-md text-black border border-black/20 hover:border-black hover:bg-white shadow-[0_4px_16px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)]';
       case 'glass':
@@ -54,7 +54,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
       case 'outline':
         return 'bg-transparent text-current border border-current hover:bg-current/10';
       default:
-        return 'bg-black text-white hover:bg-[#FFA500] hover:text-black';
+        return 'bg-black text-white hover:bg-[#FFFF00] hover:text-black';
     }
   };
 

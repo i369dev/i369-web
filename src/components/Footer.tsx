@@ -47,14 +47,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
             </p>
 
             <div className="flex flex-wrap items-center gap-2 pt-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#00DFD8]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#00FFFF]">
                 <Compass className="w-3 h-3" />
                 06°59′N 81°03′E
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#FF69B4]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#FF00FF]">
                 Dual-Engine Model
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#FFA500]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-pill text-[10px] font-mono-code text-[#FFFF00]">
                 Badulla, Sri Lanka
               </span>
             </div>
@@ -70,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('home')}
-                    className="text-zinc-300 hover:text-[#FFA500] transition-colors cursor-pointer"
+                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Home
                   </button>
@@ -78,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('about')}
-                    className="text-zinc-300 hover:text-[#FFA500] transition-colors cursor-pointer"
+                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     About Us
                   </button>
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('services')}
-                    className="text-zinc-300 hover:text-[#FFA500] transition-colors cursor-pointer"
+                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Services
                   </button>
@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('work')}
-                    className="text-zinc-300 hover:text-[#FFA500] transition-colors cursor-pointer"
+                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Our Work
                   </button>
@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('ventures')}
-                    className="text-zinc-300 hover:text-[#FFA500] transition-colors cursor-pointer"
+                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Ventures
                   </button>
@@ -110,7 +110,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('contact')}
-                    className="text-zinc-300 hover:text-[#FFA500] transition-colors cursor-pointer"
+                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Contact
                   </button>
@@ -137,7 +137,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
           <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
             <div className="p-6 border border-white/20 glass-panel-dark">
               <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[#FF69B4] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#FF00FF] shrink-0 mt-0.5" />
                 <div>
                   <h5 className="font-mono-code text-xs uppercase text-white font-bold tracking-wider">
                     Studio Headquarters
@@ -146,7 +146,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                     03 River Side Road, Badulla,<br />
                     Uva Province, Sri Lanka
                   </p>
-                  <p className="text-[#00DFD8] text-xs font-mono-code mt-2 font-bold">
+                  <p className="text-[#00FFFF] text-xs font-mono-code mt-2 font-bold">
                     i369.developer@gmail.com
                   </p>
                 </div>
@@ -156,7 +156,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 id="footer-start-project-btn"
                 variant="glass"
                 onClick={onOpenInquiry}
-                className="w-full mt-5 py-3 px-4 text-black bg-white hover:bg-[#FFA500]"
+                className="w-full mt-5 py-3 px-4 text-black bg-white hover:bg-[#FFFF00]"
               >
                 <span>Initiate Brief</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -167,7 +167,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               onClick={scrollToTop}
               className="self-start inline-flex items-center gap-2 text-xs font-mono-code text-zinc-400 hover:text-white transition-colors cursor-pointer"
             >
-              <ArrowUp className="w-3.5 h-3.5 text-[#008080]" />
+              <ArrowUp className="w-3.5 h-3.5 text-[#00FFFF]" />
               <span>Back to Top</span>
             </button>
           </div>

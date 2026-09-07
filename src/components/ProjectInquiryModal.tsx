@@ -73,7 +73,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-black hover:bg-[#FFA500] border border-black/30 p-1.5 transition-colors cursor-pointer rounded-none"
+          className="absolute top-5 right-5 text-black hover:bg-[#FFFF00] border border-black/30 p-1.5 transition-colors cursor-pointer rounded-none"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -81,7 +81,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
 
         {isSubmitted ? (
           <div className="text-center py-12 space-y-6">
-            <div className="w-16 h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#008080] shadow-sm">
+            <div className="w-16 h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#00FFFF] shadow-sm">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div className="space-y-2">
@@ -94,7 +94,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
             </div>
 
             <div className="p-4 bg-[#F5F5F5] border border-black/20 max-w-sm mx-auto text-left text-xs font-mono-code space-y-1">
-              <p className="text-[#008080] font-bold">PROJECT: {formData.projectType}</p>
+              <p className="text-[#00FFFF] font-bold">PROJECT: {formData.projectType}</p>
               <p className="text-zinc-600">ORGANIZATION: {formData.company || 'Direct'}</p>
               <p className="text-zinc-600">TARGET BUDGET: {formData.budgetRange}</p>
             </div>
@@ -203,7 +203,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                     className={`px-2.5 py-2 text-xs font-mono-code border text-left transition-colors cursor-pointer rounded-none ${
                       formData.budgetRange === opt
                         ? 'border-black bg-black text-white font-bold'
-                        : 'border-black/30 bg-white/80 text-black hover:bg-[#FFA500]'
+                        : 'border-black/30 bg-white/80 text-black hover:bg-[#FFFF00]'
                     }`}
                   >
                     {opt}

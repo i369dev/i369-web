@@ -27,12 +27,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks: { id: PageId; label: string; number: string; accent: string }[] = [
-    { id: 'home', label: 'Home', number: '01', accent: '#00DFD8' },
-    { id: 'about', label: 'About', number: '02', accent: '#FF2D87' },
-    { id: 'services', label: 'Services', number: '03', accent: '#FF9900' },
-    { id: 'work', label: 'Our Work', number: '04', accent: '#00DFD8' },
-    { id: 'ventures', label: 'Ventures', number: '05', accent: '#FF2D87' },
-    { id: 'contact', label: 'Contact', number: '06', accent: '#FF9900' },
+    { id: 'home', label: 'Home', number: '01', accent: '#00FFFF' },
+    { id: 'about', label: 'About', number: '02', accent: '#FF00FF' },
+    { id: 'services', label: 'Services', number: '03', accent: '#FFFF00' },
+    { id: 'work', label: 'Our Work', number: '04', accent: '#00FFFF' },
+    { id: 'ventures', label: 'Ventures', number: '05', accent: '#FF00FF' },
+    { id: 'contact', label: 'Contact', number: '06', accent: '#FFFF00' },
   ];
 
   const handleNavClick = (page: PageId) => {
@@ -59,11 +59,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-3 group text-left focus:outline-none cursor-pointer"
             aria-label="Imaginative 369 Home"
           >
-            <div className="w-8 h-8 bg-black flex items-center justify-center text-white font-mono-code font-bold text-xs shrink-0 tracking-tight group-hover:bg-[#FFA500] group-hover:text-black transition-colors shadow-sm">
+            <div className="w-8 h-8 bg-black flex items-center justify-center text-white font-mono-code font-bold text-xs shrink-0 tracking-tight group-hover:bg-[#FFFF00] group-hover:text-black transition-colors shadow-sm">
               i369
             </div>
             <div className="flex flex-col">
-              <span className="font-bold tracking-tighter text-lg sm:text-xl text-black group-hover:text-[#FFA500] transition-colors">
+              <span className="font-bold tracking-tighter text-lg sm:text-xl text-black group-hover:text-[#FFFF00] transition-colors">
                 Imaginative 369
               </span>
               <span className="font-mono-code text-[9px] uppercase tracking-[0.25em] text-gray-500">
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="mobile-inquiry-cta"
               onClick={onOpenInquiry}
-              className="px-3 py-1.5 bg-black text-white text-[10px] uppercase font-mono-code font-bold tracking-wider hover:bg-[#FFA500] hover:text-black transition-colors"
+              className="px-3 py-1.5 bg-black text-white text-[10px] uppercase font-mono-code font-bold tracking-wider hover:bg-[#FFFF00] hover:text-black transition-colors"
             >
               Contact
             </button>
@@ -127,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="p-2 text-black hover:opacity-70 focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-[#FF69B4]" /> : <Menu className="w-6 h-6 text-black" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-[#FF00FF]" /> : <Menu className="w-6 h-6 text-black" />}
             </button>
           </div>
         </div>
@@ -186,7 +186,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="text-xs font-mono-code text-zinc-600 space-y-1">
               <p className="text-black font-bold">Imaginative 369 Studio</p>
               <p>03 River Side Road, Badulla, Uva Province</p>
-              <p className="text-[#008080] font-bold">i369.developer@gmail.com</p>
+              <p className="text-[#00FFFF] font-bold">i369.developer@gmail.com</p>
             </div>
 
             <button
@@ -195,7 +195,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenInquiry();
               }}
-              className="w-full py-4 bg-black text-white font-mono-code text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFA500] hover:text-black transition-colors rounded-none"
+              className="w-full py-4 bg-black text-white font-mono-code text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
             >
               Start Your Project
             </button>

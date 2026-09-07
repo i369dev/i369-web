@@ -14,7 +14,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Grid & Gothic Title
          ========================================================================= */}
@@ -84,7 +84,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                       {isAudioVenture && (
                         <button
                           onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-[#FF69B4] hover:bg-[#FF85C2] text-white font-mono-code text-[10px] sm:text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-colors shadow-sm"
+                          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-[#FF00FF] hover:bg-[#FF00FF]/80 text-white font-mono-code text-[10px] sm:text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-colors shadow-sm"
                         >
                           {isPlayingAudio ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                           <span>{isPlayingAudio ? 'Pause Live Stream' : 'Audition Soundscape'}</span>
@@ -96,7 +96,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                       <h3 className="gothic-display text-2xl sm:text-4xl md:text-5xl text-white tracking-tight leading-none">
                         {venture.name}
                       </h3>
-                      <p className="font-mono-code text-[11px] sm:text-xs text-[#FFA500] uppercase tracking-widest mt-1.5 sm:mt-2 font-bold">
+                      <p className="font-mono-code text-[11px] sm:text-xs text-[#FFFF00] uppercase tracking-widest mt-1.5 sm:mt-2 font-bold">
                         {venture.tagline}
                       </p>
                     </div>
@@ -172,7 +172,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
          ========================================================================= */}
       <section className="bg-[#111] text-white py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-t border-black">
         <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00FFFF] uppercase tracking-widest">
             The Living Lab
           </div>
 
@@ -188,7 +188,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
             <MagneticButton
               variant="glass"
               onClick={onOpenInquiry}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFA500] justify-center"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFFF00] justify-center"
             >
               Invest or Partner with Imaginative 369
             </MagneticButton>

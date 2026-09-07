@@ -26,7 +26,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
       : CASE_STUDIES.filter((cs) => cs.category === activeFilter);
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Editorial
          ========================================================================= */}
@@ -61,7 +61,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                   className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-mono-code uppercase font-bold tracking-wider sm:tracking-widest transition-all duration-200 rounded-none border border-black cursor-pointer ${
                     activeFilter === cat
                       ? 'bg-black text-white shadow-md'
-                      : 'bg-white/80 backdrop-blur-sm text-black hover:bg-[#FFA500]'
+                      : 'bg-white/80 backdrop-blur-sm text-black hover:bg-[#FFFF00]'
                   }`}
                 >
                   {cat}
@@ -103,7 +103,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                   </div>
 
                   <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between text-white font-mono-code text-[11px] sm:text-xs z-20">
-                    <span className="text-[#00DFD8] font-bold">{cs.client}</span>
+                    <span className="text-[#00FFFF] font-bold">{cs.client}</span>
                     <span className="text-zinc-300 font-bold">{cs.number}</span>
                   </div>
                 </div>
@@ -112,7 +112,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 <div className="p-5 sm:p-7 md:p-8 space-y-4 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-start justify-between gap-3 sm:gap-4">
-                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-black tracking-tight group-hover:text-[#FFA500] transition-colors">
+                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-black tracking-tight group-hover:text-[#FFFF00] transition-colors">
                         {cs.title}
                       </h3>
                       <ArrowUpRight className="w-5 h-5 text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0 mt-1" />
@@ -149,7 +149,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
       <section className="bg-[#111] text-white py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16 space-y-2.5 sm:space-y-3">
-            <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#00DFD8] font-bold">
+            <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#00FFFF] font-bold">
               Industry Credentials
             </span>
             <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl tracking-tight text-white leading-none">
@@ -186,7 +186,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
             <MagneticButton
               variant="glass"
               onClick={onOpenInquiry}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFA500] justify-center"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFFF00] justify-center"
             >
               Commission A New Case Study
             </MagneticButton>

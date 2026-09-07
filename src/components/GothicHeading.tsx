@@ -22,9 +22,9 @@ export const GothicHeading: React.FC<GothicHeadingProps> = ({
   stacked = false,
 }) => {
   const accentColorMap = {
-    teal: 'text-[#00DFD8] border-[#00DFD8]',
-    pink: 'text-[#FF2D87] border-[#FF2D87]',
-    orange: 'text-[#FF9900] border-[#FF9900]',
+    teal: 'text-[#00FFFF] border-[#00FFFF]',
+    pink: 'text-[#FF00FF] border-[#FF00FF]',
+    orange: 'text-[#FFFF00] border-[#FFFF00]',
     none: 'text-zinc-500 border-zinc-500',
   };
 

@@ -171,22 +171,22 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
               {/* Shutter / Lens Parameters Telemetry */}
               <div className="hidden lg:flex items-center gap-3 border-l border-white/25 pl-3 font-mono-code text-[10px] text-zinc-400">
                 <div className="flex items-center gap-1">
-                  <Camera className="w-3 h-3 text-[#FFA500]" />
+                  <Camera className="w-3 h-3 text-[#FFFF00]" />
                   <span className="text-white font-bold">{PILLAR_CINEMATIC_DATA[activeStep]?.focal}</span>
                 </div>
                 <span className="text-zinc-600">|</span>
                 <span className="text-zinc-300">{PILLAR_CINEMATIC_DATA[activeStep]?.shutter}</span>
                 <span className="text-zinc-600">|</span>
-                <span className="text-[#008080] font-semibold">{PILLAR_CINEMATIC_DATA[activeStep]?.iso}</span>
+                <span className="text-[#00FFFF] font-semibold">{PILLAR_CINEMATIC_DATA[activeStep]?.iso}</span>
               </div>
 
               {/* Explore All CTA */}
               <button
                 onClick={() => onNavigate('services')}
-                className="inline-flex items-center gap-1 font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-[#FFA500] transition-colors group cursor-pointer border-l border-white/25 pl-2 sm:pl-3"
+                className="inline-flex items-center gap-1 font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-[#FFFF00] transition-colors group cursor-pointer border-l border-white/25 pl-2 sm:pl-3"
               >
                 <span>Explore</span>
-                <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFA500] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFFF00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </div>
           </div>
@@ -209,24 +209,24 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
             {PILLAR_CINEMATIC_DATA.map((pillar) => {
               const accentColor =
                 pillar.accentColor === 'teal'
-                  ? '#008080'
+                  ? '#00FFFF'
                   : pillar.accentColor === 'pink'
-                  ? '#FF1493'
-                  : '#FFA500';
+                  ? '#FF00FF'
+                  : '#FFFF00';
 
               const accentBorderClass =
                 pillar.accentColor === 'teal'
-                  ? 'border-t-[#008080]'
+                  ? 'border-t-[#00FFFF]'
                   : pillar.accentColor === 'pink'
-                  ? 'border-t-[#FF1493]'
-                  : 'border-t-[#FFA500]';
+                  ? 'border-t-[#FF00FF]'
+                  : 'border-t-[#FFFF00]';
 
               const accentBadgeClass =
                 pillar.accentColor === 'teal'
-                  ? 'bg-[#008080]/35 text-teal-200 border-[#008080]/80'
+                  ? 'bg-[#00FFFF]/25 text-[#00FFFF] border-[#00FFFF]/80'
                   : pillar.accentColor === 'pink'
-                  ? 'bg-[#FF1493]/35 text-pink-200 border-[#FF1493]/80'
-                  : 'bg-[#FFA500]/35 text-orange-200 border-[#FFA500]/80';
+                  ? 'bg-[#FF00FF]/25 text-[#FF00FF] border-[#FF00FF]/80'
+                  : 'bg-[#FFFF00]/25 text-[#FFFF00] border-[#FFFF00]/80';
 
               return (
                 <div
@@ -258,7 +258,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                     </div>
 
                     <div className="flex items-center gap-1.5 sm:gap-2 bg-black/85 border border-white/25 px-2.5 sm:px-3 py-1 backdrop-blur-xl font-mono-code text-[10px] sm:text-xs text-zinc-300 rounded-lg shadow-md">
-                      <Disc className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#FFA500] animate-spin" style={{ animationDuration: '6s' }} />
+                      <Disc className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#FFFF00] animate-spin" style={{ animationDuration: '6s' }} />
                       <span className="font-bold text-white uppercase tracking-wider hidden xs:inline">{pillar.badge}</span>
                       <span className="font-bold text-white uppercase tracking-wider xs:hidden">Pillar {pillar.number}</span>
                     </div>
@@ -278,7 +278,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                       </div>
 
                       {/* Main Service Title in Philosopher font */}
-                      <h3 className="gothic-display text-xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-tight leading-tight group-hover/box:text-[#FFA500] transition-colors">
+                      <h3 className="gothic-display text-xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-tight leading-tight group-hover/box:text-[#FFFF00] transition-colors">
                         {pillar.title}
                       </h3>
                     </div>

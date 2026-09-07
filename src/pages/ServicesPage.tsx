@@ -16,16 +16,16 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
   const getAccentClass = (color: 'teal' | 'pink' | 'orange') => {
     switch (color) {
       case 'teal':
-        return { text: 'text-[#008080]', border: 'border-[#008080]', bg: 'bg-[#008080]', badge: 'border-black text-black' };
+        return { text: 'text-[#00FFFF]', border: 'border-[#00FFFF]', bg: 'bg-[#00FFFF]', badge: 'border-black text-black' };
       case 'pink':
-        return { text: 'text-[#FF69B4]', border: 'border-[#FF69B4]', bg: 'bg-[#FF69B4]', badge: 'border-black text-black' };
+        return { text: 'text-[#FF00FF]', border: 'border-[#FF00FF]', bg: 'bg-[#FF00FF]', badge: 'border-black text-black' };
       case 'orange':
-        return { text: 'text-[#FFA500]', border: 'border-[#FFA500]', bg: 'bg-[#FFA500]', badge: 'border-black text-black' };
+        return { text: 'text-[#FFFF00]', border: 'border-[#FFFF00]', bg: 'bg-[#FFFF00]', badge: 'border-black text-black' };
     }
   };
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Editorial
          ========================================================================= */}
@@ -175,14 +175,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
          ========================================================================= */}
       <section className="bg-[#111] text-white py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-t border-black">
         <div className="max-w-5xl mx-auto text-center space-y-6 sm:space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00FFFF] uppercase tracking-widest">
             Direct Studio Line
           </div>
 
           <h2 className="gothic-display text-4xl sm:text-6xl md:text-7xl tracking-tight text-white leading-none break-words">
             Ready to build something?
             <br />
-            <span className="text-[#FFA500]">Let's talk.</span>
+            <span className="text-[#FFFF00]">Let's talk.</span>
           </h2>
 
           <p className="text-zinc-400 text-sm sm:text-base md:text-lg max-w-xl mx-auto font-normal leading-relaxed">
@@ -193,7 +193,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
             <MagneticButton
               variant="glass"
               onClick={() => onOpenInquiry()}
-              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 text-black bg-white hover:bg-[#FFA500] justify-center"
+              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 text-black bg-white hover:bg-[#FFFF00] justify-center"
             >
               Start Your Project
             </MagneticButton>

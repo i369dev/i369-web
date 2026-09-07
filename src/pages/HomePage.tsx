@@ -34,7 +34,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-24 sm:pt-28 md:pt-24">
+    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-24 sm:pt-28 md:pt-24">
       {/* =========================================================================
           HERO SECTION: Architectural Grid with Glass Accents
          ========================================================================= */}
@@ -100,7 +100,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div className="lg:col-span-5 w-full flex justify-center lg:justify-end mt-4 lg:mt-0">
                   <div className="relative w-full max-w-lg lg:max-w-none group">
                     {/* Ambient Glow / Diffused Aura for Seamless Edge Blending */}
-                    <div className="absolute -inset-2 sm:-inset-3 bg-gradient-to-tr from-[#00DFD8]/20 via-[#FF69B4]/10 to-[#FFA500]/25 rounded-[2.5rem] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
+                    <div className="absolute -inset-2 sm:-inset-3 bg-gradient-to-tr from-[#00FFFF]/20 via-[#FF00FF]/10 to-[#FFFF00]/25 rounded-[2.5rem] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
 
                     {/* Outer Polished Glass Frame with Frosted Backdrop Blur */}
                     <div className="relative p-2 sm:p-3 rounded-2xl sm:rounded-3xl bg-white/40 backdrop-blur-2xl border border-white/70 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)] ring-1 ring-black/5">
@@ -132,7 +132,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         {/* Top Floating Glass Badge with Live Reel Indicator */}
                         <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between z-10 pointer-events-none">
                           <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-black/55 backdrop-blur-xl border border-white/20 text-white font-mono-code text-[9px] sm:text-[10px] uppercase tracking-widest rounded-full shadow-md">
-                            <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#00DFD8] animate-pulse"></span>
+                            <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#00FFFF] animate-pulse"></span>
                             <span>Cinematic Reel // 4K</span>
                           </div>
                           
@@ -146,7 +146,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         {/* Bottom Overlay: Telemetry & Interactive Glass Sound Toggle */}
                         <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-end justify-between z-20 text-white gap-2">
                           <div className="pointer-events-none">
-                            <p className="font-mono-code text-[9px] sm:text-[11px] uppercase tracking-wider text-[#FFA500] font-bold">
+                            <p className="font-mono-code text-[9px] sm:text-[11px] uppercase tracking-wider text-[#FFFF00] font-bold">
                               Central Highlands
                             </p>
                             <p className="font-display text-xs sm:text-base font-semibold text-white/95">
@@ -172,8 +172,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                                 </>
                               ) : (
                                 <>
-                                  <Volume2 className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#00DFD8] animate-bounce transition-colors" />
-                                  <span className="font-mono-code text-[9px] sm:text-[10px] uppercase tracking-wider text-[#00DFD8] font-bold hidden sm:inline-block">
+                                  <Volume2 className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#00FFFF] animate-bounce transition-colors" />
+                                  <span className="font-mono-code text-[9px] sm:text-[10px] uppercase tracking-wider text-[#00FFFF] font-bold hidden sm:inline-block">
                                     Sound On
                                   </span>
                                 </>
@@ -301,7 +301,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <div className="w-1.5 h-4 accent-pink"></div>
                   <div className="w-1.5 h-4 accent-orange"></div>
                 </div>
-                <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#FFA500] font-bold">
+                <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#FFFF00] font-bold">
                   Core Mandate
                 </span>
               </div>
@@ -312,7 +312,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <div className="lg:col-span-8">
               <p className="text-base sm:text-xl lg:text-2xl text-zinc-300 font-light leading-relaxed">
-                From the first strategy session to the final frame — or the final line of code — we build the full journey. Cinematic media, performance marketing, and full-stack software engineering, all under one roof, all rooted in <span className="text-white font-medium underline decoration-[#008080] underline-offset-4">Badulla, Uva Province</span>.
+                From the first strategy session to the final frame — or the final line of code — we build the full journey. Cinematic media, performance marketing, and full-stack software engineering, all under one roof, all rooted in <span className="text-white font-medium underline decoration-[#00FFFF] underline-offset-4">Badulla, Uva Province</span>.
               </p>
             </div>
           </div>
@@ -336,7 +336,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       >
         {/* Modern Multi-Layer Gradient Overlays for Cinematic Depth & Pristine Legibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90 backdrop-blur-[2px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#008080]/15 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#00FFFF]/15 via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
 
         <div className="relative z-10 max-w-7xl mx-auto">
@@ -344,7 +344,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="max-w-3xl mb-10 sm:mb-14 md:mb-16">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 accent-orange shrink-0"></div>
-              <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-widest text-[#FFA500] font-bold">
+              <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
                 The Ground Zero Advantage
               </span>
             </div>
@@ -363,17 +363,17 @@ export const HomePage: React.FC<HomePageProps> = ({
             {GROUND_ZERO_ADVANTAGES.map((adv) => {
               const borderTopColor =
                 adv.accentColor === 'teal'
-                  ? 'border-t-[#008080]'
+                  ? 'border-t-[#00FFFF]'
                   : adv.accentColor === 'pink'
-                  ? 'border-t-[#FF69B4]'
-                  : 'border-t-[#FFA500]';
+                  ? 'border-t-[#FF00FF]'
+                  : 'border-t-[#FFFF00]';
 
               const metricTextColor =
                 adv.accentColor === 'teal'
-                  ? 'text-[#00DFD8]'
+                  ? 'text-[#00FFFF]'
                   : adv.accentColor === 'pink'
-                  ? 'text-[#FF69B4]'
-                  : 'text-[#FFA500]';
+                  ? 'text-[#FF00FF]'
+                  : 'text-[#FFFF00]';
 
               return (
                 <TiltCard
@@ -414,7 +414,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Bottom Statement Box with Premium Frosted Glassmorphism */}
           <div className="mt-8 sm:mt-12 p-5 sm:p-7 md:p-8 bg-black/70 backdrop-blur-2xl rounded-xl sm:rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 border border-white/25 text-center sm:text-left shadow-2xl">
             <p className="text-sm sm:text-base md:text-lg text-zinc-200 font-medium leading-relaxed">
-              "We call it the <span className="text-white font-bold underline decoration-[#008080] underline-offset-4">Ground Zero Advantage</span>. Our clients call it results."
+              "We call it the <span className="text-white font-bold underline decoration-[#00FFFF] underline-offset-4">Ground Zero Advantage</span>. Our clients call it results."
             </p>
 
             <MagneticButton
@@ -480,7 +480,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/40 to-transparent" />
                   <div className="absolute top-4 left-4 z-20">
-                    <span className="px-3 py-1 glass-pill text-[10px] font-mono-code uppercase tracking-widest text-[#00DFD8]">
+                    <span className="px-3 py-1 glass-pill text-[10px] font-mono-code uppercase tracking-widest text-[#00FFFF]">
                       {cs.category} · {cs.client}
                     </span>
                   </div>
@@ -488,7 +488,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 <div className="p-6 sm:p-8 space-y-4 relative z-10">
                   <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight group-hover:text-[#FFA500] transition-colors">
+                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight group-hover:text-[#FFFF00] transition-colors">
                       {cs.title}
                     </h3>
                     <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0" />
@@ -500,7 +500,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono-code text-zinc-400">
                     <span>Impact: {cs.stats[0]?.label} → <strong className="text-white font-bold">{cs.stats[0]?.value}</strong></span>
-                    <span className="text-[#FFA500] underline uppercase text-[11px] font-bold">Deep Dive →</span>
+                    <span className="text-[#FFFF00] underline uppercase text-[11px] font-bold">Deep Dive →</span>
                   </div>
                 </div>
               </TiltCard>
@@ -516,7 +516,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="max-w-5xl mx-auto text-center space-y-6 sm:space-y-8 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20">
             <div className="w-2 h-2 accent-orange"></div>
-            <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-[#FFA500] font-bold">
+            <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-[#FFFF00] font-bold">
               Ground Zero Briefing
             </span>
           </div>
@@ -536,7 +536,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               id="cta-band-get-in-touch-btn"
               variant="glass"
               onClick={onOpenInquiry}
-              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 text-black bg-white hover:bg-[#FFA500] justify-center"
+              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 text-black bg-white hover:bg-[#FFFF00] justify-center"
             >
               Start Your Project
             </MagneticButton>

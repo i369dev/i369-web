@@ -43,7 +43,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 text-black hover:bg-[#FFA500] border border-black/30 transition-colors cursor-pointer rounded-none"
+            className="p-1.5 text-black hover:bg-[#FFFF00] border border-black/30 transition-colors cursor-pointer rounded-none"
             aria-label="Close Case Study"
           >
             <X className="w-5 h-5" />

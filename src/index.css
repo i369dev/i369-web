@@ -8,9 +8,12 @@
   --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "Space Mono", monospace;
 
-  --color-brand-teal: #008080;
-  --color-brand-pink: #FF69B4;
-  --color-brand-orange: #FFA500;
+  --color-brand-cyan: #00FFFF;
+  --color-brand-magenta: #FF00FF;
+  --color-brand-yellow: #FFFF00;
+  --color-brand-teal: #00FFFF;
+  --color-brand-pink: #FF00FF;
+  --color-brand-orange: #FFFF00;
 }
 
 @layer base {
@@ -109,16 +112,19 @@
   transform: rotate(180deg);
 }
 
-.accent-teal {
-  background-color: #008080;
+.accent-teal,
+.accent-cyan {
+  background-color: #00FFFF;
 }
 
-.accent-pink {
-  background-color: #FF69B4;
+.accent-pink,
+.accent-magenta {
+  background-color: #FF00FF;
 }
 
-.accent-orange {
-  background-color: #FFA500;
+.accent-orange,
+.accent-yellow {
+  background-color: #FFFF00;
 }
 
 .font-gothic {
@@ -184,7 +190,7 @@
   border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFA500;
+  background: #FFFF00;
 }
 
 

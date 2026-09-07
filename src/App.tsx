@@ -53,7 +53,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col font-body selection:bg-[#00DFD8] selection:text-black">
+    <div className="min-h-screen bg-black text-white flex flex-col font-body selection:bg-[#00FFFF] selection:text-black">
       {/* Global Interactive Mouse Cursor & Ambient Glow */}
       <CustomCursor />
 

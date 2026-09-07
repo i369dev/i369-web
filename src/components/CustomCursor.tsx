@@ -99,7 +99,7 @@ export const CustomCursor: React.FC = () => {
           isVisible ? 'opacity-40 sm:opacity-60' : 'opacity-0'
         }`}
         style={{
-          background: 'radial-gradient(circle, rgba(0, 223, 216, 0.07) 0%, rgba(255, 105, 180, 0.05) 35%, rgba(255, 165, 0, 0.04) 65%, transparent 80%)',
+          background: 'radial-gradient(circle, rgba(0, 255, 255, 0.07) 0%, rgba(255, 0, 255, 0.05) 35%, rgba(255, 255, 0, 0.04) 65%, transparent 80%)',
           filter: 'blur(40px)',
           mixBlendMode: 'screen',
         }}
@@ -112,7 +112,7 @@ export const CustomCursor: React.FC = () => {
           !isVisible ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
         } ${
           isHovered
-            ? 'w-14 h-14 bg-black/10 dark:bg-white/10 backdrop-blur-xs border border-[#FFA500] shadow-[0_0_20px_rgba(255,165,0,0.35)]'
+            ? 'w-14 h-14 bg-black/10 dark:bg-white/10 backdrop-blur-xs border border-[#FFFF00] shadow-[0_0_20px_rgba(255,255,0,0.35)]'
             : isClicked
             ? 'w-7 h-7 border border-white/60 bg-white/20'
             : 'w-10 h-10 border border-black/30 dark:border-white/40'
@@ -122,7 +122,7 @@ export const CustomCursor: React.FC = () => {
         }}
       >
         {cursorText && (
-          <span className="text-[9px] font-mono-code font-bold uppercase tracking-widest text-[#FFA500] select-none animate-pulse">
+          <span className="text-[9px] font-mono-code font-bold uppercase tracking-widest text-[#FFFF00] select-none animate-pulse">
             {cursorText}
           </span>
         )}
@@ -135,9 +135,9 @@ export const CustomCursor: React.FC = () => {
           !isVisible ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
         } ${
           isHovered
-            ? 'w-2 h-2 bg-[#FFA500]'
+            ? 'w-2 h-2 bg-[#FFFF00]'
             : isClicked
-            ? 'w-1.5 h-1.5 bg-[#FF69B4]'
+            ? 'w-1.5 h-1.5 bg-[#FF00FF]'
             : 'w-2 h-2 bg-black dark:bg-white shadow-[0_0_8px_rgba(0,0,0,0.4)]'
         }`}
       />

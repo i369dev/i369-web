@@ -13,7 +13,7 @@ interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry }) => {
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Grid, Gothic H1, Triple Accent Bars
          ========================================================================= */}
@@ -43,9 +43,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             </p>
             <div className="flex flex-wrap items-center gap-2 font-mono-code text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
               <span>BADULLA</span>
-              <span className="text-[#008080]">•</span>
+              <span className="text-[#00FFFF]">•</span>
               <span>UVA PROVINCE</span>
-              <span className="text-[#FF69B4]">•</span>
+              <span className="text-[#FF00FF]">•</span>
               <span>SRI LANKA</span>
             </div>
           </div>
@@ -62,7 +62,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <div className="lg:col-span-4 space-y-4 sm:space-y-6">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 accent-pink"></div>
-                <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF69B4] font-bold">
+                <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF00FF] font-bold">
                   The Genesis
                 </span>
               </div>
@@ -89,7 +89,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             {/* Right Col: High Contrast Body Text with subtle frosted treatment */}
             <div className="lg:col-span-8 space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg text-zinc-800 font-normal leading-relaxed">
               <p>
-                <strong className="text-black font-bold">Imaginative369</strong> was founded on a simple observation: <span className="text-black underline decoration-[#008080] underline-offset-4 font-semibold">Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.</span>
+                <strong className="text-black font-bold">Imaginative369</strong> was founded on a simple observation: <span className="text-black underline decoration-[#00FFFF] underline-offset-4 font-semibold">Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.</span>
               </p>
               <p className="text-zinc-600">
                 Founded by Mithila Bhashitha Navarathna Bandara, the company grew from a creative studio into a hybrid agency, software house, and venture studio — built to bridge the gap between raw regional infrastructure and modern digital expectations.
@@ -122,7 +122,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           <div className="max-w-4xl">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 accent-orange"></div>
-              <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFA500] font-bold">
+              <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
                 Operating Axiom
               </span>
             </div>
@@ -146,7 +146,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       <section className="bg-[#111] text-white py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00DFD8] uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00FFFF] uppercase tracking-widest">
               Organizational Architecture
             </div>
             <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
@@ -163,10 +163,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               isDark={true}
               maxTilt={6}
               scale={1.02}
-              className="p-6 sm:p-8 md:p-10 border-t-4 border-t-[#008080] space-y-4 sm:space-y-6 rounded-none"
+              className="p-6 sm:p-8 md:p-10 border-t-4 border-t-[#00FFFF] space-y-4 sm:space-y-6 rounded-none"
             >
               <div className="flex items-baseline justify-between">
-                <span className="font-mono-code text-xs uppercase tracking-widest text-[#00DFD8] font-bold">
+                <span className="font-mono-code text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
                   Engine 01
                 </span>
                 <span className="font-mono-code text-xs text-zinc-400 font-bold">
@@ -189,11 +189,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
               <div className="pt-4 border-t border-white/10 space-y-2">
                 <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00DFD8] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00FFFF] shrink-0" />
                   <span>Custom Retainers & SLA Guarantees</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00DFD8] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00FFFF] shrink-0" />
                   <span>Regional Tourism & Corporate Enterprise</span>
                 </div>
               </div>
@@ -204,10 +204,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               isDark={true}
               maxTilt={6}
               scale={1.02}
-              className="p-6 sm:p-8 md:p-10 border-t-4 border-t-[#FF69B4] space-y-4 sm:space-y-6 rounded-none"
+              className="p-6 sm:p-8 md:p-10 border-t-4 border-t-[#FF00FF] space-y-4 sm:space-y-6 rounded-none"
             >
               <div className="flex items-baseline justify-between">
-                <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF69B4] font-bold">
+                <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF00FF] font-bold">
                   Engine 02
                 </span>
                 <span className="font-mono-code text-xs text-zinc-400 font-bold">
@@ -230,11 +230,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
               <div className="pt-4 border-t border-white/10 space-y-2">
                 <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF69B4] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF00FF] shrink-0" />
                   <span>Active Ventures: LankaQuests, IntotheWILDlk, Inhale Exhale</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF69B4] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF00FF] shrink-0" />
                   <span>Real-world stress tested architectures</span>
                 </div>
               </div>
@@ -243,7 +243,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
           <div className="mt-6 sm:mt-8 p-4 sm:p-6 glass-panel-dark text-center border border-white/20">
             <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-medium">
-              <span className="text-[#FFA500] font-bold">The result:</span> an agency that doesn't just advise on digital transformation — <span className="text-white font-bold underline decoration-[#FF69B4] underline-offset-4">it lives it</span>.
+              <span className="text-[#FFFF00] font-bold">The result:</span> an agency that doesn't just advise on digital transformation — <span className="text-white font-bold underline decoration-[#FF00FF] underline-offset-4">it lives it</span>.
             </p>
           </div>
         </div>
@@ -262,7 +262,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           >
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 accent-teal"></div>
-              <span className="font-mono-code text-xs uppercase tracking-widest text-[#008080] font-bold">
+              <span className="font-mono-code text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
                 Global Horizons
               </span>
             </div>
@@ -282,7 +282,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           >
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 accent-orange"></div>
-              <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFA500] font-bold">
+              <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
                 Daily Execution
               </span>
             </div>
@@ -304,8 +304,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
             <div className="lg:col-span-6 space-y-4 sm:space-y-6">
               <div className="flex items-center gap-2">
-                <Compass className="w-4 h-4 text-[#FF69B4]" />
-                <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF69B4] font-bold">
+                <Compass className="w-4 h-4 text-[#FF00FF]" />
+                <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF00FF] font-bold">
                   Geographic Anchor
                 </span>
               </div>
@@ -328,7 +328,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 <MagneticButton
                   variant="glass"
                   onClick={onOpenInquiry}
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFA500] justify-center"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFFF00] justify-center"
                 >
                   <span>Engage Badulla Studio</span>
                   <ArrowRight className="w-4 h-4" />
@@ -352,7 +352,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
                   <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-wrap items-center justify-between font-mono-code text-[10px] sm:text-xs z-20 gap-2">
-                    <span className="text-[#00DFD8] font-bold">06°59′N 81°03′E · Central Highlands</span>
+                    <span className="text-[#00FFFF] font-bold">06°59′N 81°03′E · Central Highlands</span>
                     <span className="text-zinc-400 font-bold">Badulla Headquarters</span>
                   </div>
                 </div>

@@ -40,7 +40,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFA500] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Editorial
          ========================================================================= */}
@@ -102,7 +102,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 <div className="space-y-4 sm:space-y-6 text-sm">
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <MapPin className="w-4 h-4 text-[#FF69B4] shrink-0 mt-1" />
+                    <MapPin className="w-4 h-4 text-[#FF00FF] shrink-0 mt-1" />
                     <div>
                       <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
                         Studio Address
@@ -116,7 +116,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <Mail className="w-4 h-4 text-[#00DFD8] shrink-0 mt-1" />
+                    <Mail className="w-4 h-4 text-[#00FFFF] shrink-0 mt-1" />
                     <div>
                       <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
                         Direct Email
@@ -128,7 +128,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <Clock className="w-4 h-4 text-[#FFA500] shrink-0 mt-1" />
+                    <Clock className="w-4 h-4 text-[#FFFF00] shrink-0 mt-1" />
                     <div>
                       <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
                         Highland Operating Hours
@@ -142,7 +142,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="p-3.5 sm:p-4 bg-white/5 border border-white/20 space-y-1.5 sm:space-y-2">
-                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase text-[#00DFD8] tracking-widest block font-bold">
+                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase text-[#00FFFF] tracking-widest block font-bold">
                     Ground Zero Telemetry
                   </span>
                   <p className="font-mono-code text-[11px] sm:text-xs text-zinc-300 leading-relaxed">
@@ -158,7 +158,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             <div className="lg:col-span-7 bg-white/90 backdrop-blur-xl p-5 sm:p-8 md:p-12 border border-black/20 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-none">
               {isSubmitted ? (
                 <div className="py-12 sm:py-16 text-center space-y-4 sm:space-y-6">
-                  <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#008080] shadow-sm">
+                  <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#00FFFF] shadow-sm">
                     <CheckCircle2 className="w-7 sm:w-8 h-7 sm:h-8" />
                   </div>
                   <h3 className="gothic-display text-3xl sm:text-4xl text-black">

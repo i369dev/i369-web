@@ -21,9 +21,9 @@ export const GothicLogo: React.FC<GothicLogoProps> = ({
   };
 
   const primaryFill = variant === 'black' ? '#000000' : '#FFFFFF';
-  const accent1 = variant === 'accent' ? '#00DFD8' : primaryFill;
-  const accent2 = variant === 'accent' ? '#FF2D87' : primaryFill;
-  const accent3 = variant === 'accent' ? '#FF9900' : primaryFill;
+  const accent1 = variant === 'accent' ? '#00FFFF' : primaryFill;
+  const accent2 = variant === 'accent' ? '#FF00FF' : primaryFill;
+  const accent3 = variant === 'accent' ? '#FFFF00' : primaryFill;
 
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
@@ -105,7 +105,7 @@ export const GothicLogo: React.FC<GothicLogoProps> = ({
             >
               Imaginative 369
             </span>
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00DFD8]" />
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00FFFF]" />
           </div>
           <span className="font-mono-code text-[9px] uppercase tracking-widest text-zinc-400">
             Badulla · Sri Lanka
