@@ -70,6 +70,24 @@ export const SERVICE_PILLARS: ServicePillar[] = [
     featuredClient: 'Solar Maps (Pvt) Ltd — 40MW+ Renewable Lead Engine',
     accentColor: 'teal',
     tags: ['Meta Ads', 'TikTok Marketing', 'Google Ads', '24/7 Community']
+  },
+  {
+    id: 'printing-production',
+    number: '05',
+    icon: '🖨️',
+    title: 'Printing & Production',
+    tagline: 'High-precision commercial print and tactile brand collateral.',
+    description: 'High-precision commercial printing and collateral production tailored for corporate, tourism, and highland hospitality brands.',
+    points: [
+      'Custom Hotel & Restaurant Menus (Waterproof, textured, leatherette & foiled)',
+      'Premium Business Cards & Corporate Stationery (Embossed & spot UV)',
+      'Custom Die-Cut Vinyl Stickers & Brand Decals',
+      'High-Resolution Digital Printing & Rapid Deliverables',
+      'Large-Scale Commercial Offset Printing & Packaging'
+    ],
+    featuredClient: 'Highland Hospitality Collateral & Corporate Packaging',
+    accentColor: 'orange',
+    tags: ['Hotel Menus', 'Business Cards', 'Stickers', 'Digital Printing', 'Offset Printing']
   }
 ];
 

@@ -18,7 +18,7 @@ interface StackedCardProps {
   onOpenInquiry: (serviceType?: string) => void;
 }
 
-const ROTATIONS = [-1.5, 2.5, -2, 3];
+const ROTATIONS = [-1.5, 2.5, -2, 3, -1.8];
 
 const StackedCard: React.FC<StackedCardProps> = ({
   pillar,
@@ -29,11 +29,12 @@ const StackedCard: React.FC<StackedCardProps> = ({
 }) => {
   const targetRotation = ROTATIONS[index % ROTATIONS.length];
 
-  // Dynamic transforms mapped across the scroll timeline:
+  // Dynamic transforms mapped across the scroll timeline for 5 cards:
   // Card 0: Base card (0.00 -> 1.00)
-  // Card 1: Lands at 0.28 (remains stacked)
-  // Card 2: Lands at 0.52 (remains stacked)
-  // Card 3: Lands at 0.74 (final card locks in place from 0.74 to 1.00 before unpinning)
+  // Card 1: Lands at 0.22 (remains stacked)
+  // Card 2: Lands at 0.41 (remains stacked)
+  // Card 3: Lands at 0.60 (remains stacked)
+  // Card 4: Lands at 0.78 (FINAL 5th CARD: locks in place from 0.78 to 1.00 before unpinning)
   let yTransform: MotionValue<number>;
   let rotateTransform: MotionValue<number>;
   let scaleTransform: MotionValue<number>;
@@ -42,28 +43,34 @@ const StackedCard: React.FC<StackedCardProps> = ({
   if (index === 0) {
     yTransform = useTransform(scrollYProgress, [0, 1], [0, 0]);
     rotateTransform = useTransform(scrollYProgress, [0, 1], [targetRotation, targetRotation]);
-    scaleTransform = useTransform(scrollYProgress, [0.08, 0.74], [1, 0.94]);
+    scaleTransform = useTransform(scrollYProgress, [0.06, 0.78], [1, 0.92]);
     // 100% solid opacity to prevent any transparency bleed
     opacityTransform = useTransform(scrollYProgress, [0, 1], [1, 1]);
   } else if (index === 1) {
-    yTransform = useTransform(scrollYProgress, [0.08, 0.28], [600, 0]);
-    rotateTransform = useTransform(scrollYProgress, [0.08, 0.28], [0, targetRotation]);
-    scaleTransform = useTransform(scrollYProgress, [0.08, 0.28, 0.74], [1.06, 1, 0.96]);
+    yTransform = useTransform(scrollYProgress, [0.06, 0.22], [600, 0]);
+    rotateTransform = useTransform(scrollYProgress, [0.06, 0.22], [0, targetRotation]);
+    scaleTransform = useTransform(scrollYProgress, [0.06, 0.22, 0.78], [1.06, 1, 0.94]);
     // Smooth fade in as it enters, then stays 100% solid
-    opacityTransform = useTransform(scrollYProgress, [0.08, 0.16, 1], [0, 1, 1]);
+    opacityTransform = useTransform(scrollYProgress, [0.06, 0.12, 1], [0, 1, 1]);
   } else if (index === 2) {
-    yTransform = useTransform(scrollYProgress, [0.32, 0.52], [600, 0]);
-    rotateTransform = useTransform(scrollYProgress, [0.32, 0.52], [0, targetRotation]);
-    scaleTransform = useTransform(scrollYProgress, [0.32, 0.52, 0.74], [1.06, 1, 0.98]);
+    yTransform = useTransform(scrollYProgress, [0.25, 0.41], [600, 0]);
+    rotateTransform = useTransform(scrollYProgress, [0.25, 0.41], [0, targetRotation]);
+    scaleTransform = useTransform(scrollYProgress, [0.25, 0.41, 0.78], [1.06, 1, 0.96]);
     // Smooth fade in as it enters, then stays 100% solid
-    opacityTransform = useTransform(scrollYProgress, [0.32, 0.40, 1], [0, 1, 1]);
+    opacityTransform = useTransform(scrollYProgress, [0.25, 0.31, 1], [0, 1, 1]);
+  } else if (index === 3) {
+    yTransform = useTransform(scrollYProgress, [0.44, 0.60], [600, 0]);
+    rotateTransform = useTransform(scrollYProgress, [0.44, 0.60], [0, targetRotation]);
+    scaleTransform = useTransform(scrollYProgress, [0.44, 0.60, 0.78], [1.06, 1, 0.98]);
+    // Smooth fade in as it enters, then stays 100% solid
+    opacityTransform = useTransform(scrollYProgress, [0.44, 0.50, 1], [0, 1, 1]);
   } else {
-    // index === 3 (FINAL CARD: lands at 0.74 and stays 100% locked until 1.00)
-    yTransform = useTransform(scrollYProgress, [0.56, 0.74, 1], [600, 0, 0]);
-    rotateTransform = useTransform(scrollYProgress, [0.56, 0.74, 1], [0, targetRotation, targetRotation]);
-    scaleTransform = useTransform(scrollYProgress, [0.56, 0.74, 1], [1.06, 1, 1]);
+    // index === 4 (FINAL 5th CARD: lands at 0.78 and stays 100% locked until 1.00)
+    yTransform = useTransform(scrollYProgress, [0.63, 0.78, 1], [600, 0, 0]);
+    rotateTransform = useTransform(scrollYProgress, [0.63, 0.78, 1], [0, targetRotation, targetRotation]);
+    scaleTransform = useTransform(scrollYProgress, [0.63, 0.78, 1], [1.06, 1, 1]);
     // Smooth fade in as it enters, then stays 100% solid
-    opacityTransform = useTransform(scrollYProgress, [0.56, 0.64, 1], [0, 1, 1]);
+    opacityTransform = useTransform(scrollYProgress, [0.63, 0.70, 1], [0, 1, 1]);
   }
 
   const accentTextClass =
@@ -106,7 +113,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-5 border-b border-black/10">
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5">
               <span className="font-mono-code text-xs sm:text-sm font-bold text-zinc-700 px-2.5 py-1 bg-zinc-100 border border-black/10 rounded-lg">
-                {pillar.number} // 04
+                {pillar.number} // 05
               </span>
               <span className="text-2xl sm:text-3xl">{pillar.icon}</span>
               <h2 className="gothic-display text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-950 tracking-tight leading-snug">
@@ -224,10 +231,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
 
           <div className="mt-6 sm:mt-8 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 border-t border-black pt-6">
             <p className="font-display text-lg sm:text-xl md:text-2xl text-zinc-800 font-medium max-w-xl border-l-2 border-black pl-4 sm:pl-6">
-              Four disciplines. One integrated team.
+              Five disciplines. One integrated team.
             </p>
             <p className="font-mono-code text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
-              Destination Strategy · Software · Cinema · Performance
+              Destination Strategy · Software · Cinema · Performance · Print & Production
             </p>
           </div>
         </div>
@@ -239,7 +246,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
       <section
         ref={containerRef}
         id="services-stack-section"
-        className="relative h-[360vh] bg-cover bg-center bg-fixed bg-no-repeat"
+        className="relative h-[420vh] bg-cover bg-center bg-fixed bg-no-repeat"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1920&q=80')`,
         }}
