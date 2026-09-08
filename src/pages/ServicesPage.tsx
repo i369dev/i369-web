@@ -18,7 +18,7 @@ interface StackedCardProps {
   onOpenInquiry: (serviceType?: string) => void;
 }
 
-const ROTATIONS = [-1, 2.5, -2, 3];
+const ROTATIONS = [-1.5, 2.5, -2, 3];
 
 const StackedCard: React.FC<StackedCardProps> = ({
   pillar,
@@ -38,21 +38,21 @@ const StackedCard: React.FC<StackedCardProps> = ({
   if (index === 0) {
     yTransform = useTransform(scrollYProgress, [0, 1], [0, 0]);
     rotateTransform = useTransform(scrollYProgress, [0, 1], [targetRotation, targetRotation]);
-    scaleTransform = useTransform(scrollYProgress, [0.15, 0.85], [1, 0.94]);
-    opacityTransform = useTransform(scrollYProgress, [0, 0.05, 0.9], [1, 1, 0.8]);
+    scaleTransform = useTransform(scrollYProgress, [0.15, 0.85], [1, 0.95]);
+    opacityTransform = useTransform(scrollYProgress, [0, 0.05, 0.9], [1, 1, 0.85]);
   } else if (index === 1) {
-    yTransform = useTransform(scrollYProgress, [0.12, 0.35], [500, 0]);
+    yTransform = useTransform(scrollYProgress, [0.12, 0.35], [550, 0]);
     rotateTransform = useTransform(scrollYProgress, [0.12, 0.35], [0, targetRotation]);
-    scaleTransform = useTransform(scrollYProgress, [0.12, 0.35, 0.85], [1.05, 1, 0.96]);
-    opacityTransform = useTransform(scrollYProgress, [0.12, 0.22, 0.9], [0, 1, 0.85]);
+    scaleTransform = useTransform(scrollYProgress, [0.12, 0.35, 0.85], [1.05, 1, 0.97]);
+    opacityTransform = useTransform(scrollYProgress, [0.12, 0.22, 0.9], [0, 1, 0.9]);
   } else if (index === 2) {
-    yTransform = useTransform(scrollYProgress, [0.38, 0.62], [500, 0]);
+    yTransform = useTransform(scrollYProgress, [0.38, 0.62], [550, 0]);
     rotateTransform = useTransform(scrollYProgress, [0.38, 0.62], [0, targetRotation]);
     scaleTransform = useTransform(scrollYProgress, [0.38, 0.62, 0.85], [1.05, 1, 0.98]);
-    opacityTransform = useTransform(scrollYProgress, [0.38, 0.48, 0.95], [0, 1, 0.9]);
+    opacityTransform = useTransform(scrollYProgress, [0.38, 0.48, 0.95], [0, 1, 0.95]);
   } else {
     // index === 3
-    yTransform = useTransform(scrollYProgress, [0.65, 0.88], [500, 0]);
+    yTransform = useTransform(scrollYProgress, [0.65, 0.88], [550, 0]);
     rotateTransform = useTransform(scrollYProgress, [0.65, 0.88], [0, targetRotation]);
     scaleTransform = useTransform(scrollYProgress, [0.65, 0.88], [1.05, 1]);
     opacityTransform = useTransform(scrollYProgress, [0.65, 0.75], [0, 1]);
@@ -60,24 +60,24 @@ const StackedCard: React.FC<StackedCardProps> = ({
 
   const accentColor =
     pillar.accentColor === 'teal'
+      ? '#0891b2'
+      : pillar.accentColor === 'pink'
+      ? '#db2777'
+      : '#d97706';
+
+  const accentTextClass =
+    pillar.accentColor === 'teal'
+      ? 'text-cyan-800'
+      : pillar.accentColor === 'pink'
+      ? 'text-pink-700'
+      : 'text-amber-700';
+
+  const barColor =
+    pillar.accentColor === 'teal'
       ? '#00FFFF'
       : pillar.accentColor === 'pink'
       ? '#FF00FF'
       : '#FFFF00';
-
-  const accentTextClass =
-    pillar.accentColor === 'teal'
-      ? 'text-[#00FFFF]'
-      : pillar.accentColor === 'pink'
-      ? 'text-[#FF00FF]'
-      : 'text-[#FFFF00]';
-
-  const accentBgClass =
-    pillar.accentColor === 'teal'
-      ? 'bg-[#00FFFF]'
-      : pillar.accentColor === 'pink'
-      ? 'bg-[#FF00FF]'
-      : 'bg-[#FFFF00]';
 
   return (
     <motion.div
@@ -92,23 +92,23 @@ const StackedCard: React.FC<StackedCardProps> = ({
     >
       <div
         id={`service-card-${pillar.id}`}
-        className="w-full max-w-4xl bg-black/60 backdrop-blur-2xl border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.85)] rounded-none overflow-hidden transition-all duration-300 hover:border-white/30"
+        className="w-full max-w-4xl bg-white border border-black/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] rounded-3xl sm:rounded-[2rem] overflow-hidden transition-all duration-300 hover:shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
       >
-        {/* Top CMYK Glowing Accent Bar */}
+        {/* Top CMYK Accent Bar */}
         <div
-          className="h-1.5 w-full"
-          style={{ backgroundColor: accentColor }}
+          className="h-2 w-full"
+          style={{ backgroundColor: barColor }}
         />
 
-        <div className="p-5 sm:p-7 md:p-9 lg:p-10 max-h-[75vh] overflow-y-auto">
+        <div className="p-6 sm:p-8 md:p-10">
           {/* Top Row: Identifier, Icon, Title, Tags */}
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-5 border-b border-black/10">
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5">
-              <span className="font-mono-code text-xs sm:text-sm font-bold text-zinc-400 px-2 py-0.5 bg-white/5 border border-white/10">
+              <span className="font-mono-code text-xs sm:text-sm font-bold text-zinc-700 px-2.5 py-1 bg-zinc-100 border border-black/10 rounded-lg">
                 {pillar.number} // 04
               </span>
-              <span className="text-xl sm:text-2xl">{pillar.icon}</span>
-              <h2 className="gothic-display text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white tracking-tight leading-snug">
+              <span className="text-2xl sm:text-3xl">{pillar.icon}</span>
+              <h2 className="gothic-display text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-950 tracking-tight leading-snug">
                 {pillar.title}
               </h2>
             </div>
@@ -117,7 +117,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
               {pillar.tags.slice(0, 3).map((tag, tIdx) => (
                 <span
                   key={tIdx}
-                  className="px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] font-mono-code uppercase tracking-wider border border-white/15 bg-white/5 text-zinc-300 rounded-none"
+                  className="px-2.5 py-1 text-[10px] font-mono-code uppercase tracking-wider border border-black/10 bg-zinc-100 text-zinc-700 rounded-full"
                 >
                   {tag}
                 </span>
@@ -126,24 +126,24 @@ const StackedCard: React.FC<StackedCardProps> = ({
           </div>
 
           {/* Body Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 pt-5 sm:pt-6 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 pt-5 sm:pt-6 items-start">
             {/* Left Column: Tagline, Narrative, Featured Client, Action */}
             <div className="lg:col-span-6 space-y-4 sm:space-y-5">
               <p className={`font-display text-base sm:text-lg md:text-xl font-bold leading-snug ${accentTextClass}`}>
                 "{pillar.tagline}"
               </p>
 
-              <p className="text-xs sm:text-sm md:text-[15px] text-zinc-200 font-light leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-[15px] text-zinc-700 font-normal leading-relaxed">
                 {pillar.description}
               </p>
 
               {/* Featured Client or Build Badge */}
               {(pillar.featuredClient || pillar.featuredProject) && (
-                <div className="p-3 sm:p-3.5 border border-white/10 bg-white/[0.03] backdrop-blur-md">
-                  <span className="font-mono-code text-[9px] uppercase tracking-widest text-zinc-400 block mb-0.5">
+                <div className="p-3 sm:p-3.5 rounded-xl border border-black/10 bg-zinc-50">
+                  <span className="font-mono-code text-[9px] uppercase tracking-widest text-zinc-500 font-bold block mb-0.5">
                     {pillar.featuredClient ? 'Featured Client Engagement' : 'Featured Build & Innovation'}
                   </span>
-                  <span className="font-display font-bold text-xs sm:text-sm text-white">
+                  <span className="font-display font-bold text-xs sm:text-sm text-zinc-950">
                     {pillar.featuredClient || pillar.featuredProject}
                   </span>
                 </div>
@@ -151,9 +151,9 @@ const StackedCard: React.FC<StackedCardProps> = ({
 
               <div className="pt-1">
                 <MagneticButton
-                  variant="glass"
+                  variant="primary"
                   onClick={() => onOpenInquiry(pillar.title)}
-                  className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 text-black bg-[#FFFF00] hover:bg-white text-xs font-mono-code font-bold uppercase tracking-wider justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3 text-black bg-[#FFFF00] hover:bg-zinc-950 hover:text-white border border-black/20 text-xs font-mono-code font-bold uppercase tracking-wider rounded-xl justify-center gap-2 transition-colors"
                 >
                   <span>Commission This Discipline</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -163,18 +163,21 @@ const StackedCard: React.FC<StackedCardProps> = ({
 
             {/* Right Column: Deliverables List */}
             <div className="lg:col-span-6 space-y-2.5 sm:space-y-3">
-              <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-400 block mb-1 font-bold">
+              <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-500 block mb-1 font-bold">
                 Deliverables & Technical Scope
               </span>
 
-              <div className="space-y-2">
+              <div className="space-y-2 sm:space-y-2.5">
                 {pillar.points.map((point, pIdx) => (
                   <div
                     key={pIdx}
-                    className="p-2.5 sm:p-3 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] flex items-start gap-2.5 transition-all duration-200"
+                    className="p-2.5 sm:p-3 rounded-xl border border-black/10 bg-zinc-50/80 hover:bg-zinc-100 flex items-start gap-3 transition-colors duration-200"
                   >
-                    <span className={`w-1.5 h-1.5 mt-1.5 shrink-0 ${accentBgClass}`} />
-                    <span className="text-xs sm:text-[13px] text-zinc-200 font-normal leading-relaxed">
+                    <span 
+                      className="w-2 h-2 mt-1.5 shrink-0 rounded-sm"
+                      style={{ backgroundColor: barColor }}
+                    />
+                    <span className="text-xs sm:text-[13px] text-zinc-800 font-medium leading-relaxed">
                       {point}
                     </span>
                   </div>
@@ -270,7 +273,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
           </div>
 
           {/* Cards Stack Stage */}
-          <div className="relative w-full max-w-4xl h-[70vh] sm:h-[68vh] md:h-[64vh]">
+          <div className="relative w-full max-w-4xl min-h-[560px] sm:min-h-[520px] md:min-h-[480px] flex items-center justify-center">
             {SERVICE_PILLARS.map((pillar, idx) => (
               <StackedCard
                 key={pillar.id}
