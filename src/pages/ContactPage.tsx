@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { PageId } from '../types';
-import { GothicLogo } from '../components/GothicLogo';
-import { Send, CheckCircle2, MapPin, Mail, Clock, Compass, ArrowRight } from 'lucide-react';
+import { Send, CheckCircle2, Mail, Clock } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 
@@ -89,14 +88,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
 
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
-            {/* Left: Studio Details & Ground Zero Info (Dark Glass 3D Tilt Card matching Our Story) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-stretch">
+            {/* Left: Studio Logo & Direct Communications (Dark Glass 3D Tilt Card) */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5"
+              className="lg:col-span-5 h-full flex flex-col"
             >
               <TiltCard
                 id="contact-studio-details-card"
@@ -104,142 +103,68 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 maxTilt={5}
                 scale={1.01}
                 glowColor="rgba(0, 255, 255, 0.25)"
-                className="rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/10 hover:border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 overflow-hidden cursor-default"
+                className="rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/10 hover:border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 overflow-hidden cursor-default h-full flex flex-col justify-between"
               >
                 {/* Top Subtle CMYK Accent Indicator */}
-                <div className="h-1 w-full flex">
+                <div className="h-1 w-full flex shrink-0">
                   <div className="h-full flex-1 bg-[#00FFFF]" />
                   <div className="h-full flex-1 bg-[#FF00FF]" />
                   <div className="h-full flex-1 bg-[#FFFF00]" />
                 </div>
 
-                {/* High-Contrast Editorial Image Container */}
-                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-zinc-950 border-b border-white/10">
+                {/* Supersized Centered Logo Showcase Container */}
+                <div className="relative flex-1 min-h-[280px] sm:min-h-[340px] md:min-h-[380px] w-full flex items-center justify-center p-8 sm:p-10 md:p-12 bg-gradient-to-b from-white/[0.04] via-black/20 to-black/40 border-b border-white/10 overflow-hidden group">
+                  {/* Atmospheric radial ambient light */}
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,255,255,0.08)_0%,rgba(255,0,255,0.03)_45%,transparent_75%)] pointer-events-none" />
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none opacity-40" />
+
+                  {/* Centered Supersized Logo Image */}
                   <img
+                    id="contact-studio-logo-image"
                     src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
-                    alt="Imaginative 369 Badulla Studio Coordinates"
-                    className="w-full h-full object-cover grayscale contrast-115 brightness-90 group-hover:grayscale-0 group-hover:scale-105 group-hover:brightness-100 transition-all duration-700 ease-out"
+                    alt="Imaginative 369 Logo"
+                    className="w-full h-full max-h-64 sm:max-h-72 md:max-h-80 object-contain filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)] group-hover:scale-105 group-hover:drop-shadow-[0_16px_36px_rgba(0,255,255,0.25)] transition-all duration-700 ease-out"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
-
-                  {/* Top Badge Overlay */}
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
-                      HQ · Badulla, Sri Lanka
-                    </span>
-                  </div>
-
-                  {/* Bottom Image Metadata Overlay */}
-                  <div className="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between">
-                    <span className="font-mono-code text-[10px] text-[#00FFFF] uppercase tracking-widest font-bold">
-                      06°59′N 81°03′E
-                    </span>
-                    <span className="w-1.5 h-1.5 bg-[#FF00FF]" />
-                  </div>
                 </div>
 
-                {/* Content Details Block */}
-                <div className="p-6 sm:p-8 space-y-6">
-                  {/* Brand Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0 shadow-sm">
-                        i369
-                      </div>
-                      <div>
-                        <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-tight">
-                          Imaginative 369
-                        </h3>
-                        <p className="font-mono-code text-[10px] sm:text-[11px] text-[#00FFFF] uppercase tracking-widest font-bold">
-                          Studio & Venture Directorate
-                        </p>
-                      </div>
+                {/* Simplified Content Block: Email & Operating Hours Only */}
+                <div className="p-6 sm:p-8 space-y-5 shrink-0 bg-black/20">
+                  {/* Direct Transmission Email */}
+                  <div className="flex items-start gap-4 group/item">
+                    <div className="p-2.5 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5 group-hover/item:border-[#00FFFF]/50 transition-colors">
+                      <Mail className="w-5 h-5 text-[#00FFFF]" />
                     </div>
-                    <span className="w-1.5 h-1.5 bg-[#FFFF00]" />
-                  </div>
-
-                  {/* Studio Coordinates & Communication Channels */}
-                  <div className="space-y-4 text-sm">
-                    {/* Studio Address */}
-                    <div className="flex items-start gap-3.5 group/item">
-                      <div className="p-2 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5">
-                        <MapPin className="w-4 h-4 text-[#FF00FF]" />
-                      </div>
-                      <div className="space-y-0.5">
-                        <span className="font-mono-code text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-bold">
-                          Studio Address
-                        </span>
-                        <p className="text-zinc-200 font-normal text-xs sm:text-sm leading-relaxed">
-                          03 River Side Road,<br />
-                          Badulla, Uva Province,<br />
-                          Sri Lanka
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Direct Email */}
-                    <div className="flex items-start gap-3.5 group/item">
-                      <div className="p-2 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5">
-                        <Mail className="w-4 h-4 text-[#00FFFF]" />
-                      </div>
-                      <div className="space-y-0.5">
-                        <span className="font-mono-code text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-bold">
-                          Direct Transmission Email
-                        </span>
-                        <p className="text-white font-mono-code text-xs sm:text-sm break-all font-semibold">
-                          i369.developer@gmail.com
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Operating Hours */}
-                    <div className="flex items-start gap-3.5 group/item">
-                      <div className="p-2 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5">
-                        <Clock className="w-4 h-4 text-[#FFFF00]" />
-                      </div>
-                      <div className="space-y-0.5">
-                        <span className="font-mono-code text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-bold">
-                          Highland Operating Hours
-                        </span>
-                        <p className="text-zinc-200 text-xs sm:text-sm leading-relaxed">
-                          Monday — Saturday: 08:30 — 18:30 IST<br />
-                          <span className="text-zinc-400 font-mono-code text-[11px]">24/7 Priority Response for Retainers</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Ground Zero Telemetry Block */}
-                  <div className="p-4 bg-white/[0.03] border border-white/10 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono-code text-[10px] sm:text-[11px] uppercase text-[#00FFFF] tracking-widest block font-bold">
-                        Ground Zero Telemetry
+                    <div className="space-y-1 min-w-0">
+                      <span className="font-mono-code text-[10px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
+                        Direct Transmission Email
                       </span>
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="font-mono-code text-[9px] uppercase tracking-wider text-emerald-400 font-bold">
-                          Live
-                        </span>
-                      </div>
+                      <a
+                        href="mailto:i369.developer@gmail.com"
+                        className="text-white font-mono-code text-xs sm:text-sm md:text-base break-all font-semibold hover:text-[#00FFFF] transition-colors block"
+                      >
+                        i369.developer@gmail.com
+                      </a>
                     </div>
-                    <p className="font-mono-code text-[11px] sm:text-xs text-zinc-300 leading-relaxed">
-                      Coordinates: 06°59′N 81°03′E<br />
-                      Average Elevation: 680m Above Sea Level<br />
-                      Central Highlands Innovation Corridor
-                    </p>
                   </div>
 
-                  {/* Graphic Accent Bar matching About Page */}
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                    <div className="flex space-x-1.5 w-32">
-                      <div className="h-1 flex-1 accent-teal"></div>
-                      <div className="h-1 flex-1 accent-pink"></div>
-                      <div className="h-1 flex-1 accent-orange"></div>
+                  {/* Refined Divider */}
+                  <div className="h-px w-full bg-white/10" />
+
+                  {/* Highland Operating Hours */}
+                  <div className="flex items-start gap-4 group/item">
+                    <div className="p-2.5 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5 group-hover/item:border-[#FFFF00]/50 transition-colors">
+                      <Clock className="w-5 h-5 text-[#FFFF00]" />
                     </div>
-                    <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-400 font-bold">
-                      Central Highlands
-                    </span>
+                    <div className="space-y-1">
+                      <span className="font-mono-code text-[10px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
+                        Highland Operating Hours
+                      </span>
+                      <p className="text-zinc-200 text-xs sm:text-sm leading-relaxed">
+                        Monday — Saturday: 08:30 — 18:30 IST<br />
+                        <span className="text-zinc-400 font-mono-code text-[11px]">24/7 Priority Response for Retainers</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </TiltCard>
