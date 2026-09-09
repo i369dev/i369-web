@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { PageId } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
-import { Send, CheckCircle2, MapPin, Mail, Clock, Phone, Compass, ArrowRight } from 'lucide-react';
+import { Send, CheckCircle2, MapPin, Mail, Clock, Compass, ArrowRight } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 
@@ -73,102 +74,203 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          FORM & STUDIO COORDINATES SPLIT (Hugeinc Style Grid)
+          FORM & STUDIO COORDINATES SPLIT (Matching "Our Story" Aesthetic & Cards)
          ========================================================================= */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#FAFAFA] border-b border-black">
-        <div className="max-w-7xl mx-auto">
+      <section
+        id="contact-cards-section"
+        className="relative text-white py-12 sm:py-16 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-cover bg-center bg-no-repeat sm:bg-fixed"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=85')`,
+        }}
+      >
+        {/* Modern Multi-Layer Gradient Overlays for Cinematic Depth & Pristine Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/85 backdrop-blur-[2px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#00FFFF]/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
+
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
-            {/* Left: Studio Details & Ground Zero Info (Dark Glass 3D Tilt Card) */}
-            <div className="lg:col-span-5">
+            {/* Left: Studio Details & Ground Zero Info (Dark Glass 3D Tilt Card matching Our Story) */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5"
+            >
               <TiltCard
+                id="contact-studio-details-card"
                 isDark={true}
-                maxTilt={6}
-                scale={1.02}
-                className="p-6 sm:p-8 md:p-12 space-y-6 sm:space-y-8 rounded-none cursor-default"
+                maxTilt={5}
+                scale={1.01}
+                glowColor="rgba(0, 255, 255, 0.25)"
+                className="rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/10 hover:border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 overflow-hidden cursor-default"
               >
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="w-8 h-8 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0">
-                    i369
+                {/* Top Subtle CMYK Accent Indicator */}
+                <div className="h-1 w-full flex">
+                  <div className="h-full flex-1 bg-[#00FFFF]" />
+                  <div className="h-full flex-1 bg-[#FF00FF]" />
+                  <div className="h-full flex-1 bg-[#FFFF00]" />
+                </div>
+
+                {/* High-Contrast Editorial Image Container */}
+                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-zinc-950 border-b border-white/10">
+                  <img
+                    src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
+                    alt="Imaginative 369 Badulla Studio Coordinates"
+                    className="w-full h-full object-cover grayscale contrast-115 brightness-90 group-hover:grayscale-0 group-hover:scale-105 group-hover:brightness-100 transition-all duration-700 ease-out"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
+
+                  {/* Top Badge Overlay */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
+                      HQ · Badulla, Sri Lanka
+                    </span>
                   </div>
-                  <div>
-                    <h3 className="gothic-display text-xl sm:text-2xl text-white">
-                      Imaginative 369
-                    </h3>
-                    <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-widest mt-0.5 font-bold">
-                      Studio & Venture Directorate
+
+                  {/* Bottom Image Metadata Overlay */}
+                  <div className="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between">
+                    <span className="font-mono-code text-[10px] text-[#00FFFF] uppercase tracking-widest font-bold">
+                      06°59′N 81°03′E
+                    </span>
+                    <span className="w-1.5 h-1.5 bg-[#FF00FF]" />
+                  </div>
+                </div>
+
+                {/* Content Details Block */}
+                <div className="p-6 sm:p-8 space-y-6">
+                  {/* Brand Header */}
+                  <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0 shadow-sm">
+                        i369
+                      </div>
+                      <div>
+                        <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-tight">
+                          Imaginative 369
+                        </h3>
+                        <p className="font-mono-code text-[10px] sm:text-[11px] text-[#00FFFF] uppercase tracking-widest font-bold">
+                          Studio & Venture Directorate
+                        </p>
+                      </div>
+                    </div>
+                    <span className="w-1.5 h-1.5 bg-[#FFFF00]" />
+                  </div>
+
+                  {/* Studio Coordinates & Communication Channels */}
+                  <div className="space-y-4 text-sm">
+                    {/* Studio Address */}
+                    <div className="flex items-start gap-3.5 group/item">
+                      <div className="p-2 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5">
+                        <MapPin className="w-4 h-4 text-[#FF00FF]" />
+                      </div>
+                      <div className="space-y-0.5">
+                        <span className="font-mono-code text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-bold">
+                          Studio Address
+                        </span>
+                        <p className="text-zinc-200 font-normal text-xs sm:text-sm leading-relaxed">
+                          03 River Side Road,<br />
+                          Badulla, Uva Province,<br />
+                          Sri Lanka
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Direct Email */}
+                    <div className="flex items-start gap-3.5 group/item">
+                      <div className="p-2 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5">
+                        <Mail className="w-4 h-4 text-[#00FFFF]" />
+                      </div>
+                      <div className="space-y-0.5">
+                        <span className="font-mono-code text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-bold">
+                          Direct Transmission Email
+                        </span>
+                        <p className="text-white font-mono-code text-xs sm:text-sm break-all font-semibold">
+                          i369.developer@gmail.com
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Operating Hours */}
+                    <div className="flex items-start gap-3.5 group/item">
+                      <div className="p-2 bg-white/[0.04] border border-white/10 shrink-0 mt-0.5">
+                        <Clock className="w-4 h-4 text-[#FFFF00]" />
+                      </div>
+                      <div className="space-y-0.5">
+                        <span className="font-mono-code text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-bold">
+                          Highland Operating Hours
+                        </span>
+                        <p className="text-zinc-200 text-xs sm:text-sm leading-relaxed">
+                          Monday — Saturday: 08:30 — 18:30 IST<br />
+                          <span className="text-zinc-400 font-mono-code text-[11px]">24/7 Priority Response for Retainers</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Ground Zero Telemetry Block */}
+                  <div className="p-4 bg-white/[0.03] border border-white/10 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono-code text-[10px] sm:text-[11px] uppercase text-[#00FFFF] tracking-widest block font-bold">
+                        Ground Zero Telemetry
+                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="font-mono-code text-[9px] uppercase tracking-wider text-emerald-400 font-bold">
+                          Live
+                        </span>
+                      </div>
+                    </div>
+                    <p className="font-mono-code text-[11px] sm:text-xs text-zinc-300 leading-relaxed">
+                      Coordinates: 06°59′N 81°03′E<br />
+                      Average Elevation: 680m Above Sea Level<br />
+                      Central Highlands Innovation Corridor
                     </p>
                   </div>
-                </div>
 
-                <div className="space-y-4 sm:space-y-6 text-sm">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <MapPin className="w-4 h-4 text-[#FF00FF] shrink-0 mt-1" />
-                    <div>
-                      <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
-                        Studio Address
-                      </span>
-                      <p className="text-zinc-200 font-normal mt-1 text-xs sm:text-sm leading-relaxed">
-                        03 River Side Road,<br />
-                        Badulla, Uva Province,<br />
-                        Sri Lanka
-                      </p>
+                  {/* Graphic Accent Bar matching About Page */}
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                    <div className="flex space-x-1.5 w-32">
+                      <div className="h-1 flex-1 accent-teal"></div>
+                      <div className="h-1 flex-1 accent-pink"></div>
+                      <div className="h-1 flex-1 accent-orange"></div>
                     </div>
+                    <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-400 font-bold">
+                      Central Highlands
+                    </span>
                   </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <Mail className="w-4 h-4 text-[#00FFFF] shrink-0 mt-1" />
-                    <div>
-                      <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
-                        Direct Email
-                      </span>
-                      <p className="text-zinc-200 font-mono-code mt-1 text-xs break-all">
-                        i369.developer@gmail.com
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <Clock className="w-4 h-4 text-[#FFFF00] shrink-0 mt-1" />
-                    <div>
-                      <span className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wider block font-bold">
-                        Highland Operating Hours
-                      </span>
-                      <p className="text-zinc-200 mt-1 text-xs sm:text-sm leading-relaxed">
-                        Monday — Saturday: 08:30 — 18:30 IST<br />
-                        <span className="text-zinc-400">24/7 Priority Response for Retainers</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-3.5 sm:p-4 bg-white/5 border border-white/20 space-y-1.5 sm:space-y-2">
-                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase text-[#00FFFF] tracking-widest block font-bold">
-                    Ground Zero Telemetry
-                  </span>
-                  <p className="font-mono-code text-[11px] sm:text-xs text-zinc-300 leading-relaxed">
-                    Coordinates: 06°59′N 81°03′E<br />
-                    Average Elevation: 680m Above Sea<br />
-                    Central Highlands Corridor
-                  </p>
                 </div>
               </TiltCard>
-            </div>
+            </motion.div>
 
-            {/* Right: The Official Contact Form (Light Glass Panel) */}
-            <div className="lg:col-span-7 bg-white/90 backdrop-blur-xl p-5 sm:p-8 md:p-12 border border-black/20 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-none">
+            {/* Right: The Official Contact Form (Matching "Our Story" Dark Glass Container) */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 bg-black/60 sm:bg-black/50 backdrop-blur-xl p-6 sm:p-8 md:p-10 lg:p-12 border border-white/10 hover:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-none text-white transition-all duration-300 space-y-6"
+            >
               {isSubmitted ? (
-                <div className="py-12 sm:py-16 text-center space-y-4 sm:space-y-6">
-                  <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto bg-white border-2 border-black flex items-center justify-center text-[#00FFFF] shadow-sm">
-                    <CheckCircle2 className="w-7 sm:w-8 h-7 sm:h-8" />
+                <div className="py-12 sm:py-16 text-center space-y-5 sm:space-y-6">
+                  <div className="w-16 h-16 mx-auto bg-white/5 border border-white/20 flex items-center justify-center text-[#00FFFF] shadow-inner">
+                    <CheckCircle2 className="w-8 h-8 text-[#00FFFF]" />
                   </div>
-                  <h3 className="gothic-display text-3xl sm:text-4xl text-black">
-                    Inquiry Received.
-                  </h3>
-                  <p className="text-zinc-600 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
-                    Thank you, <strong className="text-black font-bold">{formData.name}</strong>. Your project brief has been recorded by our Badulla studio team. We will review your requirements and respond within 24 hours.
+                  <div className="space-y-2">
+                    <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
+                      Transmission Confirmed
+                    </span>
+                    <h3 className="gothic-display text-3xl sm:text-4xl text-white">
+                      Inquiry Received.
+                    </h3>
+                  </div>
+                  <p className="text-zinc-300 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
+                    Thank you, <strong className="text-white font-bold">{formData.name}</strong>. Your project brief has been recorded by our Badulla studio team. We will review your requirements and respond within 24 hours.
                   </p>
                   <MagneticButton
-                    variant="primary"
+                    variant="glass"
                     onClick={() => {
                       setIsSubmitted(false);
                       setFormData({
@@ -179,27 +281,39 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         message: '',
                       });
                     }}
-                    className="w-full sm:w-auto px-6 py-3 justify-center"
+                    className="w-full sm:w-auto px-6 py-3.5 justify-center text-black bg-white hover:bg-[#FFFF00] transition-colors"
                   >
                     Submit Another Brief
                   </MagneticButton>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                  <div>
-                    <h3 className="gothic-display text-2xl sm:text-3xl text-black tracking-tight">
+                <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+                  {/* Form Header matching Our Story aesthetic */}
+                  <div className="space-y-2 pb-4 border-b border-white/10">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-[#00FFFF]" />
+                        <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-[#00FFFF] font-bold">
+                          Client Inquiry Brief
+                        </span>
+                      </div>
+                      <span className="font-mono-code text-[10px] text-zinc-400 uppercase tracking-widest font-bold">
+                        Ground Zero Transmit
+                      </span>
+                    </div>
+                    <h3 className="gothic-display text-2xl sm:text-3xl text-white tracking-tight">
                       Project Specification Brief
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 mt-1">
-                      Direct submission to the leadership and strategy directorate.
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+                      Direct submission to the executive strategy and software engineering council.
                     </p>
                   </div>
 
-                  {/* Name & Company */}
+                  {/* Name & Company Inputs */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
-                        Name *
+                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                        Name <span className="text-[#FF00FF]">*</span>
                       </label>
                       <input
                         type="text"
@@ -207,20 +321,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Your full name"
-                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                        className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
-                        Company
+                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                        Company / Brand
                       </label>
                       <input
                         type="text"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                         placeholder="Organization or brand"
-                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                        className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans"
                       />
                     </div>
                   </div>
@@ -228,8 +342,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   {/* Email & Project Type */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
-                        Email *
+                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                        Email Address <span className="text-[#FF00FF]">*</span>
                       </label>
                       <input
                         type="email"
@@ -237,21 +351,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="name@organization.com"
-                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                        className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
-                        Project Type
+                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                        Project Scope / Discipline
                       </label>
                       <select
                         value={formData.projectType}
                         onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors cursor-pointer font-sans"
+                        className="w-full px-4 py-3 bg-zinc-950/90 hover:bg-zinc-900 border border-white/15 focus:border-[#FFFF00] text-white text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all cursor-pointer font-sans"
                       >
                         {projectTypes.map((type) => (
-                          <option key={type} value={type}>
+                          <option key={type} value={type} className="bg-zinc-950 text-white">
                             {type}
                           </option>
                         ))}
@@ -261,43 +375,43 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-xs font-mono-code uppercase text-zinc-700 font-bold mb-1.5 sm:mb-2">
-                      Message *
+                    <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                      Project Objectives & Message <span className="text-[#FF00FF]">*</span>
                     </label>
                     <textarea
                       rows={4}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Outline your objectives, timeline, or current challenge..."
-                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/80 border border-black/30 text-black text-sm rounded-none focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-sans"
+                      placeholder="Outline your objectives, timeline, or current challenges..."
+                      className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans leading-relaxed resize-none"
                     />
                   </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <span className="font-mono-code text-[11px] sm:text-xs text-zinc-500 font-bold">
-                      * Required fields
+                  {/* Submit Action Strip */}
+                  <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <span className="font-mono-code text-[11px] text-zinc-400 font-medium">
+                      * All submissions are transmitted directly to studio directors.
                     </span>
 
                     <MagneticButton
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 justify-center"
+                      className="w-full sm:w-auto px-8 py-4 justify-center text-black bg-white hover:bg-[#FFFF00] transition-colors"
                     >
                       {isSubmitting ? (
                         <span>Transmitting...</span>
                       ) : (
                         <>
-                          <span>Send Inquiry</span>
-                          <Send className="w-4 h-4" />
+                          <span className="font-bold">Send Inquiry</span>
+                          <Send className="w-4 h-4 ml-1" />
                         </>
                       )}
                     </MagneticButton>
                   </div>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
