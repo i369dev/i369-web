@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { PageId, VentureItem } from '../types';
 import { VENTURES } from '../data/agencyData';
 import { ArrowUpRight, Play, Pause, Compass, Radio, MapPin, Sparkles, ExternalLink } from 'lucide-react';
@@ -9,6 +10,24 @@ interface VenturesPageProps {
   onNavigate: (page: PageId) => void;
   onOpenInquiry: () => void;
 }
+
+const getAccentHex = (accentColor?: string) => {
+  if (accentColor === 'teal') return '#00FFFF';
+  if (accentColor === 'pink') return '#FF00FF';
+  return '#FFFF00';
+};
+
+const getGlowColor = (accentColor?: string) => {
+  if (accentColor === 'teal') return 'rgba(0, 255, 255, 0.2)';
+  if (accentColor === 'pink') return 'rgba(255, 0, 255, 0.2)';
+  return 'rgba(255, 255, 0, 0.2)';
+};
+
+const getBorderHoverClass = (accentColor?: string) => {
+  if (accentColor === 'teal') return 'hover:border-[#00FFFF]/60 hover:shadow-[0_12px_40px_rgba(0,255,255,0.15)]';
+  if (accentColor === 'pink') return 'hover:border-[#FF00FF]/60 hover:shadow-[0_12px_40px_rgba(255,0,255,0.15)]';
+  return 'hover:border-[#FFFF00]/60 hover:shadow-[0_12px_40px_rgba(255,255,0,0.15)]';
+};
 
 export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenInquiry }) => {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
@@ -49,119 +68,155 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
       {/* =========================================================================
           VENTURE SHOWCASE CARDS (LankaQuests, IntotheWILDlk, Inhale Exhale)
          ========================================================================= */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#FAFAFA]">
-        <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">
+      <section className="relative text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-[#0c0c0c]">
+        {/* Modern Multi-Layer Gradient Overlays for Cinematic Depth & Pristine Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/[0.04] via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
+
+        <div className="relative z-10 max-w-7xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">
           {VENTURES.map((venture, idx) => {
             const isAudioVenture = venture.id === 'inhale-exhale';
-            const isDarkCard = idx % 2 === 1;
+            const accentHex = getAccentHex(venture.accentColor);
+            const glowColor = getGlowColor(venture.accentColor);
+            const borderHover = getBorderHoverClass(venture.accentColor);
 
             return (
-              <TiltCard
+              <motion.div
                 key={venture.id}
-                id={`venture-${venture.id}`}
-                isDark={isDarkCard}
-                maxTilt={4}
-                scale={1.01}
-                className="rounded-none cursor-default overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12">
-                  {/* Left Column: Image & Media Controls */}
-                  <div className="lg:col-span-6 relative h-64 sm:h-80 lg:h-auto min-h-[260px] sm:min-h-[350px] overflow-hidden bg-black border-b lg:border-b-0 lg:border-r border-black/20">
-                    <img
-                      src={venture.image}
-                      alt={venture.name}
-                      className="w-full h-full object-cover grayscale contrast-125 brightness-90 card-media-zoom"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                <TiltCard
+                  id={`venture-${venture.id}`}
+                  isDark={true}
+                  maxTilt={4}
+                  scale={1.015}
+                  glowColor={glowColor}
+                  className={`group relative rounded-none cursor-default overflow-hidden bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/10 ${borderHover} shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500`}
+                >
+                  {/* Top Subtle CMYK Accent Indicator */}
+                  <div
+                    className="h-1 w-full transition-opacity duration-300 opacity-60 group-hover:opacity-100"
+                    style={{ backgroundColor: accentHex }}
+                  />
 
-                    {/* Interactive Overlay Badges */}
-                    <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-wrap items-center justify-between z-20 gap-2">
-                      <span className="px-2.5 sm:px-3 py-1 glass-pill text-white font-mono-code text-[10px] sm:text-[11px] uppercase tracking-wider rounded-none">
-                        {venture.status}
-                      </span>
+                  <div className="grid grid-cols-1 lg:grid-cols-12">
+                    {/* Left Column: Image & Media Controls */}
+                    <div className="lg:col-span-6 relative h-72 sm:h-84 lg:h-auto min-h-[300px] lg:min-h-[440px] overflow-hidden bg-zinc-950 border-b lg:border-b-0 lg:border-r border-white/10">
+                      <img
+                        src={venture.image}
+                        alt={venture.name}
+                        className="w-full h-full object-cover grayscale contrast-115 brightness-90 group-hover:grayscale-0 group-hover:scale-105 group-hover:brightness-100 transition-all duration-700 ease-out"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Cinematic Multi-Layer Gradient Overlays for Legibility & Atmosphere */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent pointer-events-none" />
 
-                      {isAudioVenture && (
-                        <button
-                          onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-[#FF00FF] hover:bg-[#FF00FF]/80 text-white font-mono-code text-[10px] sm:text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-colors shadow-sm"
-                        >
-                          {isPlayingAudio ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                          <span>{isPlayingAudio ? 'Pause Live Stream' : 'Audition Soundscape'}</span>
-                        </button>
-                      )}
-                    </div>
-
-                    <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-20">
-                      <h3 className="gothic-display text-2xl sm:text-4xl md:text-5xl text-white tracking-tight leading-none">
-                        {venture.name}
-                      </h3>
-                      <p className="font-mono-code text-[11px] sm:text-xs text-[#FFFF00] uppercase tracking-widest mt-1.5 sm:mt-2 font-bold">
-                        {venture.tagline}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Specs, Technical Highlights & Features */}
-                  <div className="lg:col-span-6 p-5 sm:p-8 md:p-12 flex flex-col justify-between space-y-6 sm:space-y-8">
-                    <div className="space-y-4 sm:space-y-6">
-                      <p className={`text-sm sm:text-base md:text-lg leading-relaxed ${isDarkCard ? 'text-zinc-300 font-light' : 'text-zinc-700 font-normal'}`}>
-                        {venture.description}
-                      </p>
-
-                      <div className="space-y-2.5 sm:space-y-3">
-                        <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-widest text-zinc-500 block font-bold">
-                          Engineered Capabilities
+                      {/* Top Interactive Badges */}
+                      <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-wrap items-center justify-between z-20 gap-2">
+                        <span className="font-mono-code text-[10px] sm:text-xs uppercase font-bold tracking-wider px-3 py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
+                          {venture.status}
                         </span>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
-                          {venture.features.map((feat, fIdx) => (
-                            <div
-                              key={fIdx}
-                              className={`p-2.5 sm:p-3 border text-[11px] sm:text-xs font-mono-code flex items-start gap-2 ${
-                                isDarkCard
-                                  ? 'bg-white/5 border-white/10 text-zinc-300'
-                                  : 'bg-white/90 border-black/15 text-black'
-                              }`}
+
+                        {isAudioVenture && (
+                          <button
+                            onClick={() => setIsPlayingAudio(!isPlayingAudio)}
+                            className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 bg-[#FF00FF]/90 hover:bg-[#FF00FF] text-white font-mono-code text-[10px] sm:text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-all duration-200 shadow-md backdrop-blur-sm"
+                          >
+                            {isPlayingAudio ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                            <span>{isPlayingAudio ? 'Pause Live Stream' : 'Audition Soundscape'}</span>
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Bottom Title & Tagline */}
+                      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-20 space-y-1.5">
+                        <div className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5" style={{ backgroundColor: accentHex }} />
+                          <span
+                            className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest font-bold"
+                            style={{ color: accentHex }}
+                          >
+                            Proprietary Venture // 0{idx + 1}
+                          </span>
+                        </div>
+                        <h3 className="gothic-display text-2xl sm:text-4xl md:text-5xl text-white tracking-tight leading-none">
+                          {venture.name}
+                        </h3>
+                        <p className="font-mono-code text-[11px] sm:text-xs text-zinc-300 uppercase tracking-widest pt-0.5 font-bold">
+                          {venture.tagline}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Specs, Technical Highlights & Features */}
+                    <div className="lg:col-span-6 p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between space-y-6 sm:space-y-8 bg-black/40 sm:bg-transparent">
+                      <div className="space-y-4 sm:space-y-6">
+                        <p className="text-sm sm:text-base md:text-lg text-zinc-200 font-normal leading-relaxed">
+                          {venture.description}
+                        </p>
+
+                        <div className="space-y-3 pt-2">
+                          <div className="flex items-center gap-2">
+                            <span className="w-1.5 h-1.5" style={{ backgroundColor: accentHex }}></span>
+                            <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-400 font-bold">
+                              Engineered Capabilities
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {venture.features.map((feat, fIdx) => (
+                              <div
+                                key={fIdx}
+                                className="p-3 bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:border-white/20 text-xs font-mono-code text-zinc-300 flex items-start gap-2.5 transition-all duration-200"
+                              >
+                                <div
+                                  className="w-1.5 h-1.5 mt-1.5 shrink-0"
+                                  style={{ backgroundColor: accentHex }}
+                                />
+                                <span className="leading-relaxed">{feat}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Tech Stack & Status bar */}
+                      <div className="pt-4 sm:pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                          {venture.techStack.map((tech, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="font-mono-code text-[10px] sm:text-xs text-zinc-300 bg-white/[0.04] border border-white/15 px-2.5 py-1 rounded-none hover:border-[#FFFF00]/60 hover:text-white transition-colors"
                             >
-                              <div className="w-1.5 h-1.5 accent-teal mt-1 shrink-0"></div>
-                              <span>{feat}</span>
-                            </div>
+                              {tech}
+                            </span>
                           ))}
+                        </div>
+
+                        <div className="flex items-center gap-3 sm:gap-4">
+                          <div className="hidden lg:flex space-x-1 w-16">
+                            <div className="h-1 flex-1 accent-teal"></div>
+                            <div className="h-1 flex-1 accent-pink"></div>
+                            <div className="h-1 flex-1 accent-orange"></div>
+                          </div>
+                          <MagneticButton
+                            variant="glass"
+                            onClick={onOpenInquiry}
+                            className="w-full sm:w-auto px-5 py-2.5 justify-center text-xs sm:text-sm font-mono-code uppercase tracking-wider text-white border-white/20 hover:border-[#FFFF00] hover:text-[#FFFF00]"
+                          >
+                            <span>Collaborate</span>
+                            <ArrowUpRight className="w-3.5 h-3.5 ml-1" />
+                          </MagneticButton>
                         </div>
                       </div>
                     </div>
-
-                    {/* Tech Stack & Status bar */}
-                    <div className={`pt-4 sm:pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                      isDarkCard ? 'border-white/10' : 'border-black/15'
-                    }`}>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                        {venture.techStack.map((tech, tIdx) => (
-                          <span
-                            key={tIdx}
-                            className={`px-2 sm:px-2.5 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-mono-code uppercase tracking-wider border rounded-none ${
-                              isDarkCard
-                                ? 'bg-white/5 border-white/20 text-zinc-300'
-                                : 'bg-black/5 border-black/20 text-black font-bold'
-                            }`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      <MagneticButton
-                        variant={isDarkCard ? 'glass' : 'primary'}
-                        onClick={onOpenInquiry}
-                        className="w-full sm:w-auto px-4 py-2 sm:py-2.5 justify-center text-xs sm:text-sm"
-                      >
-                        <span>Collaborate</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </MagneticButton>
-                    </div>
                   </div>
-                </div>
-              </TiltCard>
+                </TiltCard>
+              </motion.div>
             );
           })}
         </div>
