@@ -245,32 +245,32 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </TiltCard>
             </motion.div>
 
-            {/* Right: The Official Contact Form (Matching "Our Story" Dark Glass Container) */}
+            {/* Right: The Official Contact Form (Ultra-Modern White Glassmorphic Card) */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 bg-black/60 sm:bg-black/50 backdrop-blur-xl p-6 sm:p-8 md:p-10 lg:p-12 border border-white/10 hover:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-none text-white transition-all duration-300 space-y-6"
+              className="lg:col-span-7 bg-white/[0.88] sm:bg-white/[0.82] backdrop-blur-2xl p-6 sm:p-8 md:p-10 lg:p-12 border border-white/60 hover:border-white/90 shadow-[0_20px_50px_rgba(0,0,0,0.35),0_0_30px_rgba(255,255,255,0.12)] rounded-none text-zinc-900 transition-all duration-300 space-y-6"
             >
               {isSubmitted ? (
                 <div className="py-12 sm:py-16 text-center space-y-5 sm:space-y-6">
-                  <div className="w-16 h-16 mx-auto bg-white/5 border border-white/20 flex items-center justify-center text-[#00FFFF] shadow-inner">
-                    <CheckCircle2 className="w-8 h-8 text-[#00FFFF]" />
+                  <div className="w-16 h-16 mx-auto bg-black/5 border border-black/20 flex items-center justify-center text-black shadow-inner">
+                    <CheckCircle2 className="w-8 h-8 text-black" />
                   </div>
                   <div className="space-y-2">
-                    <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
+                    <span className="font-mono-code text-xs uppercase tracking-widest text-zinc-600 font-bold">
                       Transmission Confirmed
                     </span>
-                    <h3 className="gothic-display text-3xl sm:text-4xl text-white">
+                    <h3 className="gothic-display text-3xl sm:text-4xl text-black">
                       Inquiry Received.
                     </h3>
                   </div>
-                  <p className="text-zinc-300 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
-                    Thank you, <strong className="text-white font-bold">{formData.name}</strong>. Your project brief has been recorded by our Badulla studio team. We will review your requirements and respond within 24 hours.
+                  <p className="text-zinc-700 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
+                    Thank you, <strong className="text-black font-bold">{formData.name}</strong>. Your project brief has been recorded by our Badulla studio team. We will review your requirements and respond within 24 hours.
                   </p>
                   <MagneticButton
-                    variant="glass"
+                    variant="primary"
                     onClick={() => {
                       setIsSubmitted(false);
                       setFormData({
@@ -281,30 +281,30 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         message: '',
                       });
                     }}
-                    className="w-full sm:w-auto px-6 py-3.5 justify-center text-black bg-white hover:bg-[#FFFF00] transition-colors"
+                    className="w-full sm:w-auto px-6 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
                   >
                     Submit Another Brief
                   </MagneticButton>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-                  {/* Form Header matching Our Story aesthetic */}
-                  <div className="space-y-2 pb-4 border-b border-white/10">
+                  {/* Form Header with High Contrast */}
+                  <div className="space-y-2 pb-4 border-b border-black/10">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-[#00FFFF]" />
-                        <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-[#00FFFF] font-bold">
+                        <span className="w-2 h-2 bg-black" />
+                        <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-black font-bold">
                           Client Inquiry Brief
                         </span>
                       </div>
-                      <span className="font-mono-code text-[10px] text-zinc-400 uppercase tracking-widest font-bold">
+                      <span className="font-mono-code text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
                         Ground Zero Transmit
                       </span>
                     </div>
-                    <h3 className="gothic-display text-2xl sm:text-3xl text-white tracking-tight">
+                    <h3 className="gothic-display text-2xl sm:text-3xl text-black tracking-tight">
                       Project Specification Brief
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
                       Direct submission to the executive strategy and software engineering council.
                     </p>
                   </div>
@@ -312,7 +312,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   {/* Name & Company Inputs */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
                         Name <span className="text-[#FF00FF]">*</span>
                       </label>
                       <input
@@ -321,12 +321,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Your full name"
-                        className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans"
+                        className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
                         Company / Brand
                       </label>
                       <input
@@ -334,7 +334,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                         placeholder="Organization or brand"
-                        className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans"
+                        className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans"
                       />
                     </div>
                   </div>
@@ -342,7 +342,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   {/* Email & Project Type */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
                         Email Address <span className="text-[#FF00FF]">*</span>
                       </label>
                       <input
@@ -351,21 +351,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="name@organization.com"
-                        className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans"
+                        className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                      <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
                         Project Scope / Discipline
                       </label>
                       <select
                         value={formData.projectType}
                         onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                        className="w-full px-4 py-3 bg-zinc-950/90 hover:bg-zinc-900 border border-white/15 focus:border-[#FFFF00] text-white text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all cursor-pointer font-sans"
+                        className="w-full px-4 py-3 bg-white/80 hover:bg-white border border-black/20 focus:border-black text-black text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all cursor-pointer font-sans"
                       >
                         {projectTypes.map((type) => (
-                          <option key={type} value={type} className="bg-zinc-950 text-white">
+                          <option key={type} value={type} className="bg-white text-black">
                             {type}
                           </option>
                         ))}
@@ -375,7 +375,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-xs font-mono-code uppercase text-zinc-300 font-bold mb-2 tracking-wider">
+                    <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
                       Project Objectives & Message <span className="text-[#FF00FF]">*</span>
                     </label>
                     <textarea
@@ -384,20 +384,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Outline your objectives, timeline, or current challenges..."
-                      className="w-full px-4 py-3 bg-white/[0.04] hover:bg-white/[0.06] focus:bg-white/[0.08] border border-white/15 focus:border-[#FFFF00] text-white placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-[#FFFF00] transition-all font-sans leading-relaxed resize-none"
+                      className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans leading-relaxed resize-none"
                     />
                   </div>
 
                   {/* Submit Action Strip */}
-                  <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <span className="font-mono-code text-[11px] text-zinc-400 font-medium">
+                  <div className="pt-3 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <span className="font-mono-code text-[11px] text-zinc-600 font-medium">
                       * All submissions are transmitted directly to studio directors.
                     </span>
 
                     <MagneticButton
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto px-8 py-4 justify-center text-black bg-white hover:bg-[#FFFF00] transition-colors"
+                      className="w-full sm:w-auto px-8 py-4 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
                     >
                       {isSubmitting ? (
                         <span>Transmitting...</span>
