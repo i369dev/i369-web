@@ -30,8 +30,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'home', label: 'Home', number: '01', accent: '#00FFFF' },
     { id: 'about', label: 'About', number: '02', accent: '#FF00FF' },
     { id: 'services', label: 'Services', number: '03', accent: '#FFFF00' },
-    { id: 'work', label: 'Our Work', number: '04', accent: '#00FFFF' },
-    { id: 'ventures', label: 'Ventures', number: '05', accent: '#FF00FF' },
+    { id: 'ventures', label: 'Ventures', number: '04', accent: '#00FFFF' },
+    { id: 'work', label: 'Our Work', number: '05', accent: '#FF00FF' },
     { id: 'contact', label: 'Contact', number: '06', accent: '#FFFF00' },
   ];
 
