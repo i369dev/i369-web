@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'motion/react';
 import { PageId, CaseStudy } from '../types';
 import { CASE_STUDIES, TRUSTED_CLIENTS } from '../data/agencyData';
-import { ArrowUpRight, X, Layers, Sparkles, Check, Compass, TrendingUp, ChevronRight, Eye } from 'lucide-react';
+import { ArrowUpRight, X, Layers, Sparkles, Check, Compass, TrendingUp, ChevronRight } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 
@@ -250,32 +250,12 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               </span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5">
-                {CASE_STUDIES.map((cs, idx) => (
-                  <button
-                    key={cs.id}
-                    type="button"
-                    onClick={() => setSelectedCaseStudy(cs)}
-                    className={`px-2 py-0.5 rounded text-[10px] font-mono-code transition-all cursor-pointer ${
-                      activeCardIndex === idx
-                        ? 'bg-[#FFFF00] text-black font-bold shadow-[0_0_10px_rgba(255,255,0,0.4)]'
-                        : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
-                    }`}
-                    title={`Jump to ${cs.title}`}
-                  >
-                    {cs.number}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-zinc-400">
-                <span className="hidden md:inline">Focus:</span>
-                <span className="text-[#00FFFF] font-bold truncate max-w-[140px] sm:max-w-[200px]">
-                  {CASE_STUDIES[activeCardIndex].title}
-                </span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#00FFFF] animate-pulse" />
-              </div>
+            <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-zinc-400">
+              <span className="hidden md:inline">Focus:</span>
+              <span className="text-[#00FFFF] font-bold truncate max-w-[140px] sm:max-w-[200px]">
+                {CASE_STUDIES[activeCardIndex].title}
+              </span>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#00FFFF] animate-pulse" />
             </div>
           </div>
 
@@ -304,12 +284,6 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 );
               })}
             </motion.div>
-          </div>
-
-          {/* Bottom Prompt Bar */}
-          <div className="mt-3 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-zinc-400 font-mono-code text-[10px] sm:text-[11px] uppercase tracking-wider">
-            <Eye className="w-3 h-3 text-[#FFFF00]" />
-            <span>Click any card to inspect dossier · Scroll down to rotate arc carousel</span>
           </div>
         </div>
       </section>
