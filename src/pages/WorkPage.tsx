@@ -33,6 +33,21 @@ const ArcCard: React.FC<ArcCardProps> = ({
   // Card 2 centers at 0.39
   // Card 3 centers at 0.58
   // Card 4 centers at 0.78 and stays 100% locked & stationary through 1.00 before unpinning
+  //
+  // Coordinates use large values so cards completely clear any screen viewport (beyond -100vw / 100vh)
+  // without piling or clumping in the bottom-left.
+  const ENTRY_X = 2200;
+  const ENTRY_Y = 900;
+  const MID_ENTRY_X = 450;
+  const MID_ENTRY_Y = 140;
+
+  const MID_EXIT_X = -450;
+  const MID_EXIT_Y = 140;
+  const EXIT_X = -2200;
+  const EXIT_Y = 900;
+  const FAR_EXIT_X = -2500;
+  const FAR_EXIT_Y = 1050;
+
   let xTransform: MotionValue<number>;
   let yTransform: MotionValue<number>;
   let rotateTransform: MotionValue<number>;
@@ -40,37 +55,39 @@ const ArcCard: React.FC<ArcCardProps> = ({
   let opacityTransform: MotionValue<number>;
 
   if (index === 0) {
-    xTransform = useTransform(scrollYProgress, [0, 0.20, 0.39], [0, -360, -740]);
-    yTransform = useTransform(scrollYProgress, [0, 0.20, 0.39], [0, 110, 320]);
-    rotateTransform = useTransform(scrollYProgress, [0, 0.20, 0.39], [0, -12, -24]);
-    scaleTransform = useTransform(scrollYProgress, [0, 0.20, 0.39], [1, 0.88, 0.72]);
-    opacityTransform = useTransform(scrollYProgress, [0, 0.24, 0.38], [1, 0.85, 0]);
+    xTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 1.0], [0, MID_EXIT_X, EXIT_X, FAR_EXIT_X]);
+    yTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 1.0], [0, MID_EXIT_Y, EXIT_Y, FAR_EXIT_Y]);
+    rotateTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 1.0], [0, -12, -24, -24]);
+    scaleTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 1.0], [1, 0.88, 0.65, 0.65]);
+    opacityTransform = useTransform(scrollYProgress, [0, 0.08, 0.18, 1.0], [1, 0.85, 0, 0]);
   } else if (index === 1) {
-    xTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58], [360, 0, -360, -740]);
-    yTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58], [110, 0, 110, 320]);
-    rotateTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58], [12, 0, -12, -24]);
-    scaleTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58], [0.88, 1, 0.88, 0.72]);
-    opacityTransform = useTransform(scrollYProgress, [0, 0.05, 0.20, 0.44, 0.57], [0.85, 1, 1, 0.85, 0]);
+    xTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 0.30, 0.39, 1.0], [ENTRY_X, MID_ENTRY_X, 0, MID_EXIT_X, EXIT_X, FAR_EXIT_X]);
+    yTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 0.30, 0.39, 1.0], [ENTRY_Y, MID_ENTRY_Y, 0, MID_EXIT_Y, EXIT_Y, FAR_EXIT_Y]);
+    rotateTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 0.30, 0.39, 1.0], [24, 12, 0, -12, -24, -24]);
+    scaleTransform = useTransform(scrollYProgress, [0, 0.10, 0.20, 0.30, 0.39, 1.0], [0.65, 0.88, 1, 0.88, 0.65, 0.65]);
+    opacityTransform = useTransform(scrollYProgress, [0, 0.08, 0.20, 0.30, 0.38, 1.0], [0, 0.85, 1, 0.85, 0, 0]);
   } else if (index === 2) {
-    xTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58, 0.78], [740, 360, 0, -360, -740]);
-    yTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58, 0.78], [320, 110, 0, 110, 320]);
-    rotateTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58, 0.78], [24, 12, 0, -12, -24]);
-    scaleTransform = useTransform(scrollYProgress, [0, 0.20, 0.39, 0.58, 0.78], [0.72, 0.88, 1, 0.88, 0.72]);
-    opacityTransform = useTransform(scrollYProgress, [0.06, 0.18, 0.39, 0.64, 0.77], [0, 0.85, 1, 0.85, 0]);
+    xTransform = useTransform(scrollYProgress, [0, 0.19, 0.29, 0.39, 0.49, 0.58, 1.0], [ENTRY_X, ENTRY_X, MID_ENTRY_X, 0, MID_EXIT_X, EXIT_X, FAR_EXIT_X]);
+    yTransform = useTransform(scrollYProgress, [0, 0.19, 0.29, 0.39, 0.49, 0.58, 1.0], [ENTRY_Y, ENTRY_Y, MID_ENTRY_Y, 0, MID_EXIT_Y, EXIT_Y, FAR_EXIT_Y]);
+    rotateTransform = useTransform(scrollYProgress, [0, 0.19, 0.29, 0.39, 0.49, 0.58, 1.0], [24, 24, 12, 0, -12, -24, -24]);
+    scaleTransform = useTransform(scrollYProgress, [0, 0.19, 0.29, 0.39, 0.49, 0.58, 1.0], [0.65, 0.65, 0.88, 1, 0.88, 0.65, 0.65]);
+    opacityTransform = useTransform(scrollYProgress, [0, 0.19, 0.27, 0.39, 0.49, 0.57, 1.0], [0, 0, 0.85, 1, 0.85, 0, 0]);
   } else if (index === 3) {
-    xTransform = useTransform(scrollYProgress, [0.20, 0.39, 0.58, 0.78, 1.0], [740, 360, 0, -360, -360]);
-    yTransform = useTransform(scrollYProgress, [0.20, 0.39, 0.58, 0.78, 1.0], [320, 110, 0, 110, 110]);
-    rotateTransform = useTransform(scrollYProgress, [0.20, 0.39, 0.58, 0.78, 1.0], [24, 12, 0, -12, -12]);
-    scaleTransform = useTransform(scrollYProgress, [0.20, 0.39, 0.58, 0.78, 1.0], [0.72, 0.88, 1, 0.88, 0.88]);
-    opacityTransform = useTransform(scrollYProgress, [0.22, 0.36, 0.58, 0.78, 1.0], [0, 0.85, 1, 0.85, 0.85]);
+    xTransform = useTransform(scrollYProgress, [0, 0.38, 0.48, 0.58, 0.68, 0.78, 1.0], [ENTRY_X, ENTRY_X, MID_ENTRY_X, 0, MID_EXIT_X, EXIT_X, FAR_EXIT_X]);
+    yTransform = useTransform(scrollYProgress, [0, 0.38, 0.48, 0.58, 0.68, 0.78, 1.0], [ENTRY_Y, ENTRY_Y, MID_ENTRY_Y, 0, MID_EXIT_Y, EXIT_Y, FAR_EXIT_Y]);
+    rotateTransform = useTransform(scrollYProgress, [0, 0.38, 0.48, 0.58, 0.68, 0.78, 1.0], [24, 24, 12, 0, -12, -24, -24]);
+    scaleTransform = useTransform(scrollYProgress, [0, 0.38, 0.48, 0.58, 0.68, 0.78, 1.0], [0.65, 0.65, 0.88, 1, 0.88, 0.65, 0.65]);
+    opacityTransform = useTransform(scrollYProgress, [0, 0.38, 0.46, 0.58, 0.68, 0.77, 1.0], [0, 0, 0.85, 1, 0.85, 0, 0]);
   } else {
     // index === 4 (FINAL CARD: locks in center from 0.78 to 1.00)
-    xTransform = useTransform(scrollYProgress, [0.39, 0.58, 0.78, 1.0], [740, 360, 0, 0]);
-    yTransform = useTransform(scrollYProgress, [0.39, 0.58, 0.78, 1.0], [320, 110, 0, 0]);
-    rotateTransform = useTransform(scrollYProgress, [0.39, 0.58, 0.78, 1.0], [24, 12, 0, 0]);
-    scaleTransform = useTransform(scrollYProgress, [0.39, 0.58, 0.78, 1.0], [0.72, 0.88, 1, 1]);
-    opacityTransform = useTransform(scrollYProgress, [0.42, 0.56, 0.78, 1.0], [0, 0.85, 1, 1]);
+    xTransform = useTransform(scrollYProgress, [0, 0.58, 0.68, 0.78, 1.0], [ENTRY_X, ENTRY_X, MID_ENTRY_X, 0, 0]);
+    yTransform = useTransform(scrollYProgress, [0, 0.58, 0.68, 0.78, 1.0], [ENTRY_Y, ENTRY_Y, MID_ENTRY_Y, 0, 0]);
+    rotateTransform = useTransform(scrollYProgress, [0, 0.58, 0.68, 0.78, 1.0], [24, 24, 12, 0, 0]);
+    scaleTransform = useTransform(scrollYProgress, [0, 0.58, 0.68, 0.78, 1.0], [0.65, 0.65, 0.88, 1, 1]);
+    opacityTransform = useTransform(scrollYProgress, [0, 0.58, 0.66, 0.78, 1.0], [0, 0, 0.85, 1, 1]);
   }
+
+  const pointerEvents = useTransform(opacityTransform, (val) => (val > 0.05 ? 'auto' : 'none'));
 
   const accentBarColor =
     caseStudy.accentColor === 'teal'
@@ -87,9 +104,10 @@ const ArcCard: React.FC<ArcCardProps> = ({
         rotate: rotateTransform,
         scale: scaleTransform,
         opacity: opacityTransform,
+        pointerEvents,
         zIndex: index === 4 ? 30 : index + 10,
       }}
-      className="absolute inset-0 flex items-center justify-center p-2 sm:p-4 pointer-events-auto"
+      className="absolute inset-0 flex items-center justify-center p-2 sm:p-4"
     >
       <div
         id={`work-card-${caseStudy.id}`}
