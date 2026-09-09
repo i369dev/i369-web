@@ -473,25 +473,26 @@ export const WorkPage: React.FC<WorkPageProps> = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {/* 1x1 Square Logo Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
             {TRUSTED_CLIENTS.map((client, idx) => (
-              <TiltCard
+              <div
                 key={idx}
-                isDark={true}
-                maxTilt={8}
-                scale={1.03}
-                className="p-5 sm:p-6 flex items-center justify-between rounded-none cursor-default"
+                id={`trusted-client-card-${idx}`}
+                className="group relative aspect-square w-full rounded-2xl sm:rounded-3xl bg-[#111111] sm:bg-white/5 border border-white/10 hover:border-[#00FFFF]/50 shadow-[0_8px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_12px_36px_rgba(0,255,255,0.18)] backdrop-blur-xl flex items-center justify-center p-6 sm:p-7 transition-all duration-300 hover:scale-[1.04] overflow-hidden"
               >
-                <div>
-                  <h4 className="font-display font-bold text-base sm:text-lg text-white">
-                    {client.name}
-                  </h4>
-                  <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 mt-0.5">
-                    {client.role}
-                  </p>
-                </div>
-                <div className="w-2 h-2 accent-teal shrink-0"></div>
-              </TiltCard>
+                {/* Subtle Ambient Hover Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/30 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[#00FFFF]/0 group-hover:bg-[#00FFFF]/10 rounded-full blur-xl transition-all duration-500 pointer-events-none" />
+
+                {/* Company Logo strictly centered inside 1x1 container */}
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="w-full h-full max-h-[62%] max-w-[78%] object-contain filter opacity-75 group-hover:opacity-100 contrast-125 brightness-95 group-hover:brightness-110 group-hover:scale-105 transition-all duration-300 select-none pointer-events-none"
+                  loading="lazy"
+                />
+              </div>
             ))}
           </div>
 

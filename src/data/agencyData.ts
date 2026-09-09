@@ -260,13 +260,91 @@ export const VENTURES: VentureItem[] = [
   }
 ];
 
-export const TRUSTED_CLIENTS = [
-  { name: 'Aitken Spence', role: 'Conglomerate & Hospitality' },
-  { name: 'Hilton Yala', role: 'Luxury Wilderness Resort' },
-  { name: 'The Pekoe Trail', role: 'Official Digital Partner' },
-  { name: 'Coco Organic', role: 'Sena Mills Sustainable Foods' },
-  { name: 'Balinese Spas', role: 'Wellness & Healing Retreats' },
-  { name: 'Life Balance Wellness', role: 'Holistic Health Centers' }
+export interface TrustedClient {
+  name: string;
+  role?: string;
+  logo: string;
+}
+
+export const TRUSTED_CLIENTS: TrustedClient[] = [
+  {
+    name: 'Aitken Spence',
+    role: 'Conglomerate & Hospitality',
+    logo: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+        <path d="M100 14L128 48H72L100 14Z" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M72 48L52 74H148L128 48" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="100" cy="44" r="3.5" fill="#00FFFF"/>
+        <text x="100" y="98" font-family="'Space Grotesk', system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="3.5">AITKEN SPENCE</text>
+        <text x="100" y="112" font-family="monospace" font-size="7" font-weight="600" fill="#888888" text-anchor="middle" letter-spacing="2">HOTELS &amp; RESORTS</text>
+      </svg>
+    `)}`
+  },
+  {
+    name: 'Hilton Yala',
+    role: 'Luxury Wilderness Resort',
+    logo: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+        <rect x="80" y="14" width="40" height="46" rx="4" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+        <path d="M90 25V49M110 25V49M90 37H110" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="100" cy="14" r="2.5" fill="#FFFF00"/>
+        <text x="100" y="82" font-family="'Cinzel', Georgia, serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">HILTON</text>
+        <text x="100" y="98" font-family="monospace" font-size="7.5" font-weight="600" fill="#888888" text-anchor="middle" letter-spacing="3.5">YALA WILDERNESS</text>
+      </svg>
+    `)}`
+  },
+  {
+    name: 'The Pekoe Trail',
+    role: 'Official Digital Partner',
+    logo: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+        <path d="M100 12C85 28 85 46 100 58C115 46 115 28 100 12Z" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+        <path d="M100 20V52" stroke="#00FFFF" stroke-width="2" stroke-linecap="round"/>
+        <path d="M72 58C86 52 114 62 128 56" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+        <text x="100" y="85" font-family="'Space Grotesk', system-ui, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="3.5">THE PEKOE TRAIL</text>
+        <text x="100" y="100" font-family="monospace" font-size="7.5" font-weight="500" fill="#888888" text-anchor="middle" letter-spacing="2.5">CEYLON HIGHLANDS</text>
+      </svg>
+    `)}`
+  },
+  {
+    name: 'Coco Organic',
+    role: 'Sena Mills Sustainable Foods',
+    logo: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+        <circle cx="100" cy="35" r="22" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="3 2" fill="none"/>
+        <path d="M100 20C92 27 92 39 100 47C108 39 108 27 100 20Z" fill="#00FFFF" opacity="0.9"/>
+        <path d="M85 36C95 36 105 32 115 32" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+        <text x="100" y="82" font-family="'Space Grotesk', system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">COCO ORGANIC</text>
+        <text x="100" y="98" font-family="monospace" font-size="7.5" font-weight="500" fill="#888888" text-anchor="middle" letter-spacing="2">SENA MILLS FOODS</text>
+      </svg>
+    `)}`
+  },
+  {
+    name: 'Balinese Spas',
+    role: 'Wellness & Healing Retreats',
+    logo: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+        <path d="M100 16C94 28 88 38 78 46C90 46 96 38 100 30C104 38 110 46 122 46C112 38 106 28 100 16Z" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+        <circle cx="100" cy="38" r="3.5" fill="#FF00FF"/>
+        <path d="M74 48H126" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+        <text x="100" y="80" font-family="'Cinzel', Georgia, serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">BALINESE SPAS</text>
+        <text x="100" y="96" font-family="monospace" font-size="7.5" font-weight="500" fill="#888888" text-anchor="middle" letter-spacing="2.5">LUXURY WELLNESS</text>
+      </svg>
+    `)}`
+  },
+  {
+    name: 'Life Balance Wellness',
+    role: 'Holistic Health Centers',
+    logo: `data:image/svg+xml;utf8,${encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+        <ellipse cx="100" cy="46" rx="20" ry="7" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+        <ellipse cx="100" cy="34" rx="14" ry="5.5" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+        <ellipse cx="100" cy="23" rx="8" ry="4" stroke="#FFFF00" stroke-width="2" fill="none"/>
+        <text x="100" y="82" font-family="'Space Grotesk', system-ui, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">LIFE BALANCE</text>
+        <text x="100" y="98" font-family="monospace" font-size="7.5" font-weight="500" fill="#888888" text-anchor="middle" letter-spacing="2">HEALTH CENTERS</text>
+      </svg>
+    `)}`
+  }
 ];
 
 export interface PartnerMarqueeItem {
