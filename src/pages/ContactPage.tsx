@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { PageId } from '../types';
-import { Send, CheckCircle2, Mail, Clock } from 'lucide-react';
+import { Send, Mail, Clock } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 
@@ -180,19 +180,46 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             >
               {isSubmitted ? (
                 <div className="py-12 sm:py-16 text-center space-y-5 sm:space-y-6">
-                  <div className="w-16 h-16 mx-auto bg-black/5 border border-black/20 flex items-center justify-center text-black shadow-inner">
-                    <CheckCircle2 className="w-8 h-8 text-black" />
+                  {/* Vibrantly Colored CMYK Icon Container */}
+                  <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
+                    {/* Ambient CMYK Gradient Aura */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400 via-fuchsia-500 to-yellow-400 rounded-full blur-md opacity-40 animate-pulse" />
+                    {/* Elevated Glass Container */}
+                    <div className="relative w-16 h-16 rounded-full bg-white/95 border border-white shadow-[0_8px_24px_rgba(0,0,0,0.15)] flex items-center justify-center">
+                      <svg viewBox="0 0 48 48" className="w-10 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="cmykConfirmRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#00E5FF" />
+                            <stop offset="50%" stopColor="#FF00FF" />
+                            <stop offset="100%" stopColor="#FFD600" />
+                          </linearGradient>
+                          <linearGradient id="cmykCheckGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#00C4DF" />
+                            <stop offset="100%" stopColor="#D946EF" />
+                          </linearGradient>
+                        </defs>
+                        {/* Outer CMYK Orbit Ring */}
+                        <circle cx="24" cy="24" r="21" stroke="url(#cmykConfirmRing)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="3 3" />
+                        {/* Inner Tint Circle */}
+                        <circle cx="24" cy="24" r="17" fill="url(#cmykConfirmRing)" fillOpacity="0.12" stroke="url(#cmykConfirmRing)" strokeWidth="1.5" />
+                        {/* Checkmark */}
+                        <path d="M15 24.5L21.5 31L33 18.5" stroke="url(#cmykCheckGrad)" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
                   </div>
+
                   <div className="space-y-2">
-                    <span className="font-mono-code text-xs uppercase tracking-widest text-zinc-600 font-bold">
+                    <span className="font-mono-code text-xs uppercase tracking-widest text-cyan-600 font-bold inline-flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
                       Transmission Confirmed
+                      <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-500" />
                     </span>
                     <h3 className="gothic-display text-3xl sm:text-4xl text-black">
-                      Inquiry Received.
+                      Inquiry <span className="text-fuchsia-600">Received</span>.
                     </h3>
                   </div>
                   <p className="text-zinc-700 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
-                    Thank you, <strong className="text-black font-bold">{formData.name}</strong>. Your project brief has been recorded by our Badulla studio team. We will review your requirements and respond within 24 hours.
+                    Thank you, <strong className="text-black font-bold">{formData.name}</strong>. Your project brief has been recorded by our <span className="text-cyan-600 font-semibold">Badulla studio team</span>. We will review your requirements and respond within <span className="text-amber-600 font-semibold font-mono-code">24 hours</span>.
                   </p>
                   <MagneticButton
                     variant="primary"
@@ -208,29 +235,31 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     }}
                     className="w-full sm:w-auto px-6 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
                   >
-                    Submit Another Brief
+                    <span className="font-bold">
+                      Submit Another <span className="text-yellow-400 group-hover:text-black transition-colors">Brief</span>
+                    </span>
                   </MagneticButton>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-                  {/* Form Header with High Contrast */}
+                  {/* Form Header with High Contrast and CMYK Text Accents */}
                   <div className="space-y-2 pb-4 border-b border-black/10">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-black" />
-                        <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-black font-bold">
+                        <span className="w-2 h-2 bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.5)]" />
+                        <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-cyan-600 font-bold">
                           Client Inquiry Brief
                         </span>
                       </div>
-                      <span className="font-mono-code text-[10px] text-zinc-500 uppercase tracking-widest font-bold">
+                      <span className="font-mono-code text-[10px] text-fuchsia-600 uppercase tracking-widest font-bold">
                         Ground Zero Transmit
                       </span>
                     </div>
                     <h3 className="gothic-display text-2xl sm:text-3xl text-black tracking-tight">
-                      Project Specification Brief
+                      Project <span className="text-fuchsia-600">Specification</span> Brief
                     </h3>
                     <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
-                      Direct submission to the executive strategy and software engineering council.
+                      Direct submission to the <span className="text-cyan-600 font-medium">executive strategy</span> and <span className="text-amber-600 font-medium">software engineering</span> council.
                     </p>
                   </div>
 
@@ -238,7 +267,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                        Name <span className="text-[#FF00FF]">*</span>
+                        Name <span className="text-fuchsia-600 font-bold">*</span>
                       </label>
                       <input
                         type="text"
@@ -252,7 +281,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                     <div>
                       <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                        Company / Brand
+                        Company / Brand <span className="text-cyan-600 font-mono-code text-[10px] lowercase font-normal ml-1">(optional)</span>
                       </label>
                       <input
                         type="text"
@@ -268,7 +297,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                        Email Address <span className="text-[#FF00FF]">*</span>
+                        Email Address <span className="text-cyan-600 font-bold">*</span>
                       </label>
                       <input
                         type="email"
@@ -301,7 +330,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   {/* Message */}
                   <div>
                     <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                      Project Objectives & Message <span className="text-[#FF00FF]">*</span>
+                      Project Objectives & Message <span className="text-fuchsia-600 font-bold">*</span>
                     </label>
                     <textarea
                       rows={4}
@@ -316,7 +345,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   {/* Submit Action Strip */}
                   <div className="pt-3 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <span className="font-mono-code text-[11px] text-zinc-600 font-medium">
-                      * All submissions are transmitted directly to studio directors.
+                      <span className="text-cyan-600 font-bold">*</span> All submissions are transmitted directly to studio directors.
                     </span>
 
                     <MagneticButton
@@ -328,8 +357,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         <span>Transmitting...</span>
                       ) : (
                         <>
-                          <span className="font-bold">Send Inquiry</span>
-                          <Send className="w-4 h-4 ml-1" />
+                          <span className="font-bold">
+                            Send <span className="text-yellow-400 group-hover:text-black transition-colors">Inquiry</span>
+                          </span>
+                          <Send className="w-4 h-4 ml-1.5 text-cyan-400 group-hover:text-black transition-colors" />
                         </>
                       )}
                     </MagneticButton>
