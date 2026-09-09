@@ -112,18 +112,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <div className="h-full flex-1 bg-[#FFFF00]" />
                 </div>
 
-                {/* Supersized Centered Logo Showcase Container */}
-                <div className="relative flex-1 min-h-[280px] sm:min-h-[340px] md:min-h-[380px] w-full flex items-center justify-center p-8 sm:p-10 md:p-12 bg-gradient-to-b from-white/[0.04] via-black/20 to-black/40 border-b border-white/10 overflow-hidden group">
+                {/* Supersized Tall Centered Logo Showcase Container */}
+                <div className="relative flex-1 min-h-[460px] sm:min-h-[520px] md:min-h-[580px] h-[30rem] sm:h-[34rem] w-full flex items-center justify-center p-6 sm:p-8 md:p-10 bg-gradient-to-b from-white/[0.04] via-black/20 to-black/40 border-b border-white/10 overflow-hidden group">
                   {/* Atmospheric radial ambient light */}
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,255,255,0.08)_0%,rgba(255,0,255,0.03)_45%,transparent_75%)] pointer-events-none" />
                   <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none opacity-40" />
 
-                  {/* Centered Supersized Logo Image */}
+                  {/* Centered Vertical Logo Image */}
                   <img
                     id="contact-studio-logo-image"
                     src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
                     alt="Imaginative 369 Logo"
-                    className="w-full h-full max-h-64 sm:max-h-72 md:max-h-80 object-contain filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)] group-hover:scale-105 group-hover:drop-shadow-[0_16px_36px_rgba(0,255,255,0.25)] transition-all duration-700 ease-out"
+                    className="w-full h-full max-h-[26rem] sm:max-h-[30rem] md:max-h-[32rem] object-contain filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)] group-hover:scale-105 group-hover:drop-shadow-[0_16px_36px_rgba(0,255,255,0.25)] transition-all duration-700 ease-out"
                     referrerPolicy="no-referrer"
                   />
                 </div>
