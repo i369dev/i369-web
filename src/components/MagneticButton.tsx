@@ -72,7 +72,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
           : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
         willChange: 'transform',
       }}
-      className={`relative inline-flex items-center justify-center font-mono-code font-bold uppercase tracking-widest text-xs transition-all duration-200 cursor-pointer overflow-hidden rounded-none ${getVariantStyles()} ${className}`}
+      className={`relative inline-flex items-center justify-center font-montserrat font-bold uppercase tracking-widest text-xs transition-all duration-200 cursor-pointer overflow-hidden rounded-none ${getVariantStyles()} ${className}`}
       {...props}
     >
       {/* Subtle shine sweep on hover */}

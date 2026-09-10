@@ -73,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs font-semibold uppercase tracking-widest" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs font-semibold uppercase tracking-widest font-montserrat" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const isActive = currentPage === link.id;
               return (
@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.id}
                   id={`nav-link-${link.id}`}
                   onClick={() => handleNavClick(link.id)}
-                  className={`relative py-1 text-xs uppercase font-mono-code tracking-widest transition-all duration-200 cursor-pointer ${
+                  className={`relative py-1 text-xs uppercase font-montserrat font-medium tracking-widest transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'text-black font-bold border-b-2 border-black'
                       : 'text-zinc-600 hover:text-black hover:opacity-75'
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="mobile-inquiry-cta"
               onClick={onOpenInquiry}
-              className="px-3 py-1.5 bg-black text-white text-[10px] uppercase font-mono-code font-bold tracking-wider hover:bg-[#FFFF00] hover:text-black transition-colors"
+              className="px-3 py-1.5 bg-black text-white text-[10px] uppercase font-montserrat font-bold tracking-wider hover:bg-[#FFFF00] hover:text-black transition-colors"
             >
               Contact
             </button>
@@ -163,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {link.number}
                   </span>
                   <span
-                    className={`gothic-display text-3xl font-black ${
+                    className={`font-montserrat text-3xl font-bold tracking-tight ${
                       currentPage === link.id
                         ? 'text-black underline decoration-2 underline-offset-4'
                         : 'text-zinc-600 group-hover:text-black'
@@ -195,7 +195,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenInquiry();
               }}
-              className="w-full py-4 bg-black text-white font-mono-code text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
+              className="w-full py-4 bg-black text-white font-montserrat text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
             >
               Start Your Project
             </button>

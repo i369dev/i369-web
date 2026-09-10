@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
 @theme {
+  --font-philosopher: "Philosopher", "Georgia", "Cambria", "Times New Roman", serif;
+  --font-montserrat: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-opensans: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
   --font-serif: "Philosopher", "Georgia", "Cambria", "Times New Roman", serif;
   --font-gothic: "Philosopher", "Georgia", serif;
   --font-display: "Philosopher", "Georgia", serif;
-  --font-body: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Philosopher", "Georgia", serif;
+  --font-subheading: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "Space Mono", monospace;
 
   --color-brand-cyan: #00FFFF;
@@ -22,18 +28,39 @@
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    font-family: var(--font-body), "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-opensans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #141414;
     background-color: #ffffff;
     overflow-x: hidden;
     width: 100%;
     min-width: 320px;
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif), "Philosopher", "Georgia", serif;
+  /* Headings (H1, H2): 'Philosopher' (serif/display) */
+  h1, h2,
+  h1.gothic-display,
+  h2.gothic-display,
+  .font-heading {
+    font-family: var(--font-philosopher), "Philosopher", "Georgia", serif;
   }
-  p, span, button, a, input, textarea, select, label {
-    font-family: var(--font-body), "Plus Jakarta Sans", "Inter", sans-serif;
+
+  /* Subheadings (H3, H4, H5, H6): 'Montserrat' (sans-serif) */
+  h3, h4, h5, h6,
+  h3.gothic-display,
+  h4.gothic-display,
+  h5.gothic-display,
+  h6.gothic-display,
+  .font-subheading {
+    font-family: var(--font-montserrat), "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Body Text (Paragraphs, inputs, labels, general text): 'Open Sans' (sans-serif) */
+  p, input, textarea, select, label, li, td, th, blockquote {
+    font-family: var(--font-opensans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Buttons, Badges, Navigation Menu: 'Montserrat' (sans-serif) */
+  button, [role="button"], .btn, nav, .badge, [data-badge], .glass-pill, .font-button, .font-nav {
+    font-family: var(--font-montserrat), "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 }
 
@@ -87,14 +114,35 @@
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
 }
 
-/* Modern Serif Title & Headline Typography */
+/* Explicit Custom Font Families */
+.font-philosopher {
+  font-family: 'Philosopher', 'Georgia', 'Cambria', serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.font-opensans {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Modern Serif Title & Headline Typography (H1, H2) */
 .gothic-display,
 .font-serif-modern,
-.font-serif {
+.font-serif,
+.font-heading {
   font-family: 'Philosopher', 'Georgia', 'Cambria', serif;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 0.95;
+}
+
+/* Subheadings & Nav & Buttons */
+.font-subheading,
+.font-nav,
+.font-button {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .thin-grid {
@@ -139,7 +187,7 @@
 
 .font-body,
 .font-sans {
-  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .font-mono-code {
