@@ -441,137 +441,234 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       </AnimatePresence>
 
       {/* =========================================================================
-          OUR PHILOSOPHY: Strategy to Screen
+          OUR PHILOSOPHY: Strategy to Screen (White Glassmorphic & Scroll Reveal)
          ========================================================================= */}
-      <section className="bg-white text-zinc-950 py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-4xl">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 accent-orange"></div>
-              <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
+      <section
+        id="our-philosophy-section"
+        className="relative bg-zinc-50/80 text-zinc-950 py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid overflow-hidden"
+      >
+        {/* Luminous Ambient Light Refraction Glow behind White Frosted Glass */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-r from-cyan-200/25 via-fuchsia-200/20 to-yellow-200/25 blur-3xl rounded-full pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto space-y-8 sm:space-y-10">
+          {/* Header Block: Scroll-Driven Reveal */}
+          <div className="max-w-4xl space-y-3 sm:space-y-4">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 px-3 py-1 bg-white/80 backdrop-blur-md border border-black/10 shadow-sm"
+            >
+              <div className="w-2 h-2 bg-gradient-to-r from-[#00FFFF] via-[#FF00FF] to-[#FFFF00]" />
+              <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-widest text-zinc-800 font-bold">
                 Operating Axiom
               </span>
-            </div>
+            </motion.div>
 
-            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-black tracking-tight leading-none mb-4 sm:mb-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="gothic-display text-3xl sm:text-5xl md:text-6xl text-black tracking-tight leading-none"
+            >
               Our Philosophy: "Strategy to Screen."
-            </h2>
+            </motion.h2>
+          </div>
 
-            <div className="glass-panel-light p-4 sm:p-6 border-l-4 border-l-black">
-              <p className="text-base sm:text-xl md:text-2xl text-zinc-800 font-medium leading-relaxed">
-                Every project starts with a plan and ends with something real — a launched app, a finished film, a campaign that converts. <span className="font-bold text-black">We don't hand off decks; we deliver outcomes.</span>
+          {/* Core Axiom White Glassmorphic Card (Sequential Reveal Beat 2) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative p-6 sm:p-8 md:p-10 bg-white/85 sm:bg-white/80 backdrop-blur-2xl border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.06),0_0_35px_rgba(255,255,255,0.7)] overflow-hidden"
+          >
+            {/* Top CMYK Hairline Light Refraction Bar */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#00FFFF] via-[#FF00FF] to-[#FFFF00]" />
+
+            <div className="border-l-4 border-l-black pl-4 sm:pl-6">
+              <p className="text-lg sm:text-2xl md:text-3xl text-zinc-900 font-medium leading-relaxed">
+                Every project starts with a plan and ends with something real — a launched app, a finished film, a campaign that converts.{' '}
+                <span className="font-bold text-black underline decoration-[#00FFFF] decoration-2 underline-offset-4">
+                  We don't hand off decks; we deliver outcomes.
+                </span>
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* =========================================================================
           HOW WE'RE BUILT: The Dual-Engine Model with 3D Tilt Cards
          ========================================================================= */}
-      <section className="bg-[#111] text-white py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono-code text-[#00FFFF] uppercase tracking-widest">
-              Organizational Architecture
+      <section
+        id="dual-engine-section"
+        className="relative text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-fixed bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=85')`,
+        }}
+      >
+        {/* Modern Multi-Layer Gradient Overlays for Cinematic Depth & Pristine Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90 backdrop-blur-[2px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#00FFFF]/15 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
+
+        <div className="relative z-10 max-w-7xl mx-auto space-y-10 sm:space-y-12">
+          {/* Header Block: Sequential Scroll Reveal Beat 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center max-w-3xl mx-auto space-y-3"
+          >
+            <div className="inline-flex items-center gap-2">
+              <div className="w-2 h-2 accent-teal"></div>
+              <span className="font-mono-code text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
+                Organizational Architecture
+              </span>
             </div>
             <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
               The Dual-Engine Model.
             </h2>
-            <p className="text-zinc-400 font-light text-sm sm:text-base md:text-lg">
+            <p className="text-zinc-300 font-normal text-sm sm:text-base md:text-lg">
               Imaginative369 runs on two engines working in sync:
             </p>
-          </div>
+          </motion.div>
 
+          {/* Dual Engine Cards Grid: Sequential Scroll Reveal Beats 2 & 3 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {/* ENGINE 1 */}
-            <TiltCard
-              isDark={true}
-              maxTilt={6}
-              scale={1.02}
-              className="p-6 sm:p-8 md:p-10 border-t-4 border-t-[#00FFFF] space-y-4 sm:space-y-6 rounded-none"
+            {/* ENGINE 1: Agency Services */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="h-full"
             >
-              <div className="flex items-baseline justify-between">
-                <span className="font-mono-code text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
-                  Engine 01
-                </span>
-                <span className="font-mono-code text-xs text-zinc-400 font-bold">
-                  Client Mandates
-                </span>
-              </div>
+              <TiltCard
+                isDark={true}
+                maxTilt={8}
+                scale={1.02}
+                glowColor="rgba(0, 255, 255, 0.25)"
+                className="h-full p-6 sm:p-8 md:p-10 space-y-4 sm:space-y-6 rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#00FFFF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all flex flex-col justify-between"
+              >
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-mono-code text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
+                      Engine 01
+                    </span>
+                    <span className="font-mono-code text-xs text-zinc-400 font-bold">
+                      Client Mandates
+                    </span>
+                  </div>
 
-              <div>
-                <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
-                  Agency Services
-                </h3>
-                <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
-                  (What you hire us for)
-                </p>
-              </div>
+                  <div>
+                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
+                      Agency Services
+                    </h3>
+                    <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
+                      (What you hire us for)
+                    </p>
+                  </div>
 
-              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
-                Performance marketing, software engineering, destination branding, and cinematic production delivered through retainers and project-based contracts.
-              </p>
-
-              <div className="pt-4 border-t border-white/10 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00FFFF] shrink-0" />
-                  <span>Custom Retainers & SLA Guarantees</span>
+                  <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
+                    Performance marketing, software engineering, destination branding, and cinematic production delivered through retainers and project-based contracts.
+                  </p>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00FFFF] shrink-0" />
-                  <span>Regional Tourism & Corporate Enterprise</span>
-                </div>
-              </div>
-            </TiltCard>
 
-            {/* ENGINE 2 */}
-            <TiltCard
-              isDark={true}
-              maxTilt={6}
-              scale={1.02}
-              className="p-6 sm:p-8 md:p-10 border-t-4 border-t-[#FF00FF] space-y-4 sm:space-y-6 rounded-none"
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00FFFF] shrink-0" />
+                    <span>Custom Retainers & SLA Guarantees</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00FFFF] shrink-0" />
+                    <span>Regional Tourism & Corporate Enterprise</span>
+                  </div>
+                </div>
+              </TiltCard>
+            </motion.div>
+
+            {/* ENGINE 2: Venture Studio */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.65, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="h-full"
             >
-              <div className="flex items-baseline justify-between">
-                <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF00FF] font-bold">
-                  Engine 02
-                </span>
-                <span className="font-mono-code text-xs text-zinc-400 font-bold">
-                  Proprietary IP
-                </span>
-              </div>
+              <TiltCard
+                isDark={true}
+                maxTilt={8}
+                scale={1.02}
+                glowColor="rgba(255, 0, 255, 0.25)"
+                className="h-full p-6 sm:p-8 md:p-10 space-y-4 sm:space-y-6 rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all flex flex-col justify-between"
+              >
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF00FF] font-bold">
+                      Engine 02
+                    </span>
+                    <span className="font-mono-code text-xs text-zinc-400 font-bold">
+                      Proprietary IP
+                    </span>
+                  </div>
 
-              <div>
-                <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
-                  Venture Studio
-                </h3>
-                <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
-                  (What we build ourselves)
-                </p>
-              </div>
+                  <div>
+                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
+                      Venture Studio
+                    </h3>
+                    <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
+                      (What we build ourselves)
+                    </p>
+                  </div>
 
-              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
-                The revenue from our agency work funds our own proprietary products — software, apps, and media ventures — so we're constantly testing the same technology and creative techniques we bring to our clients.
-              </p>
-
-              <div className="pt-4 border-t border-white/10 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF00FF] shrink-0" />
-                  <span>Active Ventures: LankaQuests, IntotheWILDlk, Inhale Exhale</span>
+                  <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
+                    The revenue from our agency work funds our own proprietary products — software, apps, and media ventures — so we're constantly testing the same technology and creative techniques we bring to our clients.
+                  </p>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF00FF] shrink-0" />
-                  <span>Real-world stress tested architectures</span>
+
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FF00FF] shrink-0" />
+                    <span>Active Ventures: LankaQuests, IntotheWILDlk, Inhale Exhale</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FF00FF] shrink-0" />
+                    <span>Real-world stress tested architectures</span>
+                  </div>
                 </div>
-              </div>
-            </TiltCard>
+              </TiltCard>
+            </motion.div>
           </div>
 
-          <div className="mt-6 sm:mt-8 p-4 sm:p-6 glass-panel-dark text-center border border-white/20">
-            <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-medium">
-              <span className="text-[#FFFF00] font-bold">The result:</span> an agency that doesn't just advise on digital transformation — <span className="text-white font-bold underline decoration-[#FF00FF] underline-offset-4">it lives it</span>.
+          {/* Result Callout Card: Sequential Scroll Reveal Beat 4 */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="p-6 sm:p-8 bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] space-y-5"
+          >
+            <p className="text-sm sm:text-base md:text-lg text-zinc-200 font-normal leading-relaxed text-center">
+              <span className="text-[#FFFF00] font-bold">The result:</span> an agency that doesn't just advise on digital transformation — <span className="text-white font-bold underline decoration-[#FF00FF] underline-offset-8">it lives it</span>.
             </p>
-          </div>
+
+            {/* Graphic Accents matching Our Story */}
+            <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/15">
+              <div className="flex space-x-1.5 w-36 sm:w-48">
+                <div className="h-1 flex-1 accent-teal"></div>
+                <div className="h-1 flex-1 accent-pink"></div>
+                <div className="h-1 flex-1 accent-orange"></div>
+              </div>
+              <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-300 font-bold">
+                Dual Execution Framework
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
