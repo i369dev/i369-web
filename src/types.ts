@@ -58,6 +58,7 @@ export interface TeamMember {
 
 export interface ProjectInquiry {
   name: string;
+  mobile: string;
   company: string;
   email: string;
   projectType: string;

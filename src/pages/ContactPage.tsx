@@ -12,9 +12,11 @@ interface ContactPageProps {
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [formData, setFormData] = useState({
     name: '',
+    mobile: '',
     company: '',
     email: '',
     projectType: 'Tourism Marketing',
+    budgetRange: '$5,000 - $15,000',
     message: '',
   });
 
@@ -24,10 +26,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const projectTypes = [
     'Tourism Marketing',
     'Software Development',
+    'AdventureTech',
     'Media Production',
     'Performance Marketing',
-    'AdventureTech',
+    'Venture Incubation',
     'Other',
+  ];
+
+  const budgetOptions = [
+    '< $5,000',
+    '$5,000 - $15,000',
+    '$15,000 - $35,000',
+    '$35,000+',
+    'Retainer / Equity Partnership',
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -170,14 +181,17 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </TiltCard>
             </motion.div>
 
-            {/* Right: The Official Contact Form (Ultra-Modern White Glassmorphic Card) */}
+            {/* Right: The Official Contact Form (Ultra-Modern White Glassmorphic Card matching Start Your Project) */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 bg-white/[0.88] sm:bg-white/[0.82] backdrop-blur-2xl p-6 sm:p-8 md:p-10 lg:p-12 border border-white/60 hover:border-white/90 shadow-[0_20px_50px_rgba(0,0,0,0.35),0_0_30px_rgba(255,255,255,0.12)] rounded-none text-zinc-900 transition-all duration-300 space-y-6"
+              className="lg:col-span-7 relative bg-white/[0.88] sm:bg-white/[0.85] backdrop-blur-2xl p-6 sm:p-8 md:p-10 lg:p-12 border border-white/60 hover:border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_35px_rgba(255,255,255,0.15)] rounded-none text-zinc-900 transition-all duration-300 space-y-6"
             >
+              {/* Top CMYK accent bar matching Start Your Project */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-yellow-400 pointer-events-none opacity-80" />
+
               {isSubmitted ? (
                 <div className="py-12 sm:py-16 text-center space-y-5 sm:space-y-6">
                   {/* Vibrantly Colored CMYK Icon Container */}
@@ -215,25 +229,36 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-500" />
                     </span>
                     <h3 className="gothic-display text-3xl sm:text-4xl text-black">
-                      Inquiry <span className="text-fuchsia-600">Received</span>.
+                      Inquiry <span className="text-fuchsia-600">Recorded</span>.
                     </h3>
+                    <p className="text-zinc-700 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
+                      Thank you, <strong className="text-black font-bold">{formData.name}</strong>. The Imaginative 369 strategy directorate in Badulla will review your brief and respond within <span className="text-amber-600 font-semibold font-mono-code">24 hours</span>.
+                    </p>
                   </div>
-                  <p className="text-zinc-700 max-w-md mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
-                    Thank you, <strong className="text-black font-bold">{formData.name}</strong>. Your project brief has been recorded by our <span className="text-cyan-600 font-semibold">Badulla studio team</span>. We will review your requirements and respond within <span className="text-amber-600 font-semibold font-mono-code">24 hours</span>.
-                  </p>
+
+                  <div className="p-4 sm:p-5 bg-white/60 border border-black/15 shadow-sm max-w-md mx-auto text-left text-xs font-mono-code space-y-1.5">
+                    <p className="text-cyan-700 font-bold">PROJECT: <span className="text-black font-medium">{formData.projectType}</span></p>
+                    <p className="text-zinc-700 font-bold">MOBILE: <span className="text-black font-medium">{formData.mobile || '—'}</span></p>
+                    <p className="text-zinc-700 font-bold">EMAIL: <span className="text-black font-medium">{formData.email}</span></p>
+                    <p className="text-zinc-700 font-bold">ORGANIZATION: <span className="text-black font-medium">{formData.company || 'Direct Client'}</span></p>
+                    <p className="text-zinc-700 font-bold">TARGET BUDGET: <span className="text-black font-medium">{formData.budgetRange}</span></p>
+                  </div>
+
                   <MagneticButton
                     variant="primary"
                     onClick={() => {
                       setIsSubmitted(false);
                       setFormData({
                         name: '',
+                        mobile: '',
                         company: '',
                         email: '',
                         projectType: 'Tourism Marketing',
+                        budgetRange: '$5,000 - $15,000',
                         message: '',
                       });
                     }}
-                    className="w-full sm:w-auto px-6 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
+                    className="w-full sm:w-auto px-8 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
                   >
                     <span className="font-bold">
                       Submit Another <span className="text-yellow-400 group-hover:text-black transition-colors">Brief</span>
@@ -263,81 +288,119 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     </p>
                   </div>
 
-                  {/* Name & Company Inputs */}
+                  {/* 1. Name & Mobile */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                        Name <span className="text-fuchsia-600 font-bold">*</span>
+                        Your Full Name <span className="text-fuchsia-600 font-bold">*</span>
                       </label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Your full name"
+                        placeholder="e.g. Ruwan Silva"
                         className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                        Company / Brand <span className="text-cyan-600 font-mono-code text-[10px] lowercase font-normal ml-1">(optional)</span>
+                        Mobile Number <span className="text-cyan-600 font-bold">*</span>
                       </label>
                       <input
-                        type="text"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder="Organization or brand"
+                        type="tel"
+                        required
+                        value={formData.mobile}
+                        onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                        placeholder="e.g. +94 77 123 4567"
                         className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans"
                       />
                     </div>
                   </div>
 
-                  {/* Email & Project Type */}
+                  {/* 2. Email & Company */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                        Email Address <span className="text-cyan-600 font-bold">*</span>
+                        Email Address <span className="text-fuchsia-600 font-bold">*</span>
                       </label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="name@organization.com"
+                        placeholder="name@company.com"
                         className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                        Project Scope / Discipline
+                        Company / Organization
                       </label>
-                      <select
-                        value={formData.projectType}
-                        onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                        className="w-full px-4 py-3 bg-white/80 hover:bg-white border border-black/20 focus:border-black text-black text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all cursor-pointer font-sans"
-                      >
-                        {projectTypes.map((type) => (
-                          <option key={type} value={type} className="bg-white text-black">
-                            {type}
-                          </option>
-                        ))}
-                      </select>
+                      <input
+                        type="text"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        placeholder="e.g. Ceylon Eco Retreats"
+                        className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans"
+                      />
                     </div>
                   </div>
 
-                  {/* Message */}
+                  {/* 3. Project Type */}
                   <div>
                     <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
-                      Project Objectives & Message <span className="text-fuchsia-600 font-bold">*</span>
+                      Project Type
+                    </label>
+                    <select
+                      value={formData.projectType}
+                      onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/80 hover:bg-white border border-black/20 focus:border-black text-black text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all cursor-pointer font-sans"
+                    >
+                      {projectTypes.map((type) => (
+                        <option key={type} value={type} className="bg-white text-black">
+                          {type}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* 4. Estimated Scope / Budget Tier */}
+                  <div>
+                    <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
+                      Estimated Scope / Budget Tier
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {budgetOptions.map((opt) => (
+                        <button
+                          type="button"
+                          key={opt}
+                          onClick={() => setFormData({ ...formData, budgetRange: opt })}
+                          className={`px-3 py-2.5 text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none ${
+                            formData.budgetRange === opt
+                              ? 'border-black bg-black text-white font-bold shadow-sm'
+                              : 'border-black/20 bg-white/70 text-zinc-900 hover:bg-[#FFFF00] hover:text-black hover:border-black font-medium'
+                          }`}
+                        >
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 5. Project Overview & Objectives */}
+                  <div>
+                    <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
+                      Project Overview & Objectives <span className="text-fuchsia-600 font-bold">*</span>
                     </label>
                     <textarea
                       rows={4}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Outline your objectives, timeline, or current challenges..."
+                      placeholder="Describe what you need to achieve, your timeline, or current bottlenecks..."
                       className="w-full px-4 py-3 bg-white/70 hover:bg-white/90 focus:bg-white border border-black/20 focus:border-black text-black placeholder:text-zinc-500 text-sm rounded-none focus:outline-none focus:ring-1 focus:ring-black transition-all font-sans leading-relaxed resize-none"
                     />
                   </div>
@@ -345,13 +408,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   {/* Submit Action Strip */}
                   <div className="pt-3 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <span className="font-mono-code text-[11px] text-zinc-600 font-medium">
-                      <span className="text-cyan-600 font-bold">*</span> All submissions are transmitted directly to studio directors.
+                      <span className="text-cyan-600 font-bold">*</span> Ground Zero Team · Badulla HQ
                     </span>
 
                     <MagneticButton
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto px-8 py-4 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
+                      className="w-full sm:w-auto px-8 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
                     >
                       {isSubmitting ? (
                         <span>Transmitting...</span>
