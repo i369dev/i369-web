@@ -69,7 +69,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
     >
       <div
         id="inquiry-modal-card"
-        className="relative w-full max-w-2xl bg-white/[0.88] sm:bg-white/[0.85] backdrop-blur-2xl border border-white/60 hover:border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_35px_rgba(255,255,255,0.15)] text-zinc-900 rounded-none p-6 sm:p-8 md:p-10 max-h-[90vh] overflow-y-auto transition-all duration-300 space-y-6"
+        className="relative w-full max-w-2xl bg-white/[0.88] sm:bg-white/[0.85] backdrop-blur-2xl border border-white/60 hover:border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_35px_rgba(255,255,255,0.15)] text-zinc-900 rounded-none p-5 sm:p-8 md:p-10 max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain transition-all duration-300 space-y-6"
       >
         {/* Subtle Ambient Refraction Bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-yellow-400 pointer-events-none opacity-80" />
@@ -77,7 +77,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-black hover:bg-[#FFFF00] border border-black/20 hover:border-black p-2 transition-colors cursor-pointer rounded-none bg-white/70 hover:text-black z-10"
+          className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 text-black hover:bg-[#FFFF00] border border-black/20 hover:border-black p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center transition-colors cursor-pointer rounded-none bg-white/70 hover:text-black z-10"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -244,13 +244,13 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
               <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
                 Estimated Scope / Budget Tier
               </label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-2">
                 {budgetOptions.map((opt) => (
                   <button
                     type="button"
                     key={opt}
                     onClick={() => setFormData({ ...formData, budgetRange: opt })}
-                    className={`px-3 py-2.5 text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none ${
+                    className={`px-3 py-2.5 text-[11px] sm:text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none break-words min-h-[42px] flex items-center ${
                       formData.budgetRange === opt
                         ? 'border-black bg-black text-white font-bold shadow-sm'
                         : 'border-black/20 bg-white/70 text-zinc-900 hover:bg-[#FFFF00] hover:text-black hover:border-black font-medium'

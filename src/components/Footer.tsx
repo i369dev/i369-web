@@ -66,11 +66,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               <h4 className="font-mono-code text-xs uppercase tracking-widest text-zinc-500 mb-4 font-bold">
                 Directory
               </h4>
-              <ul className="space-y-2.5 text-xs font-mono-code uppercase tracking-wider">
+              <ul className="space-y-1.5 text-xs font-mono-code uppercase tracking-wider">
                 <li>
                   <button
                     onClick={() => onNavigate('home')}
-                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Home
                   </button>
@@ -78,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('about')}
-                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     About Us
                   </button>
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('services')}
-                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Services
                   </button>
@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('work')}
-                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Our Work
                   </button>
@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('ventures')}
-                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Ventures
                   </button>
@@ -110,7 +110,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('contact')}
-                    className="text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
                   >
                     Contact
                   </button>

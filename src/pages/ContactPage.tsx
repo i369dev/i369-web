@@ -124,7 +124,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
 
                 {/* Supersized Tall Centered Logo Showcase Container */}
-                <div className="relative flex-1 min-h-[460px] sm:min-h-[520px] md:min-h-[580px] h-[30rem] sm:h-[34rem] w-full flex items-center justify-center p-6 sm:p-8 md:p-10 bg-gradient-to-b from-white/[0.04] via-black/20 to-black/40 border-b border-white/10 overflow-hidden group">
+                <div className="relative flex-1 min-h-[260px] sm:min-h-[520px] md:min-h-[580px] h-[18rem] sm:h-[34rem] w-full flex items-center justify-center p-4 sm:p-8 md:p-10 bg-gradient-to-b from-white/[0.04] via-black/20 to-black/40 border-b border-white/10 overflow-hidden group">
                   {/* Atmospheric radial ambient light */}
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,255,255,0.08)_0%,rgba(255,0,255,0.03)_45%,transparent_75%)] pointer-events-none" />
                   <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none opacity-40" />
@@ -134,7 +134,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     id="contact-studio-logo-image"
                     src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
                     alt="Imaginative 369 Logo"
-                    className="w-full h-full max-h-[26rem] sm:max-h-[30rem] md:max-h-[32rem] object-contain filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)] group-hover:scale-105 group-hover:drop-shadow-[0_16px_36px_rgba(0,255,255,0.25)] transition-all duration-700 ease-out"
+                    className="w-full h-full max-h-[16rem] sm:max-h-[30rem] md:max-h-[32rem] object-contain filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)] group-hover:scale-105 group-hover:drop-shadow-[0_16px_36px_rgba(0,255,255,0.25)] transition-all duration-700 ease-out"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -187,7 +187,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 relative bg-white/[0.88] sm:bg-white/[0.85] backdrop-blur-2xl p-6 sm:p-8 md:p-10 lg:p-12 border border-white/60 hover:border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_35px_rgba(255,255,255,0.15)] rounded-none text-zinc-900 transition-all duration-300 space-y-6"
+              className="lg:col-span-7 relative bg-white/[0.88] sm:bg-white/[0.85] backdrop-blur-2xl p-5 sm:p-8 md:p-10 lg:p-12 border border-white/60 hover:border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_35px_rgba(255,255,255,0.15)] rounded-none text-zinc-900 transition-all duration-300 space-y-6"
             >
               {/* Top CMYK accent bar matching Start Your Project */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-yellow-400 pointer-events-none opacity-80" />
@@ -372,13 +372,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <label className="block text-xs font-mono-code uppercase text-zinc-800 font-bold mb-2 tracking-wider">
                       Estimated Scope / Budget Tier
                     </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-2">
                       {budgetOptions.map((opt) => (
                         <button
                           type="button"
                           key={opt}
                           onClick={() => setFormData({ ...formData, budgetRange: opt })}
-                          className={`px-3 py-2.5 text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none ${
+                          className={`px-3 py-2.5 text-[11px] sm:text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none break-words min-h-[42px] flex items-center ${
                             formData.budgetRange === opt
                               ? 'border-black bg-black text-white font-bold shadow-sm'
                               : 'border-black/20 bg-white/70 text-zinc-900 hover:bg-[#FFFF00] hover:text-black hover:border-black font-medium'

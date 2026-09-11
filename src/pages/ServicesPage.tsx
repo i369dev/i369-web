@@ -100,7 +100,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
     >
       <div
         id={`service-card-${pillar.id}`}
-        className="w-full max-w-4xl bg-white border border-black/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] rounded-3xl sm:rounded-[2rem] overflow-hidden transition-shadow duration-300 hover:shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
+        className="w-full max-w-4xl bg-white border border-black/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] rounded-2xl sm:rounded-[2rem] overflow-hidden transition-shadow duration-300 hover:shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
       >
         {/* Top CMYK Accent Bar */}
         <div
@@ -108,7 +108,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
           style={{ backgroundColor: barColor }}
         />
 
-        <div className="p-6 sm:p-8 md:p-9">
+        <div className="p-4 sm:p-8 md:p-9">
           {/* Top Row: Identifier, Icon, Title, Tags */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-5 border-b border-black/10">
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5">
@@ -281,7 +281,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
           </div>
 
           {/* Cards Stack Stage */}
-          <div className="relative w-full max-w-4xl min-h-[560px] sm:min-h-[520px] md:min-h-[480px] flex items-center justify-center">
+          <div className="relative w-full max-w-4xl min-h-[480px] sm:min-h-[520px] md:min-h-[480px] flex items-center justify-center">
             {SERVICE_PILLARS.map((pillar, idx) => (
               <StackedCard
                 key={pillar.id}

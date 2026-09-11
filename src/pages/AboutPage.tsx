@@ -425,7 +425,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
                 <button
                   onClick={() => setSelectedMember(null)}
-                  className="p-1.5 text-zinc-400 hover:text-black hover:bg-[#FFFF00] border border-white/15 hover:border-[#FFFF00] transition-colors cursor-pointer rounded-none"
+                  className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center text-zinc-400 hover:text-black hover:bg-[#FFFF00] border border-white/15 hover:border-[#FFFF00] transition-colors cursor-pointer rounded-none"
                   aria-label="Close Profile"
                 >
                   <X className="w-4 h-4" />
@@ -433,8 +433,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               </motion.div>
 
               {/* Modal Scrollable Body */}
-              <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(90vh-90px)]">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
+              <div className="p-5 sm:p-8 overflow-y-auto max-h-[calc(90vh-90px)] overscroll-contain">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 items-start">
                   {/* Left Col: Portrait with Staggered Entrance */}
                   <motion.div
                     initial={{ opacity: 0, y: 20, scale: 0.97 }}
@@ -442,7 +442,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                     transition={{ duration: 0.45, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
                     className="md:col-span-5"
                   >
-                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/60 border border-white/10 shadow-2xl">
+                    <div className="relative aspect-[4/3] sm:aspect-[4/5] max-h-[260px] sm:max-h-none w-full overflow-hidden bg-black/60 border border-white/10 shadow-2xl">
                       <img
                         src={selectedMember.image}
                         alt={selectedMember.name}

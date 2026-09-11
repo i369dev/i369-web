@@ -232,7 +232,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                 <div
                   key={pillar.id}
                   onClick={() => onNavigate('services')}
-                  className={`relative shrink-0 w-[80vw] h-[48vh] sm:h-[50vh] md:h-[52vh] max-h-[460px] min-h-[290px] rounded-2xl sm:rounded-3xl border border-white/25 shadow-[0_24px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col justify-between bg-zinc-950 border-t-4 ${accentBorderClass} cursor-pointer group transition-all duration-300`}
+                  className={`relative shrink-0 w-[80vw] h-[50vh] sm:h-[50vh] md:h-[52vh] max-h-[460px] min-h-[250px] sm:min-h-[290px] rounded-2xl sm:rounded-3xl border border-white/25 shadow-[0_24px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col justify-between bg-zinc-950 border-t-4 ${accentBorderClass} cursor-pointer group transition-all duration-300`}
                 >
                   {/* Cinematic Background Image with Rich Film Grade Overlay */}
                   <div className="absolute inset-0 z-0 rounded-2xl sm:rounded-3xl overflow-hidden">

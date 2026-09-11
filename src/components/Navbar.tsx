@@ -117,14 +117,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="mobile-inquiry-cta"
               onClick={onOpenInquiry}
-              className="px-3 py-1.5 bg-black text-white text-[10px] uppercase font-montserrat font-bold tracking-wider hover:bg-[#FFFF00] hover:text-black transition-colors"
+              className="px-3.5 py-2 min-h-[40px] flex items-center justify-center bg-black text-white text-[11px] uppercase font-montserrat font-bold tracking-wider hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
             >
               Contact
             </button>
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-black hover:opacity-70 focus:outline-none"
+              className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-black hover:opacity-70 focus:outline-none cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6 text-[#FF00FF]" /> : <Menu className="w-6 h-6 text-black" />}
@@ -137,7 +137,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div
           id="mobile-menu-overlay"
-          className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col justify-between pt-24 pb-8 px-6 md:hidden animate-in fade-in duration-200 border-t border-black/20"
+          className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col justify-between pt-24 pb-8 px-6 md:hidden animate-in fade-in duration-200 border-t border-black/20 overflow-y-auto max-h-screen overscroll-contain"
         >
           <div className="flex flex-col space-y-4">
             <div className="pb-3 border-b border-black flex items-center justify-between">
@@ -156,14 +156,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                 key={link.id}
                 id={`mobile-nav-link-${link.id}`}
                 onClick={() => handleNavClick(link.id)}
-                className="flex items-center justify-between py-2.5 text-left group border-b border-gray-200"
+                className="flex items-center justify-between py-3 text-left group border-b border-gray-200 min-h-[44px]"
               >
                 <div className="flex items-baseline gap-3">
                   <span className="font-mono-code text-xs text-gray-400">
                     {link.number}
                   </span>
                   <span
-                    className={`font-montserrat text-3xl font-bold tracking-tight ${
+                    className={`font-montserrat text-2xl sm:text-3xl font-bold tracking-tight ${
                       currentPage === link.id
                         ? 'text-black underline decoration-2 underline-offset-4'
                         : 'text-zinc-600 group-hover:text-black'
@@ -182,7 +182,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          <div className="pt-6 border-t border-black flex flex-col gap-4">
+          <div className="pt-6 border-t border-black flex flex-col gap-4 mt-6">
             <div className="text-xs font-mono-code text-zinc-600 space-y-1">
               <p className="text-black font-bold">Imaginative 369 Studio</p>
               <p>03 River Side Road, Badulla, Uva Province</p>
@@ -195,7 +195,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenInquiry();
               }}
-              className="w-full py-4 bg-black text-white font-montserrat text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
+              className="w-full py-4 min-h-[48px] bg-black text-white font-montserrat text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
             >
               Start Your Project
             </button>

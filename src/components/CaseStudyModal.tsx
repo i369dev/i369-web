@@ -23,11 +23,11 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
     >
       <div
         id="case-study-modal-content"
-        className="relative w-full max-w-4xl bg-white/95 backdrop-blur-2xl border border-black/30 text-[#141414] shadow-[0_25px_60px_rgba(0,0,0,0.35)] rounded-none max-h-[92vh] overflow-y-auto"
+        className="relative w-full max-w-4xl bg-white/95 backdrop-blur-2xl border border-black/30 text-[#141414] shadow-[0_25px_60px_rgba(0,0,0,0.35)] rounded-none max-h-[92vh] overflow-y-auto overscroll-contain"
       >
         {/* Header Bar */}
-        <div className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-black/15 px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-black/15 px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3">
             <div className="flex space-x-1">
               <div className="w-1.5 h-3.5 accent-teal"></div>
               <div className="w-1.5 h-3.5 accent-pink"></div>
@@ -36,22 +36,22 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
             <span className="font-mono-code text-xs text-black font-bold">
               {caseStudy.number}
             </span>
-            <span className="font-mono-code text-xs uppercase tracking-widest text-zinc-600 font-bold">
+            <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-widest text-zinc-600 font-bold truncate max-w-[200px] sm:max-w-none">
               {caseStudy.category} · {caseStudy.client}
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 text-black hover:bg-[#FFFF00] border border-black/30 transition-colors cursor-pointer rounded-none"
+            className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center text-black hover:bg-[#FFFF00] border border-black/30 transition-colors cursor-pointer rounded-none shrink-0"
             aria-label="Close Case Study"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 
         {/* Hero Image & Headline */}
-        <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-black border-b border-black/20">
+        <div className="relative h-52 sm:h-80 w-full overflow-hidden bg-black border-b border-black/20">
           <img
             src={caseStudy.image}
             alt={caseStudy.title}
@@ -59,15 +59,15 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-          <div className="absolute bottom-6 left-6 right-6">
-            <h2 className="gothic-display text-4xl sm:text-5xl text-white tracking-tight leading-none">
+          <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+            <h2 className="gothic-display text-2xl sm:text-4xl md:text-5xl text-white tracking-tight leading-tight">
               {caseStudy.title}
             </h2>
           </div>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 sm:p-8 space-y-8">
+        <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
           {/* Summary */}
           <div>
             <span className="font-mono-code text-xs uppercase tracking-widest text-zinc-500 font-bold block mb-2">
@@ -145,7 +145,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 onClose();
                 onOpenInquiry();
               }}
-              className="px-6 py-3"
+              className="w-full sm:w-auto px-6 py-3 justify-center"
             >
               <span>Commission Similar Project</span>
               <ArrowUpRight className="w-4 h-4" />

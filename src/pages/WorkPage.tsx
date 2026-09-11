@@ -310,11 +310,11 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-zinc-950/95 border border-white/20 rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.9)] text-white p-6 sm:p-8 md:p-10 z-10 custom-scrollbar"
+              className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[88vh] overflow-y-auto overscroll-contain bg-zinc-950/95 border border-white/20 rounded-2xl sm:rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.9)] text-white p-5 sm:p-8 md:p-10 z-10 custom-scrollbar"
             >
               {/* Top Accent Ribbon */}
               <div
-                className="absolute top-0 left-0 right-0 h-2 rounded-t-3xl"
+                className="absolute top-0 left-0 right-0 h-2 rounded-t-2xl sm:rounded-t-3xl"
                 style={{
                   backgroundColor:
                     selectedCaseStudy.accentColor === 'teal'
@@ -328,7 +328,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               {/* Close Button */}
               <button
                 onClick={() => setSelectedCaseStudy(null)}
-                className="absolute top-5 right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-colors cursor-pointer"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
                 aria-label="Close Case Study Details"
               >
                 <X className="w-5 h-5" />
@@ -354,7 +354,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               </div>
 
               {/* Cover Image Banner */}
-              <div className="relative mt-5 h-56 sm:h-64 md:h-72 w-full rounded-2xl overflow-hidden border border-white/15 bg-zinc-900">
+              <div className="relative mt-5 h-48 sm:h-64 md:h-72 w-full rounded-xl sm:rounded-2xl overflow-hidden border border-white/15 bg-zinc-900">
                 <img
                   src={selectedCaseStudy.image}
                   alt={selectedCaseStudy.title}
