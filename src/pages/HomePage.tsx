@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { motion } from 'motion/react';
 import { PageId, CaseStudy } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
@@ -341,7 +342,13 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="max-w-3xl mb-10 sm:mb-14 md:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl mb-10 sm:mb-14 md:mb-16"
+          >
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 accent-orange shrink-0"></div>
               <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
@@ -356,11 +363,11 @@ export const HomePage: React.FC<HomePageProps> = ({
             <p className="mt-3.5 sm:mt-5 text-sm sm:text-base md:text-lg text-zinc-200 font-light leading-relaxed max-w-2xl">
               Headquartered in Badulla instead of the capital, Imaginative369 operates with a structural edge no city agency can replicate:
             </p>
-          </div>
+          </motion.div>
 
           {/* 3 Structural Edge Cards with 3D Tilt & Intense Frosted Glass */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
-            {GROUND_ZERO_ADVANTAGES.map((adv) => {
+            {GROUND_ZERO_ADVANTAGES.map((adv, index) => {
               const borderTopColor =
                 adv.accentColor === 'teal'
                   ? 'border-t-[#00FFFF]'
@@ -376,43 +383,57 @@ export const HomePage: React.FC<HomePageProps> = ({
                   : 'text-[#FFFF00]';
 
               return (
-                <TiltCard
+                <motion.div
                   key={adv.id}
-                  isDark={true}
-                  maxTilt={7}
-                  scale={1.02}
-                  className={`p-5 sm:p-7 md:p-8 bg-black/60 backdrop-blur-2xl border border-white/20 border-t-4 ${borderTopColor} space-y-4 sm:space-y-6 rounded-xl sm:rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.6)]`}
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.65, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  className="h-full"
                 >
-                  <div className="flex items-baseline justify-between">
-                    <span className="font-mono-code text-xs text-zinc-400 font-bold">
-                      EDGE {adv.number}
-                    </span>
-                    <span className={`gothic-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight ${metricTextColor}`}>
-                      {adv.metric}
-                    </span>
-                  </div>
+                  <TiltCard
+                    isDark={true}
+                    maxTilt={7}
+                    scale={1.02}
+                    className={`h-full p-5 sm:p-7 md:p-8 bg-black/60 backdrop-blur-2xl border border-white/20 border-t-4 ${borderTopColor} space-y-4 sm:space-y-6 rounded-xl sm:rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.6)]`}
+                  >
+                    <div className="flex items-baseline justify-between">
+                      <span className="font-mono-code text-xs text-zinc-400 font-bold">
+                        EDGE {adv.number}
+                      </span>
+                      <span className={`gothic-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight ${metricTextColor}`}>
+                        {adv.metric}
+                      </span>
+                    </div>
 
-                  <div>
-                    <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug">
-                      {adv.title}
-                    </h3>
-                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
-                      {adv.description}
-                    </p>
-                  </div>
+                    <div>
+                      <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug">
+                        {adv.title}
+                      </h3>
+                      <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+                        {adv.description}
+                      </p>
+                    </div>
 
-                  <div className="pt-3 sm:pt-4 border-t border-white/15">
-                    <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-wider text-zinc-400 font-bold">
-                      {adv.metricLabel}
-                    </span>
-                  </div>
-                </TiltCard>
+                    <div className="pt-3 sm:pt-4 border-t border-white/15">
+                      <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-wider text-zinc-400 font-bold">
+                        {adv.metricLabel}
+                      </span>
+                    </div>
+                  </TiltCard>
+                </motion.div>
               );
             })}
           </div>
 
           {/* Bottom Statement Box with Premium Frosted Glassmorphism */}
-          <div className="mt-8 sm:mt-12 p-5 sm:p-7 md:p-8 bg-black/70 backdrop-blur-2xl rounded-xl sm:rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 border border-white/25 text-center sm:text-left shadow-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 sm:mt-12 p-5 sm:p-7 md:p-8 bg-black/70 backdrop-blur-2xl rounded-xl sm:rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 border border-white/25 text-center sm:text-left shadow-2xl"
+          >
             <p className="text-sm sm:text-base md:text-lg text-zinc-200 font-medium leading-relaxed">
               "We call it the <span className="text-white font-bold underline decoration-[#00FFFF] underline-offset-4">Ground Zero Advantage</span>. Our clients call it results."
             </p>
@@ -424,7 +445,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             >
               Read Our Full Story →
             </MagneticButton>
-          </div>
+          </motion.div>
         </div>
       </section>
 
