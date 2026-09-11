@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PageId, TeamMember } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
-import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers, Sparkles, Terminal, Video, TrendingUp, X, MapPin } from 'lucide-react';
+import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers, Sparkles, Terminal, Video, TrendingUp, X, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 import { TEAM_MEMBERS } from '../data/agencyData';
@@ -15,6 +15,40 @@ interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry }) => {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const teamSliderRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollButtons = () => {
+    if (teamSliderRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = teamSliderRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const slider = teamSliderRef.current;
+    if (!slider) return;
+    checkScrollButtons();
+    slider.addEventListener('scroll', checkScrollButtons, { passive: true });
+    window.addEventListener('resize', checkScrollButtons);
+    return () => {
+      slider.removeEventListener('scroll', checkScrollButtons);
+      window.removeEventListener('resize', checkScrollButtons);
+    };
+  }, []);
+
+  const scrollTeamSlider = (direction: 'left' | 'right') => {
+    if (teamSliderRef.current) {
+      const cardWidth = teamSliderRef.current.querySelector<HTMLElement>('.team-card-item')?.offsetWidth || 320;
+      const scrollAmount = cardWidth + 24; // card width + gap
+      teamSliderRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -179,7 +213,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#FF00FF]/5 rounded-full blur-3xl pointer-events-none translate-y-1/2"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          {/* Header Block: Minimalist Editorial Typography */}
+          {/* Header Block: Minimalist Editorial Typography with Arrow Controls */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -203,82 +237,138 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               </h2>
             </div>
 
-            <p className="text-zinc-400 text-sm sm:text-base font-normal max-w-md leading-relaxed">
-              We are practitioners first — engineers deploying to mountain ridgelines, directors shooting at dawn, and strategists transforming regional economies.
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-end gap-5 sm:gap-8 justify-between">
+              <p className="text-zinc-400 text-sm sm:text-base font-normal max-w-md leading-relaxed">
+                We are practitioners first — engineers deploying to mountain ridgelines, directors shooting at dawn, and strategists transforming regional economies.
+              </p>
+
+              {/* Stylish Left & Right Slider Controls */}
+              <div className="flex items-center gap-2.5 shrink-0 self-start sm:self-end">
+                <button
+                  type="button"
+                  onClick={() => scrollTeamSlider('left')}
+                  disabled={!canScrollLeft}
+                  aria-label="Scroll team profiles left"
+                  className={`flex items-center justify-center w-11 h-11 border transition-all duration-300 rounded-none cursor-pointer ${
+                    canScrollLeft
+                      ? 'border-white/25 bg-black/60 text-white hover:border-[#00FFFF] hover:bg-[#00FFFF]/10 active:scale-95 shadow-[0_0_15px_rgba(0,255,255,0.15)]'
+                      : 'border-white/10 bg-black/30 text-zinc-600 cursor-not-allowed opacity-40'
+                  }`}
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollTeamSlider('right')}
+                  disabled={!canScrollRight}
+                  aria-label="Scroll team profiles right"
+                  className={`flex items-center justify-center w-11 h-11 border transition-all duration-300 rounded-none cursor-pointer ${
+                    canScrollRight
+                      ? 'border-white/25 bg-black/60 text-white hover:border-[#FFFF00] hover:bg-[#FFFF00]/10 active:scale-95 shadow-[0_0_15px_rgba(255,255,0,0.15)]'
+                      : 'border-white/10 bg-black/30 text-zinc-600 cursor-not-allowed opacity-40'
+                  }`}
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Team Showcase Grid: 4-Column Minimalist Clean Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-10 sm:pt-14">
-            {TEAM_MEMBERS.map((member, index) => {
-              const accentColor = member.accentColor === 'teal' ? '#00FFFF' : member.accentColor === 'pink' ? '#FF00FF' : '#FFFF00';
-              const borderHoverClass = member.accentColor === 'teal' 
-                ? 'group-hover:border-[#00FFFF]/60 group-hover:shadow-[0_0_30px_rgba(0,255,255,0.2)]' 
-                : member.accentColor === 'pink' 
-                ? 'group-hover:border-[#FF00FF]/60 group-hover:shadow-[0_0_30px_rgba(255,0,255,0.2)]' 
-                : 'group-hover:border-[#FFFF00]/60 group-hover:shadow-[0_0_30px_rgba(255,255,0,0.2)]';
-              
-              const textAccentClass = member.accentColor === 'teal' ? 'text-[#00FFFF]' : member.accentColor === 'pink' ? 'text-[#FF00FF]' : 'text-[#FFFF00]';
+          {/* Team Showcase Horizontal Carousel Slider */}
+          <div className="relative pt-10 sm:pt-14">
+            <div
+              ref={teamSliderRef}
+              className="flex gap-6 sm:gap-8 overflow-x-auto scroll-smooth no-scrollbar pb-6 pt-2 select-none"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
+            >
+              {TEAM_MEMBERS.map((member, index) => {
+                const accentColor = member.accentColor === 'teal' ? '#00FFFF' : member.accentColor === 'pink' ? '#FF00FF' : '#FFFF00';
+                const borderHoverClass = member.accentColor === 'teal' 
+                  ? 'group-hover:border-[#00FFFF]/60 group-hover:shadow-[0_0_30px_rgba(0,255,255,0.2)]' 
+                  : member.accentColor === 'pink' 
+                  ? 'group-hover:border-[#FF00FF]/60 group-hover:shadow-[0_0_30px_rgba(255,0,255,0.2)]' 
+                  : 'group-hover:border-[#FFFF00]/60 group-hover:shadow-[0_0_30px_rgba(255,255,0,0.2)]';
+                
+                const textAccentClass = member.accentColor === 'teal' ? 'text-[#00FFFF]' : member.accentColor === 'pink' ? 'text-[#FF00FF]' : 'text-[#FFFF00]';
 
-              return (
-                <motion.div
-                  key={member.id}
-                  id={`team-member-${member.id}`}
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.65, delay: index * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
-                  onClick={() => setSelectedMember(member)}
-                  className={`group relative flex flex-col bg-[#111111] border border-white/15 transition-all duration-500 rounded-none cursor-pointer ${borderHoverClass}`}
-                >
-                  {/* Top Subtle CMYK Accent Indicator */}
-                  <div 
-                    className="h-1 w-full transition-opacity duration-300 opacity-60 group-hover:opacity-100"
-                    style={{ backgroundColor: accentColor }}
-                  />
-
-                  {/* High-Contrast Editorial Portrait Container */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-950">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                return (
+                  <motion.div
+                    key={member.id}
+                    id={`team-member-${member.id}`}
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.65, delay: index * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+                    onClick={() => setSelectedMember(member)}
+                    className={`team-card-item group relative flex flex-col bg-[#111111] border border-white/15 transition-all duration-500 rounded-none cursor-pointer w-[280px] sm:w-[320px] md:w-[340px] shrink-0 flex-none ${borderHoverClass}`}
+                  >
+                    {/* Top Subtle CMYK Accent Indicator */}
+                    <div 
+                      className="h-1 w-full transition-opacity duration-300 opacity-60 group-hover:opacity-100"
+                      style={{ backgroundColor: accentColor }}
                     />
 
-                    {/* Gradient Overlay for seamless depth */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-500" />
+                    {/* High-Contrast Editorial Portrait Container */}
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-950">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                      />
 
-                    {/* Department Tag Overlay */}
-                    <div className="absolute top-3 left-3 z-10">
-                      <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
-                        {member.department.split('&')[0]}
-                      </span>
-                    </div>
-                  </div>
+                      {/* Gradient Overlay for seamless depth */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-500" />
 
-                  {/* Member Details Stack: Simplified Card (Image, Department, Role, Name) */}
-                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-3 bg-[#111111]">
-                    <div className="space-y-1.5">
-                      <span className={`font-mono-code text-[11px] uppercase tracking-wider font-bold block ${textAccentClass}`}>
-                        {member.role}
-                      </span>
-                      <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug group-hover:text-[#FFFF00] transition-colors">
-                        {member.name}
-                      </h3>
-                      <p className="font-mono-code text-[11px] text-zinc-400 uppercase tracking-wider pt-0.5">
-                        {member.department}
-                      </p>
+                      {/* Department Tag Overlay */}
+                      <div className="absolute top-3 left-3 z-10">
+                        <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
+                          {member.department.split('&')[0]}
+                        </span>
+                      </div>
                     </div>
 
-                    <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono-code text-zinc-400 group-hover:text-white transition-colors">
-                      <span className="text-[11px] uppercase tracking-wider">View Profile</span>
-                      <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                    {/* Member Details Stack: Simplified Card (Image, Department, Role, Name) */}
+                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-3 bg-[#111111]">
+                      <div className="space-y-1.5">
+                        <span className={`font-mono-code text-[11px] uppercase tracking-wider font-bold block ${textAccentClass}`}>
+                          {member.role}
+                        </span>
+                        <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug group-hover:text-[#FFFF00] transition-colors">
+                          {member.name}
+                        </h3>
+                        <p className="font-mono-code text-[11px] text-zinc-400 uppercase tracking-wider pt-0.5">
+                          {member.department}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono-code text-zinc-400 group-hover:text-white transition-colors">
+                        <span className="text-[11px] uppercase tracking-wider">View Profile</span>
+                        <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Subtle bottom scroll guide */}
+            <div className="flex items-center justify-between pt-4 text-xs font-mono-code text-zinc-500">
+              <span className="uppercase tracking-widest text-[10px] text-zinc-400">
+                ← Drag or use arrows to explore {TEAM_MEMBERS.length} principals →
+              </span>
+              <div className="flex items-center gap-1.5">
+                {TEAM_MEMBERS.map((m, i) => (
+                  <span
+                    key={m.id || i}
+                    className="w-1.5 h-1.5 bg-zinc-700 rounded-none inline-block"
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

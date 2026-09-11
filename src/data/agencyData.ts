@@ -518,6 +518,46 @@ export const TEAM_MEMBERS: TeamMember[] = [
     accentColor: 'teal',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
     tags: ['Destination Roadmaps', 'Meta & Google Ads', 'Stakeholder Growth']
+  },
+  {
+    id: 'dinuka-perera',
+    name: 'Dinuka Perera',
+    role: 'Lead Spatial Systems Architect',
+    department: 'AdventureTech & GIS Engineering',
+    bio: 'Specializing in high-precision terrain mapping, offline topographical navigation, and real-time telemetry processing for high-altitude expeditions and eco-trails.',
+    accentColor: 'pink',
+    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80',
+    tags: ['GIS Mapping', 'Telemetry Pipeline', 'Highland Topography']
+  },
+  {
+    id: 'anjali-wickramasinghe',
+    name: 'Anjali Wickramasinghe',
+    role: 'Principal Brand Strategist',
+    department: 'Brand Systems & Global Narrative',
+    bio: 'Translating rich regional heritage into globally resonant brand identities, strategic communication roadmaps, and international partner campaigns for luxury travel brands.',
+    accentColor: 'teal',
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80',
+    tags: ['Brand Architecture', 'Global Narrative', 'Campaign Strategy']
+  },
+  {
+    id: 'ravindu-silva',
+    name: 'Ravindu Silva',
+    role: 'Senior Expedition Cinematographer',
+    department: 'Cinematic Media & Field Production',
+    bio: 'Veteran highland documentarian capturing remote expeditions, microclimate weather shifts, and cultural heritage films across Sri Lanka\'s central massif.',
+    accentColor: 'orange',
+    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80',
+    tags: ['Field Expeditions', 'High-Speed Cine', 'Color Grading']
+  },
+  {
+    id: 'neluni-fernando',
+    name: 'Neluni Fernando',
+    role: 'Head of UX & Creative Technologist',
+    department: 'Interactive Products & Design Systems',
+    bio: 'Bridging sensory aesthetics with rugged digital utilities. Crafting human-centered interfaces for offline outdoor exploration and luxury booking portals.',
+    accentColor: 'teal',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80',
+    tags: ['Design Systems', 'Creative Tech', 'Adventure UX']
   }
 ];
 
