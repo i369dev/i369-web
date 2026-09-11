@@ -455,7 +455,13 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section id="proof-not-promises" className="bg-white text-zinc-950 py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-black gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 pb-6 sm:pb-8 border-b border-black gap-4"
+          >
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-2 h-2 accent-pink"></div>
@@ -479,52 +485,59 @@ export const HomePage: React.FC<HomePageProps> = ({
               <span>View All Studies</span>
               <ArrowRight className="w-4 h-4" />
             </MagneticButton>
-          </div>
+          </motion.div>
 
           {/* Featured Case Studies Grid (HugeInc style 3D tilt, zoom reveal, and glassmorphic stats) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            {CASE_STUDIES.slice(0, 2).map((cs) => (
-              <TiltCard
+            {CASE_STUDIES.slice(0, 2).map((cs, index) => (
+              <motion.div
                 key={cs.id}
-                isDark={true}
-                maxTilt={6}
-                scale={1.02}
-                onClick={() => onSelectCaseStudy(cs)}
-                className="cursor-pointer rounded-none"
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.65, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="h-56 sm:h-72 md:h-80 w-full overflow-hidden relative">
-                  <img
-                    src={cs.image}
-                    alt={cs.title}
-                    className="w-full h-full object-cover grayscale brightness-90 contrast-125 card-media-zoom"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/40 to-transparent" />
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="px-3 py-1 glass-pill text-[10px] font-mono-code uppercase tracking-widest text-[#00FFFF]">
-                      {cs.category} · {cs.client}
-                    </span>
+                <TiltCard
+                  isDark={true}
+                  maxTilt={6}
+                  scale={1.02}
+                  onClick={() => onSelectCaseStudy(cs)}
+                  className="cursor-pointer rounded-none"
+                >
+                  <div className="h-56 sm:h-72 md:h-80 w-full overflow-hidden relative">
+                    <img
+                      src={cs.image}
+                      alt={cs.title}
+                      className="w-full h-full object-cover grayscale brightness-90 contrast-125 card-media-zoom"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/40 to-transparent" />
+                    <div className="absolute top-4 left-4 z-20">
+                      <span className="px-3 py-1 glass-pill text-[10px] font-mono-code uppercase tracking-widest text-[#00FFFF]">
+                        {cs.category} · {cs.client}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="p-6 sm:p-8 space-y-4 relative z-10">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight group-hover:text-[#FFFF00] transition-colors">
-                      {cs.title}
-                    </h3>
-                    <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0" />
+                  <div className="p-6 sm:p-8 space-y-4 relative z-10">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight group-hover:text-[#FFFF00] transition-colors">
+                        {cs.title}
+                      </h3>
+                      <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0" />
+                    </div>
+
+                    <p className="text-zinc-400 text-xs sm:text-sm line-clamp-2 leading-relaxed font-light">
+                      {cs.summary}
+                    </p>
+
+                    <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono-code text-zinc-400">
+                      <span>Impact: {cs.stats[0]?.label} → <strong className="text-white font-bold">{cs.stats[0]?.value}</strong></span>
+                      <span className="text-[#FFFF00] underline uppercase text-[11px] font-bold">Deep Dive →</span>
+                    </div>
                   </div>
-
-                  <p className="text-zinc-400 text-xs sm:text-sm line-clamp-2 leading-relaxed font-light">
-                    {cs.summary}
-                  </p>
-
-                  <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono-code text-zinc-400">
-                    <span>Impact: {cs.stats[0]?.label} → <strong className="text-white font-bold">{cs.stats[0]?.value}</strong></span>
-                    <span className="text-[#FFFF00] underline uppercase text-[11px] font-bold">Deep Dive →</span>
-                  </div>
-                </div>
-              </TiltCard>
+                </TiltCard>
+              </motion.div>
             ))}
           </div>
         </div>
