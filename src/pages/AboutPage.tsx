@@ -18,12 +18,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
   const teamSliderRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeMemberIndex, setActiveMemberIndex] = useState(0);
 
   const checkScrollButtons = () => {
     if (teamSliderRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = teamSliderRef.current;
       setCanScrollLeft(scrollLeft > 10);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+
+      const cardWidth = teamSliderRef.current.querySelector<HTMLElement>('.team-card-item')?.offsetWidth || 280;
+      const index = Math.round(scrollLeft / (cardWidth + 24));
+      setActiveMemberIndex(Math.min(TEAM_MEMBERS.length - 1, Math.max(0, index)));
     }
   };
 
@@ -41,10 +46,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
   const scrollTeamSlider = (direction: 'left' | 'right') => {
     if (teamSliderRef.current) {
-      const cardWidth = teamSliderRef.current.querySelector<HTMLElement>('.team-card-item')?.offsetWidth || 320;
+      const cardWidth = teamSliderRef.current.querySelector<HTMLElement>('.team-card-item')?.offsetWidth || 300;
       const scrollAmount = cardWidth + 24; // card width + gap
       teamSliderRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const scrollToIndex = (index: number) => {
+    if (teamSliderRef.current) {
+      const cardWidth = teamSliderRef.current.querySelector<HTMLElement>('.team-card-item')?.offsetWidth || 300;
+      teamSliderRef.current.scrollTo({
+        left: index * (cardWidth + 24),
         behavior: 'smooth',
       });
     }
@@ -70,35 +85,35 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
     };
   }, [selectedMember]);
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full max-w-full overflow-x-clip bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Grid, Gothic H1, Triple Accent Bars
          ========================================================================= */}
-      <section className="border-b border-black py-12 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-white thin-grid relative">
+      <section className="border-b border-black py-10 xs:py-12 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-white thin-grid relative">
         <div className="max-w-7xl mx-auto">
           {/* Tag & Triple Accent Bar */}
-          <div className="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-3 sm:mb-6">
             <div className="flex space-x-1.5">
               <div className="w-2 h-4 accent-teal"></div>
               <div className="w-2 h-4 accent-pink"></div>
               <div className="w-2 h-4 accent-orange"></div>
             </div>
-            <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 font-bold">
+            <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.3em] text-gray-500 font-bold">
               02 // Corporate Origin & Doctrine
             </span>
           </div>
 
           {/* Main Gothic Display H1 */}
-          <h1 className="gothic-display text-4xl sm:text-6xl md:text-7xl lg:text-8.5xl font-black tracking-tight text-black leading-[0.88] break-words">
+          <h1 className="gothic-display text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8.5xl font-black tracking-tight text-black leading-[0.92] sm:leading-[0.88] break-words">
             About Imaginative369.
           </h1>
 
           {/* Subheading / Purpose Statement */}
-          <div className="mt-6 sm:mt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 border-t border-black pt-6">
-            <p className="text-lg sm:text-xl md:text-2xl text-zinc-800 font-medium max-w-3xl leading-relaxed border-l-2 border-black pl-4 sm:pl-6">
+          <div className="mt-5 sm:mt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 border-t border-black pt-5 sm:pt-6">
+            <p className="text-base sm:text-xl md:text-2xl text-zinc-800 font-medium max-w-3xl leading-relaxed border-l-2 border-black pl-3.5 sm:pl-6">
               The digital powerhouse and venture studio of Sri Lanka's Hill Country.
             </p>
-            <div className="flex flex-wrap items-center gap-2 font-mono-code text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono-code text-[9px] xs:text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
               <span>BADULLA</span>
               <span className="text-[#00FFFF]">•</span>
               <span>UVA PROVINCE</span>
@@ -114,13 +129,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
          ========================================================================= */}
       <section
         id="our-story"
-        className="relative text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-fixed bg-cover bg-center bg-no-repeat"
+        className="relative text-white py-14 xs:py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-scroll md:bg-fixed bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=85')`,
         }}
       >
         {/* Modern Multi-Layer Gradient Overlays for Cinematic Depth & Pristine Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85 backdrop-blur-[2px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90 backdrop-blur-[2px] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#FF00FF]/15 via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
 
@@ -130,7 +145,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-5 space-y-4 sm:space-y-6"
             >
@@ -140,7 +155,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   The Genesis
                 </span>
               </div>
-              <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
+              <h2 className="gothic-display text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
                 Our Story.
               </h2>
               <TiltCard
@@ -148,7 +163,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 scale={1.02}
                 isDark={true}
                 glowColor="rgba(255, 0, 255, 0.25)"
-                className="p-6 sm:p-7 space-y-3.5 rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all"
+                className="p-5 sm:p-7 space-y-3 sm:space-y-3.5 rounded-none bg-black/70 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all"
               >
                 <div className="flex items-center justify-between">
                   <p className="font-mono-code text-[10px] sm:text-[11px] text-[#00FFFF] uppercase tracking-wider font-bold">
@@ -156,7 +171,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   </p>
                   <span className="w-1.5 h-1.5 bg-[#FF00FF]"></span>
                 </div>
-                <p className="font-display text-lg sm:text-xl text-white font-bold leading-tight">
+                <p className="font-display text-base xs:text-lg sm:text-xl text-white font-bold leading-tight break-words">
                   Mithila Bhashitha Navarathna Bandara
                 </p>
                 <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
@@ -169,21 +184,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-7 space-y-5 sm:space-y-6 text-sm sm:text-base md:text-lg text-zinc-200 font-normal leading-relaxed"
             >
-              <div className="p-6 sm:p-8 bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] space-y-5 sm:space-y-6">
+              <div className="p-5 sm:p-8 bg-black/70 sm:bg-black/50 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] space-y-4 sm:space-y-6">
                 <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed">
                   <strong className="text-[#FFFF00] font-bold">Imaginative369</strong> was founded on a simple observation:{' '}
                   <span className="text-white underline decoration-[#00FFFF] underline-offset-8 font-semibold">
                     Sri Lanka's regional businesses had incredible stories to tell and no one telling them properly.
                   </span>
                 </p>
-                <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
+                <p className="text-zinc-200 text-xs sm:text-base leading-relaxed">
                   Founded by Mithila Bhashitha Navarathna Bandara, the company grew from a creative studio into a hybrid agency, software house, and venture studio — built to bridge the gap between raw regional infrastructure and modern digital expectations.
                 </p>
-                <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
+                <p className="text-zinc-200 text-xs sm:text-base leading-relaxed">
                   Today, our leadership team spans strategy, engineering, and creative direction, delivering everything from cinematic destination campaigns to full-stack software platforms — without ever losing the on-the-ground perspective that got us here.
                 </p>
 
@@ -207,7 +222,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       {/* =========================================================================
           LEADERSHIP & COUNCIL: Clean Minimalist Editorial Showcase (Huge Inc Style)
          ========================================================================= */}
-      <section id="leadership-section" className="bg-black text-white py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black relative overflow-hidden">
+      <section id="leadership-section" className="bg-black text-white py-14 xs:py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black relative overflow-hidden">
         {/* Subtle Ambient CMYK Glow Mesh */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00FFFF]/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#FF00FF]/5 rounded-full blur-3xl pointer-events-none translate-y-1/2"></div>
@@ -217,28 +232,28 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 pb-12 sm:pb-16 border-b border-white/15"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 pb-8 sm:pb-16 border-b border-white/15"
           >
-            <div className="space-y-3 sm:space-y-4 max-w-2xl">
+            <div className="space-y-2.5 sm:space-y-4 max-w-2xl">
               <div className="flex items-center gap-2.5">
                 <div className="flex space-x-1.5">
                   <span className="w-2 h-2 rounded-none bg-[#00FFFF]"></span>
                   <span className="w-2 h-2 rounded-none bg-[#FF00FF]"></span>
                   <span className="w-2 h-2 rounded-none bg-[#FFFF00]"></span>
                 </div>
-                <span className="font-mono-code text-xs sm:text-xs uppercase tracking-[0.25em] text-[#00FFFF] font-bold">
+                <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#00FFFF] font-bold">
                   Leadership & Principals
                 </span>
               </div>
-              <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[0.95]">
+              <h2 className="gothic-display text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[0.95]">
                 The Minds Behind the Studio.
               </h2>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-end gap-5 sm:gap-8 justify-between">
-              <p className="text-zinc-400 text-sm sm:text-base font-normal max-w-md leading-relaxed">
+              <p className="text-zinc-400 text-xs xs:text-sm sm:text-base font-normal max-w-md leading-relaxed">
                 We are practitioners first — engineers deploying to mountain ridgelines, directors shooting at dawn, and strategists transforming regional economies.
               </p>
 
@@ -249,9 +264,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   onClick={() => scrollTeamSlider('left')}
                   disabled={!canScrollLeft}
                   aria-label="Scroll team profiles left"
-                  className={`flex items-center justify-center w-11 h-11 border transition-all duration-300 rounded-none cursor-pointer ${
+                  className={`flex items-center justify-center w-11 h-11 border transition-all duration-300 rounded-none cursor-pointer touch-manipulation active:scale-95 ${
                     canScrollLeft
-                      ? 'border-white/25 bg-black/60 text-white hover:border-[#00FFFF] hover:bg-[#00FFFF]/10 active:scale-95 shadow-[0_0_15px_rgba(0,255,255,0.15)]'
+                      ? 'border-white/25 bg-black/60 text-white hover:border-[#00FFFF] hover:bg-[#00FFFF]/10 shadow-[0_0_15px_rgba(0,255,255,0.15)]'
                       : 'border-white/10 bg-black/30 text-zinc-600 cursor-not-allowed opacity-40'
                   }`}
                 >
@@ -262,9 +277,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   onClick={() => scrollTeamSlider('right')}
                   disabled={!canScrollRight}
                   aria-label="Scroll team profiles right"
-                  className={`flex items-center justify-center w-11 h-11 border transition-all duration-300 rounded-none cursor-pointer ${
+                  className={`flex items-center justify-center w-11 h-11 border transition-all duration-300 rounded-none cursor-pointer touch-manipulation active:scale-95 ${
                     canScrollRight
-                      ? 'border-white/25 bg-black/60 text-white hover:border-[#FFFF00] hover:bg-[#FFFF00]/10 active:scale-95 shadow-[0_0_15px_rgba(255,255,0,0.15)]'
+                      ? 'border-white/25 bg-black/60 text-white hover:border-[#FFFF00] hover:bg-[#FFFF00]/10 shadow-[0_0_15px_rgba(255,255,0,0.15)]'
                       : 'border-white/10 bg-black/30 text-zinc-600 cursor-not-allowed opacity-40'
                   }`}
                 >
@@ -275,13 +290,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           </motion.div>
 
           {/* Team Showcase Horizontal Carousel Slider */}
-          <div className="relative pt-10 sm:pt-14">
+          <div className="relative pt-8 sm:pt-14">
             <div
               ref={teamSliderRef}
-              className="flex gap-6 sm:gap-8 overflow-x-auto scroll-smooth no-scrollbar pb-6 pt-2 select-none"
+              className="flex gap-4 sm:gap-8 overflow-x-auto scroll-smooth no-scrollbar pb-4 pt-1 select-none snap-x snap-mandatory touch-pan-x overscroll-x-contain"
               style={{
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
               }}
             >
               {TEAM_MEMBERS.map((member, index) => {
@@ -300,10 +316,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                     id={`team-member-${member.id}`}
                     initial={{ opacity: 0, y: 35 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
+                    viewport={{ once: true, amount: 0.15 }}
                     transition={{ duration: 0.65, delay: index * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
                     onClick={() => setSelectedMember(member)}
-                    className={`team-card-item group relative flex flex-col bg-[#111111] border border-white/15 transition-all duration-500 rounded-none cursor-pointer w-[280px] sm:w-[320px] md:w-[340px] shrink-0 flex-none ${borderHoverClass}`}
+                    className={`team-card-item snap-start group relative flex flex-col bg-[#111111] border border-white/15 transition-all duration-500 rounded-none cursor-pointer w-[260px] xs:w-[280px] sm:w-[320px] md:w-[340px] shrink-0 flex-none touch-manipulation active:scale-[0.99] ${borderHoverClass}`}
                   >
                     {/* Top Subtle CMYK Accent Indicator */}
                     <div 
@@ -317,36 +333,37 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                         src={member.image}
                         alt={member.name}
                         referrerPolicy="no-referrer"
+                        loading="lazy"
                         className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                       />
 
                       {/* Gradient Overlay for seamless depth */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
 
                       {/* Department Tag Overlay */}
-                      <div className="absolute top-3 left-3 z-10">
-                        <span className="font-mono-code text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
+                      <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 z-10">
+                        <span className="font-mono-code text-[9px] xs:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/85 backdrop-blur-md text-zinc-300 border border-white/20">
                           {member.department.split('&')[0]}
                         </span>
                       </div>
                     </div>
 
                     {/* Member Details Stack: Simplified Card (Image, Department, Role, Name) */}
-                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-3 bg-[#111111]">
-                      <div className="space-y-1.5">
-                        <span className={`font-mono-code text-[11px] uppercase tracking-wider font-bold block ${textAccentClass}`}>
+                    <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between space-y-3 bg-[#111111]">
+                      <div className="space-y-1 sm:space-y-1.5">
+                        <span className={`font-mono-code text-[10px] xs:text-[11px] uppercase tracking-wider font-bold block ${textAccentClass}`}>
                           {member.role}
                         </span>
-                        <h3 className="gothic-display text-xl sm:text-2xl text-white tracking-tight leading-snug group-hover:text-[#FFFF00] transition-colors">
+                        <h3 className="gothic-display text-lg xs:text-xl sm:text-2xl text-white tracking-tight leading-snug group-hover:text-[#FFFF00] transition-colors">
                           {member.name}
                         </h3>
-                        <p className="font-mono-code text-[11px] text-zinc-400 uppercase tracking-wider pt-0.5">
+                        <p className="font-mono-code text-[10px] xs:text-[11px] text-zinc-400 uppercase tracking-wider pt-0.5">
                           {member.department}
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono-code text-zinc-400 group-hover:text-white transition-colors">
-                        <span className="text-[11px] uppercase tracking-wider">View Profile</span>
+                      <div className="pt-2.5 sm:pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono-code text-zinc-400 group-hover:text-white transition-colors">
+                        <span className="text-[10px] xs:text-[11px] uppercase tracking-wider">View Profile</span>
                         <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
@@ -355,16 +372,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               })}
             </div>
 
-            {/* Subtle bottom scroll guide */}
-            <div className="flex items-center justify-between pt-4 text-xs font-mono-code text-zinc-500">
-              <span className="uppercase tracking-widest text-[10px] text-zinc-400">
-                ← Drag or use arrows to explore {TEAM_MEMBERS.length} principals →
+            {/* Subtle bottom scroll guide with interactive dot indicators */}
+            <div className="flex flex-col xs:flex-row items-center justify-between pt-4 gap-2 text-xs font-mono-code text-zinc-500">
+              <span className="uppercase tracking-widest text-[9px] xs:text-[10px] text-zinc-400 text-center xs:text-left">
+                ← Swipe or use arrows to explore {TEAM_MEMBERS.length} principals →
               </span>
               <div className="flex items-center gap-1.5">
                 {TEAM_MEMBERS.map((m, i) => (
-                  <span
+                  <button
                     key={m.id || i}
-                    className="w-1.5 h-1.5 bg-zinc-700 rounded-none inline-block"
+                    onClick={() => scrollToIndex(i)}
+                    aria-label={`Go to principal ${i + 1}`}
+                    className={`transition-all duration-300 rounded-none cursor-pointer touch-manipulation ${
+                      activeMemberIndex === i
+                        ? 'w-4 h-1.5 bg-[#FFFF00]'
+                        : 'w-1.5 h-1.5 bg-zinc-700 hover:bg-zinc-500'
+                    }`}
                   />
                 ))}
               </div>
@@ -380,7 +403,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
         {selectedMember && (
           <div
             id="team-member-modal-backdrop"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/80 backdrop-blur-xl animate-in fade-in duration-200"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
             onClick={() => setSelectedMember(null)}
           >
             <motion.div
@@ -390,7 +413,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-3xl bg-black/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)] text-white rounded-none overflow-hidden max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-3xl bg-black/90 sm:bg-black/40 backdrop-blur-2xl border border-white/20 sm:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)] text-white rounded-none overflow-hidden max-h-[92dvh] sm:max-h-[90vh] flex flex-col"
             >
               {/* Top CMYK Accent Bar */}
               <div
@@ -410,22 +433,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/[0.02]"
+                className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-white/10 bg-white/[0.02]"
               >
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2 sm:gap-2.5">
                   <div className="flex space-x-1">
                     <span className="w-1.5 h-3 accent-teal"></span>
                     <span className="w-1.5 h-3 accent-pink"></span>
                     <span className="w-1.5 h-3 accent-orange"></span>
                   </div>
-                  <span className="font-mono-code text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
+                  <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-zinc-400 font-bold truncate max-w-[210px] xs:max-w-none">
                     Principal Profile // {selectedMember.department.split('&')[0]}
                   </span>
                 </div>
 
                 <button
                   onClick={() => setSelectedMember(null)}
-                  className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center text-zinc-400 hover:text-black hover:bg-[#FFFF00] border border-white/15 hover:border-[#FFFF00] transition-colors cursor-pointer rounded-none"
+                  className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-300 hover:text-black hover:bg-[#FFFF00] border border-white/20 hover:border-[#FFFF00] transition-colors cursor-pointer rounded-none touch-manipulation"
                   aria-label="Close Profile"
                 >
                   <X className="w-4 h-4" />
@@ -433,7 +456,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
               </motion.div>
 
               {/* Modal Scrollable Body */}
-              <div className="p-5 sm:p-8 overflow-y-auto max-h-[calc(90vh-90px)] overscroll-contain">
+              <div className="p-4 sm:p-8 overflow-y-auto max-h-[calc(92dvh-75px)] sm:max-h-[calc(90vh-90px)] overscroll-contain">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 items-start">
                   {/* Left Col: Portrait with Staggered Entrance */}
                   <motion.div
@@ -442,7 +465,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                     transition={{ duration: 0.45, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
                     className="md:col-span-5"
                   >
-                    <div className="relative aspect-[4/3] sm:aspect-[4/5] max-h-[260px] sm:max-h-none w-full overflow-hidden bg-black/60 border border-white/10 shadow-2xl">
+                    <div className="relative aspect-[4/3] xs:aspect-[16/10] sm:aspect-[4/5] max-h-[220px] sm:max-h-none w-full overflow-hidden bg-black/60 border border-white/10 shadow-2xl">
                       <img
                         src={selectedMember.image}
                         alt={selectedMember.name}
@@ -454,16 +477,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   </motion.div>
 
                   {/* Right Col: Details with Sequential Staggered Entrance */}
-                  <div className="md:col-span-7 space-y-6">
+                  <div className="md:col-span-7 space-y-5 sm:space-y-6">
                     {/* Header Details (Role, Name, Department) */}
                     <motion.div
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-1.5"
+                      className="space-y-1 sm:space-y-1.5"
                     >
                       <span
-                        className="font-mono-code text-xs uppercase tracking-wider font-bold block"
+                        className="font-mono-code text-[11px] sm:text-xs uppercase tracking-wider font-bold block"
                         style={{
                           color:
                             selectedMember.accentColor === 'teal'
@@ -475,10 +498,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                       >
                         {selectedMember.role}
                       </span>
-                      <h3 className="gothic-display text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
+                      <h3 className="gothic-display text-2xl xs:text-3xl lg:text-4xl text-white tracking-tight leading-tight break-words">
                         {selectedMember.name}
                       </h3>
-                      <p className="font-mono-code text-xs text-zinc-400 uppercase tracking-wide pt-0.5">
+                      <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 uppercase tracking-wide pt-0.5">
                         {selectedMember.department}
                       </p>
                     </motion.div>
@@ -493,7 +516,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                       <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-500 font-bold block">
                         Biography & Strategic Focus
                       </span>
-                      <p className="text-zinc-200 text-sm sm:text-base font-normal leading-relaxed">
+                      <p className="text-zinc-200 text-xs sm:text-sm md:text-base font-normal leading-relaxed">
                         {selectedMember.bio}
                       </p>
                     </motion.div>
@@ -503,19 +526,19 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-3 pt-3 border-t border-white/10"
+                      className="space-y-2.5 sm:space-y-3 pt-3 border-t border-white/10"
                     >
                       <span className="font-mono-code text-[10px] uppercase tracking-widest text-zinc-500 font-bold block">
                         Domain Competencies
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {selectedMember.tags.map((tag, tagIdx) => (
                           <motion.span
                             key={tagIdx}
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3, delay: 0.32 + tagIdx * 0.06 }}
-                            className="font-mono-code text-xs text-zinc-200 bg-white/[0.04] border border-white/15 px-3 py-1 rounded-none hover:border-[#FFFF00]/60 hover:text-white transition-colors"
+                            className="font-mono-code text-[11px] sm:text-xs text-zinc-200 bg-white/[0.04] border border-white/15 px-2.5 sm:px-3 py-1 rounded-none hover:border-[#FFFF00]/60 hover:text-white transition-colors"
                           >
                             {tag}
                           </motion.span>
@@ -535,20 +558,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
          ========================================================================= */}
       <section
         id="our-philosophy-section"
-        className="relative bg-zinc-50/80 text-zinc-950 py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid overflow-hidden"
+        className="relative bg-zinc-50/80 text-zinc-950 py-14 xs:py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid overflow-hidden"
       >
         {/* Luminous Ambient Light Refraction Glow behind White Frosted Glass */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-r from-cyan-200/25 via-fuchsia-200/20 to-yellow-200/25 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] max-w-full h-[350px] bg-gradient-to-r from-cyan-200/25 via-fuchsia-200/20 to-yellow-200/25 blur-3xl rounded-full pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto space-y-8 sm:space-y-10">
+        <div className="relative z-10 max-w-7xl mx-auto space-y-6 sm:space-y-10">
           {/* Header Block: Scroll-Driven Reveal */}
-          <div className="max-w-4xl space-y-3 sm:space-y-4">
+          <div className="max-w-4xl space-y-2.5 sm:space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-3 py-1 bg-white/80 backdrop-blur-md border border-black/10 shadow-sm"
+              className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 bg-white/80 backdrop-blur-md border border-black/10 shadow-sm"
             >
               <div className="w-2 h-2 bg-gradient-to-r from-[#00FFFF] via-[#FF00FF] to-[#FFFF00]" />
               <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-widest text-zinc-800 font-bold">
@@ -559,9 +582,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <motion.h2
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="gothic-display text-3xl sm:text-5xl md:text-6xl text-black tracking-tight leading-none"
+              className="gothic-display text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-black tracking-tight leading-none"
             >
               Our Philosophy: "Strategy to Screen."
             </motion.h2>
@@ -571,15 +594,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative p-6 sm:p-8 md:p-10 bg-white/85 sm:bg-white/80 backdrop-blur-2xl border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.06),0_0_35px_rgba(255,255,255,0.7)] overflow-hidden"
+            className="relative p-5 sm:p-8 md:p-10 bg-white/90 sm:bg-white/80 backdrop-blur-2xl border border-black/10 sm:border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.06),0_0_35px_rgba(255,255,255,0.7)] overflow-hidden"
           >
             {/* Top CMYK Hairline Light Refraction Bar */}
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#00FFFF] via-[#FF00FF] to-[#FFFF00]" />
 
-            <div className="border-l-4 border-l-black pl-4 sm:pl-6">
-              <p className="text-lg sm:text-2xl md:text-3xl text-zinc-900 font-medium leading-relaxed">
+            <div className="border-l-3 sm:border-l-4 border-l-black pl-3.5 sm:pl-6">
+              <p className="text-base xs:text-lg sm:text-2xl md:text-3xl text-zinc-900 font-medium leading-relaxed">
                 Every project starts with a plan and ends with something real — a launched app, a finished film, a campaign that converts.{' '}
                 <span className="font-bold text-black underline decoration-[#00FFFF] decoration-2 underline-offset-4">
                   We don't hand off decks; we deliver outcomes.
@@ -595,7 +618,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
          ========================================================================= */}
       <section
         id="dual-engine-section"
-        className="relative text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-fixed bg-cover bg-center bg-no-repeat"
+        className="relative text-white py-14 xs:py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-scroll md:bg-fixed bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=85')`,
         }}
@@ -605,14 +628,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#00FFFF]/15 via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
 
-        <div className="relative z-10 max-w-7xl mx-auto space-y-10 sm:space-y-12">
+        <div className="relative z-10 max-w-7xl mx-auto space-y-8 sm:space-y-12">
           {/* Header Block: Sequential Scroll Reveal Beat 1 */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center max-w-3xl mx-auto space-y-3"
+            className="text-center max-w-3xl mx-auto space-y-2.5 sm:space-y-3"
           >
             <div className="inline-flex items-center gap-2">
               <div className="w-2 h-2 accent-teal"></div>
@@ -620,10 +643,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 Organizational Architecture
               </span>
             </div>
-            <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
+            <h2 className="gothic-display text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
               The Dual-Engine Model.
             </h2>
-            <p className="text-zinc-300 font-normal text-sm sm:text-base md:text-lg">
+            <p className="text-zinc-300 font-normal text-xs xs:text-sm sm:text-base md:text-lg">
               Imaginative369 runs on two engines working in sync:
             </p>
           </motion.div>
@@ -634,7 +657,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="h-full"
             >
@@ -643,9 +666,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 maxTilt={8}
                 scale={1.02}
                 glowColor="rgba(0, 255, 255, 0.25)"
-                className="h-full p-6 sm:p-8 md:p-10 space-y-4 sm:space-y-6 rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#00FFFF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all flex flex-col justify-between"
+                className="h-full p-5 sm:p-8 md:p-10 space-y-4 sm:space-y-6 rounded-none bg-black/70 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#00FFFF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all flex flex-col justify-between"
               >
-                <div className="space-y-4 sm:space-y-6">
+                <div className="space-y-3 sm:space-y-6">
                   <div className="flex items-baseline justify-between">
                     <span className="font-mono-code text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
                       Engine 01
@@ -656,10 +679,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   </div>
 
                   <div>
-                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
+                    <h3 className="gothic-display text-xl xs:text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
                       Agency Services
                     </h3>
-                    <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
+                    <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 mt-1 font-bold">
                       (What you hire us for)
                     </p>
                   </div>
@@ -669,7 +692,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 space-y-2">
+                <div className="pt-3.5 sm:pt-4 border-t border-white/10 space-y-2">
                   <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00FFFF] shrink-0" />
                     <span>Custom Retainers & SLA Guarantees</span>
@@ -686,7 +709,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.65, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="h-full"
             >
@@ -695,9 +718,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 maxTilt={8}
                 scale={1.02}
                 glowColor="rgba(255, 0, 255, 0.25)"
-                className="h-full p-6 sm:p-8 md:p-10 space-y-4 sm:space-y-6 rounded-none bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all flex flex-col justify-between"
+                className="h-full p-5 sm:p-8 md:p-10 space-y-4 sm:space-y-6 rounded-none bg-black/70 sm:bg-black/50 backdrop-blur-xl border border-white/20 hover:border-[#FF00FF]/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all flex flex-col justify-between"
               >
-                <div className="space-y-4 sm:space-y-6">
+                <div className="space-y-3 sm:space-y-6">
                   <div className="flex items-baseline justify-between">
                     <span className="font-mono-code text-xs uppercase tracking-widest text-[#FF00FF] font-bold">
                       Engine 02
@@ -708,10 +731,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   </div>
 
                   <div>
-                    <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
+                    <h3 className="gothic-display text-xl xs:text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
                       Venture Studio
                     </h3>
-                    <p className="font-mono-code text-xs text-zinc-400 mt-1 font-bold">
+                    <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 mt-1 font-bold">
                       (What we build ourselves)
                     </p>
                   </div>
@@ -721,7 +744,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 space-y-2">
+                <div className="pt-3.5 sm:pt-4 border-t border-white/10 space-y-2">
                   <div className="flex items-center gap-2 text-xs font-mono-code text-zinc-300">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#FF00FF] shrink-0" />
                     <span>Active Ventures: LankaQuests, IntotheWILDlk, Inhale Exhale</span>
@@ -739,11 +762,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="p-6 sm:p-8 bg-black/60 sm:bg-black/50 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] space-y-5"
+            className="p-5 sm:p-8 bg-black/70 sm:bg-black/50 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] space-y-4 sm:space-y-5"
           >
-            <p className="text-sm sm:text-base md:text-lg text-zinc-200 font-normal leading-relaxed text-center">
+            <p className="text-xs sm:text-base md:text-lg text-zinc-200 font-normal leading-relaxed text-center">
               <span className="text-[#FFFF00] font-bold">The result:</span> an agency that doesn't just advise on digital transformation — <span className="text-white font-bold underline decoration-[#FF00FF] underline-offset-8">it lives it</span>.
             </p>
 
@@ -765,24 +788,24 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       {/* =========================================================================
           VISION & MISSION: Monochromatic Split with 3D Tilt Cards
          ========================================================================= */}
-      <section className="bg-white text-zinc-950 py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid">
+      <section className="bg-white text-zinc-950 py-14 xs:py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black thin-grid">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {/* VISION */}
           <TiltCard
             maxTilt={6}
             scale={1.02}
-            className="space-y-4 p-6 sm:p-8 rounded-none cursor-default"
+            className="space-y-3 sm:space-y-4 p-5 sm:p-8 rounded-none cursor-default"
           >
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-1 sm:mb-2">
               <div className="w-2 h-2 accent-teal"></div>
               <span className="font-mono-code text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
                 Global Horizons
               </span>
             </div>
-            <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-black tracking-tight">
+            <h3 className="gothic-display text-xl xs:text-2xl sm:text-3xl md:text-4xl text-black tracking-tight">
               Our Vision
             </h3>
-            <p className="text-zinc-600 text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-zinc-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
               To become a globally recognized technology and creative studio delivering world-class digital solutions that transform industries, empower local communities, and elevate destination tourism through innovation and sustainable digital technology.
             </p>
           </TiltCard>
@@ -791,18 +814,18 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
           <TiltCard
             maxTilt={6}
             scale={1.02}
-            className="space-y-4 p-6 sm:p-8 rounded-none cursor-default"
+            className="space-y-3 sm:space-y-4 p-5 sm:p-8 rounded-none cursor-default"
           >
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-1 sm:mb-2">
               <div className="w-2 h-2 accent-orange"></div>
               <span className="font-mono-code text-xs uppercase tracking-widest text-[#FFFF00] font-bold">
                 Daily Execution
               </span>
             </div>
-            <h3 className="gothic-display text-2xl sm:text-3xl md:text-4xl text-black tracking-tight">
+            <h3 className="gothic-display text-xl xs:text-2xl sm:text-3xl md:text-4xl text-black tracking-tight">
               Our Mission
             </h3>
-            <p className="text-zinc-600 text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-zinc-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
               To engineer reliable, scalable, user-centric software alongside high-impact visual media that improves business performance, creates memorable experiences, and builds long-term value for our clients, partners, and communities.
             </p>
           </TiltCard>
@@ -812,7 +835,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
       {/* =========================================================================
           WHERE WE WORK: Badulla, Uva Province
          ========================================================================= */}
-      <section className="bg-[#111] text-white py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black">
+      <section className="bg-[#111] text-white py-14 xs:py-16 sm:py-20 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
             <div className="lg:col-span-6 space-y-4 sm:space-y-6">
@@ -823,15 +846,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 </span>
               </div>
 
-              <h2 className="gothic-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
+              <h2 className="gothic-display text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-none">
                 Where We Work.
               </h2>
 
-              <p className="text-base sm:text-lg md:text-xl text-zinc-300 font-light leading-relaxed">
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl text-zinc-300 font-light leading-relaxed">
                 Headquartered in <strong className="text-white font-medium">Badulla, Uva Province, Sri Lanka</strong> — the heart of the Hill Country, and the reason we can move faster and shoot better than agencies twice our size.
               </p>
 
-              <div className="p-4 glass-panel-dark font-mono-code text-xs text-zinc-400 space-y-1.5 border border-white/20">
+              <div className="p-3.5 sm:p-4 font-mono-code text-[11px] sm:text-xs text-zinc-300 sm:text-zinc-400 space-y-2 border border-white/20 bg-black/50 backdrop-blur-md">
                 <p><span className="text-zinc-400 font-bold">STUDIO ADDRESS:</span> 03 River Side Road, Badulla</p>
                 <p><span className="text-zinc-400 font-bold">PROVINCIAL ZONE:</span> Uva Highlands</p>
                 <p><span className="text-zinc-400 font-bold">RESPONSE LATENCY:</span> 15 Minutes to Nine Arches, Ella Gap & Pekoe Trail Stages</p>
@@ -841,7 +864,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 <MagneticButton
                   variant="glass"
                   onClick={onOpenInquiry}
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFFF00] justify-center"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFFF00] justify-center touch-manipulation min-h-[48px]"
                 >
                   <span>Engage Badulla Studio</span>
                   <ArrowRight className="w-4 h-4" />
@@ -856,15 +879,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 scale={1.02}
                 className="overflow-hidden rounded-none cursor-default"
               >
-                <div className="h-64 sm:h-80 md:h-96 w-full overflow-hidden relative">
+                <div className="h-56 xs:h-64 sm:h-80 md:h-96 w-full overflow-hidden relative">
                   <img
                     src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80"
                     alt="Sri Lanka Hill Country Badulla"
                     className="w-full h-full object-cover grayscale brightness-90 contrast-125 card-media-zoom"
+                    loading="lazy"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                  <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-wrap items-center justify-between font-mono-code text-[10px] sm:text-xs z-20 gap-2">
+                  <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 flex flex-col xs:flex-row xs:items-center justify-between font-mono-code text-[9px] xs:text-[10px] sm:text-xs z-20 gap-1 sm:gap-2">
                     <span className="text-[#00FFFF] font-bold">06°59′N 81°03′E · Central Highlands</span>
                     <span className="text-zinc-400 font-bold">Badulla Headquarters</span>
                   </div>
