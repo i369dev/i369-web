@@ -172,18 +172,18 @@ export const HomePage: React.FC<HomePageProps> = ({
                               onClick={toggleSound}
                               aria-label={isMuted ? 'Unmute video audio' : 'Mute video audio'}
                               title={isMuted ? 'Unmute video sound' : 'Mute video sound'}
-                              className="group/sound flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 bg-black/60 hover:bg-black/85 backdrop-blur-xl border border-white/30 hover:border-white/60 text-white rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
+                              className="group/sound flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 min-h-[44px] min-w-[44px] bg-black/60 hover:bg-black/85 backdrop-blur-xl border border-white/30 hover:border-white/60 text-white rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
                             >
                               {isMuted ? (
                                 <>
-                                  <VolumeX className="w-3 sm:w-4 h-3 sm:h-4 text-zinc-300 group-hover/sound:text-white transition-colors" />
+                                  <VolumeX className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-zinc-300 group-hover/sound:text-white transition-colors" />
                                   <span className="font-mono-code text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-300 group-hover/sound:text-white hidden xs:inline-block">
                                     Sound Off
                                   </span>
                                 </>
                               ) : (
                                 <>
-                                  <Volume2 className="w-3 sm:w-4 h-3 sm:h-4 text-[#00FFFF] animate-bounce transition-colors" />
+                                  <Volume2 className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#00FFFF] animate-bounce transition-colors" />
                                   <span className="font-mono-code text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-wider text-[#00FFFF] font-bold hidden xs:inline-block">
                                     Sound On
                                   </span>

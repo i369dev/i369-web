@@ -100,10 +100,12 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
   // Helper to jump directly to a specific card step
   const jumpToStep = (index: number) => {
     if (!containerRef.current) return;
-    const containerTop = containerRef.current.offsetTop;
+    const rect = containerRef.current.getBoundingClientRect();
+    const sectionTop = rect.top + window.scrollY;
     const containerHeight = containerRef.current.offsetHeight;
+    const maxScroll = Math.max(1, containerHeight - window.innerHeight);
     const stepFractions = [0.04, 0.32, 0.60, 0.90];
-    const targetScroll = containerTop + containerHeight * stepFractions[index];
+    const targetScroll = sectionTop + maxScroll * stepFractions[index];
 
     window.scrollTo({
       top: targetScroll,
@@ -114,19 +116,22 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
   // Touch swipe support for mobile devices
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+  const touchStartTime = useRef<number>(0);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
+    touchStartTime.current = Date.now();
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null || touchStartY.current === null) return;
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
     const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    const deltaTime = Date.now() - touchStartTime.current;
 
-    // Detect horizontal swipe: deltaX > 40px and predominantly horizontal
-    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1) {
+    // Detect horizontal swipe: deltaX > 35px, completed within 600ms, predominantly horizontal
+    if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1 && deltaTime < 600) {
       if (deltaX < 0) {
         // Swiped left -> advance to next card
         if (activeStep < PILLAR_CINEMATIC_DATA.length - 1) {
@@ -176,10 +181,10 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
               <button
                 onClick={() => jumpToStep(Math.max(0, activeStep - 1))}
                 disabled={activeStep === 0}
-                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation"
+                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-all sm:hidden touch-manipulation active:scale-95"
                 aria-label="Previous service pillar"
               >
-                <ChevronLeft className="w-3.5 h-3.5" />
+                <ChevronLeft className="w-5 h-5 text-[#00FFFF]" />
               </button>
 
               {/* Dial Step Selectors */}
@@ -198,7 +203,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                       key={`dial-${p.id}`}
                       onClick={() => jumpToStep(idx)}
                       title={`Dial Step ${p.number}: ${p.title}`}
-                      className={`relative px-2 sm:px-2.5 py-1 font-mono-code text-[10px] sm:text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer rounded-md touch-manipulation ${
+                      className={`relative px-2.5 py-1 min-h-[44px] min-w-[38px] sm:min-h-0 sm:min-w-0 flex items-center justify-center font-mono-code text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer rounded-lg touch-manipulation active:scale-95 ${
                         isActive
                           ? `${accentClass} shadow-[0_0_16px_rgba(255,255,255,0.5)] scale-105`
                           : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
@@ -214,10 +219,10 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
               <button
                 onClick={() => jumpToStep(Math.min(PILLAR_CINEMATIC_DATA.length - 1, activeStep + 1))}
                 disabled={activeStep === PILLAR_CINEMATIC_DATA.length - 1}
-                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation"
+                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-all sm:hidden touch-manipulation active:scale-95"
                 aria-label="Next service pillar"
               >
-                <ChevronRight className="w-3.5 h-3.5" />
+                <ChevronRight className="w-5 h-5 text-[#00FFFF]" />
               </button>
 
               {/* Shutter / Lens Parameters Telemetry */}
@@ -235,7 +240,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
               {/* Explore All CTA */}
               <button
                 onClick={() => onNavigate('services')}
-                className="inline-flex items-center gap-1 font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-[#FFFF00] transition-colors group cursor-pointer border-l border-white/25 pl-2 sm:pl-3 touch-manipulation"
+                className="inline-flex items-center gap-1 font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-[#FFFF00] transition-colors group cursor-pointer border-l border-white/25 pl-2 sm:pl-3 min-h-[44px] touch-manipulation active:scale-95"
               >
                 <span>Explore</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFFF00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

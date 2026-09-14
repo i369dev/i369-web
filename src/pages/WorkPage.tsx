@@ -72,7 +72,7 @@ const ArcCard: React.FC<ArcCardProps> = ({
       <div
         id={`work-card-${caseStudy.id}-${slotAngle}`}
         onClick={() => onSelect(caseStudy)}
-        className={`w-full h-full bg-zinc-950/95 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl overflow-hidden cursor-pointer group transition-all duration-300 flex flex-col justify-between touch-manipulation ${
+        className={`w-full h-full bg-zinc-950/95 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl overflow-hidden cursor-pointer group transition-all duration-300 flex flex-col justify-between touch-manipulation active:scale-[0.98] ${
           isActive
             ? 'border-2 border-[#00FFFF]/60 shadow-[0_30px_70px_rgba(0,255,255,0.25)] scale-[1.02]'
             : 'border border-white/20 hover:border-white/40 hover:shadow-[0_30px_70px_rgba(0,255,255,0.2)] hover:scale-[1.03]'
@@ -107,11 +107,11 @@ const ArcCard: React.FC<ArcCardProps> = ({
           </div>
 
           {/* Quick Hover/Tap Prompt */}
-          <div className={`absolute bottom-2.5 right-3 transition-opacity duration-200 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFFF00] text-black text-[10px] font-mono-code font-bold uppercase tracking-wider shadow-lg ${
+          <div className={`absolute bottom-2.5 right-3 transition-opacity duration-200 flex items-center gap-1.5 px-2.5 py-1.5 min-h-[36px] rounded-full bg-[#FFFF00] text-black text-[10px] font-mono-code font-bold uppercase tracking-wider shadow-lg active:scale-95 touch-manipulation ${
             isActive ? 'opacity-100' : 'opacity-0 md:opacity-0 md:group-hover:opacity-100'
           }`}>
             <span>View Dossier</span>
-            <ArrowUpRight className="w-3 h-3" />
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </div>
         </div>
 
@@ -128,11 +128,11 @@ const ArcCard: React.FC<ArcCardProps> = ({
             </p>
           </div>
 
-          <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono-code text-zinc-400">
+          <div className="pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono-code text-zinc-400 min-h-[44px]">
             <span className="text-zinc-500 uppercase tracking-wider">Tap for full case</span>
-            <div className="flex items-center gap-1 text-[#00FFFF] font-bold">
+            <div className="flex items-center gap-1 text-[#00FFFF] font-bold py-1 px-2 rounded hover:bg-white/10 active:scale-95 transition-transform">
               <span>EXPLORE</span>
-              <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
         </div>
@@ -155,31 +155,38 @@ export const WorkPage: React.FC<WorkPageProps> = ({
     offset: ['start start', 'end end'],
   });
 
-  // Direct card jump helper
+  // Direct card jump helper with accurate bounding calculation to avoid jitter
   const jumpToWorkCard = (cardIdx: number) => {
     if (!containerRef.current) return;
-    const containerTop = containerRef.current.offsetTop;
+    const rect = containerRef.current.getBoundingClientRect();
+    const sectionTop = rect.top + window.scrollY;
     const containerHeight = containerRef.current.offsetHeight;
-    const fractions = [0.02, 0.22, 0.42, 0.62, 0.88];
-    const targetScroll = containerTop + containerHeight * fractions[cardIdx];
+    const maxScroll = Math.max(1, containerHeight - window.innerHeight);
+    const fractions = [0.02, 0.20, 0.40, 0.60, 0.85];
+    const targetScroll = sectionTop + maxScroll * fractions[cardIdx];
     window.scrollTo({ top: targetScroll, behavior: 'smooth' });
   };
 
   // Touch gesture swipe handling for mobile
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+  const touchStartTime = useRef<number>(0);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
+    touchStartTime.current = Date.now();
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null || touchStartY.current === null) return;
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
     const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    const deltaTime = Date.now() - touchStartTime.current;
 
-    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+    // Horizontal swipe detection:
+    // Minimum 35px deltaX and deltaX greater than deltaY, completed within 600ms
+    if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && deltaTime < 600) {
       if (deltaX < 0) {
         if (activeCardIndex < CASE_STUDIES.length - 1) {
           jumpToWorkCard(activeCardIndex + 1);
@@ -207,10 +214,10 @@ export const WorkPage: React.FC<WorkPageProps> = ({
   // Synchronize the active focal card indicator
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     let idx = 0;
-    if (latest < 0.12) idx = 0;
-    else if (latest < 0.32) idx = 1;
-    else if (latest < 0.52) idx = 2;
-    else if (latest < 0.72) idx = 3;
+    if (latest < 0.10) idx = 0;
+    else if (latest < 0.30) idx = 1;
+    else if (latest < 0.50) idx = 2;
+    else if (latest < 0.70) idx = 3;
     else idx = 4;
     setActiveCardIndex(idx);
   });
@@ -265,7 +272,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
       <section
         ref={containerRef}
         id="work-arc-scroll-section"
-        className="relative h-[380vh] bg-cover bg-center bg-scroll md:bg-fixed bg-no-repeat"
+        className="relative h-[320vh] sm:h-[380vh] bg-cover bg-center bg-scroll md:bg-fixed bg-no-repeat"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1920&q=80')`,
         }}
@@ -280,18 +287,18 @@ export const WorkPage: React.FC<WorkPageProps> = ({
 
         {/* Sticky Pinned Viewport Container */}
         <div 
-          className="sticky top-16 sm:top-20 h-[calc(100dvh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 overflow-hidden z-10 touch-pan-y"
+          className="sticky top-16 sm:top-20 h-[calc(100dvh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-between sm:justify-center items-center px-3 xs:px-4 sm:px-6 md:px-8 py-3 sm:py-0 overflow-hidden z-10 touch-pan-y"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           {/* Top HUD / Arc Deck Indicator */}
-          <div className="w-full max-w-5xl flex flex-wrap items-center justify-between pb-2.5 sm:pb-4 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-2 sm:mb-4 gap-2">
+          <div className="w-full max-w-5xl flex flex-wrap items-center justify-between pb-2 sm:pb-3 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-1 sm:mb-4 gap-2 shrink-0">
             <div className="flex items-center gap-2">
               <Compass className="w-3.5 h-3.5 text-[#00FFFF]" />
               <span className="uppercase tracking-widest text-[11px] font-bold text-white">
                 Curved Portfolio Arc
               </span>
-              <span className="text-zinc-500">•</span>
+              <span className="text-zinc-500 hidden xs:inline">•</span>
               <span className="text-zinc-400 text-[10px] hidden sm:inline">
                 CONTINUOUS FANNED CAROUSEL
               </span>
@@ -302,17 +309,17 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               <button
                 onClick={() => jumpToWorkCard(Math.max(0, activeCardIndex - 1))}
                 disabled={activeCardIndex === 0}
-                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
+                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 disabled:opacity-25 disabled:pointer-events-none transition-all active:scale-95 sm:hidden touch-manipulation cursor-pointer"
                 aria-label="Previous case study"
               >
-                <ChevronLeft className="w-4 h-4 text-[#00FFFF]" />
+                <ChevronLeft className="w-5 h-5 text-[#00FFFF]" />
               </button>
 
               {CASE_STUDIES.map((cs, idx) => (
                 <button
                   key={`work-pill-${cs.id}`}
                   onClick={() => jumpToWorkCard(idx)}
-                  className={`px-2.5 py-1 min-h-[36px] min-w-[36px] sm:min-h-0 sm:min-w-0 flex items-center justify-center text-[10px] font-mono-code font-bold rounded transition-all touch-manipulation cursor-pointer ${
+                  className={`px-2.5 py-1 min-h-[44px] min-w-[38px] sm:min-h-0 sm:min-w-0 flex items-center justify-center text-[11px] sm:text-[10px] font-mono-code font-bold rounded-lg transition-all touch-manipulation cursor-pointer active:scale-95 ${
                     activeCardIndex === idx
                       ? 'bg-[#00FFFF] text-black shadow-[0_0_12px_rgba(0,255,255,0.5)] scale-105'
                       : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
@@ -326,10 +333,10 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               <button
                 onClick={() => jumpToWorkCard(Math.min(CASE_STUDIES.length - 1, activeCardIndex + 1))}
                 disabled={activeCardIndex === CASE_STUDIES.length - 1}
-                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
+                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 disabled:opacity-25 disabled:pointer-events-none transition-all active:scale-95 sm:hidden touch-manipulation cursor-pointer"
                 aria-label="Next case study"
               >
-                <ChevronRight className="w-4 h-4 text-[#00FFFF]" />
+                <ChevronRight className="w-5 h-5 text-[#00FFFF]" />
               </button>
             </div>
 
@@ -343,14 +350,14 @@ export const WorkPage: React.FC<WorkPageProps> = ({
           </div>
 
           {/* Curved Arc Stage: Continuous Fanned Deck */}
-          <div className="relative w-full max-w-7xl h-[440px] sm:h-[480px] md:h-[500px] flex items-start justify-center overflow-visible">
+          <div className="relative w-full max-w-7xl h-[280px] xs:h-[320px] sm:h-[480px] md:h-[500px] flex items-start justify-center overflow-visible">
             {/* The rotating arc wrapper with large transform-origin */}
             <motion.div
               style={{
                 rotate: carouselRotation,
                 transformOrigin: `0px ${PIVOT_RADIUS}px`,
               }}
-              className="absolute top-2 sm:top-4 left-1/2 w-0 h-0 flex items-center justify-center pointer-events-none scale-[0.60] xs:scale-[0.70] sm:scale-[0.80] md:scale-[0.90] lg:scale-100 transition-transform origin-top"
+              className="absolute top-1 sm:top-4 left-1/2 w-0 h-0 flex items-center justify-center pointer-events-none scale-[0.55] xs:scale-[0.65] sm:scale-[0.80] md:scale-[0.90] lg:scale-100 transition-transform origin-top"
             >
               {SLOTS.map((slot) => {
                 const caseStudy = CASE_STUDIES[slot.caseIndex];
@@ -368,6 +375,48 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               })}
             </motion.div>
           </div>
+
+          {/* Mobile Focal Card Quick Action Strip (visible on mobile screens sm:hidden) */}
+          <div className="sm:hidden w-[85vw] max-w-[320px] xs:w-[280px] z-20 pb-2">
+            <div
+              onClick={() => setSelectedCaseStudy(CASE_STUDIES[activeCardIndex])}
+              className="w-full bg-zinc-950/95 border border-white/20 rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.7)] backdrop-blur-2xl cursor-pointer active:scale-[0.98] transition-all touch-manipulation group"
+            >
+              {/* CMYK Accent top line */}
+              <div
+                className="h-1 w-full rounded-full mb-2.5"
+                style={{
+                  backgroundColor:
+                    CASE_STUDIES[activeCardIndex].accentColor === 'teal'
+                      ? '#00FFFF'
+                      : CASE_STUDIES[activeCardIndex].accentColor === 'pink'
+                      ? '#FF00FF'
+                      : '#FFFF00',
+                }}
+              />
+              <div className="flex items-center justify-between text-[10px] font-mono-code">
+                <span className="text-zinc-400 font-bold uppercase tracking-wider">
+                  {CASE_STUDIES[activeCardIndex].number} // 05
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-white/10 text-[#00FFFF] font-bold uppercase text-[9px]">
+                  {CASE_STUDIES[activeCardIndex].category}
+                </span>
+              </div>
+              <h4 className="gothic-display text-base text-white font-bold tracking-tight mt-1 line-clamp-1 group-hover:text-[#FFFF00] transition-colors">
+                {CASE_STUDIES[activeCardIndex].title}
+              </h4>
+              <p className="font-mono-code text-[10px] text-zinc-400 truncate mt-0.5">
+                {CASE_STUDIES[activeCardIndex].client}
+              </p>
+              <div className="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-code">
+                <span className="text-zinc-500 text-[10px]">Swipe or tap to view</span>
+                <span className="inline-flex items-center gap-1 font-bold text-black bg-[#FFFF00] px-2.5 py-1 min-h-[30px] rounded-lg">
+                  Open Dossier
+                  <ArrowUpRight className="w-3 h-3" />
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -376,7 +425,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
          ========================================================================= */}
       <AnimatePresence>
         {selectedCaseStudy && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6 md:p-8">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -393,7 +442,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[88vh] overflow-y-auto overscroll-contain bg-zinc-950/95 border border-white/20 rounded-2xl sm:rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.9)] text-white p-5 sm:p-8 md:p-10 z-10 custom-scrollbar"
+              className="relative w-full max-w-3xl max-h-[90dvh] overflow-y-auto overscroll-contain bg-zinc-950/95 border border-white/20 rounded-2xl sm:rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.9)] text-white p-4 xs:p-5 sm:p-8 md:p-10 z-10 custom-scrollbar"
             >
               {/* Top Accent Ribbon */}
               <div
@@ -411,7 +460,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               {/* Close Button */}
               <button
                 onClick={() => setSelectedCaseStudy(null)}
-                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
+                className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 p-2 rounded-full bg-white/10 hover:bg-[#FFFF00] hover:text-black text-white border border-white/20 transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation z-20 active:scale-95"
                 aria-label="Close Case Study Details"
               >
                 <X className="w-5 h-5" />
@@ -521,7 +570,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                     setSelectedCaseStudy(null);
                     onOpenInquiry(selectedCaseStudy.category);
                   }}
-                  className="w-full sm:w-auto px-6 py-3.5 min-h-[44px] bg-[#FFFF00] text-black hover:bg-white text-xs font-mono-code font-bold uppercase tracking-wider rounded-xl justify-center gap-2 touch-manipulation"
+                  className="w-full sm:w-auto px-6 py-3.5 min-h-[44px] bg-[#FFFF00] text-black hover:bg-white text-xs font-mono-code font-bold uppercase tracking-wider rounded-xl justify-center gap-2 touch-manipulation active:scale-[0.98]"
                 >
                   <span>Inquire About Similar Scope</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -529,7 +578,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
 
                 <button
                   onClick={() => setSelectedCaseStudy(null)}
-                  className="w-full sm:w-auto px-5 py-3.5 min-h-[44px] text-xs font-mono-code text-zinc-400 hover:text-white rounded-xl border border-white/10 hover:border-white/20 transition-colors touch-manipulation flex items-center justify-center"
+                  className="w-full sm:w-auto px-5 py-3.5 min-h-[44px] text-xs font-mono-code text-zinc-400 hover:text-white rounded-xl border border-white/10 hover:border-white/20 transition-colors touch-manipulation active:scale-[0.98] flex items-center justify-center cursor-pointer"
                 >
                   Close Dossier
                 </button>
