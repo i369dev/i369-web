@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue } from 'motion/react';
 import { PageId, ServicePillar } from '../types';
 import { SERVICE_PILLARS } from '../data/agencyData';
-import { ArrowRight, ArrowUpRight, Check, Sparkles, Code2, Film, TrendingUp, Mountain, Layers, MousePointer } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, Sparkles, Code2, Film, TrendingUp, Mountain, Layers, MousePointer, ChevronLeft, ChevronRight } from 'lucide-react';
 import { MagneticButton } from '../components/MagneticButton';
 
 interface ServicesPageProps {
@@ -96,21 +96,21 @@ const StackedCard: React.FC<StackedCardProps> = ({
         opacity: opacityTransform,
         zIndex: index + 10,
       }}
-      className="absolute inset-0 flex items-center justify-center p-2 sm:p-4 pointer-events-auto"
+      className="absolute inset-0 flex items-center justify-center p-2 sm:p-4 pointer-events-auto touch-manipulation"
     >
       <div
         id={`service-card-${pillar.id}`}
-        className="w-full max-w-4xl bg-white border border-black/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] rounded-2xl sm:rounded-[2rem] overflow-hidden transition-shadow duration-300 hover:shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
+        className="w-full max-w-4xl max-h-[calc(100dvh-7.5rem)] sm:max-h-none overflow-y-auto sm:overflow-visible bg-white border border-black/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] rounded-2xl sm:rounded-[2rem] transition-shadow duration-300 hover:shadow-[0_30px_70px_rgba(0,0,0,0.6)]"
       >
         {/* Top CMYK Accent Bar */}
         <div
-          className="h-2 w-full"
+          className="h-2 w-full shrink-0"
           style={{ backgroundColor: barColor }}
         />
 
         <div className="p-4 sm:p-8 md:p-9">
           {/* Top Row: Identifier, Icon, Title, Tags */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-5 border-b border-black/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-3.5 sm:pb-5 border-b border-black/10">
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5">
               <span className="font-mono-code text-xs sm:text-sm font-bold text-zinc-700 px-2.5 py-1 bg-zinc-100 border border-black/10 rounded-lg">
                 {pillar.number} // 05
@@ -134,9 +134,9 @@ const StackedCard: React.FC<StackedCardProps> = ({
           </div>
 
           {/* Body Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 pt-4 sm:pt-5 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 pt-3.5 sm:pt-5 items-start">
             {/* Left Column: Tagline, Narrative, Featured Client, Action */}
-            <div className="lg:col-span-6 space-y-3.5 sm:space-y-4">
+            <div className="lg:col-span-6 space-y-3 sm:space-y-4">
               <p className={`font-display text-base sm:text-lg md:text-xl font-bold leading-snug ${accentTextClass}`}>
                 "{pillar.tagline}"
               </p>
@@ -147,7 +147,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
 
               {/* Featured Client or Build Badge */}
               {(pillar.featuredClient || pillar.featuredProject) && (
-                <div className="p-3 rounded-xl border border-black/10 bg-zinc-50">
+                <div className="p-2.5 sm:p-3 rounded-xl border border-black/10 bg-zinc-50">
                   <span className="font-mono-code text-[9px] uppercase tracking-widest text-zinc-500 font-bold block mb-0.5">
                     {pillar.featuredClient ? 'Featured Client Engagement' : 'Featured Build & Innovation'}
                   </span>
@@ -161,7 +161,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
                 <MagneticButton
                   variant="primary"
                   onClick={() => onOpenInquiry(pillar.title)}
-                  className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 text-black bg-[#FFFF00] hover:bg-zinc-950 hover:text-white border border-black/20 text-xs font-mono-code font-bold uppercase tracking-wider rounded-xl justify-center gap-2 transition-colors"
+                  className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 text-black bg-[#FFFF00] hover:bg-zinc-950 hover:text-white border border-black/20 text-xs font-mono-code font-bold uppercase tracking-wider rounded-xl justify-center gap-2 transition-colors touch-manipulation"
                 >
                   <span>Commission This Discipline</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -175,7 +175,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
                 Deliverables & Technical Scope
               </span>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5 sm:space-y-2">
                 {pillar.points.map((point, pIdx) => (
                   <div
                     key={pIdx}
@@ -201,11 +201,59 @@ const StackedCard: React.FC<StackedCardProps> = ({
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenInquiry }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
+
+  // Track currently frontmost / focused card across scroll
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (latest < 0.15) setActiveCard(0);
+    else if (latest < 0.35) setActiveCard(1);
+    else if (latest < 0.55) setActiveCard(2);
+    else if (latest < 0.75) setActiveCard(3);
+    else setActiveCard(4);
+  });
+
+  // Direct card jump helper
+  const jumpToCard = (cardIdx: number) => {
+    if (!containerRef.current) return;
+    const containerTop = containerRef.current.offsetTop;
+    const containerHeight = containerRef.current.offsetHeight;
+    const fractions = [0.02, 0.22, 0.41, 0.60, 0.85];
+    const targetScroll = containerTop + containerHeight * fractions[cardIdx];
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  };
+
+  // Mobile swipe support
+  const touchStartY = useRef<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartY.current === null || touchStartX.current === null) return;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+
+    // Detect intentional swipe (either horizontal swipe or vertical drag > 50px)
+    if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        // Swipe left -> next card
+        if (activeCard < SERVICE_PILLARS.length - 1) jumpToCard(activeCard + 1);
+      } else {
+        // Swipe right -> prev card
+        if (activeCard > 0) jumpToCard(activeCard - 1);
+      }
+    }
+    touchStartY.current = null;
+    touchStartX.current = null;
+  };
 
   return (
     <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
@@ -260,9 +308,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
         <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-[#FF00FF]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Sticky Pinned Viewport Container */}
-        <div className="sticky top-16 sm:top-20 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 overflow-hidden z-10">
+        <div 
+          className="sticky top-16 sm:top-20 h-[calc(100dvh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 overflow-hidden z-10 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {/* Top HUD / Deck Indicator */}
-          <div className="w-full max-w-4xl flex items-center justify-between pb-3 sm:pb-4 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-2">
+          <div className="w-full max-w-4xl flex flex-wrap items-center justify-between gap-2 pb-2.5 sm:pb-4 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-2">
             <div className="flex items-center gap-2">
               <Layers className="w-3.5 h-3.5 text-[#00FFFF]" />
               <span className="uppercase tracking-widest text-[11px] font-bold text-white">
@@ -274,7 +326,25 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            {/* Quick Direct Step Selector Pills for Easy Mobile & Desktop Navigation */}
+            <div className="flex items-center gap-1 sm:gap-1.5">
+              {SERVICE_PILLARS.map((p, idx) => (
+                <button
+                  key={`deck-pill-${p.id}`}
+                  onClick={() => jumpToCard(idx)}
+                  className={`px-2 py-0.5 text-[10px] font-mono-code font-bold rounded transition-all touch-manipulation cursor-pointer ${
+                    activeCard === idx
+                      ? 'bg-[#FFFF00] text-black shadow-[0_0_12px_rgba(255,255,0,0.5)] scale-105'
+                      : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
+                  }`}
+                  title={`View Pillar ${p.number}: ${p.title}`}
+                >
+                  {p.number}
+                </button>
+              ))}
+            </div>
+
+            <div className="hidden xs:flex items-center gap-2">
               <span className="text-[10px] uppercase tracking-wider text-zinc-400">Scroll to Stack</span>
               <div className="w-1.5 h-1.5 rounded-full bg-[#FFFF00] animate-pulse" />
             </div>

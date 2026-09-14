@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 
 interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -30,10 +30,32 @@ export const TiltCard: React.FC<TiltCardProps> = ({
     opacity: 0,
   });
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Detect touch devices / coarse pointers / mobile viewports
+  useEffect(() => {
+    const checkTouch = () => {
+      const isCoarse = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+      const hasTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+      const isMobileWidth = typeof window !== 'undefined' && window.innerWidth < 1024;
+      setIsTouchDevice(isCoarse || (hasTouch && isMobileWidth));
+    };
+
+    checkTouch();
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    mediaQuery.addEventListener?.('change', checkTouch);
+    window.addEventListener('resize', checkTouch);
+
+    return () => {
+      mediaQuery.removeEventListener?.('change', checkTouch);
+      window.removeEventListener('resize', checkTouch);
+    };
+  }, []);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!cardRef.current) return;
+      // Strictly disable tilt calculation on touch/mobile devices to prevent jumpy transforms
+      if (isTouchDevice || !cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
       const width = rect.width;
       const height = rect.height;
@@ -63,14 +85,16 @@ export const TiltCard: React.FC<TiltCardProps> = ({
         });
       }
     },
-    [maxTilt, scale, glareEffect]
+    [isTouchDevice, maxTilt, scale, glareEffect]
   );
 
   const handleMouseEnter = () => {
+    if (isTouchDevice) return;
     setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
+    if (isTouchDevice) return;
     setIsHovered(false);
     setTransformStyle('perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)');
     setGlarePosition((prev) => ({ ...prev, opacity: 0 }));
@@ -88,19 +112,23 @@ export const TiltCard: React.FC<TiltCardProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      style={{
-        transform: transformStyle,
-        transition: isHovered
-          ? 'transform 0.1s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out'
-          : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease-out, border-color 0.5s ease-out',
-        transformStyle: 'preserve-3d',
-        willChange: 'transform',
-      }}
-      className={`relative overflow-hidden group interactive-card select-none ${glassClasses} ${className}`}
+      style={
+        isTouchDevice
+          ? undefined
+          : {
+              transform: transformStyle,
+              transition: isHovered
+                ? 'transform 0.1s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out'
+                : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease-out, border-color 0.5s ease-out',
+              transformStyle: 'preserve-3d',
+              willChange: 'transform',
+            }
+      }
+      className={`relative overflow-hidden group interactive-card select-none touch-manipulation ${glassClasses} ${className}`}
       {...props}
     >
-      {/* Subtle dynamic glass specular glare overlay */}
-      {glareEffect && (
+      {/* Dynamic specular glare overlay (desktop only to prevent stuck specular highlights on mobile taps) */}
+      {glareEffect && !isTouchDevice && (
         <div
           className="absolute inset-0 pointer-events-none z-30 transition-opacity duration-300 ease-out"
           style={{

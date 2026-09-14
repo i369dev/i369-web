@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 
 interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -18,10 +18,30 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const checkTouch = () => {
+      const isCoarse = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+      const hasTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+      const isSmall = typeof window !== 'undefined' && window.innerWidth < 1024;
+      setIsTouchDevice(isCoarse || (hasTouch && isSmall));
+    };
+
+    checkTouch();
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    mediaQuery.addEventListener?.('change', checkTouch);
+    window.addEventListener('resize', checkTouch);
+
+    return () => {
+      mediaQuery.removeEventListener?.('change', checkTouch);
+      window.removeEventListener('resize', checkTouch);
+    };
+  }, []);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (!buttonRef.current) return;
+      if (isTouchDevice || !buttonRef.current) return;
       const rect = buttonRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
@@ -31,12 +51,16 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
       setPosition({ x: deltaX, y: deltaY });
     },
-    [pullStrength]
+    [isTouchDevice, pullStrength]
   );
 
-  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseEnter = () => {
+    if (isTouchDevice) return;
+    setIsHovered(true);
+  };
 
   const handleMouseLeave = () => {
+    if (isTouchDevice) return;
     setIsHovered(false);
     setPosition({ x: 0, y: 0 });
   };

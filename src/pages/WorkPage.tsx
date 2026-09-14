@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'motion/react';
 import { PageId, CaseStudy } from '../types';
 import { CASE_STUDIES, TRUSTED_CLIENTS } from '../data/agencyData';
-import { ArrowUpRight, X, Layers, Sparkles, Check, Compass, TrendingUp, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, X, Layers, Sparkles, Check, Compass, TrendingUp, ChevronRight, ChevronLeft } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
 
@@ -72,7 +72,7 @@ const ArcCard: React.FC<ArcCardProps> = ({
       <div
         id={`work-card-${caseStudy.id}-${slotAngle}`}
         onClick={() => onSelect(caseStudy)}
-        className={`w-full h-full bg-zinc-950/95 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl overflow-hidden cursor-pointer group transition-all duration-300 flex flex-col justify-between ${
+        className={`w-full h-full bg-zinc-950/95 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl overflow-hidden cursor-pointer group transition-all duration-300 flex flex-col justify-between touch-manipulation ${
           isActive
             ? 'border-2 border-[#00FFFF]/60 shadow-[0_30px_70px_rgba(0,255,255,0.25)] scale-[1.02]'
             : 'border border-white/20 hover:border-white/40 hover:shadow-[0_30px_70px_rgba(0,255,255,0.2)] hover:scale-[1.03]'
@@ -89,8 +89,8 @@ const ArcCard: React.FC<ArcCardProps> = ({
           <img
             src={caseStudy.image}
             alt={caseStudy.title}
-            className={`w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-500 ${
-              isActive ? 'grayscale-0' : ''
+            className={`w-full h-full object-cover contrast-125 brightness-95 group-hover:scale-105 transition-all duration-500 ${
+              isActive ? 'grayscale-0' : 'grayscale-0 md:grayscale md:group-hover:grayscale-0'
             }`}
             referrerPolicy="no-referrer"
           />
@@ -106,8 +106,10 @@ const ArcCard: React.FC<ArcCardProps> = ({
             </span>
           </div>
 
-          {/* Quick Hover Prompt */}
-          <div className="absolute bottom-2.5 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFFF00] text-black text-[10px] font-mono-code font-bold uppercase tracking-wider shadow-lg">
+          {/* Quick Hover/Tap Prompt */}
+          <div className={`absolute bottom-2.5 right-3 transition-opacity duration-200 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFFF00] text-black text-[10px] font-mono-code font-bold uppercase tracking-wider shadow-lg ${
+            isActive ? 'opacity-100' : 'opacity-0 md:opacity-0 md:group-hover:opacity-100'
+          }`}>
             <span>View Dossier</span>
             <ArrowUpRight className="w-3 h-3" />
           </div>
@@ -116,7 +118,9 @@ const ArcCard: React.FC<ArcCardProps> = ({
         {/* Compact Card Content */}
         <div className="p-4 sm:p-5 space-y-2 flex-1 flex flex-col justify-between">
           <div>
-            <h3 className="gothic-display text-lg sm:text-xl text-white tracking-tight leading-snug group-hover:text-[#FFFF00] transition-colors line-clamp-2">
+            <h3 className={`gothic-display text-lg sm:text-xl tracking-tight leading-snug transition-colors line-clamp-2 ${
+              isActive ? 'text-[#FFFF00]' : 'text-white group-hover:text-[#FFFF00]'
+            }`}>
               {caseStudy.title}
             </h3>
             <p className="font-mono-code text-[11px] sm:text-xs text-zinc-400 mt-1 truncate">
@@ -150,6 +154,45 @@ export const WorkPage: React.FC<WorkPageProps> = ({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
+
+  // Direct card jump helper
+  const jumpToWorkCard = (cardIdx: number) => {
+    if (!containerRef.current) return;
+    const containerTop = containerRef.current.offsetTop;
+    const containerHeight = containerRef.current.offsetHeight;
+    const fractions = [0.02, 0.22, 0.42, 0.62, 0.88];
+    const targetScroll = containerTop + containerHeight * fractions[cardIdx];
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  };
+
+  // Touch gesture swipe handling for mobile
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        if (activeCardIndex < CASE_STUDIES.length - 1) {
+          jumpToWorkCard(activeCardIndex + 1);
+        }
+      } else {
+        if (activeCardIndex > 0) {
+          jumpToWorkCard(activeCardIndex - 1);
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   // Carousel rotation angle derived from scrollYProgress:
   // Rotates the entire fanned-out deck from right to left as the user scrolls.
@@ -236,9 +279,13 @@ export const WorkPage: React.FC<WorkPageProps> = ({
         <div className="absolute bottom-1/3 right-8 w-96 h-96 bg-[#FF00FF]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Sticky Pinned Viewport Container */}
-        <div className="sticky top-16 sm:top-20 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 overflow-hidden z-10">
+        <div 
+          className="sticky top-16 sm:top-20 h-[calc(100dvh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 overflow-hidden z-10 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {/* Top HUD / Arc Deck Indicator */}
-          <div className="w-full max-w-5xl flex flex-wrap items-center justify-between pb-3 sm:pb-4 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-2 sm:mb-4 gap-3">
+          <div className="w-full max-w-5xl flex flex-wrap items-center justify-between pb-2.5 sm:pb-4 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-2 sm:mb-4 gap-2">
             <div className="flex items-center gap-2">
               <Compass className="w-3.5 h-3.5 text-[#00FFFF]" />
               <span className="uppercase tracking-widest text-[11px] font-bold text-white">
@@ -250,9 +297,45 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-zinc-400">
+            {/* Quick Case Study Selectors & Mobile Controls */}
+            <div className="flex items-center gap-1 sm:gap-1.5">
+              <button
+                onClick={() => jumpToWorkCard(Math.max(0, activeCardIndex - 1))}
+                disabled={activeCardIndex === 0}
+                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
+                aria-label="Previous case study"
+              >
+                <ChevronLeft className="w-4 h-4 text-[#00FFFF]" />
+              </button>
+
+              {CASE_STUDIES.map((cs, idx) => (
+                <button
+                  key={`work-pill-${cs.id}`}
+                  onClick={() => jumpToWorkCard(idx)}
+                  className={`px-2 py-0.5 text-[10px] font-mono-code font-bold rounded transition-all touch-manipulation cursor-pointer ${
+                    activeCardIndex === idx
+                      ? 'bg-[#00FFFF] text-black shadow-[0_0_12px_rgba(0,255,255,0.5)] scale-105'
+                      : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
+                  }`}
+                  title={`Jump to ${cs.title}`}
+                >
+                  {cs.number}
+                </button>
+              ))}
+
+              <button
+                onClick={() => jumpToWorkCard(Math.min(CASE_STUDIES.length - 1, activeCardIndex + 1))}
+                disabled={activeCardIndex === CASE_STUDIES.length - 1}
+                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
+                aria-label="Next case study"
+              >
+                <ChevronRight className="w-4 h-4 text-[#00FFFF]" />
+              </button>
+            </div>
+
+            <div className="hidden xs:flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-zinc-400">
               <span className="hidden md:inline">Focus:</span>
-              <span className="text-[#00FFFF] font-bold truncate max-w-[140px] sm:max-w-[200px]">
+              <span className="text-[#00FFFF] font-bold truncate max-w-[120px] sm:max-w-[180px]">
                 {CASE_STUDIES[activeCardIndex].title}
               </span>
               <div className="w-1.5 h-1.5 rounded-full bg-[#00FFFF] animate-pulse" />

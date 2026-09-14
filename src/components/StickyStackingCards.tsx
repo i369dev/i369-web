@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent, useSpring } from 'motion/react';
 import { SERVICE_PILLARS } from '../data/agencyData';
 import { PageId } from '../types';
-import { ArrowUpRight, Camera, Disc } from 'lucide-react';
+import { ArrowUpRight, Camera, Disc, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface StickyStackingCardsProps {
   onNavigate: (page: PageId) => void;
@@ -111,6 +111,38 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
     });
   };
 
+  // Touch swipe support for mobile devices
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+
+    // Detect horizontal swipe: deltaX > 40px and predominantly horizontal
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1) {
+      if (deltaX < 0) {
+        // Swiped left -> advance to next card
+        if (activeStep < PILLAR_CINEMATIC_DATA.length - 1) {
+          jumpToStep(activeStep + 1);
+        }
+      } else {
+        // Swiped right -> go to previous card
+        if (activeStep > 0) {
+          jumpToStep(activeStep - 1);
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
   return (
     <div
       ref={containerRef}
@@ -139,7 +171,17 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
             </div>
 
             {/* Camera Dial Control HUD */}
-            <div className="flex items-center gap-2 sm:gap-4 self-start sm:self-auto bg-black/80 border border-white/30 px-2.5 sm:px-4 py-1.5 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.8)] rounded-xl">
+            <div className="flex items-center gap-1.5 sm:gap-4 self-start sm:self-auto bg-black/80 border border-white/30 px-2 sm:px-4 py-1.5 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.8)] rounded-xl">
+              {/* Mobile Prev Arrow */}
+              <button
+                onClick={() => jumpToStep(Math.max(0, activeStep - 1))}
+                disabled={activeStep === 0}
+                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation"
+                aria-label="Previous service pillar"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+
               {/* Dial Step Selectors */}
               <div className="flex items-center gap-1 sm:gap-1.5">
                 {PILLAR_CINEMATIC_DATA.map((p, idx) => {
@@ -156,7 +198,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                       key={`dial-${p.id}`}
                       onClick={() => jumpToStep(idx)}
                       title={`Dial Step ${p.number}: ${p.title}`}
-                      className={`relative px-2 sm:px-2.5 py-1 font-mono-code text-[10px] sm:text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer rounded-md ${
+                      className={`relative px-2 sm:px-2.5 py-1 font-mono-code text-[10px] sm:text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer rounded-md touch-manipulation ${
                         isActive
                           ? `${accentClass} shadow-[0_0_16px_rgba(255,255,255,0.5)] scale-105`
                           : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
@@ -167,6 +209,16 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                   );
                 })}
               </div>
+
+              {/* Mobile Next Arrow */}
+              <button
+                onClick={() => jumpToStep(Math.min(PILLAR_CINEMATIC_DATA.length - 1, activeStep + 1))}
+                disabled={activeStep === PILLAR_CINEMATIC_DATA.length - 1}
+                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation"
+                aria-label="Next service pillar"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
 
               {/* Shutter / Lens Parameters Telemetry */}
               <div className="hidden lg:flex items-center gap-3 border-l border-white/25 pl-3 font-mono-code text-[10px] text-zinc-400">
@@ -183,7 +235,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
               {/* Explore All CTA */}
               <button
                 onClick={() => onNavigate('services')}
-                className="inline-flex items-center gap-1 font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-[#FFFF00] transition-colors group cursor-pointer border-l border-white/25 pl-2 sm:pl-3"
+                className="inline-flex items-center gap-1 font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-[#FFFF00] transition-colors group cursor-pointer border-l border-white/25 pl-2 sm:pl-3 touch-manipulation"
               >
                 <span>Explore</span>
                 <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFFF00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -195,7 +247,11 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
         {/* =========================================================================
             HORIZONTAL TRAIN CARRIAGE TRACK: Unified Desktop & Mobile Flow
            ========================================================================= */}
-        <div className="relative flex-1 w-full my-auto flex items-center overflow-hidden py-1 sm:py-3">
+        <div 
+          className="relative flex-1 w-full my-auto flex items-center overflow-hidden py-1 sm:py-3 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           
           {/* Subtle Left & Right Edge Vignette Shading */}
           <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-20 pointer-events-none" />
@@ -232,14 +288,14 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                 <div
                   key={pillar.id}
                   onClick={() => onNavigate('services')}
-                  className={`relative shrink-0 w-[80vw] h-[50vh] sm:h-[50vh] md:h-[52vh] max-h-[460px] min-h-[250px] sm:min-h-[290px] rounded-2xl sm:rounded-3xl border border-white/25 shadow-[0_24px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col justify-between bg-zinc-950 border-t-4 ${accentBorderClass} cursor-pointer group transition-all duration-300`}
+                  className={`relative shrink-0 w-[80vw] h-[50vh] sm:h-[50vh] md:h-[52vh] max-h-[460px] min-h-[250px] sm:min-h-[290px] rounded-2xl sm:rounded-3xl border border-white/25 shadow-[0_24px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col justify-between bg-zinc-950 border-t-4 ${accentBorderClass} cursor-pointer group transition-all duration-300 touch-manipulation`}
                 >
                   {/* Cinematic Background Image with Rich Film Grade Overlay */}
                   <div className="absolute inset-0 z-0 rounded-2xl sm:rounded-3xl overflow-hidden">
                     <img
                       src={pillar.bgImage}
                       alt={pillar.title}
-                      className="w-full h-full object-cover object-center filter brightness-[0.6] contrast-[1.25] scale-105 group-hover:scale-110 transition-transform duration-700 ease-out"
+                      className="w-full h-full object-cover object-center filter brightness-[0.72] md:brightness-[0.6] contrast-[1.25] scale-105 group-hover:scale-110 md:group-hover:brightness-[0.75] transition-transform duration-700 ease-out"
                       loading="lazy"
                     />
                     {/* Multi-layer Cinematic Film Gradients */}
