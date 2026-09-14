@@ -117,14 +117,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="mobile-inquiry-cta"
               onClick={onOpenInquiry}
-              className="px-3.5 py-2 min-h-[40px] flex items-center justify-center bg-black text-white text-[11px] uppercase font-montserrat font-bold tracking-wider hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
+              className="px-3.5 py-2 min-h-[44px] flex items-center justify-center bg-black text-white text-[11px] uppercase font-montserrat font-bold tracking-wider hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none touch-manipulation cursor-pointer"
             >
               Contact
             </button>
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-black hover:opacity-70 focus:outline-none cursor-pointer"
+              className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-black hover:opacity-70 focus:outline-none cursor-pointer touch-manipulation"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6 text-[#FF00FF]" /> : <Menu className="w-6 h-6 text-black" />}

@@ -51,7 +51,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full max-w-full overflow-x-clip bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Editorial
          ========================================================================= */}
@@ -68,7 +68,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             </span>
           </div>
 
-          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
+          <h1 className="gothic-display text-3xl xs:text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
             Let’s Build Something.
           </h1>
 
@@ -88,7 +88,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
          ========================================================================= */}
       <section
         id="contact-cards-section"
-        className="relative text-white py-12 sm:py-16 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-cover bg-center bg-no-repeat sm:bg-fixed"
+        className="relative text-white py-12 sm:py-16 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=85')`,
         }}
@@ -258,7 +258,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         message: '',
                       });
                     }}
-                    className="w-full sm:w-auto px-8 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
+                    className="w-full sm:w-auto px-8 py-3.5 min-h-[44px] justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors touch-manipulation"
                   >
                     <span className="font-bold">
                       Submit Another <span className="text-yellow-400 group-hover:text-black transition-colors">Brief</span>
@@ -378,7 +378,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                           type="button"
                           key={opt}
                           onClick={() => setFormData({ ...formData, budgetRange: opt })}
-                          className={`px-3 py-2.5 text-[11px] sm:text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none break-words min-h-[42px] flex items-center ${
+                          className={`px-3 py-2.5 text-[11px] sm:text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none break-words min-h-[44px] flex items-center touch-manipulation ${
                             formData.budgetRange === opt
                               ? 'border-black bg-black text-white font-bold shadow-sm'
                               : 'border-black/20 bg-white/70 text-zinc-900 hover:bg-[#FFFF00] hover:text-black hover:border-black font-medium'
@@ -414,7 +414,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <MagneticButton
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto px-8 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
+                      className="w-full sm:w-auto px-8 py-3.5 min-h-[44px] justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors touch-manipulation"
                     >
                       {isSubmitting ? (
                         <span>Transmitting...</span>

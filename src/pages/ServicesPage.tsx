@@ -256,7 +256,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
   };
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full max-w-full overflow-x-clip bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Editorial
          ========================================================================= */}
@@ -294,7 +294,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
       <section
         ref={containerRef}
         id="services-stack-section"
-        className="relative h-[420vh] bg-cover bg-center bg-fixed bg-no-repeat"
+        className="relative h-[420vh] bg-cover bg-center bg-scroll md:bg-fixed bg-no-repeat"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1920&q=80')`,
         }}
@@ -332,7 +332,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
                 <button
                   key={`deck-pill-${p.id}`}
                   onClick={() => jumpToCard(idx)}
-                  className={`px-2 py-0.5 text-[10px] font-mono-code font-bold rounded transition-all touch-manipulation cursor-pointer ${
+                  className={`px-2.5 py-1 min-h-[36px] sm:min-h-0 text-[10px] font-mono-code font-bold rounded transition-all touch-manipulation cursor-pointer flex items-center justify-center ${
                     activeCard === idx
                       ? 'bg-[#FFFF00] text-black shadow-[0_0_12px_rgba(255,255,0,0.5)] scale-105'
                       : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'

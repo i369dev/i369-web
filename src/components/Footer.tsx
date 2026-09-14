@@ -66,11 +66,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
               <h4 className="font-mono-code text-xs uppercase tracking-widest text-zinc-500 mb-4 font-bold">
                 Directory
               </h4>
-              <ul className="space-y-1.5 text-xs font-mono-code uppercase tracking-wider">
+              <ul className="space-y-1 text-xs font-mono-code uppercase tracking-wider">
                 <li>
                   <button
                     onClick={() => onNavigate('home')}
-                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-2 min-h-[36px] inline-flex items-center text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer touch-manipulation"
                   >
                     Home
                   </button>
@@ -78,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('about')}
-                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-2 min-h-[36px] inline-flex items-center text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer touch-manipulation"
                   >
                     About Us
                   </button>
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('services')}
-                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-2 min-h-[36px] inline-flex items-center text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer touch-manipulation"
                   >
                     Services
                   </button>
@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('work')}
-                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-2 min-h-[36px] inline-flex items-center text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer touch-manipulation"
                   >
                     Our Work
                   </button>
@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('ventures')}
-                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-2 min-h-[36px] inline-flex items-center text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer touch-manipulation"
                   >
                     Ventures
                   </button>
@@ -110,7 +110,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 <li>
                   <button
                     onClick={() => onNavigate('contact')}
-                    className="py-1 inline-block text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer"
+                    className="py-2 min-h-[36px] inline-flex items-center text-zinc-300 hover:text-[#FFFF00] transition-colors cursor-pointer touch-manipulation"
                   >
                     Contact
                   </button>
@@ -156,7 +156,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
                 id="footer-start-project-btn"
                 variant="glass"
                 onClick={onOpenInquiry}
-                className="w-full mt-5 py-3 px-4 text-black bg-white hover:bg-[#FFFF00]"
+                className="w-full mt-5 py-3.5 px-4 min-h-[44px] text-black bg-white hover:bg-[#FFFF00] touch-manipulation"
               >
                 <span>Initiate Brief</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -165,7 +165,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
 
             <button
               onClick={scrollToTop}
-              className="self-start inline-flex items-center gap-2 text-xs font-mono-code text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              className="self-start inline-flex items-center gap-2 py-2 min-h-[44px] text-xs font-mono-code text-zinc-400 hover:text-white transition-colors cursor-pointer touch-manipulation"
             >
               <ArrowUp className="w-3.5 h-3.5 text-[#00FFFF]" />
               <span>Back to Top</span>

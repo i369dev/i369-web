@@ -33,7 +33,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full max-w-full overflow-x-clip bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Grid & Gothic Title
          ========================================================================= */}
@@ -50,7 +50,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
             </span>
           </div>
 
-          <h1 className="gothic-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
+          <h1 className="gothic-display text-3xl xs:text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-black tracking-tight leading-[0.88] break-words">
             Built In-House.
           </h1>
 
@@ -70,7 +70,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
          ========================================================================= */}
       <section
         id="built-in-house-showcase"
-        className="relative text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-cover bg-center bg-no-repeat sm:bg-fixed"
+        className="relative text-white py-16 sm:py-20 md:py-28 px-4 sm:px-8 md:px-12 lg:px-16 border-b border-black overflow-hidden bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=85')`,
         }}
@@ -146,7 +146,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                         {isAudioVenture && (
                           <button
                             onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                            className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 bg-[#FF00FF]/90 hover:bg-[#FF00FF] text-white font-mono-code text-[10px] sm:text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-all duration-200 shadow-md backdrop-blur-sm"
+                            className="flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 min-h-[44px] bg-[#FF00FF]/90 hover:bg-[#FF00FF] text-white font-mono-code text-[10px] sm:text-xs uppercase font-bold tracking-wider rounded-none cursor-pointer transition-all duration-200 shadow-md backdrop-blur-sm touch-manipulation"
                           >
                             {isPlayingAudio ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                             <span>{isPlayingAudio ? 'Pause Live Stream' : 'Audition Soundscape'}</span>
@@ -267,7 +267,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
                           <MagneticButton
                             variant="glass"
                             onClick={onOpenInquiry}
-                            className="w-full sm:w-auto px-5 py-2.5 justify-center text-xs sm:text-sm font-mono-code uppercase tracking-wider text-white border-white/20 hover:border-[#FFFF00] hover:text-[#FFFF00]"
+                            className="w-full sm:w-auto px-5 py-2.5 min-h-[44px] justify-center text-xs sm:text-sm font-mono-code uppercase tracking-wider text-white border-white/20 hover:border-[#FFFF00] hover:text-[#FFFF00] touch-manipulation"
                           >
                             <span>Collaborate</span>
                             <ArrowUpRight className="w-3.5 h-3.5 ml-1" />
@@ -304,7 +304,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
             <MagneticButton
               variant="glass"
               onClick={onOpenInquiry}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFFF00] justify-center"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 min-h-[44px] text-black bg-white hover:bg-[#FFFF00] justify-center touch-manipulation"
             >
               Invest or Partner with Imaginative 369
             </MagneticButton>

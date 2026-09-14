@@ -77,7 +77,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 text-black hover:bg-[#FFFF00] border border-black/20 hover:border-black p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center transition-colors cursor-pointer rounded-none bg-white/70 hover:text-black z-10"
+          className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 text-black hover:bg-[#FFFF00] border border-black/20 hover:border-black p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors cursor-pointer rounded-none bg-white/70 hover:text-black z-10 touch-manipulation"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -133,7 +133,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
             <MagneticButton
               variant="primary"
               onClick={handleReset}
-              className="w-full sm:w-auto px-8 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
+              className="w-full sm:w-auto px-8 py-3.5 min-h-[44px] justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors touch-manipulation"
             >
               <span className="font-bold">Close Window</span>
             </MagneticButton>
@@ -250,7 +250,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                     type="button"
                     key={opt}
                     onClick={() => setFormData({ ...formData, budgetRange: opt })}
-                    className={`px-3 py-2.5 text-[11px] sm:text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none break-words min-h-[42px] flex items-center ${
+                    className={`px-3 py-2.5 text-[11px] sm:text-xs font-mono-code border text-left transition-all cursor-pointer rounded-none break-words min-h-[44px] flex items-center touch-manipulation ${
                       formData.budgetRange === opt
                         ? 'border-black bg-black text-white font-bold shadow-sm'
                         : 'border-black/20 bg-white/70 text-zinc-900 hover:bg-[#FFFF00] hover:text-black hover:border-black font-medium'
@@ -285,7 +285,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
               <MagneticButton
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-8 py-3.5 justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors"
+                className="w-full sm:w-auto px-8 py-3.5 min-h-[44px] justify-center text-white bg-black hover:bg-[#FFFF00] hover:text-black transition-colors touch-manipulation"
               >
                 {isSubmitting ? (
                   <span>Transmitting...</span>

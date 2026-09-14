@@ -43,7 +43,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center text-black hover:bg-[#FFFF00] border border-black/30 transition-colors cursor-pointer rounded-none shrink-0"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-black hover:bg-[#FFFF00] border border-black/30 transition-colors cursor-pointer rounded-none shrink-0 touch-manipulation"
             aria-label="Close Case Study"
           >
             <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -145,7 +145,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 onClose();
                 onOpenInquiry();
               }}
-              className="w-full sm:w-auto px-6 py-3 justify-center"
+              className="w-full sm:w-auto px-6 py-3.5 min-h-[44px] justify-center touch-manipulation"
             >
               <span>Commission Similar Project</span>
               <ArrowUpRight className="w-4 h-4" />

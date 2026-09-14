@@ -227,7 +227,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
   }, []);
 
   return (
-    <div className="w-full bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
+    <div className="w-full max-w-full overflow-x-clip bg-white text-[#141414] selection:bg-[#FFFF00] selection:text-black pt-16 sm:pt-20">
       {/* =========================================================================
           PAGE HEADER: Artistic Flair Minimalist Editorial
          ========================================================================= */}
@@ -265,7 +265,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
       <section
         ref={containerRef}
         id="work-arc-scroll-section"
-        className="relative h-[380vh] bg-cover bg-center bg-fixed bg-no-repeat"
+        className="relative h-[380vh] bg-cover bg-center bg-scroll md:bg-fixed bg-no-repeat"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1920&q=80')`,
         }}
@@ -302,7 +302,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               <button
                 onClick={() => jumpToWorkCard(Math.max(0, activeCardIndex - 1))}
                 disabled={activeCardIndex === 0}
-                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
+                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
                 aria-label="Previous case study"
               >
                 <ChevronLeft className="w-4 h-4 text-[#00FFFF]" />
@@ -312,7 +312,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 <button
                   key={`work-pill-${cs.id}`}
                   onClick={() => jumpToWorkCard(idx)}
-                  className={`px-2 py-0.5 text-[10px] font-mono-code font-bold rounded transition-all touch-manipulation cursor-pointer ${
+                  className={`px-2.5 py-1 min-h-[36px] min-w-[36px] sm:min-h-0 sm:min-w-0 flex items-center justify-center text-[10px] font-mono-code font-bold rounded transition-all touch-manipulation cursor-pointer ${
                     activeCardIndex === idx
                       ? 'bg-[#00FFFF] text-black shadow-[0_0_12px_rgba(0,255,255,0.5)] scale-105'
                       : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
@@ -326,7 +326,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               <button
                 onClick={() => jumpToWorkCard(Math.min(CASE_STUDIES.length - 1, activeCardIndex + 1))}
                 disabled={activeCardIndex === CASE_STUDIES.length - 1}
-                className="p-1 rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
+                className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-colors sm:hidden touch-manipulation cursor-pointer"
                 aria-label="Next case study"
               >
                 <ChevronRight className="w-4 h-4 text-[#00FFFF]" />
@@ -411,7 +411,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               {/* Close Button */}
               <button
                 onClick={() => setSelectedCaseStudy(null)}
-                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
                 aria-label="Close Case Study Details"
               >
                 <X className="w-5 h-5" />
@@ -521,7 +521,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                     setSelectedCaseStudy(null);
                     onOpenInquiry(selectedCaseStudy.category);
                   }}
-                  className="w-full sm:w-auto px-6 py-3 bg-[#FFFF00] text-black hover:bg-white text-xs font-mono-code font-bold uppercase tracking-wider rounded-xl justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3.5 min-h-[44px] bg-[#FFFF00] text-black hover:bg-white text-xs font-mono-code font-bold uppercase tracking-wider rounded-xl justify-center gap-2 touch-manipulation"
                 >
                   <span>Inquire About Similar Scope</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -529,7 +529,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
 
                 <button
                   onClick={() => setSelectedCaseStudy(null)}
-                  className="w-full sm:w-auto px-5 py-3 text-xs font-mono-code text-zinc-400 hover:text-white rounded-xl border border-white/10 hover:border-white/20 transition-colors"
+                  className="w-full sm:w-auto px-5 py-3.5 min-h-[44px] text-xs font-mono-code text-zinc-400 hover:text-white rounded-xl border border-white/10 hover:border-white/20 transition-colors touch-manipulation flex items-center justify-center"
                 >
                   Close Dossier
                 </button>
@@ -583,7 +583,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
             <MagneticButton
               variant="glass"
               onClick={() => onOpenInquiry()}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-black bg-white hover:bg-[#FFFF00] justify-center"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 min-h-[44px] text-black bg-white hover:bg-[#FFFF00] justify-center touch-manipulation"
             >
               Commission A New Case Study
             </MagneticButton>
