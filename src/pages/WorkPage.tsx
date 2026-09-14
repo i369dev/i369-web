@@ -260,19 +260,19 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               Real clients. Real ground. Real results.
             </p>
             <p className="font-mono-code text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
-              Scroll through the arc deck · Click any card for the full dossier
+              Scroll or swipe through the arc deck · Tap any card for the full dossier
             </p>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          STICKY ARC-SCROLL SECTION (Curved Trajectory Flow Carousel)
+          STICKY ARC-SCROLL SECTION (Curved Trajectory Flow Carousel for Desktop & Mobile)
          ========================================================================= */}
       <section
         ref={containerRef}
         id="work-arc-scroll-section"
-        className="relative h-[320vh] sm:h-[380vh] bg-cover bg-center bg-scroll md:bg-fixed bg-no-repeat"
+        className="relative h-[320vh] sm:h-[380vh] bg-cover bg-center bg-scroll md:bg-fixed bg-no-repeat select-none"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1920&q=80')`,
         }}
@@ -287,12 +287,12 @@ export const WorkPage: React.FC<WorkPageProps> = ({
 
         {/* Sticky Pinned Viewport Container */}
         <div 
-          className="sticky top-16 sm:top-20 h-[calc(100dvh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-between sm:justify-center items-center px-3 xs:px-4 sm:px-6 md:px-8 py-3 sm:py-0 overflow-hidden z-10 touch-pan-y"
+          className="sticky top-16 sm:top-20 h-[calc(100dvh-4rem)] sm:h-[calc(100vh-5rem)] w-full flex flex-col justify-between items-center px-3 xs:px-4 sm:px-6 md:px-8 py-3 sm:py-4 overflow-hidden z-10 touch-pan-y"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           {/* Top HUD / Arc Deck Indicator */}
-          <div className="w-full max-w-5xl flex flex-wrap items-center justify-between pb-2 sm:pb-3 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-1 sm:mb-4 gap-2 shrink-0">
+          <div className="w-full max-w-5xl flex flex-wrap items-center justify-between pb-2 sm:pb-3 text-xs font-mono-code text-zinc-400 border-b border-white/10 mb-1 sm:mb-2 gap-2 shrink-0">
             <div className="flex items-center gap-2">
               <Compass className="w-3.5 h-3.5 text-[#00FFFF]" />
               <span className="uppercase tracking-widest text-[11px] font-bold text-white">
@@ -349,73 +349,51 @@ export const WorkPage: React.FC<WorkPageProps> = ({
             </div>
           </div>
 
-          {/* Curved Arc Stage: Continuous Fanned Deck */}
-          <div className="relative w-full max-w-7xl h-[280px] xs:h-[320px] sm:h-[480px] md:h-[500px] flex items-start justify-center overflow-visible">
-            {/* The rotating arc wrapper with large transform-origin */}
-            <motion.div
-              style={{
-                rotate: carouselRotation,
-                transformOrigin: `0px ${PIVOT_RADIUS}px`,
-              }}
-              className="absolute top-1 sm:top-4 left-1/2 w-0 h-0 flex items-center justify-center pointer-events-none scale-[0.55] xs:scale-[0.65] sm:scale-[0.80] md:scale-[0.90] lg:scale-100 transition-transform origin-top"
-            >
-              {SLOTS.map((slot) => {
-                const caseStudy = CASE_STUDIES[slot.caseIndex];
-                const slotAngle = slot.slotIndex * ANGLE_STEP;
-                const isCenter = activeCardIndex === slot.caseIndex;
-                return (
-                  <ArcCard
-                    key={`arc-slot-${slot.slotIndex}-${caseStudy.id}`}
-                    caseStudy={caseStudy}
-                    slotAngle={slotAngle}
-                    isActive={isCenter}
-                    onSelect={(cs) => setSelectedCaseStudy(cs)}
-                  />
-                );
-              })}
-            </motion.div>
+          {/* Curved Arc Stage: Continuous Fanned Deck on Desktop & Mobile */}
+          <div className="relative w-full max-w-7xl h-[310px] xs:h-[350px] sm:h-[460px] md:h-[500px] flex items-start justify-center overflow-visible my-auto">
+            {/* Outer Scaling Wrapper: Scales cleanly from origin-top to keep top centered on all screen widths */}
+            <div className="absolute top-1 sm:top-4 left-1/2 w-0 h-0 flex items-center justify-center pointer-events-none scale-[0.45] xs:scale-[0.55] sm:scale-[0.75] md:scale-[0.88] lg:scale-100 origin-top transition-transform duration-300">
+              {/* Inner Rotating Arc Wrapper: Rotates smoothly around PIVOT_RADIUS */}
+              <motion.div
+                style={{
+                  rotate: carouselRotation,
+                  transformOrigin: `0px ${PIVOT_RADIUS}px`,
+                }}
+                className="w-0 h-0 flex items-center justify-center pointer-events-none"
+              >
+                {SLOTS.map((slot) => {
+                  const caseStudy = CASE_STUDIES[slot.caseIndex];
+                  const slotAngle = slot.slotIndex * ANGLE_STEP;
+                  const isCenter = activeCardIndex === slot.caseIndex;
+                  return (
+                    <ArcCard
+                      key={`arc-slot-${slot.slotIndex}-${caseStudy.id}`}
+                      caseStudy={caseStudy}
+                      slotAngle={slotAngle}
+                      isActive={isCenter}
+                      onSelect={(cs) => setSelectedCaseStudy(cs)}
+                    />
+                  );
+                })}
+              </motion.div>
+            </div>
           </div>
 
-          {/* Mobile Focal Card Quick Action Strip (visible on mobile screens sm:hidden) */}
-          <div className="sm:hidden w-[85vw] max-w-[320px] xs:w-[280px] z-20 pb-2">
-            <div
-              onClick={() => setSelectedCaseStudy(CASE_STUDIES[activeCardIndex])}
-              className="w-full bg-zinc-950/95 border border-white/20 rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.7)] backdrop-blur-2xl cursor-pointer active:scale-[0.98] transition-all touch-manipulation group"
-            >
-              {/* CMYK Accent top line */}
-              <div
-                className="h-1 w-full rounded-full mb-2.5"
-                style={{
-                  backgroundColor:
-                    CASE_STUDIES[activeCardIndex].accentColor === 'teal'
-                      ? '#00FFFF'
-                      : CASE_STUDIES[activeCardIndex].accentColor === 'pink'
-                      ? '#FF00FF'
-                      : '#FFFF00',
-                }}
-              />
-              <div className="flex items-center justify-between text-[10px] font-mono-code">
-                <span className="text-zinc-400 font-bold uppercase tracking-wider">
-                  {CASE_STUDIES[activeCardIndex].number} // 05
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-white/10 text-[#00FFFF] font-bold uppercase text-[9px]">
-                  {CASE_STUDIES[activeCardIndex].category}
-                </span>
-              </div>
-              <h4 className="gothic-display text-base text-white font-bold tracking-tight mt-1 line-clamp-1 group-hover:text-[#FFFF00] transition-colors">
-                {CASE_STUDIES[activeCardIndex].title}
-              </h4>
-              <p className="font-mono-code text-[10px] text-zinc-400 truncate mt-0.5">
-                {CASE_STUDIES[activeCardIndex].client}
-              </p>
-              <div className="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-code">
-                <span className="text-zinc-500 text-[10px]">Swipe or tap to view</span>
-                <span className="inline-flex items-center gap-1 font-bold text-black bg-[#FFFF00] px-2.5 py-1 min-h-[30px] rounded-lg">
-                  Open Dossier
-                  <ArrowUpRight className="w-3 h-3" />
-                </span>
-              </div>
+          {/* Mobile Interaction Cue Strip */}
+          <div className="flex sm:hidden items-center justify-between w-full max-w-sm px-2 pt-1 pb-1 text-[10px] font-mono-code text-zinc-400 border-t border-white/10 shrink-0">
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00FFFF] animate-pulse" />
+              <span className="text-zinc-300 font-bold uppercase tracking-wider">
+                Swipe / Scroll Arc Deck
+              </span>
             </div>
+            <button
+              onClick={() => setSelectedCaseStudy(CASE_STUDIES[activeCardIndex])}
+              className="inline-flex items-center gap-1 text-[#FFFF00] font-bold uppercase tracking-wider hover:underline min-h-[36px] px-2 touch-manipulation active:scale-95"
+            >
+              <span>Full Dossier</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </button>
           </div>
         </div>
       </section>
