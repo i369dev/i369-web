@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { GothicLogo } from './GothicLogo';
 import { PageId } from '../types';
 import { Menu, X, ArrowUpRight, Globe } from 'lucide-react';
@@ -9,6 +10,43 @@ interface NavbarProps {
   onNavigate: (page: PageId) => void;
   onOpenInquiry: () => void;
 }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.07,
+      delayChildren: 0.08,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.04,
+      staggerDirection: -1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentPage,
@@ -124,84 +162,113 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-black hover:opacity-70 focus:outline-none cursor-pointer touch-manipulation"
+              className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-black hover:opacity-70 focus:outline-none cursor-pointer touch-manipulation transition-colors"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-[#FF00FF]" /> : <Menu className="w-6 h-6 text-black" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-black" /> : <Menu className="w-6 h-6 text-black" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Full-Screen Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div
-          id="mobile-menu-overlay"
-          className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col justify-between pt-24 pb-8 px-6 md:hidden animate-in fade-in duration-200 border-t border-black/20 overflow-y-auto max-h-screen overscroll-contain"
-        >
-          <div className="flex flex-col space-y-4">
-            <div className="pb-3 border-b border-black flex items-center justify-between">
-              <span className="font-mono-code text-[11px] uppercase tracking-[0.25em] text-gray-500 font-bold">
-                Index & Navigation
-              </span>
-              <div className="flex space-x-1.5">
-                <div className="w-2 h-4 accent-teal"></div>
-                <div className="w-2 h-4 accent-pink"></div>
-                <div className="w-2 h-4 accent-orange"></div>
-              </div>
-            </div>
-
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                id={`mobile-nav-link-${link.id}`}
-                onClick={() => handleNavClick(link.id)}
-                className="flex items-center justify-between py-3 text-left group border-b border-gray-200 min-h-[44px]"
-              >
-                <div className="flex items-baseline gap-3">
-                  <span className="font-mono-code text-xs text-gray-400">
-                    {link.number}
-                  </span>
-                  <span
-                    className={`font-montserrat text-2xl sm:text-3xl font-bold tracking-tight ${
-                      currentPage === link.id
-                        ? 'text-black underline decoration-2 underline-offset-4'
-                        : 'text-zinc-600 group-hover:text-black'
-                    }`}
-                  >
-                    {link.label}
-                  </span>
-                </div>
-                {currentPage === link.id && (
-                  <span
-                    className="w-2.5 h-2.5"
-                    style={{ backgroundColor: link.accent }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-
-          <div className="pt-6 border-t border-black flex flex-col gap-4 mt-6">
-            <div className="text-xs font-mono-code text-zinc-600 space-y-1">
-              <p className="text-black font-bold">Imaginative 369 Studio</p>
-              <p>03 River Side Road, Badulla, Uva Province</p>
-              <p className="text-[#00FFFF] font-bold">i369.developer@gmail.com</p>
-            </div>
-
-            <button
-              id="mobile-menu-inquiry-button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenInquiry();
-              }}
-              className="w-full py-4 min-h-[48px] bg-black text-white font-montserrat text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none"
+      {/* Full-Screen Mobile Drawer with Framer Motion and Dark Theme */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            key="mobile-menu-overlay"
+            id="mobile-menu-overlay"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-black backdrop-blur-xl flex flex-col justify-between pt-24 pb-8 px-6 md:hidden border-t border-white/10 overflow-y-auto max-h-screen overscroll-contain text-white selection:bg-[#FFFF00] selection:text-black"
+          >
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="flex flex-col space-y-3 sm:space-y-4"
             >
-              Start Your Project
-            </button>
-          </div>
-        </div>
-      )}
+              <motion.div
+                variants={itemVariants}
+                className="pb-3 border-b border-white/15 flex items-center justify-between"
+              >
+                <span className="font-mono-code text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-bold">
+                  Index & Navigation
+                </span>
+                <div className="flex space-x-1.5">
+                  <div className="w-2 h-4 accent-teal"></div>
+                  <div className="w-2 h-4 accent-pink"></div>
+                  <div className="w-2 h-4 accent-orange"></div>
+                </div>
+              </motion.div>
+
+              {navLinks.map((link) => {
+                const isActive = currentPage === link.id;
+                return (
+                  <motion.button
+                    key={link.id}
+                    variants={itemVariants}
+                    id={`mobile-nav-link-${link.id}`}
+                    onClick={() => handleNavClick(link.id)}
+                    className="flex items-center justify-between py-3 text-left group border-b border-white/10 min-h-[44px] cursor-pointer touch-manipulation transition-colors"
+                  >
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono-code text-xs text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                        {link.number}
+                      </span>
+                      <span
+                        className={`font-montserrat text-2xl sm:text-3xl font-bold tracking-tight transition-colors ${
+                          isActive
+                            ? 'text-[#FFFF00] underline decoration-2 underline-offset-4'
+                            : 'text-zinc-300 group-hover:text-[#FFFF00]'
+                        }`}
+                      >
+                        {link.label}
+                      </span>
+                    </div>
+                    {isActive ? (
+                      <span
+                        className="w-2.5 h-2.5 shadow-[0_0_8px_rgba(255,255,0,0.6)]"
+                        style={{ backgroundColor: link.accent }}
+                      />
+                    ) : (
+                      <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-[#FFFF00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    )}
+                  </motion.button>
+                );
+              })}
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ delay: 0.35, duration: 0.4 }}
+              className="pt-6 border-t border-white/15 flex flex-col gap-4 mt-6"
+            >
+              <div className="text-xs font-mono-code text-zinc-400 space-y-1">
+                <p className="text-white font-bold tracking-wide">Imaginative 369 Studio</p>
+                <p>03 River Side Road, Badulla, Uva Province</p>
+                <p className="text-[#00FFFF] font-bold">i369.developer@gmail.com</p>
+              </div>
+
+              <button
+                id="mobile-menu-inquiry-button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenInquiry();
+                }}
+                className="w-full py-4 min-h-[48px] bg-white text-black font-montserrat text-xs uppercase font-bold tracking-widest text-center hover:bg-[#FFFF00] hover:text-black transition-colors rounded-none touch-manipulation cursor-pointer active:scale-[0.99] shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+              >
+                Start Your Project
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
