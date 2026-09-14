@@ -321,20 +321,20 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                   </div>
 
                   {/* Content: Intense Glassmorphism Floating Box */}
-                  <div className="relative z-10 p-3.5 sm:p-6 md:p-8 flex items-end">
-                    <div className="w-full max-w-3xl bg-[#080808]/85 backdrop-blur-[36px] border-2 border-white/40 p-4 sm:p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_20px_rgba(255,255,255,0.1),inset_0_1px_2px_rgba(255,255,255,0.5)] rounded-xl sm:rounded-2xl relative overflow-hidden group/box transition-all duration-300">
+                  <div className="relative z-10 p-3 sm:p-6 md:p-8 flex items-end">
+                    <div className="w-full max-w-3xl bg-[#080808]/85 backdrop-blur-[36px] border-2 border-white/40 p-3.5 sm:p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_20px_rgba(255,255,255,0.1),inset_0_1px_2px_rgba(255,255,255,0.5)] rounded-xl sm:rounded-2xl relative overflow-hidden group/box transition-all duration-300">
                       {/* Corner Specular Glass Glare */}
                       <div className="absolute top-0 right-0 w-36 sm:w-44 h-36 sm:h-44 bg-gradient-to-bl from-white/25 via-white/10 to-transparent pointer-events-none" />
                       
                       {/* Subtitle / Tagline */}
-                      <div className="flex items-center gap-2 mb-1.5 sm:mb-2.5">
-                        <span className={`font-mono-code text-[10px] sm:text-xs font-bold uppercase tracking-widest px-2.5 sm:px-3 py-0.5 sm:py-1 border rounded-md shadow-sm ${accentBadgeClass}`}>
+                      <div className="flex items-center gap-2 mb-1 sm:mb-2.5">
+                        <span className={`font-mono-code text-[9px] xs:text-[10px] sm:text-xs font-bold uppercase tracking-widest px-2 sm:px-3 py-0.5 sm:py-1 border rounded-md shadow-sm ${accentBadgeClass}`}>
                           {pillar.tagline}
                         </span>
                       </div>
 
                       {/* Main Service Title in Philosopher font */}
-                      <h3 className="gothic-display text-xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-tight leading-tight group-hover/box:text-[#FFFF00] transition-colors">
+                      <h3 className="gothic-display text-lg xs:text-xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-tight leading-tight group-hover/box:text-[#FFFF00] transition-colors">
                         {pillar.title}
                       </h3>
                     </div>
