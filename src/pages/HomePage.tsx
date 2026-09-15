@@ -56,9 +56,30 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="p-4 sm:p-8 md:p-12 lg:p-16 flex-grow flex flex-col justify-center">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
                 {/* Left Column: Headline & Editorial Content */}
-                <div className="lg:col-span-7 flex flex-col justify-center">
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+                    },
+                  }}
+                  className="lg:col-span-7 flex flex-col justify-center"
+                >
                   {/* Eyebrow */}
-                  <div className="flex items-center gap-2 sm:gap-3 mb-3.5 sm:mb-6">
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                      },
+                    }}
+                    className="flex items-center gap-2 sm:gap-3 mb-3.5 sm:mb-6"
+                  >
                     <div className="flex space-x-1.5">
                       <div className="w-2 h-3.5 sm:h-4 accent-teal"></div>
                       <div className="w-2 h-3.5 sm:h-4 accent-pink"></div>
@@ -67,23 +88,53 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.4em] text-gray-500 font-mono-code">
                       Strategy to Screen
                     </span>
-                  </div>
+                  </motion.div>
 
                   {/* Main Artistic Flair Gothic Display Headline */}
-                  <h1 className="gothic-display text-[2.5rem] xs:text-5xl sm:text-6xl md:text-7xl lg:text-[90px] xl:text-[104px] text-black mb-4 sm:mb-8 leading-[0.92] sm:leading-[0.88] tracking-tighter break-words">
+                  <motion.h1
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                      },
+                    }}
+                    className="gothic-display text-[2.5rem] xs:text-5xl sm:text-6xl md:text-7xl lg:text-[90px] xl:text-[104px] text-black mb-4 sm:mb-8 leading-[0.92] sm:leading-[0.88] tracking-tighter break-words"
+                  >
                     Imaginative<br />
                     369
-                  </h1>
+                  </motion.h1>
 
                   {/* Stately Editorial Pull-Description with subtle frosted highlight */}
-                  <div className="max-w-xl p-3.5 sm:p-6 glass-panel-light border-l-4 border-l-black mb-5 sm:mb-10">
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                      },
+                    }}
+                    className="max-w-xl p-3.5 sm:p-6 glass-panel-light border-l-4 border-l-black mb-5 sm:mb-10"
+                  >
                     <p className="text-sm sm:text-lg md:text-xl leading-relaxed font-medium text-[#141414]">
                       The creative media, digital marketing, and software engineering powerhouse of Sri Lanka’s Hill Country. Turning bold ideas into cinematic stories, high-performing software, and brands that win.
                     </p>
-                  </div>
+                  </motion.div>
 
                   {/* Action Buttons with Magnetic physics */}
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                      },
+                    }}
+                    className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto"
+                  >
                     <MagneticButton
                       id="hero-primary-cta"
                       variant="primary"
@@ -103,8 +154,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <span>See Our Work</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </MagneticButton>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
 
                 {/* Right Column: Cinematic Video Showcase Container with Glassmorphism */}
                 <div className="lg:col-span-5 w-full flex justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0">
