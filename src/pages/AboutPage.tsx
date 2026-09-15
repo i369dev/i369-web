@@ -6,7 +6,7 @@ import { GothicHeading } from '../components/GothicHeading';
 import { Compass, CheckCircle2, ArrowRight, Zap, Target, Eye, Layers, Sparkles, Terminal, Video, TrendingUp, X, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
-import { TEAM_MEMBERS } from '../data/agencyData';
+import { useDataContext } from '../context/DataContext';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -14,6 +14,7 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry }) => {
+  const { teamMembers } = useDataContext();
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const teamSliderRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -28,7 +29,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
 
       const cardWidth = teamSliderRef.current.querySelector<HTMLElement>('.team-card-item')?.offsetWidth || 280;
       const index = Math.round(scrollLeft / (cardWidth + 24));
-      setActiveMemberIndex(Math.min(TEAM_MEMBERS.length - 1, Math.max(0, index)));
+      setActiveMemberIndex(Math.min(teamMembers.length - 1, Math.max(0, index)));
     }
   };
 
@@ -300,7 +301,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
                 WebkitOverflowScrolling: 'touch',
               }}
             >
-              {TEAM_MEMBERS.map((member, index) => {
+              {teamMembers.map((member, index) => {
                 const accentColor = member.accentColor === 'teal' ? '#00FFFF' : member.accentColor === 'pink' ? '#FF00FF' : '#FFFF00';
                 const borderHoverClass = member.accentColor === 'teal' 
                   ? 'group-hover:border-[#00FFFF]/60 group-hover:shadow-[0_0_30px_rgba(0,255,255,0.2)]' 
@@ -375,10 +376,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenInquiry 
             {/* Subtle bottom scroll guide with interactive dot indicators */}
             <div className="flex flex-col xs:flex-row items-center justify-between pt-4 gap-2 text-xs font-mono-code text-zinc-500">
               <span className="uppercase tracking-widest text-[9px] xs:text-[10px] text-zinc-400 text-center xs:text-left">
-                ← Swipe or use arrows to explore {TEAM_MEMBERS.length} principals →
+                ← Swipe or use arrows to explore {teamMembers.length} principals →
               </span>
               <div className="flex items-center gap-1.5">
-                {TEAM_MEMBERS.map((m, i) => (
+                {teamMembers.map((m, i) => (
                   <button
                     key={m.id || i}
                     onClick={() => scrollToIndex(i)}

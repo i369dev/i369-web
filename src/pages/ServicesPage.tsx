@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue } from 'motion/react';
 import { PageId, ServicePillar } from '../types';
-import { SERVICE_PILLARS } from '../data/agencyData';
+import { useDataContext } from '../context/DataContext';
 import { ArrowRight, ArrowUpRight, Check, Sparkles, Code2, Film, TrendingUp, Mountain, Layers, MousePointer, ChevronLeft, ChevronRight } from 'lucide-react';
 import { MagneticButton } from '../components/MagneticButton';
 
@@ -200,6 +200,7 @@ const StackedCard: React.FC<StackedCardProps> = ({
 };
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenInquiry }) => {
+  const { services } = useDataContext();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState(0);
 
@@ -245,7 +246,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
     if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
       if (deltaX < 0) {
         // Swipe left -> next card
-        if (activeCard < SERVICE_PILLARS.length - 1) jumpToCard(activeCard + 1);
+        if (activeCard < services.length - 1) jumpToCard(activeCard + 1);
       } else {
         // Swipe right -> prev card
         if (activeCard > 0) jumpToCard(activeCard - 1);
@@ -328,7 +329,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
 
             {/* Quick Direct Step Selector Pills for Easy Mobile & Desktop Navigation */}
             <div className="flex items-center gap-1 sm:gap-1.5">
-              {SERVICE_PILLARS.map((p, idx) => (
+              {services.map((p, idx) => (
                 <button
                   key={`deck-pill-${p.id}`}
                   onClick={() => jumpToCard(idx)}
@@ -352,12 +353,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenIn
 
           {/* Cards Stack Stage */}
           <div className="relative w-full max-w-4xl min-h-[480px] sm:min-h-[520px] md:min-h-[480px] flex items-center justify-center">
-            {SERVICE_PILLARS.map((pillar, idx) => (
+            {services.map((pillar, idx) => (
               <StackedCard
                 key={pillar.id}
                 pillar={pillar}
                 index={idx}
-                total={SERVICE_PILLARS.length}
+                total={services.length}
                 scrollYProgress={scrollYProgress}
                 onOpenInquiry={onOpenInquiry}
               />

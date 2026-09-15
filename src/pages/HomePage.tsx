@@ -3,7 +3,8 @@ import { motion } from 'motion/react';
 import { PageId, CaseStudy } from '../types';
 import { GothicLogo } from '../components/GothicLogo';
 import { GothicHeading } from '../components/GothicHeading';
-import { SERVICE_PILLARS, CASE_STUDIES, TRUSTED_CLIENTS, GROUND_ZERO_ADVANTAGES, PARTNER_MARQUEE_ITEMS } from '../data/agencyData';
+import { GROUND_ZERO_ADVANTAGES } from '../data/agencyData';
+import { useDataContext } from '../context/DataContext';
 import { ArrowRight, ArrowUpRight, Compass, ShieldCheck, Sparkles, Terminal, Video, MapPin, Zap, Volume2, VolumeX } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
@@ -20,6 +21,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenInquiry,
   onSelectCaseStudy,
 }) => {
+  const { caseStudies, marqueeItems, siteContent } = useDataContext();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState<boolean>(true);
 
@@ -176,11 +178,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                           muted={isMuted}
                           playsInline
                           preload="auto"
-                          poster="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"
+                          poster={siteContent.heroVideoPoster || "https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80"}
                           className="w-full h-56 xs:h-64 sm:h-80 md:h-96 lg:h-[460px] object-cover filter contrast-[1.08] saturate-[1.12] brightness-[0.92] group-hover:scale-105 transition-transform duration-700 ease-out"
                         >
                           <source
-                            src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-fog-over-a-green-mountain-forest-41480-large.mp4"
+                            src={siteContent.heroVideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-fog-over-a-green-mountain-forest-41480-large.mp4"}
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.
@@ -257,9 +259,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div className="animate-marquee-infinite flex items-center">
                   {/* Track 1 */}
                   <div className="flex items-center gap-6 sm:gap-12 md:gap-16 pr-6 sm:pr-12 md:pr-16 shrink-0">
-                    {PARTNER_MARQUEE_ITEMS.map((partner, pIdx) => {
+                    {marqueeItems.map((partner, pIdx) => {
                       const matchedCaseStudy = partner.caseStudyId
-                        ? CASE_STUDIES.find((cs) => cs.id === partner.caseStudyId)
+                        ? caseStudies.find((cs) => cs.id === partner.caseStudyId)
                         : null;
 
                       return (
@@ -289,9 +291,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   {/* Track 2 (Exact duplicate for seamless infinite 0% -> -50% loop) */}
                   <div className="flex items-center gap-6 sm:gap-12 md:gap-16 pr-6 sm:pr-12 md:pr-16 shrink-0" aria-hidden="true">
-                    {PARTNER_MARQUEE_ITEMS.map((partner, pIdx) => {
+                    {marqueeItems.map((partner, pIdx) => {
                       const matchedCaseStudy = partner.caseStudyId
-                        ? CASE_STUDIES.find((cs) => cs.id === partner.caseStudyId)
+                        ? caseStudies.find((cs) => cs.id === partner.caseStudyId)
                         : null;
 
                       return (
@@ -556,7 +558,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           {/* Featured Case Studies Grid (HugeInc style 3D tilt, zoom reveal, and glassmorphic stats) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
-            {CASE_STUDIES.slice(0, 2).map((cs, index) => (
+            {caseStudies.slice(0, 2).map((cs, index) => (
               <motion.div
                 key={cs.id}
                 initial={{ opacity: 0, y: 30 }}

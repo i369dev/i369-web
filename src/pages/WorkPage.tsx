@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'motion/react';
 import { PageId, CaseStudy } from '../types';
-import { CASE_STUDIES, TRUSTED_CLIENTS } from '../data/agencyData';
+import { useDataContext } from '../context/DataContext';
 import { ArrowUpRight, X, Layers, Sparkles, Check, Compass, TrendingUp, ChevronRight, ChevronLeft } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
@@ -146,6 +146,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
   onSelectCaseStudy,
   onOpenInquiry,
 }) => {
+  const { caseStudies, trustedClients } = useDataContext();
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
@@ -188,7 +189,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
     // Minimum 35px deltaX and deltaX greater than deltaY, completed within 600ms
     if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && deltaTime < 600) {
       if (deltaX < 0) {
-        if (activeCardIndex < CASE_STUDIES.length - 1) {
+        if (activeCardIndex < caseStudies.length - 1) {
           jumpToWorkCard(activeCardIndex + 1);
         }
       } else {
@@ -315,7 +316,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 <ChevronLeft className="w-5 h-5 text-[#00FFFF]" />
               </button>
 
-              {CASE_STUDIES.map((cs, idx) => (
+              {caseStudies.map((cs, idx) => (
                 <button
                   key={`work-pill-${cs.id}`}
                   onClick={() => jumpToWorkCard(idx)}
@@ -331,8 +332,8 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               ))}
 
               <button
-                onClick={() => jumpToWorkCard(Math.min(CASE_STUDIES.length - 1, activeCardIndex + 1))}
-                disabled={activeCardIndex === CASE_STUDIES.length - 1}
+                onClick={() => jumpToWorkCard(Math.min(caseStudies.length - 1, activeCardIndex + 1))}
+                disabled={activeCardIndex === caseStudies.length - 1}
                 className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 disabled:opacity-25 disabled:pointer-events-none transition-all active:scale-95 sm:hidden touch-manipulation cursor-pointer"
                 aria-label="Next case study"
               >
@@ -343,7 +344,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
             <div className="hidden xs:flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-zinc-400">
               <span className="hidden md:inline">Focus:</span>
               <span className="text-[#00FFFF] font-bold truncate max-w-[120px] sm:max-w-[180px]">
-                {CASE_STUDIES[activeCardIndex].title}
+                {caseStudies[activeCardIndex]?.title}
               </span>
               <div className="w-1.5 h-1.5 rounded-full bg-[#00FFFF] animate-pulse" />
             </div>
@@ -362,9 +363,10 @@ export const WorkPage: React.FC<WorkPageProps> = ({
                 className="w-0 h-0 flex items-center justify-center pointer-events-none"
               >
                 {SLOTS.map((slot) => {
-                  const caseStudy = CASE_STUDIES[slot.caseIndex];
+                  const safeIndex = ((slot.caseIndex % caseStudies.length) + caseStudies.length) % caseStudies.length;
+                  const caseStudy = caseStudies[safeIndex] || caseStudies[0];
                   const slotAngle = slot.slotIndex * ANGLE_STEP;
-                  const isCenter = activeCardIndex === slot.caseIndex;
+                  const isCenter = activeCardIndex === safeIndex;
                   return (
                     <ArcCard
                       key={`arc-slot-${slot.slotIndex}-${caseStudy.id}`}
@@ -388,7 +390,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
               </span>
             </div>
             <button
-              onClick={() => setSelectedCaseStudy(CASE_STUDIES[activeCardIndex])}
+              onClick={() => setSelectedCaseStudy(caseStudies[activeCardIndex] || caseStudies[0])}
               className="inline-flex items-center gap-1 text-[#FFFF00] font-bold uppercase tracking-wider hover:underline min-h-[36px] px-2 touch-manipulation active:scale-95"
             >
               <span>Full Dossier</span>
@@ -585,7 +587,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({
 
           {/* 1x1 Square Logo Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-            {TRUSTED_CLIENTS.map((client, idx) => (
+            {trustedClients.map((client, idx) => (
               <div
                 key={idx}
                 id={`trusted-client-card-${idx}`}

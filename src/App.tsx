@@ -16,28 +16,47 @@ import { ContactPage } from './pages/ContactPage';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { CustomCursor } from './components/CustomCursor';
+import { AdminPage } from './pages/AdminPage';
 
 export default function App() {
+  const [isAdminRoute, setIsAdminRoute] = useState<boolean>(() => {
+    const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+    const hash = window.location.hash.toLowerCase();
+    return path === '/i369.web.admin' || hash === '#i369.web.admin' || hash === '#/i369.web.admin';
+  });
   const [currentPage, setCurrentPage] = useState<PageId>('home');
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const [inquiryServiceType, setInquiryServiceType] = useState<string>('Tourism Marketing');
 
-  // Handle URL hash navigation if user uses browser history / direct links
+  // Handle URL navigation (hash and pathname)
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '') as PageId;
-      if (['home', 'about', 'services', 'work', 'ventures', 'contact'].includes(hash)) {
-        setCurrentPage(hash);
+    const checkRoute = () => {
+      const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      const hash = window.location.hash.toLowerCase();
+      const isAdmin = path === '/i369.web.admin' || hash === '#i369.web.admin' || hash === '#/i369.web.admin';
+      setIsAdminRoute(isAdmin);
+
+      if (!isAdmin) {
+        const cleanHash = window.location.hash.replace('#', '') as PageId;
+        if (['home', 'about', 'services', 'work', 'ventures', 'contact'].includes(cleanHash)) {
+          setCurrentPage(cleanHash);
+        }
       }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    if (window.location.hash) {
-      handleHashChange();
-    }
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('hashchange', checkRoute);
+    window.addEventListener('popstate', checkRoute);
+    checkRoute();
+    return () => {
+      window.removeEventListener('hashchange', checkRoute);
+      window.removeEventListener('popstate', checkRoute);
+    };
   }, []);
+
+  if (isAdminRoute) {
+    return <AdminPage />;
+  }
 
   const handleNavigate = (page: PageId) => {
     setCurrentPage(page);

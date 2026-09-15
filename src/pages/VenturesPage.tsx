@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { PageId, VentureItem } from '../types';
-import { VENTURES } from '../data/agencyData';
+import { useDataContext } from '../context/DataContext';
 import { ArrowUpRight, Play, Pause, Compass, Radio, MapPin, Sparkles, ExternalLink } from 'lucide-react';
 import { TiltCard } from '../components/TiltCard';
 import { MagneticButton } from '../components/MagneticButton';
@@ -30,6 +30,7 @@ const getBorderHoverClass = (accentColor?: string) => {
 };
 
 export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenInquiry }) => {
+  const { ventures } = useDataContext();
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   return (
@@ -81,7 +82,7 @@ export const VenturesPage: React.FC<VenturesPageProps> = ({ onNavigate, onOpenIn
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
 
         <div className="relative z-10 max-w-7xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">
-          {VENTURES.map((venture, idx) => {
+          {ventures.map((venture, idx) => {
             const isAudioVenture = venture.id === 'inhale-exhale';
             const accentHex = getAccentHex(venture.accentColor);
             const glowColor = getGlowColor(venture.accentColor);
