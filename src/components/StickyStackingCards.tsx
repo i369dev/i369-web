@@ -165,8 +165,8 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
             {/* Left Header Title & Eyebrow */}
             <div className="flex flex-col items-start text-left">
               <div className="flex items-center mb-1 sm:mb-1.5">
-                <div className="w-2 h-2 bg-blue-500 mr-2 shrink-0"></div>
-                <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-widest text-zinc-400 font-bold">
+                <div className="w-2 h-2 bg-[#00FFFF] shadow-[0_0_8px_rgba(0,255,255,0.8)] mr-2 shrink-0"></div>
+                <span className="font-mono-code text-[10px] sm:text-xs uppercase tracking-widest text-[#00FFFF] font-bold">
                   Service Pillars Overview
                 </span>
               </div>
