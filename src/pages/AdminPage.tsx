@@ -1365,7 +1365,27 @@ export const AdminPage: React.FC = () => {
               </div>
 
               <div className="bg-white p-6 rounded-xl border border-slate-200 space-y-5">
-                <h3 className="text-sm font-bold text-slate-900 border-b pb-2">Hero Video & Visual Assets</h3>
+                <h3 className="text-sm font-bold text-slate-900 border-b pb-2">Company Brand Logos</h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <MediaUploader
+                    label="Header Logo (Dark/Black PNG)"
+                    value={siteContent.headerLogoUrl || ''}
+                    mediaType="image"
+                    onChange={(url) => saveSiteContent({ headerLogoUrl: url })}
+                    helpText="Appears on the light navigation header. Transparent dark/black PNG or SVG recommended."
+                  />
+
+                  <MediaUploader
+                    label="Footer Logo (Light/White PNG)"
+                    value={siteContent.footerLogoUrl || ''}
+                    mediaType="image"
+                    onChange={(url) => saveSiteContent({ footerLogoUrl: url })}
+                    helpText="Appears on the dark footer background. Transparent light/white PNG or SVG recommended."
+                  />
+                </div>
+
+                <h3 className="text-sm font-bold text-slate-900 border-b pb-2 pt-4">Hero Video & Visual Assets</h3>
 
                 <MediaUploader
                   label="Hero 4K Cinematic Video (MP4 / WebM)"

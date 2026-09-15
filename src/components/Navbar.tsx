@@ -4,6 +4,7 @@ import { GothicLogo } from './GothicLogo';
 import { PageId } from '../types';
 import { Menu, X, ArrowUpRight, Globe } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
+import { useDataContext } from '../context/DataContext';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -53,6 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigate,
   onOpenInquiry,
 }) => {
+  const { siteContent } = useDataContext();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -97,9 +99,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-3 group text-left focus:outline-none cursor-pointer"
             aria-label="Imaginative 369 Home"
           >
-            <div className="w-8 h-8 bg-black flex items-center justify-center text-white font-mono-code font-bold text-xs shrink-0 tracking-tight group-hover:bg-[#FFFF00] group-hover:text-black transition-colors shadow-sm">
-              i369
-            </div>
+            {siteContent.headerLogoUrl ? (
+              <img
+                src={siteContent.headerLogoUrl}
+                alt="Company Logo"
+                className="h-8 w-auto object-contain"
+              />
+            ) : (
+              <div className="w-8 h-8 bg-black flex items-center justify-center text-white font-mono-code font-bold text-xs shrink-0 tracking-tight group-hover:bg-[#FFFF00] group-hover:text-black transition-colors shadow-sm">
+                i369
+              </div>
+            )}
             <div className="flex flex-col">
               <span className="font-bold tracking-tighter text-lg sm:text-xl text-black group-hover:text-[#FFFF00] transition-colors">
                 Imaginative 369

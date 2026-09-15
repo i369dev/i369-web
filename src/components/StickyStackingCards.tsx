@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent, useSpring } from 'motion/react';
-import { SERVICE_PILLARS } from '../data/agencyData';
+import { useDataContext } from '../context/DataContext';
 import { PageId } from '../types';
 import { ArrowUpRight, Camera, Disc, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -8,45 +8,51 @@ interface StickyStackingCardsProps {
   onNavigate: (page: PageId) => void;
 }
 
-// Curated cinematic photography with camera telemetry
-const PILLAR_CINEMATIC_DATA = [
+// Curated cinematic photography with camera telemetry presets
+const DEFAULT_CINEMATIC_PRESETS = [
   {
-    ...SERVICE_PILLARS[0],
     bgImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop',
     iso: 'ISO 100',
     shutter: '1/1000s',
     focal: '24mm F1.4',
-    badge: 'Tourism & Destination Marketing',
   },
   {
-    ...SERVICE_PILLARS[1],
     bgImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop',
     iso: 'ISO 400',
     shutter: '1/2500s',
     focal: '35mm F1.8',
-    badge: 'Software Engineering & AdventureTech',
   },
   {
-    ...SERVICE_PILLARS[2],
     bgImage: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?q=80&w=1600&auto=format&fit=crop',
     iso: 'ISO 800',
     shutter: '1/5000s',
     focal: '50mm F1.2 Cinema',
-    badge: 'Cinematic Media & Visual Identity',
   },
   {
-    ...SERVICE_PILLARS[3],
     bgImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
     iso: 'ISO 200',
     shutter: '1/4000s',
     focal: '85mm F1.4 Master',
-    badge: 'Digital Operations & Performance',
   },
 ];
 
 export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavigate }) => {
+  const { services } = useDataContext();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState<number>(0);
+
+  // Dynamically enrich services with cinematic telemetry & background images
+  const cinematicPillars = services.map((service, idx) => {
+    const preset = DEFAULT_CINEMATIC_PRESETS[idx % DEFAULT_CINEMATIC_PRESETS.length];
+    return {
+      ...service,
+      bgImage: preset.bgImage,
+      iso: preset.iso,
+      shutter: preset.shutter,
+      focal: preset.focal,
+      badge: service.title,
+    };
+  });
 
   // Track vertical scroll progress across the container
   const { scrollYProgress } = useScroll({
@@ -134,7 +140,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
     if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1 && deltaTime < 600) {
       if (deltaX < 0) {
         // Swiped left -> advance to next card
-        if (activeStep < PILLAR_CINEMATIC_DATA.length - 1) {
+        if (activeStep < cinematicPillars.length - 1) {
           jumpToStep(activeStep + 1);
         }
       } else {
@@ -189,7 +195,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
 
               {/* Dial Step Selectors */}
               <div className="flex items-center gap-1 sm:gap-1.5">
-                {PILLAR_CINEMATIC_DATA.map((p, idx) => {
+                {cinematicPillars.map((p, idx) => {
                   const isActive = activeStep === idx;
                   const accentClass =
                     p.accentColor === 'teal'
@@ -217,8 +223,8 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
 
               {/* Mobile Next Arrow */}
               <button
-                onClick={() => jumpToStep(Math.min(PILLAR_CINEMATIC_DATA.length - 1, activeStep + 1))}
-                disabled={activeStep === PILLAR_CINEMATIC_DATA.length - 1}
+                onClick={() => jumpToStep(Math.min(cinematicPillars.length - 1, activeStep + 1))}
+                disabled={activeStep === cinematicPillars.length - 1}
                 className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-white disabled:opacity-25 disabled:pointer-events-none transition-all sm:hidden touch-manipulation active:scale-95"
                 aria-label="Next service pillar"
               >
@@ -229,12 +235,12 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
               <div className="hidden lg:flex items-center gap-3 border-l border-white/25 pl-3 font-mono-code text-[10px] text-zinc-400">
                 <div className="flex items-center gap-1">
                   <Camera className="w-3 h-3 text-[#FFFF00]" />
-                  <span className="text-white font-bold">{PILLAR_CINEMATIC_DATA[activeStep]?.focal}</span>
+                  <span className="text-white font-bold">{cinematicPillars[activeStep]?.focal}</span>
                 </div>
                 <span className="text-zinc-600">|</span>
-                <span className="text-zinc-300">{PILLAR_CINEMATIC_DATA[activeStep]?.shutter}</span>
+                <span className="text-zinc-300">{cinematicPillars[activeStep]?.shutter}</span>
                 <span className="text-zinc-600">|</span>
-                <span className="text-[#00FFFF] font-semibold">{PILLAR_CINEMATIC_DATA[activeStep]?.iso}</span>
+                <span className="text-[#00FFFF] font-semibold">{cinematicPillars[activeStep]?.iso}</span>
               </div>
 
               {/* Explore All CTA */}
@@ -267,7 +273,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
             style={{ x: trackX }}
             className="flex items-center gap-[4vw] pl-[10vw] shrink-0 pointer-events-auto"
           >
-            {PILLAR_CINEMATIC_DATA.map((pillar) => {
+            {cinematicPillars.map((pillar) => {
               const accentColor =
                 pillar.accentColor === 'teal'
                   ? '#00FFFF'
@@ -314,7 +320,7 @@ export const StickyStackingCards: React.FC<StickyStackingCardsProps> = ({ onNavi
                   <div className="relative z-10 p-3.5 sm:p-6 md:p-8 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="font-mono-code text-[11px] sm:text-xs font-black px-2.5 sm:px-3 py-1 bg-black/85 border border-white/35 text-white tracking-widest rounded-lg shadow-md">
-                        {pillar.number} // 04
+                        {pillar.number} // 0{cinematicPillars.length}
                       </span>
                     </div>
 

@@ -14,6 +14,8 @@ import {
 import { ServicePillar, CaseStudy, VentureItem, TeamMember } from '../types';
 
 export interface SiteContent {
+  headerLogoUrl?: string;
+  footerLogoUrl?: string;
   heroVideoUrl: string;
   heroVideoPoster: string;
   heroTagline: string;
@@ -28,6 +30,8 @@ export interface SiteContent {
 }
 
 export const DEFAULT_SITE_CONTENT: SiteContent = {
+  headerLogoUrl: '',
+  footerLogoUrl: '',
   heroVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4',
   heroVideoPoster: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
   heroTagline: 'Strategy to Screen',

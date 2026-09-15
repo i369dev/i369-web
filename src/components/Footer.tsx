@@ -3,6 +3,7 @@ import { GothicLogo } from './GothicLogo';
 import { PageId } from '../types';
 import { ArrowUp, Mail, MapPin, Compass, ArrowUpRight } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
+import { useDataContext } from '../context/DataContext';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -10,6 +11,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => {
+  const { siteContent } = useDataContext();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -29,9 +31,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInquiry }) => 
           {/* Col 1: Brand & Logo */}
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-start gap-4">
-              <div className="w-9 h-9 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0 tracking-tight shadow-sm">
-                i369
-              </div>
+              {siteContent.footerLogoUrl ? (
+                <img
+                  src={siteContent.footerLogoUrl}
+                  alt="Company Logo"
+                  className="h-10 w-auto object-contain"
+                />
+              ) : (
+                <div className="w-9 h-9 bg-white text-black font-mono-code font-black text-xs flex items-center justify-center shrink-0 tracking-tight shadow-sm">
+                  i369
+                </div>
+              )}
               <div>
                 <h3 className="gothic-display text-3xl sm:text-4xl tracking-tight text-white leading-none">
                   Imaginative 369
